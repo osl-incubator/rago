@@ -2,6 +2,8 @@
 
 from importlib import metadata as importlib_metadata
 
+from rago.core import Rago
+
 
 def get_version() -> str:
     """Return the program version."""
@@ -16,3 +18,10 @@ version = get_version()
 __version__ = version
 __author__ = 'Ivan Ogasawara'
 __email__ = 'ivan.ogasawara@gmail.com'
+
+__all__ = [
+    '__version__',
+    '__author__',
+    '__email__',
+    'Rago',
+]

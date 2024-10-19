@@ -1,0 +1,18 @@
+""""""
+
+from __future__ import annotations
+
+from abc import abstractclassmethod
+
+class DBBase:
+    index: Any
+
+    @abstractclassmethod
+    def embed(self, documents: Any) -> None:
+        ...
+
+    @abstractclassmethod
+    def search(
+        self, query: str, model: Any, k: int = 2
+    ) -> tuple[list[int], list[float]]:
+      ...
