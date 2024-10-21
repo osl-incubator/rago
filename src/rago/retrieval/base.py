@@ -1,43 +1,28 @@
-""""""
+"""Base classes for retrieval."""
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Literal
-
-
-@dataclass
-class SourceContentBase:
-    """SourceContentBase defines the structure for contents."""
-
-    name: str
-    source_type: Literal['path', 'string', 'other']
-    chunk_type: Literal['sentence', 'paragraphs', 'size', 'other']
-
-
-@dataclass
-class RetrievalSourceBase:
-    """RetrievalSourceBase defines the bases for sources."""
-
-    def get(self) -> SourceContentBase: ...
+from abc import abstractmethod
+from typing import Any, List, cast
 
 
 class RetrievalBase:
     """Base Retrieval class."""
 
-    sources: RetrievalSourceBase
     content: Any
 
-    def __init__(self, sources: list[RetrievalSourceBase]) -> None:
+    def __init__(self, sources: Any) -> None:
         self.sources = sources
 
-    # def run(self.)
-
-
-class StringSourceContent(SourceContentBase): ...
+    @abstractmethod
+    def get(self, query: str = '') -> Any:
+        """Get the data from the sources."""
+        ...
 
 
 class StringRet(RetrievalBase):
     """String Retrieval class."""
 
-    ...
+    def get(self, query: str = '') -> list[str]:
+        """Get the data from the sources."""
+        return cast(List[str], self.sources)

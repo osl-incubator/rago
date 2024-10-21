@@ -1,41 +1,39 @@
-""""""
+"""Base classes for the augmented step."""
 
 from __future__ import annotations
 
-from abc import abstractclassmethod
+from abc import abstractmethod
 from typing import Any, Optional
 
-from rago.db import DBBase
+from rago.db import DBBase, FaissDB
 
 
 class AugmentedBase:
+    """Define the base structure for Augmented classes."""
+
     model: Optional[Any]
     db: Any
     k: int = -1
     documents: list[str]
 
-    @abstractclassmethod
+    @abstractmethod
     def __init__(
         self,
-        name: str = 'paraphrase',
         documents: list[str] = [],
-        db: FaissDB = FaissDB(),
+        db: DBBase = FaissDB(),
         k: int = -1,
     ) -> None:
         """Initialize AugmentedBase."""
+        self.k = k
+        self.documents = documents
+        self.db = db
+
+    @abstractmethod
+    def search(
+        self,
+        query: str,
+        documents: Any,
+        k: int = -1,
+    ) -> list[str]:
+        """Search an encoded query into vector database."""
         ...
-
-    @abstractclassmethod
-    def search(self) -> tuple[list[int], list[float]]:
-        """
-        Search a query into a vector db.
-
-        Return
-        ------
-        tuple:
-            list of indices
-            list of distances
-        """
-        ...
-
-    def run(self, query: str, context: list[str]): ...

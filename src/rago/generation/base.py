@@ -1,8 +1,8 @@
-""""""
+"""Base classes for generation."""
 
 from __future__ import annotations
 
-from abc import abstractclassmethod
+from abc import abstractmethod
 from typing import Any
 
 
@@ -13,14 +13,15 @@ class GenerationBase:
     tokenizer: Any
     output_max_length: int = 150
 
-    @abstractclassmethod
+    @abstractmethod
     def __init__(
         self, model_name: str = '', output_max_length: int = 150
     ) -> None:
         """Initialize GenerationBase."""
-        ...
+        self.model_name = model_name
+        self.output_max_length = output_max_length
 
-    @abstractclassmethod
-    def run(self, query: str, context: list[str]) -> str:
+    @abstractmethod
+    def generate(self, query: str, context: list[str]) -> str:
         """Generate text."""
         ...
