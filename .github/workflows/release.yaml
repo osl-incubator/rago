@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          environment-file: conda/release.yaml
+          channels: conda-forge,nodefaults
+          activate-environment: rago
+          auto-update-conda: true
+          conda-solver: libmamba
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          poetry config virtualenvs.create false
+          poetry install
+
+      - name: Run semantic release (for tests)
+        if: ${{ github.event_name != 'workflow_dispatch' }}
+        run: makim --verbose release.dry
+
+      - name: Run semantic release
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          poetry config pypi-token.pypi ${PYPI_TOKEN}
+          makim --verbose release.ci
+
+      - name: Generate documentation with changes from semantic-release
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: makim --verbose docs.build
+
+      - name: GitHub Pages action
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        uses: peaceiris/actions-gh-pages@v3.5.9
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/
+
+      - name: Setup tmate session
+        if: "${{ failure() && (contains(github.event.pull_request.labels.*.name, 'ci:enable-debugging')) }}"
+        uses: mxschmitt/action-tmate@v3

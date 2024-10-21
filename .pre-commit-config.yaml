@@ -1,0 +1,74 @@
+default_stages:
+  - pre-commit
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.1.0
+    hooks:
+      - id: end-of-file-fixer
+
+  - repo: local
+    hooks:
+      # NOTE: This is a total unnecessary check, just used as part of the
+      #       template. Remove this after creating the template.
+      - id: check-python
+        name: check-python
+        entry: python --version
+        language: system
+        pass_filenames: no
+
+      - id: ruff-linter
+        name: ruff-linter
+        entry: ruff check --fix
+        language: system
+        pass_filenames: true
+        require_serial: yes
+        files: "./"
+        types:
+          - python
+
+      - id: ruff-format
+        name: ruff-format
+        entry: ruff format
+        language: system
+        pass_filenames: true
+        require_serial: yes
+        files: "./"
+        types:
+          - python
+
+      - id: mypy
+        name: mypy
+        entry: mypy
+        language: system
+        files: "src/rago"
+        pass_filenames: true
+        types:
+          - python
+
+      - id: bandit
+        name: bandit
+        entry: bandit
+        language: system
+        args: ["--configfile", "pyproject.toml", "-iii", "-lll"]
+        pass_filenames: true
+        types:
+          - python
+
+      # - id: vulture
+      #   name: vulture
+      #   entry: vulture
+      #   language: system
+      #   files: "src/rago"
+      #   description: Find unused Python code.
+      #   pass_filenames: true
+      #   types:
+      #     - python
+
+      - id: mccabe
+        name: mccabe
+        entry: python -m mccabe --min 10
+        language: system
+        files: "src/rago"
+        pass_filenames: true
+        types:
+          - python
