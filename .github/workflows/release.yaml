@@ -25,12 +25,11 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
-          environment-file: conda/release.yaml
+          environment-file: conda/dev.yaml
           channels: conda-forge,nodefaults
           activate-environment: rago
           auto-update-conda: true
           conda-solver: libmamba
-          python-version: "3.11"
 
       - name: Install deps
         run: |
