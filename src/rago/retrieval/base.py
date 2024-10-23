@@ -23,6 +23,7 @@ class RetrievalBase:
         ...
 
 
+@typechecked
 class StringRet(RetrievalBase):
     """String Retrieval class."""
 
