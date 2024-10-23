@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from transformers import T5ForConditionalGeneration, T5Tokenizer
+from typeguard import typechecked
 
 from rago.generation.base import GenerationBase
 
@@ -10,6 +11,7 @@ from rago.generation.base import GenerationBase
 class HuggingFaceGen(GenerationBase):
     """HuggingFaceGen."""
 
+    @typechecked
     def __init__(
         self, model_name: str = 't5-small', output_max_length: int = 500
     ) -> None:
@@ -21,6 +23,7 @@ class HuggingFaceGen(GenerationBase):
 
         self.output_max_length = output_max_length
 
+    @typechecked
     def _set_t5_small_models(self) -> None:
         """Set models to t5-small models."""
         self.model = T5ForConditionalGeneration.from_pretrained('t5-small')

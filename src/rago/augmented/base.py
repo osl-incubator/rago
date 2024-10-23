@@ -5,6 +5,8 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any, Optional
 
+from typeguard import typechecked
+
 from rago.db import DBBase, FaissDB
 
 
@@ -17,6 +19,7 @@ class AugmentedBase:
     documents: list[str]
 
     @abstractmethod
+    @typechecked
     def __init__(
         self,
         documents: list[str] = [],
@@ -29,6 +32,7 @@ class AugmentedBase:
         self.db = db
 
     @abstractmethod
+    @typechecked
     def search(
         self,
         query: str,

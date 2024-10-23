@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from sentence_transformers import SentenceTransformer
+from typeguard import typechecked
 
 from rago.augmented.base import AugmentedBase
 from rago.db import DBBase, FaissDB
@@ -17,6 +18,7 @@ class HuggingFaceAug(AugmentedBase):
     k: int = -1
     db: DBBase
 
+    @typechecked
     def __init__(
         self,
         name: str = 'paraphrase',
@@ -34,6 +36,7 @@ class HuggingFaceAug(AugmentedBase):
         self.db = db
         self.k = k
 
+    @typechecked
     def search(self, query: str, documents: Any, k: int = -1) -> list[str]:
         """Search an encoded query into vector database."""
         document_encoded = self.model.encode(documents)

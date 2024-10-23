@@ -24,6 +24,7 @@ python = ">=3.9,<4"
 faiss-cpu = ">=1.9.0"
 sentence-transformers = ">=3.2.0"
 sentencepiece = ">=0.2.0"
+typeguard = ">=4.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.3.2"

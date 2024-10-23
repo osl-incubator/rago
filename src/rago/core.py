@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typeguard import typechecked
+
 from rago.augmented.base import AugmentedBase
 from rago.generation.base import GenerationBase
 from rago.retrieval.base import RetrievalBase
@@ -14,6 +16,7 @@ class Rago:
     augmented: AugmentedBase
     generation: GenerationBase
 
+    @typechecked
     def __init__(
         self,
         retrieval: RetrievalBase,
@@ -25,6 +28,7 @@ class Rago:
         self.augmented = augmented
         self.generation = generation
 
+    @typechecked
     def prompt(self, query: str) -> str:
         """Run the pipeline with for specific prompt."""
         ret_data = self.retrieval.get(query)
