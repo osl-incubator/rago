@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, List, cast
+from typing import Any, cast
 
 from typeguard import typechecked
 
@@ -29,4 +29,4 @@ class StringRet(RetrievalBase):
 
     def get(self, query: str = '') -> list[str]:
         """Get the data from the sources."""
-        return cast(List[str], self.sources)
+        return cast(list[str], self.sources)
