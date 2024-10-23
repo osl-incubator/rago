@@ -5,7 +5,10 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any, List, cast
 
+from typeguard import typechecked
 
+
+@typechecked
 class RetrievalBase:
     """Base Retrieval class."""
 
@@ -20,6 +23,7 @@ class RetrievalBase:
         ...
 
 
+@typechecked
 class StringRet(RetrievalBase):
     """String Retrieval class."""
 

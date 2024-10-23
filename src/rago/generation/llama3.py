@@ -12,6 +12,7 @@ from typeguard import typechecked
 from rago.generation.base import GenerationBase
 
 
+@typechecked
 class LlamaV32M1BGen(GenerationBase):
     """Llama 3.2 1B Generation class."""
 
@@ -19,7 +20,6 @@ class LlamaV32M1BGen(GenerationBase):
     tokenizer: AutoTokenizer
     generator: pipeline
 
-    @typechecked
     def __init__(
         self,
         model_name: str = 'meta-llama/Llama-3.2-1B',
@@ -40,7 +40,6 @@ class LlamaV32M1BGen(GenerationBase):
             'text-generation', model=self.model, tokenizer=self.tokenizer
         )
 
-    @typechecked
     def generate(self, query: str, context: List[str]) -> str:
         """Generate text using Llama 3.2 1B model."""
         input_text = f"Question: {query} Context: {' '.join(context)}"

@@ -10,6 +10,7 @@ from typeguard import typechecked
 from rago.db import DBBase, FaissDB
 
 
+@typechecked
 class AugmentedBase:
     """Define the base structure for Augmented classes."""
 
@@ -19,7 +20,6 @@ class AugmentedBase:
     documents: list[str]
 
     @abstractmethod
-    @typechecked
     def __init__(
         self,
         documents: list[str] = [],
@@ -32,7 +32,6 @@ class AugmentedBase:
         self.db = db
 
     @abstractmethod
-    @typechecked
     def search(
         self,
         query: str,
