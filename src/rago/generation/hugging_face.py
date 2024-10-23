@@ -68,22 +68,20 @@ class HuggingFaceGen(GenerationBase):
             The query or prompt from the user.
         context : list[str]
             Contextual information for the query.
-        device : str (default 'auto')
+        device : str, optional
             Device for generation (e.g., 'auto', 'cpu', 'cuda'),
-            by default None.
+            by default 'auto'.
 
         Returns
         -------
         str
             The generated response.
         """
-        if device is None:
-            device = self.device
+        if device == 'auto':
+            device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-        if device == 'cuda' and torch.cuda.is_available():
-            self.model = self.model.to('cuda')
-        elif device == 'cpu':
-            self.model = self.model.to('cpu')
+        self.model = self.model.to(device)
+
         with torch.no_grad():
             input_text = f"Question: {query} Context: {' '.join(context)}"
             input_ids = self.tokenizer.encode(
