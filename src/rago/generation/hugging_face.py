@@ -11,7 +11,7 @@ class HuggingFaceGen(GenerationBase):
     """HuggingFaceGen."""
 
     def __init__(
-        self, model_name: str = 't5-small', output_max_length: int = 150
+        self, model_name: str = 't5-small', output_max_length: int = 500
     ) -> None:
         """Initialize HuggingFaceGen."""
         if model_name == 't5-small':
