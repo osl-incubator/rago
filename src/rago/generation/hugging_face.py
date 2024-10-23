@@ -29,7 +29,7 @@ class HuggingFaceGen(GenerationBase):
             The name of the Hugging Face model to use.
         output_max_length : int
             The maximum length for the generated output.
-        device : str
+        device : str (default 'auto')
             Device for running the model ('cpu', 'cuda', or 'auto'),
             default is 'auto'.
         """

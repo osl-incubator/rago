@@ -48,7 +48,7 @@ class Rago:
         ----------
         query : str
             The query or prompt from the user.
-        device : str, optional
+        device : str (default 'auto')
             Device for generation (e.g., 'auto', 'cpu', 'cuda'), by
             default 'auto'.
 
