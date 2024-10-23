@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
-
 import torch
 
 from transformers import T5ForConditionalGeneration, T5Tokenizer
@@ -59,7 +57,7 @@ class HuggingFaceGen(GenerationBase):
             )
 
     def generate(
-        self, query: str, context: list[str], device: Optional[str] = None
+        self, query: str, context: list[str], device: str = 'auto'
     ) -> str:
         """
         Generate the text from the query and augmented context.
@@ -68,9 +66,9 @@ class HuggingFaceGen(GenerationBase):
         ----------
         query : str
             The query or prompt from the user.
-        context : List[str]
+        context : list[str]
             Contextual information for the query.
-        device : Optional[str], optional
+        device : str (default 'auto')
             Device for generation (e.g., 'auto', 'cpu', 'cuda'),
             by default None.
 

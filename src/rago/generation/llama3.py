@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from typing import Optional, cast
+from typing import cast
 
 import torch
 
@@ -27,7 +27,7 @@ class LlamaV32M1BGen(GenerationBase):
         model_name: str = 'meta-llama/Llama-3.2-1B',
         output_max_length: int = 500,
         apikey: str = '',
-        device: Optional[str] = 'auto',
+        device: str = 'auto',
     ) -> None:
         """Initialize LlamaV32M1BGen.
 
@@ -39,7 +39,7 @@ class LlamaV32M1BGen(GenerationBase):
             Maximum length of the generated output.
         apikey : str
             Hugging Face API key for accessing gated models.
-        device : Optional[str]
+        device: str = 'auto'
             Device to run the model on ('auto', 'cpu', or 'cuda').
         """
         super().__init__(
@@ -83,9 +83,9 @@ class LlamaV32M1BGen(GenerationBase):
         ----------
         query : str
             The input query or prompt to generate text from.
-        context : List[str]
+        context : list[str]
             Additional context information to be included in the generation.
-        device : str, optional
+        device : str (default 'auto')
             Device to run the generation ('auto', 'cpu', 'cuda').
 
         Returns
