@@ -9,8 +9,8 @@
         "replacements": [
           {
             "files": ["src/rago/__init__.py"],
-            "from": "return \".*\"  # semantic-release",
-            "to": "return \"${nextRelease.version}\"  # semantic-release",
+            "from": "return '.*'  # semantic-release",
+            "to": "return '${nextRelease.version}'  # semantic-release",
             "results": [
               {
                 "file": "src/rago/__init__.py",
