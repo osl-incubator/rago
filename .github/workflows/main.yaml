@@ -74,7 +74,7 @@ jobs:
           poetry install
 
       - name: Run unit tests
-        run: makim tests.unit
+        run: makim tests.unit --params '-m "not skip_on_ci" -vvv'
 
       - name: Semantic Release PR Title Check
         uses: osl-incubator/semantic-release-pr-title-check@v1.4.1

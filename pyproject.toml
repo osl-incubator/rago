@@ -56,6 +56,9 @@ python-dotenv = ">=1.0"
 testpaths = [
     "tests",
 ]
+markers = [
+    "skip_on_ci: Skip these tests in CI",
+]
 
 [tool.bandit]
 exclude_dirs = ["tests"]
