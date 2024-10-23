@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any
+from typing import Any, Iterable
+
+from typeguard import typechecked
 
 
 class DBBase:
@@ -12,13 +14,15 @@ class DBBase:
     index: Any
 
     @abstractmethod
+    @typechecked
     def embed(self, documents: Any) -> None:
         """Embed the documents into the database."""
         ...
 
     @abstractmethod
+    @typechecked
     def search(
         self, query_encoded: Any, k: int = 2
-    ) -> tuple[list[float], list[int]]:
+    ) -> tuple[Iterable[float], Iterable[int]]:
         """Search a query from documents."""
         ...
