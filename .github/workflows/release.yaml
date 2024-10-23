@@ -30,6 +30,7 @@ jobs:
           activate-environment: rago
           auto-update-conda: true
           conda-solver: libmamba
+          python-version: "3.11"
 
       - name: Install deps
         run: |
