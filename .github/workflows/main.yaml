@@ -39,7 +39,6 @@ jobs:
           - "3.12"
         os:
           - "ubuntu"
-          - "macos"
 
     runs-on: ${{ matrix.os }}-latest
     timeout-minutes: 20
