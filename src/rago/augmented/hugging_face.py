@@ -11,6 +11,7 @@ from rago.augmented.base import AugmentedBase
 from rago.db import DBBase, FaissDB
 
 
+@typechecked
 class HuggingFaceAug(AugmentedBase):
     """Class for augmentation with Hugging Face."""
 
@@ -18,7 +19,6 @@ class HuggingFaceAug(AugmentedBase):
     k: int = -1
     db: DBBase
 
-    @typechecked
     def __init__(
         self,
         name: str = 'paraphrase',
@@ -36,7 +36,6 @@ class HuggingFaceAug(AugmentedBase):
         self.db = db
         self.k = k
 
-    @typechecked
     def search(self, query: str, documents: Any, k: int = -1) -> list[str]:
         """Search an encoded query into vector database."""
         document_encoded = self.model.encode(documents)

@@ -8,6 +8,7 @@ from typing import Any
 from typeguard import typechecked
 
 
+@typechecked
 class GenerationBase:
     """Generic Generation class."""
 
@@ -16,7 +17,6 @@ class GenerationBase:
     output_max_length: int = 500
 
     @abstractmethod
-    @typechecked
     def __init__(
         self, model_name: str = '', output_max_length: int = 500
     ) -> None:
@@ -25,7 +25,6 @@ class GenerationBase:
         self.output_max_length = output_max_length
 
     @abstractmethod
-    @typechecked
     def generate(self, query: str, context: list[str]) -> str:
         """Generate text."""
         ...

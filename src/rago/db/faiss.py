@@ -11,16 +11,15 @@ from typeguard import typechecked
 from rago.db.base import DBBase
 
 
+@typechecked
 class FaissDB(DBBase):
     """Faiss Database."""
 
-    @typechecked
     def embed(self, documents: Any) -> None:
         """Embed the documents into the database."""
         self.index = faiss.IndexFlatL2(documents.shape[1])
         self.index.add(documents)
 
-    @typechecked
     def search(
         self, query_encoded: Any, k: int = 2
     ) -> tuple[Iterable[float], Iterable[int]]:
