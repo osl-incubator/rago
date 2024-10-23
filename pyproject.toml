@@ -21,8 +21,8 @@ include = ["src/rago/py.typed"]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4"
-faiss-cpu = "^1.9.0"
-sentence-transformers = "^3.2.0"
+faiss-cpu = ">=1.9.0"
+sentence-transformers = ">=3.2.0"
 sentencepiece = ">=0.2.0"
 
 [tool.poetry.group.dev.dependencies]
@@ -50,10 +50,14 @@ mkdocs-gen-files = ">=0.5.0"
 makim = "1.19.0"
 # 'PosixPath' object has no attribute 'endswith'
 virtualenv = "<=20.25.1"
+python-dotenv = ">=1.0"
 
 [tool.pytest.ini_options]
 testpaths = [
     "tests",
+]
+markers = [
+    "skip_on_ci: Skip these tests in CI",
 ]
 
 [tool.bandit]
