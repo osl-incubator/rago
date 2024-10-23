@@ -65,6 +65,12 @@ jobs:
           conda-solver: libmamba
           python-version: "${{ matrix.python_version }}"
 
+      - name: Create environment variables for tests
+        run: |
+          pushd tests
+          envsubst < .env.tpl > .env
+          popd
+
       - name: Check Poetry lock
         run: poetry check
 
