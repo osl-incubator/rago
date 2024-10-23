@@ -25,6 +25,8 @@ class GenerationBase:
         self.output_max_length = output_max_length
 
     @abstractmethod
-    def generate(self, query: str, context: list[str]) -> str:
+    def generate(
+        self, query: str, context: list[str], device: str = 'auto'
+    ) -> str:
         """Generate text."""
         ...
