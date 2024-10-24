@@ -10,7 +10,7 @@ def get_version() -> str:
     try:
         return importlib_metadata.version(__name__)
     except importlib_metadata.PackageNotFoundError:  # pragma: no cover
-        return '0.2.0'  # semantic-release
+        return '0.3.0'  # semantic-release
 
 
 version = get_version()
