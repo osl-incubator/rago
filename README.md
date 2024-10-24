@@ -10,6 +10,20 @@ Rago is a lightweight framework for RAG.
 - Support for Hugging Face
 - Support for llama
 
+## Installation
+
+If you want to install it for `cpu` only, you can run:
+
+```bash
+$ pip install rago[cpu]
+```
+
+But, if you want to install it for `gpu` (cuda), you can run:
+
+```bash
+$ pip install rago[gpu]
+```
+
 ## Setup
 
 ### Llama 3

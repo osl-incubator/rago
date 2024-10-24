@@ -21,10 +21,24 @@ include = ["src/rago/py.typed"]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4"
-faiss-cpu = ">=1.9.0"
-sentence-transformers = ">=3.2.0"
-sentencepiece = ">=0.2.0"
 typeguard = ">=4.0"
+# https://github.com/kyamagu/faiss-wheels?tab=readme-ov-file#supporting-gpu-or-customized-build-configuration
+faiss-cpu = ">=1.9.0"
+sentencepiece = {version = ">=0.2.0"}
+sentence-transformers = {version = ">=3.2.0"}
+transformers = {version = ">=4"}
+torch = [
+  {version = ">=2.5.0+cpu", markers="extra=='cpu' and extra!='gpu'", source="pytorch-cpu"},
+  {version = ">=2.5.0", markers="extra=='gpu' and extra!='cpu'"},
+]
+torchvision = [
+  {version = ">=0.20.0+cpu", markers="extra=='cpu' and extra!='gpu'", source="pytorch-cpu"},
+  {version = ">=0.20.0", markers="extra=='gpu' and extra!='cpu'"},
+]
+
+[tool.poetry.extras]
+cpu = ["torch", "torchvision"]
+gpu = ["torch", "torchvision"]
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.3.2"
@@ -52,6 +66,24 @@ makim = "1.19.0"
 # 'PosixPath' object has no attribute 'endswith'
 virtualenv = "<=20.25.1"
 python-dotenv = ">=1.0"
+
+
+[[tool.poetry.source]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "supplemental"
+
+
+[[tool.poetry.source]]
+name = "pytorch-gpu-cuda118"
+url = "https://download.pytorch.org/whl/cu118"
+priority = "supplemental"
+
+[[tool.poetry.source]]
+name = "pytorch-gpu-cuda121"
+url = "https://download.pytorch.org/whl/cu121"
+priority = "supplemental"
+
 
 [tool.pytest.ini_options]
 testpaths = [
