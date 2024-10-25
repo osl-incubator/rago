@@ -53,7 +53,7 @@ class Rago:
         ----------
         query : str
             The query or prompt from the user.
-        device : str, optional
+        device : str (default 'auto')
             Device for generation (e.g., 'auto', 'cpu', 'cuda'), by
             default 'auto'.
 
@@ -66,9 +66,8 @@ class Rago:
         ret_data = self.retrieval.get(query)
         aug_data = self.augmented.search(query, ret_data)
 
-        # Ensure gen_data is treated as str type
         gen_data: str = self.generation.generate(
             query, context=aug_data, language=language
         )
 
-        return gen_data  # Already str, so no conversion needed
+        return gen_data
