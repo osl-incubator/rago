@@ -1,5 +1,7 @@
 """Tests for language detection and response generation in Rago."""
 
+import os
+
 import pytest
 
 from rago import Rago
@@ -41,6 +43,7 @@ def test_language_detection(
     device: str = 'cpu',
 ) -> None:
     """Test language detection and response generation in Rago."""
+    HF_TOKEN = os.getenv('HF_TOKEN', '')
     animals_data = (
         animals_data_en if expected_language == 'en' else animals_data_fr
     )
@@ -48,7 +51,7 @@ def test_language_detection(
     rag = Rago(
         retrieval=StringRet(animals_data),
         augmented=HuggingFaceAug(k=3),
-        generation=LlamaV32M1BGen(device=device),
+        generation=LlamaV32M1BGen(apikey=HF_TOKEN, device=device),
     )
 
     detected_language = rag.detect_language(query)
@@ -59,8 +62,3 @@ def test_language_detection(
     response = rag.prompt(query)
     assert isinstance(response, str), 'Response should be a string.'
     assert response != '', 'Response should not be empty.'
-
-    print(
-        f'Query: {query}\nDetected Language: {detected_language}\n'
-        f'Response: {response}'
-    )

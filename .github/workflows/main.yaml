@@ -51,6 +51,9 @@ jobs:
       group: ci-tests-${{ matrix.os }}-${{ matrix.python_version }}-${{ github.ref }}
       cancel-in-progress: true
 
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}  
+
     steps:
       - uses: actions/checkout@v4
 
