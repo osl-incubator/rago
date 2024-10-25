@@ -18,10 +18,6 @@ from rago.generation.base import GenerationBase
 class LlamaV32M1BGen(GenerationBase):
     """Llama 3.2 1B Generation class."""
 
-    model: AutoModelForCausalLM
-    tokenizer: AutoTokenizer
-    generator: pipeline
-
     def __init__(
         self,
         model_name: str = 'meta-llama/Llama-3.2-1B',
@@ -29,19 +25,7 @@ class LlamaV32M1BGen(GenerationBase):
         apikey: str = '',
         device: str = 'auto',
     ) -> None:
-        """Initialize LlamaV32M1BGen.
-
-        Parameters
-        ----------
-        model_name : str
-            The name of the model to use (default: 'meta-llama/Llama-3.2-1B').
-        output_max_length : int
-            Maximum length of the generated output.
-        apikey : str
-            Hugging Face API key for accessing gated models.
-        device: str = 'auto'
-            Device to run the model on ('auto', 'cpu', or 'cuda').
-        """
+        """Initialize LlamaV32M1BGen."""
         super().__init__(
             model_name=model_name, output_max_length=output_max_length
         )
@@ -69,31 +53,23 @@ class LlamaV32M1BGen(GenerationBase):
             'text-generation',
             model=self.model,
             tokenizer=self.tokenizer,
-            device=0
-            if self.device.type == 'cuda'
-            else -1,  # Set device for pipeline
+            device=0 if self.device.type == 'cuda' else -1,
         )
 
     def generate(
-        self, query: str, context: list[str], device: str = 'auto'
+        self,
+        query: str,
+        context: list[str],
+        language: str = 'en',
     ) -> str:
-        """Generate text using Llama 3.2 1B model.
-
-        Parameters
-        ----------
-        query : str
-            The input query or prompt to generate text from.
-        context : list[str]
-            Additional context information to be included in the generation.
-        device : str (default 'auto')
-            Device to run the generation ('auto', 'cpu', 'cuda').
-
-        Returns
-        -------
-        str
-            The generated text response.
-        """
+        """Generate text using Llama 3.2 1B model with language support."""
         input_text = f"Question: {query} Context: {' '.join(context)}"
+
+        # Set the tokenizer language if supported
+        if language == 'fr':
+            self.tokenizer.lang_code = 'fr'
+        else:
+            self.tokenizer.lang_code = 'en'
 
         response = self.generator(
             input_text,
