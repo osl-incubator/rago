@@ -68,7 +68,7 @@ class HuggingFaceGen(GenerationBase):
             The query or prompt from the user.
         context : list[str]
             Contextual information for the query.
-        device : str, optional
+        device : str (default 'auto')
             Device for generation (e.g., 'auto', 'cpu', 'cuda'),
             by default 'auto'.
 
