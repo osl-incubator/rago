@@ -28,11 +28,11 @@ sentencepiece = {version = ">=0.2.0"}
 sentence-transformers = {version = ">=3.2.0"}
 transformers = {version = ">=4"}
 torch = [
-  {version = ">=2.5.0+cpu", markers="extra=='cpu' and extra!='gpu'", source="pytorch-cpu"},
+  {version = ">=2.5.0", markers="extra=='cpu' and extra!='gpu'", source="pytorch-cpu"},
   {version = ">=2.5.0", markers="extra=='gpu' and extra!='cpu'"},
 ]
 torchvision = [
-  {version = ">=0.20.0+cpu", markers="extra=='cpu' and extra!='gpu'", source="pytorch-cpu"},
+  {version = ">=0.20.0", markers="extra=='cpu' and extra!='gpu'", source="pytorch-cpu"},
   {version = ">=0.20.0", markers="extra=='gpu' and extra!='cpu'"},
 ]
 
