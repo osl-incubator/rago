@@ -35,6 +35,7 @@ torchvision = [
   {version = ">=0.20.0", markers="extra=='cpu' and extra!='gpu'", source="pytorch-cpu"},
   {version = ">=0.20.0", markers="extra=='gpu' and extra!='cpu'"},
 ]
+langdetect = ">=1"
 
 [tool.poetry.extras]
 cpu = ["torch", "torchvision"]
