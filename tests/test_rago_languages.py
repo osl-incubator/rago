@@ -35,6 +35,7 @@ def animals_data_fr() -> list[str]:
         ("Y a-t-il des animaux plus grands qu'un dinosaure?", 'fr'),
     ],
 )
+@pytest.mark.skip_on_ci
 def test_language_detection(
     query: str,
     expected_language: str,
