@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from langdetect import detect
 from typeguard import typechecked
 
 from rago.augmented.base import AugmentedBase
@@ -42,10 +41,6 @@ class Rago:
         self.augmented = augmented
         self.generation = generation
 
-    def detect_language(self, query: str) -> str:
-        """Detect the language of the query."""
-        return str(detect(query))
-
     def prompt(self, query: str, device: str = 'auto') -> str:
         """Run the pipeline for a specific prompt.
 
@@ -62,12 +57,8 @@ class Rago:
         str
             Generated text based on the query and augmented data.
         """
-        language = self.detect_language(query)
         ret_data = self.retrieval.get(query)
         aug_data = self.augmented.search(query, ret_data)
-
-        gen_data: str = self.generation.generate(
-            query, context=aug_data, language=language
-        )
+        gen_data: str = self.generation.generate(query, context=aug_data)
 
         return gen_data

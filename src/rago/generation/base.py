@@ -34,7 +34,9 @@ class GenerationBase:
 
     @abstractmethod
     def generate(
-        self, query: str, context: list[str], language: str = 'en'
+        self,
+        query: str,
+        context: list[str],
     ) -> str:
         """Generate text with optional language parameter.
 
@@ -44,8 +46,6 @@ class GenerationBase:
             The input query or prompt.
         context : list[str]
             Additional context information for the generation.
-        language : str, optional
-            The language for generation, by default 'en'.
 
         Returns
         -------

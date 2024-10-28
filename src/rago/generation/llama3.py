@@ -8,6 +8,7 @@ from typing import cast
 
 import torch
 
+from langdetect import detect
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 from typeguard import typechecked
 
@@ -74,7 +75,6 @@ class LlamaV32M1BGen(GenerationBase):
         self,
         query: str,
         context: list[str],
-        language: str = 'en',
     ) -> str:
         """
         Generate text using Llama 3.2 1B model with language support.
@@ -85,20 +85,17 @@ class LlamaV32M1BGen(GenerationBase):
             The input query or prompt.
         context : list[str]
             Contextual information for the query.
-        language : str, optional
-            The language for generation (either 'en' or 'fr'), by default 'en'.
 
-        Returns
-        -------
+        Return
+        ------
+
         str
             The generated response.
         """
         input_text = f"Question: {query} Context: {' '.join(context)}"
+        language = str(detect(query)) or 'en'
 
-        if language == 'fr':
-            self.tokenizer.lang_code = 'fr'
-        else:
-            self.tokenizer.lang_code = 'en'
+        self.tokenizer.lang_code = language
 
         response = self.generator(
             input_text,
