@@ -21,17 +21,7 @@ class OpenAIGPTGen(GenerationBase):
         output_max_tokens: int = 500,
         api_key: str = '',
     ) -> None:
-        """Initialize OpenAIGenerationModel with OpenAI's model.
-
-        Parameters
-        ----------
-        model_name : str
-            The OpenAI model to use (e.g., 'text-davinci-003' or 'gpt-4').
-        output_max_tokens : int
-            Maximum length of the generated output in tokens.
-        api_key : str
-            API key for OpenAI authentication.
-        """
+        """Initialize OpenAIGenerationModel with OpenAI's model."""
         super().__init__(
             model_name=model_name, output_max_length=output_max_tokens
         )
@@ -43,22 +33,7 @@ class OpenAIGPTGen(GenerationBase):
         context: list[str],
         language: str = 'en',
     ) -> str:
-        """Generate text using OpenAI's API with dynamic model support.
-
-        Parameters
-        ----------
-        query : str
-            The input query or prompt.
-        context : list[str]
-            Contextual information for the query.
-        language : str, optional
-            The language for generation (either 'en' or 'fr'), by default 'en'.
-
-        Returns
-        -------
-        str
-            The generated response.
-        """
+        """Generate text using OpenAI's API with dynamic model support."""
         input_text = (
             f"Question: {query}\nContext: {' '.join(context)}\n"
             f"Answer in {language}:"
