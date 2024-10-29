@@ -24,7 +24,7 @@ class OpenAIAug(AugmentedBase):
         """Augment the query by expanding or rephrasing it using OpenAI."""
         prompt = f"Retrieval: '{query}'\nContext: {' '.join(documents)}"
 
-        response = openai.ChatCompletion.create(  # type: ignore[no-untyped-call]
+        response = openai.Completion.create(  # type: ignore[attr-defined]
             model=self.model_name,
             messages=[{'role': 'user', 'content': prompt}],
             max_tokens=50,

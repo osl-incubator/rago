@@ -34,6 +34,7 @@ def openai_api_key() -> str:
     return api_key
 
 
+@pytest.mark.skip_on_ci
 def test_openai_gpt4(animals_data: list[str], openai_api_key: str) -> None:
     """Test RAG pipeline with OpenAI's GPT-4."""
     rag = Rago(

@@ -39,7 +39,7 @@ class OpenAIGPTGen(GenerationBase):
             f"Answer in {language}:"
         )
 
-        response = openai.ChatCompletion.create(  # type: ignore[no-untyped-call]
+        response = openai.Completion.create(  # type: ignore[attr-defined]
             model=self.model_name,
             messages=[{'role': 'user', 'content': input_text}],
             max_tokens=self.output_max_length,

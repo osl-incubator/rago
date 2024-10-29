@@ -1,5 +1,7 @@
 """Tests for rago package."""
 
+import os
+
 from pathlib import Path
 
 import pytest
@@ -22,7 +24,7 @@ def animals_data() -> list[str]:
 @pytest.mark.skip_on_ci
 def test_llama(env, animals_data: list[str], device: str = 'auto') -> None:
     """Test RAG with hugging face."""
-    HF_TOKEN = env.get('HF_TOKEN', '')
+    HF_TOKEN = os.getenv('HF_TOKEN', '')
 
     rag = Rago(
         retrieval=StringRet(animals_data),
