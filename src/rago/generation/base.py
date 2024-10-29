@@ -5,6 +5,8 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any
 
+import torch
+
 from typeguard import typechecked
 
 
@@ -12,13 +14,22 @@ from typeguard import typechecked
 class GenerationBase:
     """Generic Generation class."""
 
+    apikey: str = ''
+    device_name: str = 'cpu'
+    device: torch.device
     model: Any
     tokenizer: Any
+    temperature: float = 0.5
     output_max_length: int = 500
 
     @abstractmethod
     def __init__(
-        self, model_name: str = '', output_max_length: int = 500
+        self,
+        model_name: str = '',
+        apikey: str = '',
+        temperature: float = 0.5,
+        output_max_length: int = 500,
+        device: str = 'auto',
     ) -> None:
         """Initialize GenerationBase.
 
@@ -26,11 +37,28 @@ class GenerationBase:
         ----------
         model_name : str
             The name of the model to use.
+        apikey : str
+        temperature : float
         output_max_length : int
             Maximum length of the generated output.
+        device: str (default=auto)
         """
+        self.apikey = apikey
         self.model_name = model_name
         self.output_max_length = output_max_length
+        self.temperature = temperature
+
+        if self.device_name not in ['cpu', 'cuda', 'auto']:
+            raise Exception(
+                f'Device {self.device_name} not supported. '
+                'Options: cpu, cuda, auto.'
+            )
+
+        cuda_available = torch.cuda.is_available()
+        self.device_name = (
+            'cpu' if device == 'cpu' or not cuda_available else 'cuda'
+        )
+        self.device = torch.device(self.device_name)
 
     @abstractmethod
     def generate(

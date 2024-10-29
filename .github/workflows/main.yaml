@@ -52,7 +52,7 @@ jobs:
       cancel-in-progress: true
 
     env:
-      HF_TOKEN: ${{ secrets.HF_TOKEN }}  
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
