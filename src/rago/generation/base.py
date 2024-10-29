@@ -14,7 +14,7 @@ from typeguard import typechecked
 class GenerationBase:
     """Generic Generation class."""
 
-    apikey: str = ''
+    api_key: str = ''
     device_name: str = 'cpu'
     device: torch.device
     model: Any
@@ -26,7 +26,7 @@ class GenerationBase:
     def __init__(
         self,
         model_name: str = '',
-        apikey: str = '',
+        api_key: str = '',
         temperature: float = 0.5,
         output_max_length: int = 500,
         device: str = 'auto',
@@ -37,13 +37,13 @@ class GenerationBase:
         ----------
         model_name : str
             The name of the model to use.
-        apikey : str
+        api_key : str
         temperature : float
         output_max_length : int
             Maximum length of the generated output.
         device: str (default=auto)
         """
-        self.apikey = apikey
+        self.api_key = api_key
         self.model_name = model_name
         self.output_max_length = output_max_length
         self.temperature = temperature

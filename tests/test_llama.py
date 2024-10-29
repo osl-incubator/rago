@@ -19,8 +19,7 @@ def animals_data() -> list[str]:
         return data
 
 
-# @pytest.mark.skip_on_ci
-@pytest.mark.skip(reason='Not on CI')
+@pytest.mark.skip_on_ci
 def test_llama(env, animals_data: list[str], device: str = 'auto') -> None:
     """Test RAG with hugging face."""
     HF_TOKEN = env.get('HF_TOKEN', '')
@@ -28,7 +27,7 @@ def test_llama(env, animals_data: list[str], device: str = 'auto') -> None:
     rag = Rago(
         retrieval=StringRet(animals_data),
         augmented=HuggingFaceAug(k=3),
-        generation=LlamaGen(apikey=HF_TOKEN, device=device),
+        generation=LlamaGen(api_key=HF_TOKEN, device=device),
     )
 
     query = 'Is there any animals larger than a dinosaur?'
