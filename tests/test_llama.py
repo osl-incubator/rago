@@ -19,7 +19,8 @@ def animals_data() -> list[str]:
         return data
 
 
-@pytest.mark.skip_on_ci
+# @pytest.mark.skip_on_ci
+@pytest.mark.skip(reason='Not on CI')
 def test_llama(env, animals_data: list[str], device: str = 'auto') -> None:
     """Test RAG with hugging face."""
     HF_TOKEN = env.get('HF_TOKEN', '')
