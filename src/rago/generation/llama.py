@@ -1,10 +1,6 @@
-# src/rago/generation/llama3.py
-
-"""Llama 3.2 1B classes for text generation."""
+"""Llama generation module."""
 
 from __future__ import annotations
-
-from typing import cast
 
 import torch
 
@@ -62,19 +58,29 @@ class LlamaGen(GenerationBase):
 
     def generate(self, query: str, context: list[str]) -> str:
         """Generate text using Llama model with language support."""
-        input_text = f"Question: {query} Context: {' '.join(context)}"
-        language = str(detect(query)) or 'en'
-
-        self.tokenizer.lang_code = language
-
-        response = self.generator(
-            input_text,
-            max_length=self.output_max_length,
-            do_sample=True,
-            temperature=self.temperature,
-            num_return_sequences=1,
+        # Craft the input prompt with a clear instruction for the model
+        input_text = (
+            f"Answer the following question briefly and directly.\n"
+            f"Question: {query}\nContext: {' '.join(context)}\nAnswer:"
         )
 
-        breakpoint()
+        # Detect and set the language code for multilingual models (optional)
+        language = str(detect(query)) or 'en'
+        self.tokenizer.lang_code = language
 
-        return cast(str, response[0].get('generated_text', ''))
+        # Generate the response with adjusted parameters
+        response = self.generator(
+            input_text,
+            max_new_tokens=self.output_max_length,
+            do_sample=True,
+            temperature=self.temperature,
+            top_k=50,
+            top_p=0.95,
+            num_return_sequences=1,
+            eos_token_id=self.tokenizer.eos_token_id,
+        )
+
+        # Extract and return the answer only
+        answer = str(response[0].get('generated_text', ''))
+        # Strip off any redundant text after the answer itself
+        return answer.split('Answer:')[-1].strip()
