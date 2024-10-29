@@ -11,16 +11,7 @@ from rago.augmented.base import AugmentedBase
 
 @typechecked
 class OpenAIAug(AugmentedBase):
-    """
-    OpenAIAug class for query augmentation using OpenAI API.
-
-    Parameters
-    ----------
-    model_name : str
-        The name of the OpenAI model to use for augmentation.
-    k : int
-        Number of results to retrieve in augmentation.
-    """
+    """OpenAIAug class for query augmentation using OpenAI API."""
 
     def __init__(self, model_name: str = 'gpt-4', k: int = 1) -> None:
         """Initialize the OpenAIAug class."""
