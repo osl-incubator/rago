@@ -18,7 +18,7 @@ class LlamaGen(GenerationBase):
     def __init__(
         self,
         model_name: str = 'meta-llama/Llama-3.2-1B',
-        apikey: str = '',
+        api_key: str = '',
         temperature: float = 0.5,
         output_max_length: int = 500,
         device: str = 'auto',
@@ -31,19 +31,19 @@ class LlamaGen(GenerationBase):
 
         super().__init__(
             model_name=model_name,
-            apikey=apikey,
+            api_key=api_key,
             temperature=temperature,
             output_max_length=output_max_length,
             device=device,
         )
 
         self.tokenizer = AutoTokenizer.from_pretrained(
-            model_name, token=apikey
+            model_name, token=api_key
         )
 
         self.model = AutoModelForCausalLM.from_pretrained(
             model_name,
-            token=apikey,
+            token=api_key,
             torch_dtype=torch.float16
             if self.device_name == 'cuda'
             else torch.float32,

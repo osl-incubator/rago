@@ -17,7 +17,7 @@ class HuggingFaceGen(GenerationBase):
     def __init__(
         self,
         model_name: str = 't5-small',
-        apikey: str = '',
+        api_key: str = '',
         temperature: float = 0.5,
         output_max_length: int = 500,
         device: str = 'auto',
@@ -28,7 +28,7 @@ class HuggingFaceGen(GenerationBase):
 
         super().__init__(
             model_name=model_name,
-            apikey=apikey,
+            api_key=api_key,
             temperature=temperature,
             output_max_length=output_max_length,
             device=device,
