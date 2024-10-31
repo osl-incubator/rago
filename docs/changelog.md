@@ -1,6 +1,19 @@
 # Release Notes
 ---
 
+# [0.4.0](https://github.com/osl-incubator/rago/compare/0.3.0...0.4.0) (2024-10-31)
+
+
+### Bug Fixes
+
+* Fix packaging issues with torch and fix issues with langdetect ([#10](https://github.com/osl-incubator/rago/issues/10)) ([e4ade58](https://github.com/osl-incubator/rago/commit/e4ade58f274d0c0fd8c34cbb21431d00bc122954))
+
+
+### Features
+
+* Implement Gemini Model Integration for Augmentation and Generation ([#16](https://github.com/osl-incubator/rago/issues/16)) ([b418c9b](https://github.com/osl-incubator/rago/commit/b418c9be414333a3575e17ac42cd7bf89483a815))
+* **model:** Integrate GPT-4 text generation in Rago ([#13](https://github.com/osl-incubator/rago/issues/13)) ([42078a3](https://github.com/osl-incubator/rago/commit/42078a359dbe64f39e9ddcb9e8f3cf4289dff52a))
+
 # [0.3.0](https://github.com/osl-incubator/rago/compare/0.2.0...0.3.0) (2024-10-24)
 
 
