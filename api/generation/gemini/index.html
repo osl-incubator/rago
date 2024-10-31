@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://osl-incubator.github.io/rago/api/generation/base/">
+        <link rel="canonical" href="https://osl-incubator.github.io/rago/api/generation/gemini/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../base/">
       
       
-        <link rel="next" href="../gemini/">
+        <link rel="next" href="../hugging_face/">
       
       
       <link rel="icon" href="../../../images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>base - Rago</title>
+        <title>gemini - Rago</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rago.generation.base" class="md-skip">
+        <a href="#rago.generation.gemini" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> base
+              <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> gemini
             
           </span>
         </div>
@@ -753,6 +753,27 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../base/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -769,7 +790,7 @@
           
   
   <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> base
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> gemini
   </span>
   
 
@@ -780,7 +801,7 @@
         
   
   <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> base
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> gemini
   </span>
   
 
@@ -802,17 +823,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#rago.generation.base.GenerationBase" class="md-nav__link">
+  <a href="#rago.generation.gemini.GeminiGen" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;GenerationBase
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;GeminiGen
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" GenerationBase">
+    <nav class="md-nav" aria-label=" GeminiGen">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#rago.generation.base.GenerationBase.generate" class="md-nav__link">
+  <a href="#rago.generation.gemini.GeminiGen.generate" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;generate
     </span>
@@ -829,27 +850,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../gemini/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> gemini
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -1070,17 +1070,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#rago.generation.base.GenerationBase" class="md-nav__link">
+  <a href="#rago.generation.gemini.GeminiGen" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;GenerationBase
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;GeminiGen
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" GenerationBase">
+    <nav class="md-nav" aria-label=" GeminiGen">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#rago.generation.base.GenerationBase.generate" class="md-nav__link">
+  <a href="#rago.generation.gemini.GeminiGen.generate" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;generate
     </span>
@@ -1115,15 +1115,15 @@
 
 
 
-<h1 id="rago.generation.base" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <span class="doc doc-object-name doc-module-name">base</span>
+<h1 id="rago.generation.gemini" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <span class="doc doc-object-name doc-module-name">gemini</span>
 
 
 </h1>
 
     <div class="doc doc-contents first">
 
-        <p>Base classes for generation.</p>
+        <p>GeminiGen class for text generation using Google's Gemini model.</p>
 
 
 
@@ -1134,10 +1134,10 @@
 <p><span class="doc-section-title">Classes:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-          <b><code><a class="autorefs autorefs-internal" title="rago.generation.base.GenerationBase" href="#rago.generation.base.GenerationBase">GenerationBase</a></code></b>
+          <b><code><a class="autorefs autorefs-internal" title="rago.generation.gemini.GeminiGen" href="#rago.generation.gemini.GeminiGen">GeminiGen</a></code></b>
           –
           <div class="doc-md-description">
-            <p>Generic Generation class.</p>
+            <p>Gemini generation model for text generation.</p>
           </div>
         </li>
     </ul>
@@ -1161,18 +1161,20 @@
 
 
 
-<h2 id="rago.generation.base.GenerationBase" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">GenerationBase</span>
+<h2 id="rago.generation.gemini.GeminiGen" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">GeminiGen</span>
 
 
 </h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">GenerationBase</span><span class="p">(</span><span class="n">model_name</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">api_key</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">temperature</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">prompt_template</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">output_max_length</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">GeminiGen</span><span class="p">(</span><span class="n">model_name</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">api_key</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">temperature</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">prompt_template</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">output_max_length</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="rago.generation.base.GenerationBase" href="../base/#rago.generation.base.GenerationBase">GenerationBase</a></code></p>
 
 
-        <p>Generic Generation class.</p>
+        <p>Gemini generation model for text generation.</p>
 
 
 
@@ -1251,10 +1253,10 @@
 <p><span class="doc-section-title">Methods:</span></p>
     <ul>
           <li class="doc-section-item field-body">
-            <b><code><a class="autorefs autorefs-internal" title="rago.generation.base.GenerationBase.generate" href="#rago.generation.base.GenerationBase.generate">generate</a></code></b>
+            <b><code><a class="autorefs autorefs-internal" title="rago.generation.gemini.GeminiGen.generate" href="#rago.generation.gemini.GeminiGen.generate">generate</a></code></b>
             –
             <div class="doc-md-description">
-              <p>Generate text with optional language parameter.</p>
+              <p>Generate text using Gemini model support.</p>
             </div>
           </li>
     </ul>
@@ -1372,13 +1374,9 @@
 <div class="doc doc-object doc-function">
 
 
-<h3 id="rago.generation.base.GenerationBase.generate" class="doc doc-heading">
+<h3 id="rago.generation.gemini.GeminiGen.generate" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">generate</span>
 
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
-  </span>
 
 </h3>
 <div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">generate</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span>
@@ -1386,84 +1384,25 @@
 
     <div class="doc doc-contents ">
 
-        <p>Generate text with optional language parameter.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>query</code></b>
-              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>)
-          –
-          <div class="doc-md-description">
-            <p>The input query or prompt.</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>context</code></b>
-              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code>)
-          –
-          <div class="doc-md-description">
-            <p>Additional context information for the generation.</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-          –
-          <div class="doc-md-description">
-            <p>Generated text based on query and context.</p>
-          </div>
-        </li>
-    </ul>
+        <p>Generate text using Gemini model support.</p>
 
             <details class="quote">
-              <summary>Source code in <code>src/rago/generation/base.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@abstractmethod</span>
-<span class="k">def</span> <span class="nf">generate</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span>
-    <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate text with optional language parameter.</span>
+              <summary>Source code in <code>src/rago/generation/gemini.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate text using Gemini model support.&quot;&quot;&quot;</span>
+    <span class="n">input_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="p">)</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    query : str</span>
-<span class="sd">        The input query or prompt.</span>
-<span class="sd">    context : list[str]</span>
-<span class="sd">        Additional context information for the generation.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    str</span>
-<span class="sd">        Generated text based on query and context.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="o">...</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">generate_content</span><span class="p">(</span><span class="n">input_text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
