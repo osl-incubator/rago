@@ -39,7 +39,7 @@ class OpenAIGPTGen(GenerationBase):
             f"Answer in {language}:"
         )
 
-        response = openai.Completion.create(  # type: ignore[attr-defined]
+        response = openai.Completion.create(  # type: ignore[no-untyped-call]
             model=self.model_name,
             messages=[{'role': 'user', 'content': input_text}],
             max_tokens=self.output_max_length,
