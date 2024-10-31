@@ -1,12 +1,14 @@
 """Tests for Rago package using Google's Gemini Model."""
 
+import os
+
 from pathlib import Path
 
 import pytest
 
 from rago import Rago
 from rago.augmented import GeminiAug
-from rago.generation.gemini_ai import GeminiAIGen
+from rago.generation import GeminiGen
 from rago.retrieval import StringRet
 
 
@@ -20,9 +22,9 @@ def animals_data() -> list[str]:
 
 
 @pytest.fixture
-def gemini_api_key() -> str:
+def api_key(env) -> str:
     """Fixture for Gemini API key from environment."""
-    api_key = 'AIzaSyDl6-k1hPjrgWR71Qia47F6z5dSylYJGpg'
+    api_key = os.getenv('GEMINI_API_KEY')
     if not api_key:
         raise EnvironmentError(
             'Please set the GEMINI_API_KEY environment variable.'
@@ -31,9 +33,7 @@ def gemini_api_key() -> str:
 
 
 @pytest.mark.skip_on_ci
-def test_gemini_generation(
-    animals_data: list[str], gemini_api_key: str
-) -> None:
+def test_gemini_generation(animals_data: list[str], api_key: str) -> None:
     """Test RAG pipeline with Gemini model for text generation."""
     # Instantiate Rago with the Gemini model
     rag = Rago(
@@ -41,9 +41,7 @@ def test_gemini_generation(
         augmented=GeminiAug(
             k=3
         ),  # Update if using a specific augmentation class for Gemini
-        generation=GeminiAIGen(
-            api_key=gemini_api_key, model_name='gemini-1.5-flash'
-        ),
+        generation=GeminiGen(api_key=api_key, model_name='gemini-1.5-flash'),
     )
 
     query = 'Is there any animal larger than a dinosaur?'
@@ -51,5 +49,5 @@ def test_gemini_generation(
 
     # Verify the result contains relevant information, e.g., "Blue Whale"
     assert (
-        'Blue Whale' in result
+        'blue whale' in result.lower()
     ), 'Expected response to mention Blue Whale as a larger animal.'

@@ -14,38 +14,28 @@ from rago.generation.base import GenerationBase
 class HuggingFaceGen(GenerationBase):
     """HuggingFaceGen."""
 
-    def __init__(
-        self,
-        model_name: str = 't5-small',
-        api_key: str = '',
-        temperature: float = 0.5,
-        output_max_length: int = 500,
-        device: str = 'auto',
-    ) -> None:
-        """Initialize HuggingFaceGen."""
-        if model_name != 't5-small':
-            raise Exception(f'The given model {model_name} is not supported.')
+    default_model_name = 't5-small'
 
-        super().__init__(
-            model_name=model_name,
-            api_key=api_key,
-            temperature=temperature,
-            output_max_length=output_max_length,
-            device=device,
-        )
+    def _validate(self) -> None:
+        if self.model_name != 't5-small':
+            raise Exception(
+                f'The given model {self.model_name} is not supported.'
+            )
 
-        self._set_t5_small_models()
-
-    def _set_t5_small_models(self) -> None:
+    def _setup(self) -> None:
         """Set models to t5-small models."""
-        self.tokenizer = T5Tokenizer.from_pretrained('t5-small')
-        self.model = T5ForConditionalGeneration.from_pretrained('t5-small')
+        self.tokenizer = T5Tokenizer.from_pretrained(self.model_name)
+        self.model = T5ForConditionalGeneration.from_pretrained(
+            self.model_name
+        )
         self.model = self.model.to(self.device)
 
     def generate(self, query: str, context: list[str]) -> str:
         """Generate the text from the query and augmented context."""
         with torch.no_grad():
-            input_text = f"Question: {query} Context: {' '.join(context)}"
+            input_text = self.prompt_template.format(
+                query=query, context=' '.join(context)
+            )
             input_ids = self.tokenizer.encode(
                 input_text,
                 return_tensors='pt',

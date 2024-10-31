@@ -36,7 +36,7 @@ torchvision = [
   {version = ">=0.20.0", markers="extra=='gpu' and extra!='cpu'"},
 ]
 langdetect = ">=1"
-openai = "0.28"
+openai = "^1.52.2"
 google-generativeai = "^0.8.3"
 
 [tool.poetry.extras]

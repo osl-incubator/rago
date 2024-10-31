@@ -8,36 +8,24 @@ from sentence_transformers import SentenceTransformer
 from typeguard import typechecked
 
 from rago.augmented.base import AugmentedBase
-from rago.db import DBBase, FaissDB
 
 
 @typechecked
 class HuggingFaceAug(AugmentedBase):
     """Class for augmentation with Hugging Face."""
 
-    model: Any
-    k: int = -1
-    db: DBBase
+    default_model_name = 'paraphrase-MiniLM-L6-v2'
+    default_k = 2
 
-    def __init__(
-        self,
-        name: str = 'paraphrase',
-        db: DBBase = FaissDB(),
-        k: int = -1,
-    ) -> None:
-        """Initialize HuggingFaceAug."""
-        if name == 'paraphrase':
-            self.model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
-        else:
-            raise Exception(
-                'The Augmented class name {name} is not supported.'
-            )
+    def _setup(self) -> None:
+        """Set up the object with the initial parameters."""
+        self.model = SentenceTransformer(self.model_name)
 
-        self.db = db
-        self.k = k
-
-    def search(self, query: str, documents: Any, k: int = -1) -> list[str]:
+    def search(self, query: str, documents: Any, k: int = 0) -> list[str]:
         """Search an encoded query into vector database."""
+        if not self.model:
+            raise Exception('The model was not created.')
+
         document_encoded = self.model.encode(documents)
         query_encoded = self.model.encode([query])
         k = k if k > 0 else self.k

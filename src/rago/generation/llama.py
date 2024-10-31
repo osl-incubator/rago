@@ -58,10 +58,8 @@ class LlamaGen(GenerationBase):
 
     def generate(self, query: str, context: list[str]) -> str:
         """Generate text using Llama model with language support."""
-        # Craft the input prompt with a clear instruction for the model
-        input_text = (
-            f"Answer the following question briefly and directly.\n"
-            f"Question: {query}\nContext: {' '.join(context)}\nAnswer:"
+        input_text = self.prompt_template.format(
+            query=query, context=' '.join(context)
         )
 
         # Detect and set the language code for multilingual models (optional)

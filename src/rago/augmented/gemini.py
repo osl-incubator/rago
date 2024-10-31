@@ -13,30 +13,29 @@ from rago.augmented.base import AugmentedBase
 class GeminiAug(AugmentedBase):
     """GeminiAug class for query augmentation using Gemini API."""
 
-    def __init__(
-        self,
-        model_name: str = 'gemini-1.5-flash',
-        k: int = 1,
-        api_key: str = '',
-    ) -> None:
-        """Initialize the GeminiAug class."""
-        self.model_name = model_name
-        self.k = k
-        genai.configure(api_key=api_key)
+    default_model_name: str = 'gemini-1.5-flash'
+    default_k: int = 1
+
+    def _setup(self) -> None:
+        """Set up the object with the initial parameters."""
+        genai.configure(api_key=self.api_key)
 
     def search(
-        self, query: str, documents: list[str], k: int = 1
+        self, query: str, documents: list[str], k: int = 0
     ) -> list[str]:
         """Augment the query by expanding or rephrasing it using Gemini."""
-        prompt = f"Retrieval: '{query}'\nContext: {' '.join(documents)}"
+        k = k or self.k
+        prompt = self.prompt_template.format(
+            query=query, context=' '.join(documents), k=k
+        )
 
         response = genai.GenerativeModel(self.model_name).generate_content(
             prompt
         )
 
-        augmented_query = (
+        augmented_query = str(
             response.text.strip()
             if hasattr(response, 'text')
             else response[0].text.strip()
         )
-        return [augmented_query] * self.k
+        return augmented_query.split(self.result_separator)[:k]
