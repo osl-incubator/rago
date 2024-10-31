@@ -1,4 +1,4 @@
-"""Tests for Rago package using OpenAI GPT-4."""
+"""Tests for Rago package using OpenAI GPT."""
 
 import os
 
@@ -8,9 +8,7 @@ import pytest
 
 from rago import Rago
 from rago.augmented import OpenAIAug
-from rago.generation.openai_gpt import (
-    OpenAIGPTGen,
-)
+from rago.generation import OpenAIGen
 from rago.retrieval import StringRet
 
 
@@ -24,7 +22,7 @@ def animals_data() -> list[str]:
 
 
 @pytest.fixture
-def openai_api_key() -> str:
+def api_key(env) -> str:
     """Fixture for OpenAI API key from environment."""
     api_key = os.getenv('OPENAI_API_KEY')
     if not api_key:
@@ -35,12 +33,12 @@ def openai_api_key() -> str:
 
 
 @pytest.mark.skip_on_ci
-def test_openai_gpt4(animals_data: list[str], openai_api_key: str) -> None:
-    """Test RAG pipeline with OpenAI's GPT-4."""
+def test_openai_gpt4(animals_data: list[str], api_key: str) -> None:
+    """Test RAG pipeline with OpenAI's GPT."""
     rag = Rago(
         retrieval=StringRet(animals_data),
         augmented=OpenAIAug(k=3),
-        generation=OpenAIGPTGen(api_key=openai_api_key, model_name='gpt-4'),
+        generation=OpenAIGen(api_key=api_key, model_name='gpt-3.5'),
     )
 
     query = 'Is there any animal larger than a dinosaur?'

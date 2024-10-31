@@ -15,9 +15,13 @@ from rago.augmented.base import AugmentedBase
 class OpenAIAug(AugmentedBase):
     """OpenAIAug class for query augmentation using OpenAI API."""
 
-    default_model_name = 'gpt-4'
+    default_model_name = 'gpt-3.5'
     default_k = 2
     default_result_separator = '\n'
+
+    def _setup(self) -> None:
+        """Set up the object with the initial parameters."""
+        self.model = openai.OpenAI(api_key=self.api_key)
 
     def search(
         self, query: str, documents: list[str], k: int = 0
@@ -28,7 +32,10 @@ class OpenAIAug(AugmentedBase):
             query=query, context=' '.join(documents), k=k
         )
 
-        response = openai.Completion.create(  # type: ignore[no-untyped-call]
+        if not self.model:
+            raise Exception('The model was not created.')
+
+        response = self.model.chat.completions.create(
             model=self.model_name,
             messages=[{'role': 'user', 'content': prompt}],
             max_tokens=self.output_max_length,

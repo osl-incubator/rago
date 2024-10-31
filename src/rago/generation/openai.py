@@ -12,10 +12,14 @@ from rago.generation.base import GenerationBase
 
 
 @typechecked
-class OpenAIGPTGen(GenerationBase):
+class OpenAIGen(GenerationBase):
     """OpenAI generation model for text generation."""
 
-    default_model_name = 'gpt-4'
+    default_model_name = 'gpt-3.5'
+
+    def _setup(self) -> None:
+        """Set up the object with the initial parameters."""
+        self.model = openai.OpenAI(api_key=self.api_key)
 
     def generate(
         self,
@@ -27,7 +31,10 @@ class OpenAIGPTGen(GenerationBase):
             query=query, context=' '.join(context)
         )
 
-        response = openai.Completion.create(  # type: ignore[no-untyped-call]
+        if not self.model:
+            raise Exception('The model was not created.')
+
+        response = self.model.chat.completions.create(
             model=self.model_name,
             messages=[{'role': 'user', 'content': input_text}],
             max_tokens=self.output_max_length,

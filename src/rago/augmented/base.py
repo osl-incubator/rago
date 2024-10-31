@@ -14,6 +14,7 @@ from rago.db import DBBase, FaissDB
 class AugmentedBase:
     """Define the base structure for Augmented classes."""
 
+    api_key: str = ''
     model: Optional[Any]
     model_name: str = ''
     db: Any
@@ -38,6 +39,7 @@ class AugmentedBase:
     def __init__(
         self,
         model_name: str = '',
+        api_key: str = '',
         db: DBBase = FaissDB(),
         k: int = 0,
         temperature: float = 0.5,
@@ -47,6 +49,8 @@ class AugmentedBase:
     ) -> None:
         """Initialize AugmentedBase."""
         self.db = db
+        self.api_key = api_key
+
         self.k = k or self.default_k
         self.model_name = model_name or self.default_model_name
         self.temperature = temperature or self.default_temperature
