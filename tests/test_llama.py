@@ -34,4 +34,4 @@ def test_llama(env, animals_data: list[str], device: str = 'auto') -> None:
 
     query = 'Is there any animals larger than a dinosaur?'
     result = rag.prompt(query)
-    assert 'Blue Whale' in result
+    assert 'blue whale' in result.lower()

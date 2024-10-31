@@ -49,5 +49,5 @@ def test_gemini_generation(animals_data: list[str], api_key: str) -> None:
 
     # Verify the result contains relevant information, e.g., "Blue Whale"
     assert (
-        'Blue Whale' in result
+        'blue whale' in result.lower()
     ), 'Expected response to mention Blue Whale as a larger animal.'

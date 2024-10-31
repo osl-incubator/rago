@@ -15,7 +15,7 @@ from rago.augmented.base import AugmentedBase
 class OpenAIAug(AugmentedBase):
     """OpenAIAug class for query augmentation using OpenAI API."""
 
-    default_model_name = 'gpt-3.5'
+    default_model_name = 'gpt-3.5-turbo'
     default_k = 2
     default_result_separator = '\n'
 
@@ -43,6 +43,6 @@ class OpenAIAug(AugmentedBase):
         )
 
         augmented_query = cast(
-            str, response.choices[0]['message']['content'].strip()
+            str, response.choices[0].message.content.strip()
         )
         return augmented_query.split(self.result_separator)[:k]

@@ -15,7 +15,7 @@ from rago.generation.base import GenerationBase
 class OpenAIGen(GenerationBase):
     """OpenAI generation model for text generation."""
 
-    default_model_name = 'gpt-3.5'
+    default_model_name = 'gpt-3.5-turbo'
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
@@ -44,4 +44,4 @@ class OpenAIGen(GenerationBase):
             presence_penalty=0.3,
         )
 
-        return cast(str, response['choices'][0]['message']['content'].strip())
+        return cast(str, response.choices[0].message.content.strip())

@@ -37,13 +37,13 @@ def test_openai_gpt4(animals_data: list[str], api_key: str) -> None:
     """Test RAG pipeline with OpenAI's GPT."""
     rag = Rago(
         retrieval=StringRet(animals_data),
-        augmented=OpenAIAug(k=3),
-        generation=OpenAIGen(api_key=api_key, model_name='gpt-3.5'),
+        augmented=OpenAIAug(api_key=api_key, k=3),
+        generation=OpenAIGen(api_key=api_key, model_name='gpt-3.5-turbo'),
     )
 
     query = 'Is there any animal larger than a dinosaur?'
     result = rag.prompt(query)
 
     assert (
-        'Blue Whale' in result
+        'blue whale' in result.lower()
     ), 'Expected response to mention Blue Whale as a larger animal.'
