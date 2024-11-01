@@ -21,7 +21,7 @@ class DBBase:
 
     @abstractmethod
     def search(
-        self, query_encoded: Any, k: int = 2
+        self, query_encoded: Any, top_k: int = 2
     ) -> tuple[Iterable[float], Iterable[int]]:
         """Search a query from documents."""
         ...

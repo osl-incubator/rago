@@ -21,8 +21,8 @@ class FaissDB(DBBase):
         self.index.add(documents)
 
     def search(
-        self, query_encoded: Any, k: int = 2
+        self, query_encoded: Any, top_k: int = 2
     ) -> tuple[Iterable[float], Iterable[int]]:
         """Search an encoded query into vector database."""
-        distances, indices = self.index.search(query_encoded, k)
+        distances, indices = self.index.search(query_encoded, top_k)
         return distances, indices[0]

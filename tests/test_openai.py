@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from rago import Rago
-from rago.augmented import OpenAIAug
+from rago.augmented.experimental.openai import OpenAIAug
 from rago.generation import OpenAIGen
 from rago.retrieval import StringRet
 
@@ -33,11 +33,11 @@ def api_key(env) -> str:
 
 
 @pytest.mark.skip_on_ci
-def test_openai_gpt4(animals_data: list[str], api_key: str) -> None:
+def test_openai_gpt(animals_data: list[str], api_key: str) -> None:
     """Test RAG pipeline with OpenAI's GPT."""
     rag = Rago(
         retrieval=StringRet(animals_data),
-        augmented=OpenAIAug(api_key=api_key, k=3),
+        augmented=OpenAIAug(api_key=api_key, top_k=3),
         generation=OpenAIGen(api_key=api_key, model_name='gpt-3.5-turbo'),
     )
 

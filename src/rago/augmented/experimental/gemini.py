@@ -21,12 +21,12 @@ class GeminiAug(AugmentedBase):
         genai.configure(api_key=self.api_key)
 
     def search(
-        self, query: str, documents: list[str], k: int = 0
+        self, query: str, documents: list[str], top_k: int = 0
     ) -> list[str]:
         """Augment the query by expanding or rephrasing it using Gemini."""
-        k = k or self.k
+        top_k = top_k or self.top_k
         prompt = self.prompt_template.format(
-            query=query, context=' '.join(documents), k=k
+            query=query, context=' '.join(documents), top_k=top_k
         )
 
         response = genai.GenerativeModel(self.model_name).generate_content(
@@ -38,4 +38,4 @@ class GeminiAug(AugmentedBase):
             if hasattr(response, 'text')
             else response[0].text.strip()
         )
-        return augmented_query.split(self.result_separator)[:k]
+        return augmented_query.split(self.result_separator)[:top_k]

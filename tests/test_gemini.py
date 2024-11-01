@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from rago import Rago
-from rago.augmented import GeminiAug
+from rago.augmented.experimental.gemini import GeminiAug
 from rago.generation import GeminiGen
 from rago.retrieval import StringRet
 
@@ -39,7 +39,7 @@ def test_gemini_generation(animals_data: list[str], api_key: str) -> None:
     rag = Rago(
         retrieval=StringRet(animals_data),
         augmented=GeminiAug(
-            k=3
+            top_k=3
         ),  # Update if using a specific augmentation class for Gemini
         generation=GeminiGen(api_key=api_key, model_name='gemini-1.5-flash'),
     )

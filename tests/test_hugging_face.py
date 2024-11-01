@@ -23,7 +23,7 @@ def test_hugging_face(animals_data: list[str]) -> None:
     """Test RAG with hugging face."""
     rag = Rago(
         retrieval=StringRet(animals_data),
-        augmented=HuggingFaceAug(k=3),
+        augmented=HuggingFaceAug(top_k=3),
         generation=HuggingFaceGen(),
     )
 
