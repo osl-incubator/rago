@@ -21,18 +21,18 @@ class HuggingFaceAug(AugmentedBase):
         """Set up the object with the initial parameters."""
         self.model = SentenceTransformer(self.model_name)
 
-    def search(self, query: str, documents: Any, k: int = 0) -> list[str]:
+    def search(self, query: str, documents: Any, top_k: int = 0) -> list[str]:
         """Search an encoded query into vector database."""
         if not self.model:
             raise Exception('The model was not created.')
 
         document_encoded = self.model.encode(documents)
         query_encoded = self.model.encode([query])
-        k = k if k > 0 else self.k
+        top_k = top_k if top_k > 0 else self.top_k
 
         self.db.embed(document_encoded)
 
-        _, indices = self.db.search(query_encoded, k=k)
+        _, indices = self.db.search(query_encoded, top_k=top_k)
 
         retrieved_docs = [documents[i] for i in indices]
 

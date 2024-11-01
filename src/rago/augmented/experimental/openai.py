@@ -24,12 +24,12 @@ class OpenAIAug(AugmentedBase):
         self.model = openai.OpenAI(api_key=self.api_key)
 
     def search(
-        self, query: str, documents: list[str], k: int = 0
+        self, query: str, documents: list[str], top_k: int = 0
     ) -> list[str]:
         """Augment the query by expanding or rephrasing it using OpenAI."""
-        k = k or self.k
+        top_k = top_k or self.top_k
         prompt = self.prompt_template.format(
-            query=query, context=' '.join(documents), k=k
+            query=query, context=' '.join(documents), top_k=top_k
         )
 
         if not self.model:
@@ -45,4 +45,4 @@ class OpenAIAug(AugmentedBase):
         augmented_query = cast(
             str, response.choices[0].message.content.strip()
         )
-        return augmented_query.split(self.result_separator)[:k]
+        return augmented_query.split(self.result_separator)[:top_k]
