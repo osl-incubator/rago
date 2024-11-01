@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+# [0.5.0](https://github.com/osl-incubator/rago/compare/0.4.0...0.5.0) (2024-11-01)
+
+
+### Features
+
+* Add attribute for storing intermediate results from the pipeline ([#17](https://github.com/osl-incubator/rago/issues/17)) ([b00c4ae](https://github.com/osl-incubator/rago/commit/b00c4aeb102b6947fbe06e964976cd480c60a0b1))
+
 # [0.4.0](https://github.com/osl-incubator/rago/compare/0.3.0...0.4.0) (2024-10-31)
 
 
