@@ -44,6 +44,7 @@ class Rago:
         self.retrieval = retrieval
         self.augmented = augmented
         self.generation = generation
+        self.results: dict[str, Any] = {}
 
     def prompt(self, query: str, device: str = 'auto') -> str:
         """Run the pipeline for a specific prompt.
