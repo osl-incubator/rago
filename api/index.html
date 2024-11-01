@@ -428,8 +428,6 @@
       
         
       
-        
-      
     
     
     
@@ -495,8 +493,63 @@
   
   
   
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_2_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="augmented/experimental/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> experimental
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_1_2_3" id="__nav_5_1_2_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_1_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> experimental
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href="augmented/gemini/" class="md-nav__link">
+      <a href="augmented/experimental/gemini/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -517,15 +570,23 @@
   
   
     <li class="md-nav__item">
-      <a href="augmented/hugging_face/" class="md-nav__link">
+      <a href="augmented/experimental/openai/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> hugging_face
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> openai
   </span>
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -538,11 +599,11 @@
   
   
     <li class="md-nav__item">
-      <a href="augmented/openai/" class="md-nav__link">
+      <a href="augmented/hugging_face/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> openai
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> hugging_face
   </span>
   
 
@@ -1213,11 +1274,7 @@ on the query and augmented data.</p>
 
                   <details class="quote">
                     <summary>Source code in <code>src/rago/core.py</code></summary>
-                    <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
+                    <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">24</span>
 <span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
@@ -1235,7 +1292,12 @@ on the query and augmented data.</p>
 <span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
-<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">retrieval</span><span class="p">:</span> <span class="n">RetrievalBase</span><span class="p">,</span>
     <span class="n">augmented</span><span class="p">:</span> <span class="n">AugmentedBase</span><span class="p">,</span>
@@ -1258,6 +1320,7 @@ on the query and augmented data.</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">retrieval</span> <span class="o">=</span> <span class="n">retrieval</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">augmented</span> <span class="o">=</span> <span class="n">augmented</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">generation</span> <span class="o">=</span> <span class="n">generation</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -1326,12 +1389,7 @@ default 'auto'.</p>
 
             <details class="quote">
               <summary>Source code in <code>src/rago/core.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
 <span class="normal">52</span>
@@ -1346,7 +1404,17 @@ default 'auto'.</p>
 <span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
-<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">prompt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">prompt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the pipeline for a specific prompt.</span>
 
 <span class="sd">    Parameters</span>
@@ -1363,8 +1431,13 @@ default 'auto'.</p>
 <span class="sd">        Generated text based on the query and augmented data.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ret_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieval</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;retrieval&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret_data</span>
+
     <span class="n">aug_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">augmented</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">ret_data</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;augmented&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aug_data</span>
+
     <span class="n">gen_data</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generation</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">aug_data</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;generation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gen_data</span>
 
     <span class="k">return</span> <span class="n">gen_data</span>
 </code></pre></div></td></tr></table></div>
@@ -1409,7 +1482,7 @@ default 'auto'.</p>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">importlib_metadata</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">importlib_metadata</span><span class="o">.</span><span class="n">PackageNotFoundError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-        <span class="k">return</span> <span class="s1">&#39;0.4.0&#39;</span>  <span class="c1"># semantic-release</span>
+        <span class="k">return</span> <span class="s1">&#39;0.5.0&#39;</span>  <span class="c1"># semantic-release</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
