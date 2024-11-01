@@ -63,11 +63,12 @@ class Rago:
             Generated text based on the query and augmented data.
         """
         ret_data = self.retrieval.get(query)
-        aug_data = self.augmented.search(query, ret_data)
-        gen_data: str = self.generation.generate(query, context=aug_data)
-
         self.results['retrieval'] = ret_data
+
+        aug_data = self.augmented.search(query, ret_data)
         self.results['augmented'] = aug_data
+
+        gen_data: str = self.generation.generate(query, context=aug_data)
         self.results['generation'] = gen_data
 
         return gen_data
