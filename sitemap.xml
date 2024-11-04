@@ -2,102 +2,102 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://osl-incubator.github.io/rago/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/changelog/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/contributing/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/example/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/installation/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/SUMMARY/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/core/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/base/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/hugging_face/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/experimental/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/experimental/gemini/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/experimental/openai/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/db/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/db/base/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/db/faiss/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/generation/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/generation/base/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/generation/gemini/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/generation/hugging_face/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/generation/llama/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/generation/openai/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/retrieval/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/retrieval/base/</loc>
-         <lastmod>2024-11-01</lastmod>
+         <lastmod>2024-11-04</lastmod>
     </url>
 </urlset>

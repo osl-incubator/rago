@@ -281,6 +281,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -290,6 +301,49 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#051-2024-11-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.5.1 (2024-11-04)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.5.1 (2024-11-04)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bug Fixes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1064,6 +1118,38 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#051-2024-11-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.5.1 (2024-11-04)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.5.1 (2024-11-04)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bug Fixes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1082,13 +1168,18 @@
 
 <h1 id="release-notes">Release Notes</h1>
 <hr />
+<h2 id="051-2024-11-04"><a href="https://github.com/osl-incubator/rago/compare/0.5.0...0.5.1">0.5.1</a> (2024-11-04)</h2>
+<h3 id="bug-fixes">Bug Fixes</h3>
+<ul>
+<li>Remove unnecessary usage of abc.abstractmethod (<a href="https://github.com/osl-incubator/rago/issues/18">#18</a>) (<a href="https://github.com/osl-incubator/rago/commit/565ec05d182dc16e6b12994bc510f67c7f61c61d">565ec05</a>)</li>
+</ul>
 <h1 id="050-2024-11-01"><a href="https://github.com/osl-incubator/rago/compare/0.4.0...0.5.0">0.5.0</a> (2024-11-01)</h1>
 <h3 id="features">Features</h3>
 <ul>
 <li>Add attribute for storing intermediate results from the pipeline (<a href="https://github.com/osl-incubator/rago/issues/17">#17</a>) (<a href="https://github.com/osl-incubator/rago/commit/b00c4aeb102b6947fbe06e964976cd480c60a0b1">b00c4ae</a>)</li>
 </ul>
 <h1 id="040-2024-10-31"><a href="https://github.com/osl-incubator/rago/compare/0.3.0...0.4.0">0.4.0</a> (2024-10-31)</h1>
-<h3 id="bug-fixes">Bug Fixes</h3>
+<h3 id="bug-fixes_1">Bug Fixes</h3>
 <ul>
 <li>Fix packaging issues with torch and fix issues with langdetect (<a href="https://github.com/osl-incubator/rago/issues/10">#10</a>) (<a href="https://github.com/osl-incubator/rago/commit/e4ade58f274d0c0fd8c34cbb21431d00bc122954">e4ade58</a>)</li>
 </ul>
@@ -1098,7 +1189,7 @@
 <li><strong>model:</strong> Integrate GPT-4 text generation in Rago (<a href="https://github.com/osl-incubator/rago/issues/13">#13</a>) (<a href="https://github.com/osl-incubator/rago/commit/42078a359dbe64f39e9ddcb9e8f3cf4289dff52a">42078a3</a>)</li>
 </ul>
 <h1 id="030-2024-10-24"><a href="https://github.com/osl-incubator/rago/compare/0.2.0...0.3.0">0.3.0</a> (2024-10-24)</h1>
-<h3 id="bug-fixes_1">Bug Fixes</h3>
+<h3 id="bug-fixes_2">Bug Fixes</h3>
 <ul>
 <li>Fix packaging for gpu and cpu (<a href="https://github.com/osl-incubator/rago/issues/8">#8</a>) (<a href="https://github.com/osl-incubator/rago/commit/42e071607f38ef37130bbb1f24bcfde6e93b1dc3">42e0716</a>)</li>
 <li>Improve the usage of typeguard (<a href="https://github.com/osl-incubator/rago/issues/5">#5</a>) (<a href="https://github.com/osl-incubator/rago/commit/25782c1db85024fa117b70db61b02fcea16b6f46">25782c1</a>)</li>
@@ -1109,7 +1200,7 @@
 <li>Implement type checking with typeguard (<a href="https://github.com/osl-incubator/rago/issues/4">#4</a>) (<a href="https://github.com/osl-incubator/rago/commit/ae7958e501f0964a62411449184c27bed3c9413f">ae7958e</a>)</li>
 </ul>
 <h1 id="020-2024-10-23"><a href="https://github.com/osl-incubator/rago/compare/0.1.0...0.2.0">0.2.0</a> (2024-10-23)</h1>
-<h3 id="bug-fixes_2">Bug Fixes</h3>
+<h3 id="bug-fixes_3">Bug Fixes</h3>
 <ul>
 <li>fix the semantic release workflow (<a href="https://github.com/osl-incubator/rago/issues/3">#3</a>) (<a href="https://github.com/osl-incubator/rago/commit/b238e46e1ab42d10669c258e70cfb238074be064">b238e46</a>)</li>
 </ul>
