@@ -35,7 +35,6 @@ class AugmentedBase:
     default_result_separator = '\n'
     default_output_max_length: int = 500
 
-    @abstractmethod
     def __init__(
         self,
         model_name: str = '',
