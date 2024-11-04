@@ -35,7 +35,6 @@ class GenerationBase:
         'question: \n```\n{query}\n```\ncontext: ```\n{context}\n```'
     )
 
-    @abstractmethod
     def __init__(
         self,
         model_name: str = '',
