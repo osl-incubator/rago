@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [0.5.1](https://github.com/osl-incubator/rago/compare/0.5.0...0.5.1) (2024-11-04)
+
+
+### Bug Fixes
+
+* Remove unnecessary usage of abc.abstractmethod ([#18](https://github.com/osl-incubator/rago/issues/18)) ([565ec05](https://github.com/osl-incubator/rago/commit/565ec05d182dc16e6b12994bc510f67c7f61c61d))
+
 # [0.5.0](https://github.com/osl-incubator/rago/compare/0.4.0...0.5.0) (2024-11-01)
 
 
