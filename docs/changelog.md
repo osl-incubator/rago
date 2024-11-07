@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+# [0.6.0](https://github.com/osl-incubator/rago/compare/0.5.1...0.6.0) (2024-11-07)
+
+
+### Features
+
+* Add OpenAIAug with embeddings ([#19](https://github.com/osl-incubator/rago/issues/19)) ([227c535](https://github.com/osl-incubator/rago/commit/227c5355e4bed091301dd01b13b20b1860f68aa1))
+
 ## [0.5.1](https://github.com/osl-incubator/rago/compare/0.5.0...0.5.1) (2024-11-04)
 
 
