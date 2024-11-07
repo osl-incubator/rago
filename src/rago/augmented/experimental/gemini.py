@@ -14,7 +14,7 @@ class GeminiAug(AugmentedBase):
     """GeminiAug class for query augmentation using Gemini API."""
 
     default_model_name: str = 'gemini-1.5-flash'
-    default_k: int = 1
+    default_top_k: int = 1
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""

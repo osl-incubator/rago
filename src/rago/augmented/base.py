@@ -26,7 +26,7 @@ class AugmentedBase:
 
     # default values to be overwritten by the derived classes
     default_model_name: str = ''
-    default_k: int = 0
+    default_top_k: int = 0
     default_temperature: float = 0.5
     default_prompt_template: str = (
         'Retrieve {top_k} entries from the context that better answer the '
@@ -50,7 +50,7 @@ class AugmentedBase:
         self.db = db
         self.api_key = api_key
 
-        self.top_k = top_k or self.default_k
+        self.top_k = top_k or self.default_top_k
         self.model_name = model_name or self.default_model_name
         self.temperature = temperature or self.default_temperature
         self.result_separator = (
@@ -73,6 +73,10 @@ class AugmentedBase:
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
         return
+
+    def get_embedding(self, content: [str]) -> list[float]:
+        """Retrieve the embedding for a given text using OpenAI API."""
+        raise Exception('Method not implemented.')
 
     @abstractmethod
     def search(

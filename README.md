@@ -41,7 +41,7 @@ models locally, for example:
 
 rag = Rago(
     retrieval=StringRet(animals_data),
-    augmented=HuggingFaceAug(top_k=3),
+    augmented=SentenceTransformerAug(top_k=3),
     generation=LlamaGen(apikey=HF_TOKEN),
 )
 rag.prompt('Is there any animals larger than a dinosaur?')

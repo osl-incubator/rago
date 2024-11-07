@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from rago.augmented.base import AugmentedBase
-from rago.augmented.hugging_face import HuggingFaceAug
+from rago.augmented.openai import OpenAIAug
+from rago.augmented.sentence_transformer import SentenceTransformerAug
 
 __all__ = [
     'AugmentedBase',
-    'HuggingFaceAug',
+    'OpenAIAug',
+    'SentenceTransformerAug',
 ]
