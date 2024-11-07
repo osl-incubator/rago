@@ -3,11 +3,17 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, Optional
+from typing import TYPE_CHECKING, Any, Optional
 
 from typeguard import typechecked
 
 from rago.db import DBBase, FaissDB
+
+if TYPE_CHECKING:
+    import numpy as np
+    import numpy.typing as npt
+
+    from torch import Tensor
 
 
 @typechecked
@@ -74,7 +80,9 @@ class AugmentedBase:
         """Set up the object with the initial parameters."""
         return
 
-    def get_embedding(self, content: [str]) -> list[float]:
+    def get_embedding(
+        self, content: list[str]
+    ) -> list[Tensor] | npt.NDArray[np.float64] | Tensor:
         """Retrieve the embedding for a given text using OpenAI API."""
         raise Exception('Method not implemented.')
 

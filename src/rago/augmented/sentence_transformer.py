@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, cast
 
 from sentence_transformers import SentenceTransformer
 from typeguard import typechecked
@@ -11,6 +11,7 @@ from rago.augmented.base import AugmentedBase
 
 if TYPE_CHECKING:
     import numpy as np
+    import numpy.typing as npt
 
     from torch import Tensor
 
@@ -28,9 +29,10 @@ class SentenceTransformerAug(AugmentedBase):
 
     def get_embedding(
         self, content: list[str]
-    ) -> list[Tensor] | np.ndarray | Tensor:
+    ) -> list[Tensor] | npt.NDArray[np.float64] | Tensor:
         """Retrieve the embedding for a given text using OpenAI API."""
-        return self.model.encode(content)
+        model = cast(SentenceTransformer, self.model)
+        return model.encode(content)
 
     def search(self, query: str, documents: Any, top_k: int = 0) -> list[str]:
         """Search an encoded query into vector database."""

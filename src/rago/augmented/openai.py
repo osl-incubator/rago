@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 import numpy as np
 import openai
@@ -12,6 +12,8 @@ from typeguard import typechecked
 from rago.augmented.base import AugmentedBase
 
 if TYPE_CHECKING:
+    import numpy.typing as npt
+
     from torch import Tensor
 
 
@@ -32,9 +34,10 @@ class OpenAIAug(AugmentedBase):
 
     def get_embedding(
         self, content: list[str]
-    ) -> list[Tensor] | np.ndarray | Tensor:
+    ) -> list[Tensor] | npt.NDArray[np.float64] | Tensor:
         """Retrieve the embedding for a given text using OpenAI API."""
-        response = self.model.embeddings.create(
+        model = cast(openai.OpenAI, self.model)
+        response = model.embeddings.create(
             input=content, model=self.model_name
         )
         result = np.array(response.data[0].embedding)
