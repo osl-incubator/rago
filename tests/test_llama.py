@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from rago import Rago
-from rago.augmented import HuggingFaceAug
+from rago.augmented import SentenceTransformerAug
 from rago.generation import LlamaGen
 from rago.retrieval import StringRet
 
@@ -28,7 +28,7 @@ def test_llama(env, animals_data: list[str], device: str = 'auto') -> None:
 
     rag = Rago(
         retrieval=StringRet(animals_data),
-        augmented=HuggingFaceAug(top_k=3),
+        augmented=SentenceTransformerAug(top_k=3),
         generation=LlamaGen(api_key=HF_TOKEN, device=device),
     )
 
