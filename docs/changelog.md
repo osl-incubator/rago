@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+# [0.7.0](https://github.com/osl-incubator/rago/compare/0.6.0...0.7.0) (2024-11-14)
+
+
+### Features
+
+* Add PDF Retrieval and Text Splitter ([#20](https://github.com/osl-incubator/rago/issues/20)) ([6e80756](https://github.com/osl-incubator/rago/commit/6e8075625b08e9a830e68aaa7639c2bb7862b893))
+
 # [0.6.0](https://github.com/osl-incubator/rago/compare/0.5.1...0.6.0) (2024-11-07)
 
 
