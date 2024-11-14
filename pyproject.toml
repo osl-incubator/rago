@@ -38,6 +38,9 @@ torchvision = [
 langdetect = ">=1"
 openai = "^1.52.2"
 google-generativeai = "^0.8.3"
+pypdf = ">=5"
+langchain = ">=0.3.7"
+langchain-community = ">=0.3.7"
 
 [tool.poetry.extras]
 cpu = ["torch", "torchvision"]
