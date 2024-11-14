@@ -2,23 +2,12 @@
 
 import os
 
-from pathlib import Path
-
 import pytest
 
 from rago import Rago
 from rago.augmented import OpenAIAug
 from rago.generation import OpenAIGen
 from rago.retrieval import StringRet
-
-
-@pytest.fixture
-def animals_data() -> list[str]:
-    """Fixture for loading the animals dataset."""
-    data_path = Path(__file__).parent / 'data' / 'animals.txt'
-    with open(data_path) as f:
-        data = [line.strip() for line in f.readlines() if line.strip()]
-        return data
 
 
 @pytest.fixture
