@@ -5,7 +5,7 @@ import os
 import pytest
 
 from rago import Rago
-from rago.augmented.experimental.gemini import GeminiAug
+from rago.augmented import SentenceTransformerAug
 from rago.generation import GeminiGen
 from rago.retrieval import StringRet
 
@@ -27,9 +27,7 @@ def test_gemini_generation(animals_data: list[str], api_key: str) -> None:
     # Instantiate Rago with the Gemini model
     rag = Rago(
         retrieval=StringRet(animals_data),
-        augmented=GeminiAug(
-            top_k=3
-        ),  # Update if using a specific augmentation class for Gemini
+        augmented=SentenceTransformerAug(top_k=3),
         generation=GeminiGen(api_key=api_key, model_name='gemini-1.5-flash'),
     )
 
