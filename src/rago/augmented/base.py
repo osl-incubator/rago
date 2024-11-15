@@ -25,21 +25,10 @@ class AugmentedBase:
     model_name: str = ''
     db: Any
     top_k: int = 0
-    temperature: float = 0.5
-    prompt_template: str = ''
-    result_separator = '\n'
-    output_max_length: int = 500
 
     # default values to be overwritten by the derived classes
     default_model_name: str = ''
     default_top_k: int = 0
-    default_temperature: float = 0.5
-    default_prompt_template: str = (
-        'Retrieve {top_k} entries from the context that better answer the '
-        'following query:\n```\n{query}\n```\n\ncontext:\n```\n{context}\n```'
-    )
-    default_result_separator = '\n'
-    default_output_max_length: int = 500
 
     def __init__(
         self,
@@ -47,10 +36,6 @@ class AugmentedBase:
         api_key: str = '',
         db: DBBase = FaissDB(),
         top_k: int = 0,
-        temperature: float = 0.5,
-        prompt_template: str = '',
-        result_separator: str = '\n',
-        output_max_length: int = 500,
     ) -> None:
         """Initialize AugmentedBase."""
         self.db = db
@@ -58,15 +43,6 @@ class AugmentedBase:
 
         self.top_k = top_k or self.default_top_k
         self.model_name = model_name or self.default_model_name
-        self.temperature = temperature or self.default_temperature
-        self.result_separator = (
-            result_separator or self.default_result_separator
-        )
-        self.prompt_template = prompt_template or self.default_prompt_template
-        self.output_max_length = (
-            output_max_length or self.default_output_max_length
-        )
-
         self.model = None
 
         self._validate()
