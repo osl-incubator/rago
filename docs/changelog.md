@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [0.7.1](https://github.com/osl-incubator/rago/compare/0.7.0...0.7.1) (2024-11-15)
+
+
+### Bug Fixes
+
+* Remove experimental augmented classes ([#21](https://github.com/osl-incubator/rago/issues/21)) ([e878012](https://github.com/osl-incubator/rago/commit/e8780125db3c5966493621eb3e5f2a7713ccc419))
+
 # [0.7.0](https://github.com/osl-incubator/rago/compare/0.6.0...0.7.0) (2024-11-14)
 
 
