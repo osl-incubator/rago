@@ -25,6 +25,7 @@ class AugmentedBase:
     model_name: str = ''
     db: Any
     top_k: int = 0
+    logs: dict[str, Any] = {}  # noqa: RUF012
 
     # default values to be overwritten by the derived classes
     default_model_name: str = ''
@@ -36,6 +37,7 @@ class AugmentedBase:
         api_key: str = '',
         db: DBBase = FaissDB(),
         top_k: int = 0,
+        logs: dict[str, Any] = {},
     ) -> None:
         """Initialize AugmentedBase."""
         self.db = db
@@ -44,6 +46,8 @@ class AugmentedBase:
         self.top_k = top_k or self.default_top_k
         self.model_name = model_name or self.default_model_name
         self.model = None
+
+        self.logs = logs
 
         self._validate()
         self._setup()

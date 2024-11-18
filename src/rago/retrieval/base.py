@@ -20,6 +20,7 @@ class RetrievalBase:
     content: Any
     source: Any
     splitter: TextSplitterBase
+    logs: dict[str, Any] = {}  # noqa: RUF012
 
     def __init__(
         self,
@@ -27,10 +28,14 @@ class RetrievalBase:
         splitter: TextSplitterBase = LangChainTextSplitter(
             'RecursiveCharacterTextSplitter'
         ),
+        logs: dict[str, Any] = {},
     ) -> None:
         """Initialize the Retrieval class."""
         self.source = source
         self.splitter = splitter
+
+        self.logs = logs
+
         self._validate()
         self._setup()
 

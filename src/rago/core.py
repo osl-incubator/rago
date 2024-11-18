@@ -19,7 +19,7 @@ class Rago:
     augmented: AugmentedBase
     generation: GenerationBase
 
-    results: dict[str, Any]
+    logs: dict[str, dict[str, Any]]
 
     def __init__(
         self,
@@ -44,7 +44,11 @@ class Rago:
         self.retrieval = retrieval
         self.augmented = augmented
         self.generation = generation
-        self.results: dict[str, Any] = {}
+        self.logs: dict[str, dict[str, Any]] = {
+            'retrieval': retrieval.logs,
+            'augmented': augmented.logs,
+            'generation': generation.logs,
+        }
 
     def prompt(self, query: str, device: str = 'auto') -> str:
         """Run the pipeline for a specific prompt.
@@ -63,12 +67,12 @@ class Rago:
             Generated text based on the query and augmented data.
         """
         ret_data = self.retrieval.get(query)
-        self.results['retrieval'] = ret_data
+        self.logs['retrieval']['result'] = ret_data
 
         aug_data = self.augmented.search(query, ret_data)
-        self.results['augmented'] = aug_data
+        self.logs['augmented']['result'] = aug_data
 
         gen_data: str = self.generation.generate(query, context=aug_data)
-        self.results['generation'] = gen_data
+        self.logs['generation']['result'] = gen_data
 
         return gen_data

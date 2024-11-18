@@ -25,10 +25,19 @@ def api_key(env) -> str:
 def test_gemini_generation(animals_data: list[str], api_key: str) -> None:
     """Test RAG pipeline with Gemini model for text generation."""
     # Instantiate Rago with the Gemini model
+    logs = {
+        'retrieval': {},
+        'augmented': {},
+        'generation': {},
+    }
     rag = Rago(
-        retrieval=StringRet(animals_data),
-        augmented=SentenceTransformerAug(top_k=3),
-        generation=GeminiGen(api_key=api_key, model_name='gemini-1.5-flash'),
+        retrieval=StringRet(animals_data, logs=logs['retrieval']),
+        augmented=SentenceTransformerAug(top_k=3, logs=logs['augmented']),
+        generation=GeminiGen(
+            api_key=api_key,
+            model_name='gemini-1.5-flash',
+            logs=logs['generation'],
+        ),
     )
 
     query = 'Is there any animal larger than a dinosaur?'
@@ -38,3 +47,8 @@ def test_gemini_generation(animals_data: list[str], api_key: str) -> None:
     assert (
         'blue whale' in result.lower()
     ), 'Expected response to mention Blue Whale as a larger animal.'
+
+    # check if logs have been used
+    assert logs['retrieval']
+    assert logs['augmented']
+    assert logs['generation']

@@ -34,7 +34,7 @@ class OpenAIGen(GenerationBase):
         if not self.model:
             raise Exception('The model was not created.')
 
-        response = self.model.chat.completions.create(
+        model_params = dict(
             model=self.model_name,
             messages=[{'role': 'user', 'content': input_text}],
             max_tokens=self.output_max_length,
@@ -43,5 +43,9 @@ class OpenAIGen(GenerationBase):
             frequency_penalty=0.5,
             presence_penalty=0.3,
         )
+
+        response = self.model.chat.completions.create(**model_params)
+
+        self.logs['model_params'] = model_params
 
         return cast(str, response.choices[0].message.content.strip())
