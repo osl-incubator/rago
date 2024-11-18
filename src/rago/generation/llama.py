@@ -15,35 +15,27 @@ from rago.generation.base import GenerationBase
 class LlamaGen(GenerationBase):
     """Llama Generation class."""
 
-    def __init__(
-        self,
-        model_name: str = 'meta-llama/Llama-3.2-1B',
-        api_key: str = '',
-        temperature: float = 0.5,
-        output_max_length: int = 500,
-        device: str = 'auto',
-    ) -> None:
-        """Initialize LlamaGen."""
-        if not model_name.startswith('meta-llama/'):
+    default_model_name: str = 'meta-llama/Llama-3.2-1B'
+    default_temperature: float = 0.5
+    default_output_max_length: int = 500
+
+    def _validate(self) -> None:
+        """Raise an error if the initial parameters are not valid."""
+        if not self.model_name.startswith('meta-llama/'):
             raise Exception(
-                f'The given model name {model_name} is not provided by meta.'
+                f'The given model name {self.model_name} is not provided '
+                'by meta.'
             )
 
-        super().__init__(
-            model_name=model_name,
-            api_key=api_key,
-            temperature=temperature,
-            output_max_length=output_max_length,
-            device=device,
-        )
-
+    def _setup(self) -> None:
+        """Set up the object with the initial parameters."""
         self.tokenizer = AutoTokenizer.from_pretrained(
-            model_name, token=api_key
+            self.model_name, token=self.api_key
         )
 
         self.model = AutoModelForCausalLM.from_pretrained(
-            model_name,
-            token=api_key,
+            self.model_name,
+            token=self.api_key,
             torch_dtype=torch.float16
             if self.device_name == 'cuda'
             else torch.float32,
@@ -69,7 +61,7 @@ class LlamaGen(GenerationBase):
         # Generate the response with adjusted parameters
 
         model_params = dict(
-            inputs=input_text,
+            text_inputs=input_text,
             max_new_tokens=self.output_max_length,
             do_sample=True,
             temperature=self.temperature,

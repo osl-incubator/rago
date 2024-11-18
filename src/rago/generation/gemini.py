@@ -34,5 +34,5 @@ class GeminiGen(GenerationBase):
 
         response = self.model.generate_content(**model_params)
 
-        self.logs['model_params']
+        self.logs['model_params'] = model_params
         return cast(str, response.text.strip())

@@ -55,9 +55,10 @@ class OpenAIAug(AugmentedBase):
         query_encoded = self.get_embedding([query])
         top_k = top_k or self.top_k or self.default_top_k or 1
 
-        # Embed documents into the vector database and perform the search
         self.db.embed(document_encoded)
         scores, indices = self.db.search(query_encoded, top_k=top_k)
+
+        retrieved_docs = [documents[i] for i in indices]
 
         self.logs['indices'] = indices
         self.logs['scores'] = scores
@@ -65,8 +66,5 @@ class OpenAIAug(AugmentedBase):
             'query_encoded': query_encoded,
             'top_k': top_k,
         }
-
-        # Retrieve the actual documents based on indices
-        retrieved_docs = [documents[i] for i in indices]
 
         return retrieved_docs

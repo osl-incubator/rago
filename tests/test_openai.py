@@ -59,9 +59,13 @@ def test_rag_openai_gpt(animals_data: list[str], api_key: str) -> None:
     }
 
     rag = Rago(
-        retrieval=StringRet(animals_data),
-        augmented=OpenAIAug(api_key=api_key, top_k=3),
-        generation=OpenAIGen(api_key=api_key, model_name='gpt-3.5-turbo'),
+        retrieval=StringRet(animals_data, logs=logs['retrieval']),
+        augmented=OpenAIAug(api_key=api_key, top_k=3, logs=logs['augmented']),
+        generation=OpenAIGen(
+            api_key=api_key,
+            model_name='gpt-3.5-turbo',
+            logs=logs['generation'],
+        ),
     )
 
     query = 'Is there any animal larger than a dinosaur?'
