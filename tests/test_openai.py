@@ -24,11 +24,19 @@ def api_key(env) -> str:
 @pytest.mark.skip_on_ci
 def test_aug_openai(animals_data: list[str], api_key: str) -> None:
     """Test RAG pipeline with OpenAI's GPT."""
+    logs = {
+        'augmented': {},
+    }
+
     query = 'Is there any animal larger than a dinosaur?'
     top_k = 3
 
     ret_string = StringRet(animals_data)
-    aug_openai = OpenAIAug(api_key=api_key, top_k=top_k)
+    aug_openai = OpenAIAug(
+        api_key=api_key,
+        top_k=top_k,
+        logs=logs['augmented'],
+    )
 
     ret_result = ret_string.get()
     aug_result = aug_openai.search(query, ret_result)
@@ -37,10 +45,19 @@ def test_aug_openai(animals_data: list[str], api_key: str) -> None:
     assert len(aug_result) == top_k
     assert 'blue whale' in aug_result[0].lower()
 
+    # check if logs have been used
+    assert logs['augmented']
+
 
 @pytest.mark.skip_on_ci
 def test_rag_openai_gpt(animals_data: list[str], api_key: str) -> None:
     """Test RAG pipeline with OpenAI's GPT."""
+    logs = {
+        'retrieval': {},
+        'augmented': {},
+        'generation': {},
+    }
+
     rag = Rago(
         retrieval=StringRet(animals_data),
         augmented=OpenAIAug(api_key=api_key, top_k=3),
@@ -53,3 +70,8 @@ def test_rag_openai_gpt(animals_data: list[str], api_key: str) -> None:
     assert (
         'blue whale' in result.lower()
     ), 'Expected response to mention Blue Whale as a larger animal.'
+
+    # check if logs have been used
+    assert logs['retrieval']
+    assert logs['augmented']
+    assert logs['generation']

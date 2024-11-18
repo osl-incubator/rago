@@ -43,11 +43,16 @@ class HuggingFaceGen(GenerationBase):
                 max_length=512,
             ).to(self.device_name)
 
-            outputs = self.model.generate(
-                input_ids,
+            model_params = dict(
+                inputs=input_ids,
                 max_length=self.output_max_length,
                 pad_token_id=self.tokenizer.eos_token_id,
             )
+
+            outputs = self.model.generate(**model_params)
+
+            self.logs['model_params'] = model_params
+
             response = self.tokenizer.decode(
                 outputs[0], skip_special_tokens=True
             )

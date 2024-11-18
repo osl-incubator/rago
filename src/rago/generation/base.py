@@ -22,6 +22,7 @@ class GenerationBase:
     tokenizer: Any
     temperature: float = 0.5
     output_max_length: int = 500
+    logs: dict[str, Any] = {}  # noqa: RUF012
     prompt_template: str = (
         'question: \n```\n{query}\n```\ncontext: ```\n{context}\n```'
     )
@@ -43,6 +44,7 @@ class GenerationBase:
         prompt_template: str = '',
         output_max_length: int = 500,
         device: str = 'auto',
+        logs: dict[str, Any] = {},
     ) -> None:
         """Initialize Generation class.
 
@@ -77,6 +79,8 @@ class GenerationBase:
             'cpu' if device == 'cpu' or not cuda_available else 'cuda'
         )
         self.device = torch.device(self.device_name)
+
+        self.logs = logs
 
         self._validate()
         self._setup()

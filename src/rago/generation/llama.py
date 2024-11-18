@@ -67,16 +67,20 @@ class LlamaGen(GenerationBase):
         self.tokenizer.lang_code = language
 
         # Generate the response with adjusted parameters
-        response = self.generator(
-            input_text,
+
+        model_params = dict(
+            inputs=input_text,
             max_new_tokens=self.output_max_length,
             do_sample=True,
             temperature=self.temperature,
-            top_k=50,
-            top_p=0.95,
+            top_k=50,  # todo: check if it is necessary
+            top_p=0.95,  # todo: check if it is necessary
             num_return_sequences=1,
             eos_token_id=self.tokenizer.eos_token_id,
         )
+        response = self.generator(**model_params)
+
+        self.logs['model_params'] = model_params
 
         # Extract and return the answer only
         answer = str(response[0].get('generated_text', ''))

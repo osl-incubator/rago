@@ -57,7 +57,14 @@ class OpenAIAug(AugmentedBase):
 
         # Embed documents into the vector database and perform the search
         self.db.embed(document_encoded)
-        _, indices = self.db.search(query_encoded, top_k=top_k)
+        scores, indices = self.db.search(query_encoded, top_k=top_k)
+
+        self.logs['indices'] = indices
+        self.logs['scores'] = scores
+        self.logs['search_params'] = {
+            'query_encoded': query_encoded,
+            'top_k': top_k,
+        }
 
         # Retrieve the actual documents based on indices
         retrieved_docs = [documents[i] for i in indices]

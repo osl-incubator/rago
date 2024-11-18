@@ -38,4 +38,7 @@ class PDFPathRet(FilePathRet):
     def get(self, query: str = '') -> Iterable[str]:
         """Get the data from the source."""
         text = extract_text_from_pdf(self.source)
+
+        self.logs['text'] = text
+
         return self.splitter.split(text)

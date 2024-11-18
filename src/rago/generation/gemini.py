@@ -28,5 +28,11 @@ class GeminiGen(GenerationBase):
             query=query, context=' '.join(context)
         )
 
-        response = self.model.generate_content(input_text)
+        model_params = {
+            'contents': input_text,
+        }
+
+        response = self.model.generate_content(**model_params)
+
+        self.logs['model_params']
         return cast(str, response.text.strip())
