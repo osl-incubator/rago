@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from rago.augmented import SpacyAug
+from rago.augmented import SpaCyAug
 from rago.retrieval import PDFPathRet
 
 PDF_DATA_PATH = Path(__file__).parent / 'data' / 'pdf'
@@ -43,7 +43,7 @@ def test_retrieval_pdfs_extraction_aug_spacy(
 
     aug_top_k = 3
 
-    aug_openai = SpacyAug(top_k=aug_top_k)
+    aug_openai = SpaCyAug(top_k=aug_top_k)
     aug_result = aug_openai.search(query, documents=chunks)
 
     assert aug_result

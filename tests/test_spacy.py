@@ -1,11 +1,11 @@
-"""Tests for Rago package using Spacy."""
+"""Tests for Rago package using SpaCy."""
 
-from rago.augmented import SpacyAug
+from rago.augmented import SpaCyAug
 from rago.retrieval import StringRet
 
 
 def test_aug_spacy(animals_data: list[str]) -> None:
-    """Test RAG pipeline with Spacy."""
+    """Test RAG pipeline with SpaCy."""
     logs = {
         'augmented': {},
     }
@@ -14,7 +14,7 @@ def test_aug_spacy(animals_data: list[str]) -> None:
     top_k = 3
 
     ret_string = StringRet(animals_data)
-    aug_openai = SpacyAug(
+    aug_openai = SpaCyAug(
         top_k=top_k,
         logs=logs['augmented'],
     )
