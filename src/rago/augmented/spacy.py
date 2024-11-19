@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 
 
 @typechecked
-class SpacyAug(AugmentedBase):
+class SpaCyAug(AugmentedBase):
     """Class for augmentation with SpaCy embeddings."""
 
     default_model_name = 'en_core_web_md'
