@@ -1,6 +1,14 @@
 # Release Notes
 ---
 
+# [0.8.0](https://github.com/osl-incubator/rago/compare/0.7.1...0.8.0) (2024-11-19)
+
+
+### Features
+
+* Add an attribute for logs to keep more information for all the steps ([#22](https://github.com/osl-incubator/rago/issues/22)) ([89b19bb](https://github.com/osl-incubator/rago/commit/89b19bbd0a24a4b3e208d2dcb53a11ef67bf5bb5))
+* **aug:** Add support for SpaCy augmented class ([#23](https://github.com/osl-incubator/rago/issues/23)) ([14b4dd5](https://github.com/osl-incubator/rago/commit/14b4dd53961f7d5990b369bbe1bf7f729acc2060))
+
 ## [0.7.1](https://github.com/osl-incubator/rago/compare/0.7.0...0.7.1) (2024-11-15)
 
 
