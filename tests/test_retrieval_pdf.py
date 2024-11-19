@@ -1,26 +1,13 @@
 """Test the PDF retrieval."""
 
-import os
-
 from pathlib import Path
 
 import pytest
 
-from rago.augmented import OpenAIAug
+from rago.augmented import SpacyAug
 from rago.retrieval import PDFPathRet
 
 PDF_DATA_PATH = Path(__file__).parent / 'data' / 'pdf'
-
-
-@pytest.fixture
-def api_key(env) -> str:
-    """Fixture for OpenAI API key from environment."""
-    api_key = os.getenv('OPENAI_API_KEY')
-    if not api_key:
-        raise EnvironmentError(
-            'Please set the OPENAI_API_KEY environment variable.'
-        )
-    return api_key
 
 
 def test_retrieval_pdf_extraction_basic() -> None:
@@ -38,8 +25,8 @@ def test_retrieval_pdf_extraction_basic() -> None:
         ('2407.20116.pdf', ''),
     ],
 )
-def test_retrieval_pdfs_extraction(
-    pdf_path: str, expected: str, api_key: str
+def test_retrieval_pdfs_extraction_aug_spacy(
+    pdf_path: str, expected: str
 ) -> None:
     """Test the text extraction from a pdf."""
     pdf_ret = PDFPathRet(PDF_DATA_PATH / pdf_path)
@@ -56,8 +43,11 @@ def test_retrieval_pdfs_extraction(
 
     aug_top_k = 3
 
-    aug_openai = OpenAIAug(api_key=api_key, top_k=aug_top_k)
+    aug_openai = SpacyAug(top_k=aug_top_k)
     aug_result = aug_openai.search(query, documents=chunks)
 
     assert aug_result
     assert len(aug_result) == aug_top_k
+    assert all(['vitamin' in result.lower() for result in aug_result])
+    assert all(['vitamin d' in result.lower() for result in aug_result])
+    assert len(set(aug_result)) == 3
