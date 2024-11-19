@@ -21,7 +21,7 @@ class SentenceTransformerAug(AugmentedBase):
     """Class for augmentation with Hugging Face."""
 
     default_model_name = 'paraphrase-MiniLM-L12-v2'
-    default_top_k = 2
+    default_top_k = 3
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""

@@ -1,11 +1,11 @@
-"""Classes for augmentation with OpenAI embeddings."""
+"""Classes for augmentation with SpaCy embeddings."""
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING, List, cast
 
 import numpy as np
-import openai
+import spacy
 
 from typeguard import typechecked
 
@@ -18,29 +18,26 @@ if TYPE_CHECKING:
 
 
 @typechecked
-class OpenAIAug(AugmentedBase):
-    """Class for augmentation with OpenAI embeddings."""
+class SpacyAug(AugmentedBase):
+    """Class for augmentation with SpaCy embeddings."""
 
-    default_model_name = 'text-embedding-3-small'
+    default_model_name = 'en_core_web_md'
     default_top_k = 3
 
     def _setup(self) -> None:
         """Set up the object with initial parameters."""
-        if not self.api_key:
-            raise ValueError('API key for OpenAI is required.')
-        openai.api_key = self.api_key
-        self.model = openai.OpenAI(api_key=self.api_key)
+        self.model = spacy.load(self.model_name)
 
     def get_embedding(
-        self, content: list[str]
-    ) -> list[Tensor] | npt.NDArray[np.float64] | Tensor:
-        """Retrieve the embedding for a given text using OpenAI API."""
-        model = cast(openai.OpenAI, self.model)
-        response = model.embeddings.create(
-            input=content, model=self.model_name
-        )
-        result = np.array(response.data[0].embedding)
-        return result.reshape(1, result.size)
+        self, content: List[str]
+    ) -> npt.NDArray[np.float64] | Tensor:
+        """Retrieve the embedding for a given text using SpaCy."""
+        model = cast(spacy.language.Language, self.model)
+        embeddings = []
+        for text in content:
+            doc = model(text)
+            embeddings.append(doc.vector)
+        return np.array(embeddings)
 
     def search(
         self, query: str, documents: list[str], top_k: int = 0
