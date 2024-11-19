@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [0.8.1](https://github.com/osl-incubator/rago/compare/0.8.0...0.8.1) (2024-11-19)
+
+
+### Bug Fixes
+
+* Rename Spacy to SpaCy ([#24](https://github.com/osl-incubator/rago/issues/24)) ([d611271](https://github.com/osl-incubator/rago/commit/d611271b339d52c536da4d9691052e797bf2829d))
+
 # [0.8.0](https://github.com/osl-incubator/rago/compare/0.7.1...0.8.0) (2024-11-19)
 
 
