@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
     
     
       
@@ -428,6 +428,8 @@
       
         
       
+        
+      
     
     
     
@@ -520,6 +522,27 @@
   
   <span class="md-ellipsis">
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> sentence_transformer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="augmented/spacy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> spacy
   </span>
   
 
@@ -1427,7 +1450,11 @@ on the query and augmented data.</p>
 <span class="normal">44</span>
 <span class="normal">45</span>
 <span class="normal">46</span>
-<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">retrieval</span><span class="p">:</span> <span class="n">RetrievalBase</span><span class="p">,</span>
     <span class="n">augmented</span><span class="p">:</span> <span class="n">AugmentedBase</span><span class="p">,</span>
@@ -1450,7 +1477,11 @@ on the query and augmented data.</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">retrieval</span> <span class="o">=</span> <span class="n">retrieval</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">augmented</span> <span class="o">=</span> <span class="n">augmented</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">generation</span> <span class="o">=</span> <span class="n">generation</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;retrieval&#39;</span><span class="p">:</span> <span class="n">retrieval</span><span class="o">.</span><span class="n">logs</span><span class="p">,</span>
+        <span class="s1">&#39;augmented&#39;</span><span class="p">:</span> <span class="n">augmented</span><span class="o">.</span><span class="n">logs</span><span class="p">,</span>
+        <span class="s1">&#39;generation&#39;</span><span class="p">:</span> <span class="n">generation</span><span class="o">.</span><span class="n">logs</span><span class="p">,</span>
+    <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
@@ -1519,11 +1550,7 @@ default 'auto'.</p>
 
             <details class="quote">
               <summary>Source code in <code>src/rago/core.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">53</span>
 <span class="normal">54</span>
 <span class="normal">55</span>
 <span class="normal">56</span>
@@ -1544,7 +1571,11 @@ default 'auto'.</p>
 <span class="normal">71</span>
 <span class="normal">72</span>
 <span class="normal">73</span>
-<span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">prompt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">prompt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the pipeline for a specific prompt.</span>
 
 <span class="sd">    Parameters</span>
@@ -1561,13 +1592,13 @@ default 'auto'.</p>
 <span class="sd">        Generated text based on the query and augmented data.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ret_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieval</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;retrieval&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret_data</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;retrieval&#39;</span><span class="p">][</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret_data</span>
 
     <span class="n">aug_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">augmented</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">ret_data</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;augmented&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aug_data</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;augmented&#39;</span><span class="p">][</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aug_data</span>
 
     <span class="n">gen_data</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generation</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">aug_data</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;generation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gen_data</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;generation&#39;</span><span class="p">][</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gen_data</span>
 
     <span class="k">return</span> <span class="n">gen_data</span>
 </code></pre></div></td></tr></table></div>
@@ -1612,7 +1643,7 @@ default 'auto'.</p>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">importlib_metadata</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">importlib_metadata</span><span class="o">.</span><span class="n">PackageNotFoundError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-        <span class="k">return</span> <span class="s1">&#39;0.7.1&#39;</span>  <span class="c1"># semantic-release</span>
+        <span class="k">return</span> <span class="s1">&#39;0.8.0&#39;</span>  <span class="c1"># semantic-release</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>

@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://osl-incubator.github.io/rago/api/retrieval/text_splitter/langchain/">
+        <link rel="canonical" href="https://osl-incubator.github.io/rago/api/augmented/spacy/">
       
       
-        <link rel="prev" href="../base/">
+        <link rel="prev" href="../sentence_transformer/">
       
       
-        <link rel="next" href="../../tools/">
+        <link rel="next" href="../../core/">
       
       
-      <link rel="icon" href="../../../../images/favicon.png">
+      <link rel="icon" href="../../../images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
     
     
       
-        <title>langchain - Rago</title>
+        <title>spacy - Rago</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.0253249f.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rago.retrieval.text_splitter.langchain" class="md-skip">
+        <a href="#rago.augmented.spacy" class="md-skip">
           Skip to content
         </a>
       
@@ -90,9 +90,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../.." title="Rago" class="md-header__button md-logo" aria-label="Rago" data-md-component="logo">
+    <a href="../../.." title="Rago" class="md-header__button md-logo" aria-label="Rago" data-md-component="logo">
       
-  <img src="../../../../images/logo.png" alt="logo">
+  <img src="../../../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> langchain
+              <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> spacy
             
           </span>
         </div>
@@ -203,9 +203,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="Rago" class="md-nav__button md-logo" aria-label="Rago" data-md-component="logo">
+    <a href="../../.." title="Rago" class="md-nav__button md-logo" aria-label="Rago" data-md-component="logo">
       
-  <img src="../../../../images/logo.png" alt="logo">
+  <img src="../../../images/logo.png" alt="logo">
 
     </a>
     Rago
@@ -232,7 +232,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -252,7 +252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../installation/" class="md-nav__link">
+      <a href="../../../installation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -272,7 +272,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../changelog/" class="md-nav__link">
+      <a href="../../../changelog/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -292,7 +292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../contributing/" class="md-nav__link">
+      <a href="../../../contributing/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -383,7 +383,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -413,6 +413,8 @@
                 
   
   
+    
+  
   
   
     
@@ -433,16 +435,16 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_2" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../augmented/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -459,7 +461,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5_1_2">
             <span class="md-nav__icon md-icon"></span>
             <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> augmented
@@ -475,7 +477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../augmented/base/" class="md-nav__link">
+      <a href="../base/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -496,7 +498,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../augmented/openai/" class="md-nav__link">
+      <a href="../openai/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -517,7 +519,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../augmented/sentence_transformer/" class="md-nav__link">
+      <a href="../sentence_transformer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -535,10 +537,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../augmented/spacy/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> spacy
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -547,6 +569,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rago.augmented.spacy.SpacyAug" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;SpacyAug
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" SpacyAug">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rago.augmented.spacy.SpacyAug.get_embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;get_embedding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rago.augmented.spacy.SpacyAug.search" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;search
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -567,7 +642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../core/" class="md-nav__link">
+      <a href="../../core/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -610,7 +685,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../db/" class="md-nav__link ">
+            <a href="../../db/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -643,7 +718,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/base/" class="md-nav__link">
+      <a href="../../db/base/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -664,7 +739,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../db/faiss/" class="md-nav__link">
+      <a href="../../db/faiss/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -721,7 +796,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../generation/" class="md-nav__link ">
+            <a href="../../generation/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -754,7 +829,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../generation/base/" class="md-nav__link">
+      <a href="../../generation/base/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -775,7 +850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../generation/gemini/" class="md-nav__link">
+      <a href="../../generation/gemini/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -796,7 +871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../generation/hugging_face/" class="md-nav__link">
+      <a href="../../generation/hugging_face/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -817,7 +892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../generation/llama/" class="md-nav__link">
+      <a href="../../generation/llama/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -838,7 +913,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../generation/openai/" class="md-nav__link">
+      <a href="../../generation/openai/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -864,8 +939,6 @@
                 
   
   
-    
-  
   
   
     
@@ -886,16 +959,16 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_6" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../../retrieval/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -912,7 +985,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_1_6">
             <span class="md-nav__icon md-icon"></span>
             <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> retrieval
@@ -928,7 +1001,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base/" class="md-nav__link">
+      <a href="../../retrieval/base/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -949,7 +1022,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../file/" class="md-nav__link">
+      <a href="../../retrieval/file/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -967,8 +1040,6 @@
                 
   
   
-    
-  
   
   
     
@@ -985,16 +1056,16 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_6_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_6_4" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../retrieval/text_splitter/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1011,7 +1082,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_1_6_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_1_6_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_1_6_4">
             <span class="md-nav__icon md-icon"></span>
             <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> text_splitter
@@ -1027,7 +1098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../base/" class="md-nav__link">
+      <a href="../../retrieval/text_splitter/base/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1045,30 +1116,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> langchain
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../retrieval/text_splitter/langchain/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1077,50 +1128,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#rago.retrieval.text_splitter.langchain.LangChainTextSplitter" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;LangChainTextSplitter
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label=" LangChainTextSplitter">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rago.retrieval.text_splitter.langchain.LangChainTextSplitter.split" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;split
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1161,7 +1168,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../tools/" class="md-nav__link ">
+            <a href="../../retrieval/tools/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1194,7 +1201,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tools/pdf/" class="md-nav__link">
+      <a href="../../retrieval/tools/pdf/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1246,7 +1253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../example/" class="md-nav__link">
+      <a href="../../../example/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1286,19 +1293,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#rago.retrieval.text_splitter.langchain.LangChainTextSplitter" class="md-nav__link">
+  <a href="#rago.augmented.spacy.SpacyAug" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;LangChainTextSplitter
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;SpacyAug
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" LangChainTextSplitter">
+    <nav class="md-nav" aria-label=" SpacyAug">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#rago.retrieval.text_splitter.langchain.LangChainTextSplitter.split" class="md-nav__link">
+  <a href="#rago.augmented.spacy.SpacyAug.get_embedding" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;split
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;get_embedding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rago.augmented.spacy.SpacyAug.search" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;search
     </span>
   </a>
   
@@ -1331,15 +1347,15 @@
 
 
 
-<h1 id="rago.retrieval.text_splitter.langchain" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <span class="doc doc-object-name doc-module-name">langchain</span>
+<h1 id="rago.augmented.spacy" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <span class="doc doc-object-name doc-module-name">spacy</span>
 
 
 </h1>
 
     <div class="doc doc-contents first">
 
-        <p>Support langchain text splitter.</p>
+        <p>Classes for augmentation with SpaCy embeddings.</p>
 
 
 
@@ -1350,10 +1366,10 @@
 <p><span class="doc-section-title">Classes:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-          <b><code><a class="autorefs autorefs-internal" title="rago.retrieval.text_splitter.langchain.LangChainTextSplitter" href="#rago.retrieval.text_splitter.langchain.LangChainTextSplitter">LangChainTextSplitter</a></code></b>
+          <b><code><a class="autorefs autorefs-internal" title="rago.augmented.spacy.SpacyAug" href="#rago.augmented.spacy.SpacyAug">SpacyAug</a></code></b>
           –
           <div class="doc-md-description">
-            <p>LangChain Text Splitter class.</p>
+            <p>Class for augmentation with SpaCy embeddings.</p>
           </div>
         </li>
     </ul>
@@ -1377,20 +1393,20 @@
 
 
 
-<h2 id="rago.retrieval.text_splitter.langchain.LangChainTextSplitter" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">LangChainTextSplitter</span>
+<h2 id="rago.augmented.spacy.SpacyAug" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">SpacyAug</span>
 
 
 </h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">LangChainTextSplitter</span><span class="p">(</span><span class="n">splitter_name</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">SpacyAug</span><span class="p">(</span><span class="n">model_name</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">api_key</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="rago.db.DBBase" href="../../db/#rago.db.DBBase">DBBase</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="rago.db.FaissDB" href="../../db/#rago.db.FaissDB">FaissDB</a></span><span class="p">(),</span> <span class="n">top_k</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">logs</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">{})</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="rago.retrieval.text_splitter.base.TextSplitterBase" href="../base/#rago.retrieval.text_splitter.base.TextSplitterBase">TextSplitterBase</a></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="rago.augmented.base.AugmentedBase" href="../base/#rago.augmented.base.AugmentedBase">AugmentedBase</a></code></p>
 
 
-        <p>LangChain Text Splitter class.</p>
+        <p>Class for augmentation with SpaCy embeddings.</p>
 
 
 
@@ -1403,10 +1419,17 @@
 <p><span class="doc-section-title">Methods:</span></p>
     <ul>
           <li class="doc-section-item field-body">
-            <b><code><a class="autorefs autorefs-internal" title="rago.retrieval.text_splitter.langchain.LangChainTextSplitter.split" href="#rago.retrieval.text_splitter.langchain.LangChainTextSplitter.split">split</a></code></b>
+            <b><code><a class="autorefs autorefs-internal" title="rago.augmented.spacy.SpacyAug.get_embedding" href="#rago.augmented.spacy.SpacyAug.get_embedding">get_embedding</a></code></b>
             –
             <div class="doc-md-description">
-              <p>Split text into smaller chunks for processing.</p>
+              <p>Retrieve the embedding for a given text using SpaCy.</p>
+            </div>
+          </li>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="rago.augmented.spacy.SpacyAug.search" href="#rago.augmented.spacy.SpacyAug.search">search</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Search an encoded query into vector database.</p>
             </div>
           </li>
     </ul>
@@ -1414,29 +1437,43 @@
 
 
                   <details class="quote">
-                    <summary>Source code in <code>src/rago/retrieval/text_splitter/base.py</code></summary>
-                    <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
+                    <summary>Source code in <code>src/rago/augmented/base.py</code></summary>
+                    <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">34</span>
 <span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">splitter_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
-    <span class="n">chunk_overlap</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">db</span><span class="p">:</span> <span class="n">DBBase</span> <span class="o">=</span> <span class="n">FaissDB</span><span class="p">(),</span>
+    <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">logs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize the text splitter class.&quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span> <span class="o">=</span> <span class="n">chunk_size</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_chunk_size</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">chunk_overlap</span> <span class="o">=</span> <span class="n">chunk_overlap</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_chunk_overlap</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">splitter_name</span> <span class="o">=</span> <span class="n">splitter_name</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_splitter_name</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize AugmentedBase.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">db</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">api_key</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">top_k</span> <span class="o">=</span> <span class="n">top_k</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_top_k</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="n">model_name</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_model_name</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="o">=</span> <span class="n">logs</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_setup</span><span class="p">()</span>
@@ -1458,21 +1495,22 @@
 <div class="doc doc-object doc-function">
 
 
-<h3 id="rago.retrieval.text_splitter.langchain.LangChainTextSplitter.split" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">split</span>
+<h3 id="rago.augmented.spacy.SpacyAug.get_embedding" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">get_embedding</span>
 
 
 </h3>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">split</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">get_embedding</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n"><span title="numpy.typing.NDArray">NDArray</span></span><span class="p">[</span><span class="n"><span title="numpy.float64">float64</span></span><span class="p">]</span> <span class="o">|</span> <span class="n"><span title="torch.Tensor">Tensor</span></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
-        <p>Split text into smaller chunks for processing.</p>
+        <p>Retrieve the embedding for a given text using SpaCy.</p>
 
             <details class="quote">
-              <summary>Source code in <code>src/rago/retrieval/text_splitter/langchain.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
+              <summary>Source code in <code>src/rago/augmented/spacy.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">31</span>
+<span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
@@ -1480,15 +1518,88 @@
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
-<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Split text into smaller chunks for processing.&quot;&quot;&quot;</span>
-    <span class="n">text_splitter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">splitter</span><span class="p">(</span>
-        <span class="n">chunk_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span><span class="p">,</span>
-        <span class="n">chunk_overlap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk_overlap</span><span class="p">,</span>
-        <span class="n">length_function</span><span class="o">=</span><span class="nb">len</span><span class="p">,</span>
-        <span class="n">is_separator_regex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_text</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_embedding</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">|</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve the embedding for a given text using SpaCy.&quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">spacy</span><span class="o">.</span><span class="n">language</span><span class="o">.</span><span class="n">Language</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+    <span class="n">embeddings</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+        <span class="n">doc</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">embeddings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="rago.augmented.spacy.SpacyAug.search" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">search</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">search</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n">documents</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">],</span> <span class="n">top_k</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Search an encoded query into vector database.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>src/rago/augmented/spacy.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">search</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">documents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Search an encoded query into vector database.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;db&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Vector database (db) is not initialized.&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Encode the documents and query</span>
+    <span class="n">document_encoded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+    <span class="n">query_encoded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">([</span><span class="n">query</span><span class="p">])</span>
+    <span class="n">top_k</span> <span class="o">=</span> <span class="n">top_k</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">top_k</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_top_k</span> <span class="ow">or</span> <span class="mi">1</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">embed</span><span class="p">(</span><span class="n">document_encoded</span><span class="p">)</span>
+    <span class="n">scores</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query_encoded</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="n">top_k</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;indices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">indices</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scores</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;search_params&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;query_encoded&#39;</span><span class="p">:</span> <span class="n">query_encoded</span><span class="p">,</span>
+        <span class="s1">&#39;top_k&#39;</span><span class="p">:</span> <span class="n">top_k</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">retrieved_docs</span> <span class="o">=</span> <span class="p">[</span><span class="n">documents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">retrieved_docs</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1589,10 +1700,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.annotate", "content.tabs.link", "header.autohide", "navigation.indexes", "navigation.instant", "search.highlight", "search.share", "search.suggest"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.tabs.link", "header.autohide", "navigation.indexes", "navigation.instant", "search.highlight", "search.share", "search.suggest"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
   </body>
