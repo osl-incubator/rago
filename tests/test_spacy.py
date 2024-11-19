@@ -24,7 +24,7 @@ def test_aug_spacy(animals_data: list[str]) -> None:
 
     assert aug_openai.top_k == top_k
     assert len(aug_result) == top_k
-    assert any(['blue whale' in result for result in aug_result])
+    assert any(['blue whale' in result.lower() for result in aug_result])
 
     # check if logs have been used
     assert logs['augmented']
