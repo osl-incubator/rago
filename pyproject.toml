@@ -41,6 +41,7 @@ google-generativeai = "^0.8.3"
 pypdf = ">=5"
 langchain = ">=0.3.7"
 langchain-community = ">=0.3.7"
+spacy = ">=3"
 
 [tool.poetry.extras]
 cpu = ["torch", "torchvision"]
@@ -72,6 +73,8 @@ makim = "1.19.0"
 # 'PosixPath' object has no attribute 'endswith'
 virtualenv = "<=20.25.1"
 python-dotenv = ">=1.0"
+# note: Version 3.7.1 requries spaCy >=3.7.2,<3.8.0
+en-core-web-md = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.7.1/en_core_web_md-3.7.1-py3-none-any.whl"}
 
 
 [[tool.poetry.source]]
