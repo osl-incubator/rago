@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any
+from typing import Any, Optional
 
 import torch
 
+from pydantic import BaseModel
 from typeguard import typechecked
 
 
@@ -26,6 +27,7 @@ class GenerationBase:
     prompt_template: str = (
         'question: \n```\n{query}\n```\ncontext: ```\n{context}\n```'
     )
+    structured_output: Optional[BaseModel] = None
 
     # default parameters that can be overwritten by the derived class
     default_device_name: str = 'cpu'
@@ -44,6 +46,7 @@ class GenerationBase:
         prompt_template: str = '',
         output_max_length: int = 500,
         device: str = 'auto',
+        structured_output: Optional[BaseModel] = None,
         logs: dict[str, Any] = {},
     ) -> None:
         """Initialize Generation class.
@@ -58,29 +61,33 @@ class GenerationBase:
         output_max_length : int
             Maximum length of the generated output.
         device: str (default=auto)
+        structured_output: Optional[BaseModel] = None
+        logs: dict[str, Any] = {}
         """
-        self.api_key = api_key
-        self.model_name = model_name or self.default_model_name
-        self.output_max_length = (
+        self.api_key: str = api_key
+        self.model_name: str = model_name or self.default_model_name
+        self.output_max_length: int = (
             output_max_length or self.default_output_max_length
         )
-        self.temperature = temperature or self.default_temperature
+        self.temperature: float = temperature or self.default_temperature
 
-        self.prompt_template = prompt_template or self.default_prompt_template
+        self.prompt_template: str = (
+            prompt_template or self.default_prompt_template
+        )
+        self.structured_output: Optional[BaseModel] = None
 
-        if self.device_name not in ['cpu', 'cuda', 'auto']:
+        if device not in ['cpu', 'cuda', 'auto']:
             raise Exception(
-                f'Device {self.device_name} not supported. '
-                'Options: cpu, cuda, auto.'
+                f'Device {device} not supported. ' 'Options: cpu, cuda, auto.'
             )
 
         cuda_available = torch.cuda.is_available()
-        self.device_name = (
+        self.device_name: str = (
             'cpu' if device == 'cpu' or not cuda_available else 'cuda'
         )
         self.device = torch.device(self.device_name)
 
-        self.logs = logs
+        self.logs: dict[str, Any] = logs
 
         self._validate()
         self._setup()

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import warnings
+
 import torch
 
 from transformers import T5ForConditionalGeneration, T5Tokenizer
@@ -22,13 +24,17 @@ class HuggingFaceGen(GenerationBase):
                 f'The given model {self.model_name} is not supported.'
             )
 
+        if self.structured_output:
+            warnings.warn(
+                'Structured output is not supported yet in '
+                f'{self.__class__.__name__}.'
+            )
+
     def _setup(self) -> None:
         """Set models to t5-small models."""
         self.tokenizer = T5Tokenizer.from_pretrained(self.model_name)
-        self.model = T5ForConditionalGeneration.from_pretrained(
-            self.model_name
-        )
-        self.model = self.model.to(self.device)
+        model = T5ForConditionalGeneration.from_pretrained(self.model_name)
+        self.model = model.to(self.device)
 
     def generate(self, query: str, context: list[str]) -> str:
         """Generate the text from the query and augmented context."""

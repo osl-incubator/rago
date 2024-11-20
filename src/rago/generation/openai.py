@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import cast
 
+import instructor
 import openai
 
 from typeguard import typechecked
@@ -19,7 +20,11 @@ class OpenAIGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        self.model = openai.OpenAI(api_key=self.api_key)
+        model = openai.OpenAI(api_key=self.api_key)
+
+        self.model = (
+            instructor.from_openai(model) if self.structured_output else model
+        )
 
     def generate(
         self,

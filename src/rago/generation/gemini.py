@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import cast
 
 import google.generativeai as genai
+import instructor
 
 from typeguard import typechecked
 
@@ -20,7 +21,11 @@ class GeminiGen(GenerationBase):
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
         genai.configure(api_key=self.api_key)
-        self.model = genai.GenerativeModel(self.model_name)
+        model = genai.GenerativeModel(self.model_name)
+
+        self.model = (
+            instructor.from_gemini(model) if self.structured_output else model
+        )
 
     def generate(self, query: str, context: list[str]) -> str:
         """Generate text using Gemini model support."""
