@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import warnings
+
 import torch
 
 from langdetect import detect
@@ -25,6 +27,12 @@ class LlamaGen(GenerationBase):
             raise Exception(
                 f'The given model name {self.model_name} is not provided '
                 'by meta.'
+            )
+
+        if self.structured_output:
+            warnings.warn(
+                'Structured output is not supported yet in '
+                f'{self.__class__.__name__}.'
             )
 
     def _setup(self) -> None:

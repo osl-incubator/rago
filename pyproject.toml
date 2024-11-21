@@ -42,6 +42,8 @@ pypdf = ">=5"
 langchain = ">=0.3.7"
 langchain-community = ">=0.3.7"
 spacy = ">=3"
+instructor = ">=1"
+pydantic = ">=2"
 
 [tool.poetry.extras]
 cpu = ["torch", "torchvision"]
