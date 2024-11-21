@@ -64,7 +64,7 @@ def test_gemini_generation(animals_data: list[str], api_key: str) -> None:
     [
         ('What animal is larger than a dinosaur?', 'Blue Whale'),
         (
-            'What animal is renowned as the fastest animal on the planet?',
+            'What ave is renowned as the fastest animal on the planet?',
             'Peregrine Falcon',
         ),
     ],
