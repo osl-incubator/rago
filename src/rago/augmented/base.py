@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Any, Optional
 
 from typeguard import typechecked
 
-from rago.db import DBBase, FaissDB
+from rago.augmented.db import DBBase, FaissDB
 
 if TYPE_CHECKING:
     import numpy as np
