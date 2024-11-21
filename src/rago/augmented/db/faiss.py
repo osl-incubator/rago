@@ -8,7 +8,7 @@ import faiss
 
 from typeguard import typechecked
 
-from rago.db.base import DBBase
+from rago.augmented.db.base import DBBase
 
 
 @typechecked
