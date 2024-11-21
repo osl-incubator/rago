@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+# [0.9.0](https://github.com/osl-incubator/rago/compare/0.8.1...0.9.0) (2024-11-21)
+
+
+### Features
+
+* Add initial support for structured output ([#25](https://github.com/osl-incubator/rago/issues/25)) ([64856e1](https://github.com/osl-incubator/rago/commit/64856e19aa3f69eec20b6a8e81ba86bca8bf93b9))
+
 ## [0.8.1](https://github.com/osl-incubator/rago/compare/0.8.0...0.8.1) (2024-11-19)
 
 
