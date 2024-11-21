@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from pydantic import BaseModel
 from typeguard import typechecked
 
 from rago.augmented.base import AugmentedBase
@@ -50,7 +51,7 @@ class Rago:
             'generation': generation.logs,
         }
 
-    def prompt(self, query: str, device: str = 'auto') -> str:
+    def prompt(self, query: str, device: str = 'auto') -> str | BaseModel:
         """Run the pipeline for a specific prompt.
 
         Parameters
@@ -72,7 +73,7 @@ class Rago:
         aug_data = self.augmented.search(query, ret_data)
         self.logs['augmented']['result'] = aug_data
 
-        gen_data: str = self.generation.generate(query, context=aug_data)
+        gen_data = self.generation.generate(query, context=aug_data)
         self.logs['generation']['result'] = gen_data
 
         return gen_data

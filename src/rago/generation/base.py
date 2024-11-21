@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, Optional
+from typing import Any, Optional, Type
 
 import torch
 
@@ -27,7 +27,7 @@ class GenerationBase:
     prompt_template: str = (
         'question: \n```\n{query}\n```\ncontext: ```\n{context}\n```'
     )
-    structured_output: Optional[BaseModel] = None
+    structured_output: Optional[Type[BaseModel]] = None
 
     # default parameters that can be overwritten by the derived class
     default_device_name: str = 'cpu'
@@ -46,7 +46,7 @@ class GenerationBase:
         prompt_template: str = '',
         output_max_length: int = 500,
         device: str = 'auto',
-        structured_output: Optional[BaseModel] = None,
+        structured_output: Optional[Type[BaseModel]] = None,
         logs: dict[str, Any] = {},
     ) -> None:
         """Initialize Generation class.
@@ -61,7 +61,7 @@ class GenerationBase:
         output_max_length : int
             Maximum length of the generated output.
         device: str (default=auto)
-        structured_output: Optional[BaseModel] = None
+        structured_output: Optional[Type[BaseModel]] = None
         logs: dict[str, Any] = {}
         """
         self.api_key: str = api_key
@@ -74,7 +74,7 @@ class GenerationBase:
         self.prompt_template: str = (
             prompt_template or self.default_prompt_template
         )
-        self.structured_output: Optional[BaseModel] = None
+        self.structured_output: Optional[Type[BaseModel]] = structured_output
 
         if device not in ['cpu', 'cuda', 'auto']:
             raise Exception(
@@ -105,7 +105,7 @@ class GenerationBase:
         self,
         query: str,
         context: list[str],
-    ) -> str:
+    ) -> str | BaseModel:
         """Generate text with optional language parameter.
 
         Parameters

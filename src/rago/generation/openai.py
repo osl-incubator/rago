@@ -7,6 +7,7 @@ from typing import cast
 import instructor
 import openai
 
+from pydantic import BaseModel
 from typeguard import typechecked
 
 from rago.generation.base import GenerationBase
@@ -30,7 +31,7 @@ class OpenAIGen(GenerationBase):
         self,
         query: str,
         context: list[str],
-    ) -> str:
+    ) -> str | BaseModel:
         """Generate text using OpenAI's API with dynamic model support."""
         input_text = self.prompt_template.format(
             query=query, context=' '.join(context)
@@ -49,8 +50,15 @@ class OpenAIGen(GenerationBase):
             presence_penalty=0.3,
         )
 
+        if self.structured_output:
+            model_params['response_model'] = self.structured_output
+
         response = self.model.chat.completions.create(**model_params)
 
         self.logs['model_params'] = model_params
 
-        return cast(str, response.choices[0].message.content.strip())
+        has_choices = hasattr(response, 'choices')
+
+        if has_choices and isinstance(response.choices, list):
+            return cast(str, response.choices[0].message.content.strip())
+        return cast(BaseModel, response)
