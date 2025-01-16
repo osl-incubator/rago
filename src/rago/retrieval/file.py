@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, cast
 
 from typeguard import typechecked
 
@@ -37,8 +37,17 @@ class PDFPathRet(FilePathRet):
 
     def get(self, query: str = '') -> Iterable[str]:
         """Get the data from the source."""
+        cache_key = self.source
+        cached = self._get_cache(cache_key)
+        if cached:
+            return cast(Iterable[str], cached)
+
         text = extract_text_from_pdf(self.source)
 
         self.logs['text'] = text
 
-        return self.splitter.split(text)
+        result = self.splitter.split(text)
+
+        self._save_cache(cache_key, result)
+
+        return result

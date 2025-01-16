@@ -2,19 +2,15 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, cast
+from hashlib import sha256
+from typing import List, cast
 
 import numpy as np
 import spacy
 
 from typeguard import typechecked
 
-from rago.augmented.base import AugmentedBase
-
-if TYPE_CHECKING:
-    import numpy.typing as npt
-
-    from torch import Tensor
+from rago.augmented.base import AugmentedBase, EmbeddingType
 
 
 @typechecked
@@ -28,16 +24,21 @@ class SpaCyAug(AugmentedBase):
         """Set up the object with initial parameters."""
         self.model = spacy.load(self.model_name)
 
-    def get_embedding(
-        self, content: List[str]
-    ) -> npt.NDArray[np.float64] | Tensor:
+    def get_embedding(self, content: List[str]) -> EmbeddingType:
         """Retrieve the embedding for a given text using SpaCy."""
+        cache_key = sha256(''.join(content).encode('utf-8')).hexdigest()
+        cached = self._get_cache(cache_key)
+        if cached:
+            return cast(EmbeddingType, cached)
+
         model = cast(spacy.language.Language, self.model)
         embeddings = []
         for text in content:
             doc = model(text)
             embeddings.append(doc.vector)
-        return np.array(embeddings)
+        result = np.array(embeddings)
+        self._save_cache(cache_key, result)
+        return result
 
     def search(
         self, query: str, documents: list[str], top_k: int = 0

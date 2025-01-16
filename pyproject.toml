@@ -35,6 +35,7 @@ dependencies = [
   "torch >=2.5",
   "torchvision >=0.20",
   "eval-type-backport >=0.2 ; python_version < '3.10'",
+  "joblib (>=1.4.2,<2.0.0)",
 ]
 
 [build-system]
@@ -118,6 +119,7 @@ src = ["./"]
 exclude = [
   'docs',
 ]
+fix = true
 
 [tool.ruff.lint]
 select = [

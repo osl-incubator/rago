@@ -2,19 +2,15 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, cast
+from hashlib import sha256
+from typing import cast
 
 import numpy as np
 import openai
 
 from typeguard import typechecked
 
-from rago.augmented.base import AugmentedBase
-
-if TYPE_CHECKING:
-    import numpy.typing as npt
-
-    from torch import Tensor
+from rago.augmented.base import AugmentedBase, EmbeddingType
 
 
 @typechecked
@@ -31,16 +27,23 @@ class OpenAIAug(AugmentedBase):
         openai.api_key = self.api_key
         self.model = openai.OpenAI(api_key=self.api_key)
 
-    def get_embedding(
-        self, content: list[str]
-    ) -> list[Tensor] | npt.NDArray[np.float64] | Tensor:
+    def get_embedding(self, content: list[str]) -> EmbeddingType:
         """Retrieve the embedding for a given text using OpenAI API."""
+        cache_key = sha256(''.join(content).encode('utf-8')).hexdigest()
+        cached = self._get_cache(cache_key)
+        if cached:
+            return cast(EmbeddingType, cached)
+
         model = cast(openai.OpenAI, self.model)
         response = model.embeddings.create(
             input=content, model=self.model_name
         )
         result = np.array(response.data[0].embedding)
-        return result.reshape(1, result.size)
+        result = result.reshape(1, result.size)
+
+        self._save_cache(cache_key, result)
+
+        return result
 
     def search(
         self, query: str, documents: list[str], top_k: int = 0

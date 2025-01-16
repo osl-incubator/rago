@@ -10,12 +10,14 @@ import torch
 from pydantic import BaseModel
 from typeguard import typechecked
 
+from rago.base import RagoBase
+from rago.extensions.cache import Cache
+
 
 @typechecked
-class GenerationBase:
+class GenerationBase(RagoBase):
     """Generic Generation class."""
 
-    api_key: str = ''
     device_name: str = 'cpu'
     device: torch.device
     model: Any
@@ -23,7 +25,6 @@ class GenerationBase:
     tokenizer: Any
     temperature: float = 0.5
     output_max_length: int = 500
-    logs: dict[str, Any] = {}  # noqa: RUF012
     prompt_template: str = (
         'question: \n```\n{query}\n```\ncontext: ```\n{context}\n```'
     )
@@ -41,30 +42,17 @@ class GenerationBase:
     def __init__(
         self,
         model_name: str = '',
-        api_key: str = '',
         temperature: float = 0.5,
         prompt_template: str = '',
         output_max_length: int = 500,
         device: str = 'auto',
         structured_output: Optional[Type[BaseModel]] = None,
+        api_key: str = '',
+        cache: Optional[Cache] = None,
         logs: dict[str, Any] = {},
     ) -> None:
-        """Initialize Generation class.
-
-        Parameters
-        ----------
-        model_name : str
-            The name of the model to use.
-        api_key : str
-        temperature : float
-        prompt_template: str
-        output_max_length : int
-            Maximum length of the generated output.
-        device: str (default=auto)
-        structured_output: Optional[Type[BaseModel]] = None
-        logs: dict[str, Any] = {}
-        """
-        self.api_key: str = api_key
+        """Initialize Generation class."""
+        super().__init__(api_key=api_key, cache=cache, logs=logs)
         self.model_name: str = model_name or self.default_model_name
         self.output_max_length: int = (
             output_max_length or self.default_output_max_length
@@ -86,8 +74,6 @@ class GenerationBase:
             'cpu' if device == 'cpu' or not cuda_available else 'cuda'
         )
         self.device = torch.device(self.device_name)
-
-        self.logs: dict[str, Any] = logs
 
         self._validate()
         self._setup()
