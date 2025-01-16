@@ -78,7 +78,7 @@ class GenerationBase:
 
         if device not in ['cpu', 'cuda', 'auto']:
             raise Exception(
-                f'Device {device} not supported. ' 'Options: cpu, cuda, auto.'
+                f'Device {device} not supported. Options: cpu, cuda, auto.'
             )
 
         cuda_available = torch.cuda.is_available()
