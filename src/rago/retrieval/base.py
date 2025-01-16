@@ -7,6 +7,7 @@ from typing import Any, Iterable, cast
 
 from typeguard import typechecked
 
+from rago.base import Pipelines
 from rago.retrieval.text_splitter import (
     LangChainTextSplitter,
     TextSplitterBase,
@@ -14,7 +15,7 @@ from rago.retrieval.text_splitter import (
 
 
 @typechecked
-class RetrievalBase:
+class RetrievalBase(Pipelines):
     """Base Retrieval class."""
 
     content: Any

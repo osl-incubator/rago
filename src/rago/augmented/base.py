@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Any, Optional
 from typeguard import typechecked
 
 from rago.augmented.db import DBBase, FaissDB
+from rago.base import Pipelines
 
 if TYPE_CHECKING:
     import numpy as np
@@ -17,7 +18,7 @@ if TYPE_CHECKING:
 
 
 @typechecked
-class AugmentedBase:
+class AugmentedBase(Pipelines):
     """Define the base structure for Augmented classes."""
 
     api_key: str = ''

@@ -10,9 +10,11 @@ import torch
 from pydantic import BaseModel
 from typeguard import typechecked
 
+from rago.base import Pipelines
+
 
 @typechecked
-class GenerationBase:
+class GenerationBase(Pipelines):
     """Generic Generation class."""
 
     api_key: str = ''
