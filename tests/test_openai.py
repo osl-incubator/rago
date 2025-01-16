@@ -78,9 +78,9 @@ def test_rag_openai_gpt(animals_data: list[str], api_key: str) -> None:
     query = 'Is there any animal larger than a dinosaur?'
     result = rag.prompt(query)
 
-    assert (
-        'blue whale' in result.lower()
-    ), 'Expected response to mention Blue Whale as a larger animal.'
+    assert 'blue whale' in result.lower(), (
+        'Expected response to mention Blue Whale as a larger animal.'
+    )
 
     # check if logs have been used
     assert logs['retrieval']

@@ -48,9 +48,9 @@ def test_gemini_generation(animals_data: list[str], api_key: str) -> None:
     result = rag.prompt(query)
 
     # Verify the result contains relevant information, e.g., "Blue Whale"
-    assert (
-        'blue whale' in result.lower()
-    ), 'Expected response to mention Blue Whale as a larger animal.'
+    assert 'blue whale' in result.lower(), (
+        'Expected response to mention Blue Whale as a larger animal.'
+    )
 
     # check if logs have been used
     assert logs['retrieval']
