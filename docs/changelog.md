@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+# [0.10.0](https://github.com/osl-incubator/rago/compare/0.9.0...0.10.0) (2025-01-16)
+
+
+### Features
+
+* Add support for caching ([#29](https://github.com/osl-incubator/rago/issues/29)) ([a3bb556](https://github.com/osl-incubator/rago/commit/a3bb556549eb2646ee7073a0889fb0b4c74e7823))
+
 # [0.9.0](https://github.com/osl-incubator/rago/compare/0.8.1...0.9.0) (2024-11-21)
 
 
