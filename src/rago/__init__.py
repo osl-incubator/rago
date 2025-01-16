@@ -20,8 +20,8 @@ __author__ = 'Ivan Ogasawara'
 __email__ = 'ivan.ogasawara@gmail.com'
 
 __all__ = [
-    '__version__',
+    'Rago',
     '__author__',
     '__email__',
-    'Rago',
+    '__version__',
 ]

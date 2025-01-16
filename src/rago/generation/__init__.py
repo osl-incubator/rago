@@ -9,9 +9,9 @@ from rago.generation.llama import LlamaGen
 from rago.generation.openai import OpenAIGen
 
 __all__ = [
+    'GeminiGen',
     'GenerationBase',
     'HuggingFaceGen',
     'LlamaGen',
     'OpenAIGen',
-    'GeminiGen',
 ]
