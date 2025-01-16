@@ -2,37 +2,35 @@
 
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
-from typing import Literal
+from abc import ABC
+from typing import Any, Optional
+
+from rago.extensions.cache import Cache
 
 
-class Pipelines(ABC):
+class RagoBase(ABC):
     """Define base interface for RAG step classes."""
 
-    # pipeline
-    pipelines: dict[str, list[PipelineStep]] = {  # noqa: RUF012
-        'pre': [],
-        'post': [],
-    }
+    api_key: str = ''
+    cache: Optional[Cache] = None
+    logs: dict[str, Any] = {}  # noqa: RUF012
 
-    def set_pipeline(
+    def __init__(
         self,
-        pipeline: list[PipelineStep],
-        run_type: Literal['pre', 'post'],
+        api_key: str = '',
+        cache: Optional[Cache] = None,
+        logs: dict[str, Any] = {},
     ) -> None:
-        """Set pipeline for given run-type."""
-        self.pipelines[run_type] = pipeline
+        self.api_key = api_key
+        self.cache = cache
+        self.logs = logs
 
-    def run(self, run_type: Literal['pre', 'post']) -> None:
-        """Run given run-type pipeline."""
-        for step in self.pipelines[run_type]:
-            step.run()
+    def _get_cache(self, key: Any) -> Any:
+        if not self.cache:
+            return
+        return self.cache.load(key)
 
-
-class PipelineStep(ABC):
-    """Define base interface for RAG step classes."""
-
-    @abstractmethod
-    def run(self) -> None:
-        """Execute the step."""
-        return
+    def _save_cache(self, key: Any, data: Any) -> None:
+        if not self.cache:
+            return
+        self.cache.save(key, data)

@@ -2,18 +2,12 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, cast
+from typing import Any, cast
 
 from sentence_transformers import SentenceTransformer
 from typeguard import typechecked
 
-from rago.augmented.base import AugmentedBase
-
-if TYPE_CHECKING:
-    import numpy as np
-    import numpy.typing as npt
-
-    from torch import Tensor
+from rago.augmented.base import AugmentedBase, EmbeddingType
 
 
 @typechecked
@@ -27,9 +21,7 @@ class SentenceTransformerAug(AugmentedBase):
         """Set up the object with the initial parameters."""
         self.model = SentenceTransformer(self.model_name)
 
-    def get_embedding(
-        self, content: list[str]
-    ) -> list[Tensor] | npt.NDArray[np.float64] | Tensor:
+    def get_embedding(self, content: list[str]) -> EmbeddingType:
         """Retrieve the embedding for a given text using OpenAI API."""
         model = cast(SentenceTransformer, self.model)
         return model.encode(content)

@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, Iterable, cast
+from typing import Any, Iterable, Optional, cast
 
 from typeguard import typechecked
 
-from rago.base import Pipelines
+from rago.base import RagoBase
+from rago.extensions.cache import Cache
 from rago.retrieval.text_splitter import (
     LangChainTextSplitter,
     TextSplitterBase,
@@ -15,13 +16,12 @@ from rago.retrieval.text_splitter import (
 
 
 @typechecked
-class RetrievalBase(Pipelines):
+class RetrievalBase(RagoBase):
     """Base Retrieval class."""
 
     content: Any
     source: Any
     splitter: TextSplitterBase
-    logs: dict[str, Any] = {}  # noqa: RUF012
 
     def __init__(
         self,
@@ -29,9 +29,12 @@ class RetrievalBase(Pipelines):
         splitter: TextSplitterBase = LangChainTextSplitter(
             'RecursiveCharacterTextSplitter'
         ),
+        api_key: str = '',
+        cache: Optional[Cache] = None,
         logs: dict[str, Any] = {},
     ) -> None:
         """Initialize the Retrieval class."""
+        super().__init__(api_key=api_key, cache=cache, logs=logs)
         self.source = source
         self.splitter = splitter
 

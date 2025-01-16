@@ -3,30 +3,34 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import TYPE_CHECKING, Any, Optional
+from typing import Any, Optional, Union
 
+import numpy as np
+import numpy.typing as npt
+
+from torch import Tensor
 from typeguard import typechecked
+from typing_extensions import TypeAlias
 
 from rago.augmented.db import DBBase, FaissDB
-from rago.base import Pipelines
+from rago.base import RagoBase
+from rago.extensions.cache import Cache
 
-if TYPE_CHECKING:
-    import numpy as np
-    import numpy.typing as npt
-
-    from torch import Tensor
+EmbeddingType: TypeAlias = Union[
+    npt.NDArray[np.float64],
+    Tensor,
+    list[Tensor],
+]
 
 
 @typechecked
-class AugmentedBase(Pipelines):
+class AugmentedBase(RagoBase):
     """Define the base structure for Augmented classes."""
 
-    api_key: str = ''
     model: Optional[Any]
     model_name: str = ''
     db: Any
     top_k: int = 0
-    logs: dict[str, Any] = {}  # noqa: RUF012
 
     # default values to be overwritten by the derived classes
     default_model_name: str = ''
@@ -35,20 +39,20 @@ class AugmentedBase(Pipelines):
     def __init__(
         self,
         model_name: str = '',
-        api_key: str = '',
         db: DBBase = FaissDB(),
         top_k: int = 0,
+        api_key: str = '',
+        cache: Optional[Cache] = None,
         logs: dict[str, Any] = {},
     ) -> None:
         """Initialize AugmentedBase."""
+        super().__init__(api_key=api_key, cache=cache, logs=logs)
+
         self.db = db
-        self.api_key = api_key
 
         self.top_k = top_k or self.default_top_k
         self.model_name = model_name or self.default_model_name
         self.model = None
-
-        self.logs = logs
 
         self._validate()
         self._setup()
@@ -61,9 +65,7 @@ class AugmentedBase(Pipelines):
         """Set up the object with the initial parameters."""
         return
 
-    def get_embedding(
-        self, content: list[str]
-    ) -> list[Tensor] | npt.NDArray[np.float64] | Tensor:
+    def get_embedding(self, content: list[str]) -> EmbeddingType:
         """Retrieve the embedding for a given text using OpenAI API."""
         raise Exception('Method not implemented.')
 
