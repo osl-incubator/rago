@@ -39,7 +39,7 @@ class PDFPathRet(FilePathRet):
         """Get the data from the source."""
         cache_key = self.source
         cached = self._get_cache(cache_key)
-        if cached:
+        if cached is not None:
             return cast(Iterable[str], cached)
 
         text = extract_text_from_pdf(self.source)

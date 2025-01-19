@@ -28,7 +28,7 @@ class SpaCyAug(AugmentedBase):
         """Retrieve the embedding for a given text using SpaCy."""
         cache_key = sha256(''.join(content).encode('utf-8')).hexdigest()
         cached = self._get_cache(cache_key)
-        if cached:
+        if cached is not None:
             return cast(EmbeddingType, cached)
 
         model = cast(spacy.language.Language, self.model)
