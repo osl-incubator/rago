@@ -18,6 +18,11 @@ class OpenAIGen(GenerationBase):
     """OpenAI generation model for text generation."""
 
     default_model_name = 'gpt-3.5-turbo'
+    default_api_params = {  # noqa: RUF012
+        'top_p': 1.0,
+        'frequency_penalty': 0.0,
+        'presence_penalty': 0.0,
+    }
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
@@ -40,14 +45,16 @@ class OpenAIGen(GenerationBase):
         if not self.model:
             raise Exception('The model was not created.')
 
+        api_params = (
+            self.api_params if self.api_params else self.default_api_params
+        )
+
         model_params = dict(
             model=self.model_name,
             messages=[{'role': 'user', 'content': input_text}],
             max_tokens=self.output_max_length,
             temperature=self.temperature,
-            top_p=0.9,
-            frequency_penalty=0.5,
-            presence_penalty=0.3,
+            **api_params,
         )
 
         if self.structured_output:
