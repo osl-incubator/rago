@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+# [0.11.0](https://github.com/osl-incubator/rago/compare/0.10.1...0.11.0) (2025-01-21)
+
+
+### Features
+
+* Add support for extra parameters for RAG generation ([#32](https://github.com/osl-incubator/rago/issues/32)) ([e7a57c1](https://github.com/osl-incubator/rago/commit/e7a57c18194b9d5303a550425bb2e8c4d21fb7b5))
+
 ## [0.10.1](https://github.com/osl-incubator/rago/compare/0.10.0...0.10.1) (2025-01-19)
 
 
