@@ -13,6 +13,8 @@ from typeguard import typechecked
 from rago.base import RagoBase
 from rago.extensions.cache import Cache
 
+DEFAULT_LOGS: dict[str, Any] = {}
+
 
 @typechecked
 class GenerationBase(RagoBase):
@@ -49,9 +51,11 @@ class GenerationBase(RagoBase):
         structured_output: Optional[Type[BaseModel]] = None,
         api_key: str = '',
         cache: Optional[Cache] = None,
-        logs: dict[str, Any] = {},
+        logs: dict[str, Any] = DEFAULT_LOGS,
     ) -> None:
         """Initialize Generation class."""
+        if logs is DEFAULT_LOGS:
+            logs = {}
         super().__init__(api_key=api_key, cache=cache, logs=logs)
         self.model_name: str = model_name or self.default_model_name
         self.output_max_length: int = (

@@ -22,6 +22,8 @@ EmbeddingType: TypeAlias = Union[
     list[Tensor],
 ]
 
+DEFAULT_LOGS: dict[str, Any] = {}
+
 
 @typechecked
 class AugmentedBase(RagoBase):
@@ -43,9 +45,11 @@ class AugmentedBase(RagoBase):
         top_k: int = 0,
         api_key: str = '',
         cache: Optional[Cache] = None,
-        logs: dict[str, Any] = {},
+        logs: dict[str, Any] = DEFAULT_LOGS,
     ) -> None:
         """Initialize AugmentedBase."""
+        if logs is DEFAULT_LOGS:
+            logs = {}
         super().__init__(api_key=api_key, cache=cache, logs=logs)
 
         self.db = db
