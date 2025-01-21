@@ -3,11 +3,12 @@ channels:
   - nodefaults
   - conda-forge
 dependencies:
-  - python
+  - python # <3.13
   - pip
   - poetry >=2
   - nodejs # used by semantic-release
   - tokenizers
+  - compilers
   - pip:
       # distlib issue
       - paginate==0.5.6

@@ -14,6 +14,8 @@ from rago.retrieval.text_splitter import (
     TextSplitterBase,
 )
 
+DEFAULT_LOGS: dict[str, Any] = {}
+
 
 @typechecked
 class RetrievalBase(RagoBase):
@@ -31,14 +33,14 @@ class RetrievalBase(RagoBase):
         ),
         api_key: str = '',
         cache: Optional[Cache] = None,
-        logs: dict[str, Any] = {},
+        logs: dict[str, Any] = DEFAULT_LOGS,
     ) -> None:
         """Initialize the Retrieval class."""
+        if logs is DEFAULT_LOGS:
+            logs = {}
         super().__init__(api_key=api_key, cache=cache, logs=logs)
         self.source = source
         self.splitter = splitter
-
-        self.logs = logs
 
         self._validate()
         self._setup()
