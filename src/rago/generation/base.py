@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
+from copy import deepcopy
 from typing import Any, Optional, Type
 
 import torch
@@ -14,6 +15,7 @@ from rago.base import RagoBase
 from rago.extensions.cache import Cache
 
 DEFAULT_LOGS: dict[str, Any] = {}
+DEFAULT_API_PARAMS: dict[str, Any] = {}
 
 
 @typechecked
@@ -31,6 +33,7 @@ class GenerationBase(RagoBase):
         'question: \n```\n{query}\n```\ncontext: ```\n{context}\n```'
     )
     structured_output: Optional[Type[BaseModel]] = None
+    api_params: dict[str, Any] = {}  # noqa: RUF012
 
     # default parameters that can be overwritten by the derived class
     default_device_name: str = 'cpu'
@@ -40,6 +43,7 @@ class GenerationBase(RagoBase):
     default_prompt_template: str = (
         'question: \n```\n{query}\n```\ncontext: ```\n{context}\n```'
     )
+    default_api_params: dict[str, Any] = {}  # noqa: RUF012
 
     def __init__(
         self,
@@ -49,6 +53,7 @@ class GenerationBase(RagoBase):
         output_max_length: int = 500,
         device: str = 'auto',
         structured_output: Optional[Type[BaseModel]] = None,
+        api_params: dict[str, Any] = DEFAULT_API_PARAMS,
         api_key: str = '',
         cache: Optional[Cache] = None,
         logs: dict[str, Any] = DEFAULT_LOGS,
@@ -57,6 +62,7 @@ class GenerationBase(RagoBase):
         if logs is DEFAULT_LOGS:
             logs = {}
         super().__init__(api_key=api_key, cache=cache, logs=logs)
+
         self.model_name: str = model_name or self.default_model_name
         self.output_max_length: int = (
             output_max_length or self.default_output_max_length
@@ -67,6 +73,10 @@ class GenerationBase(RagoBase):
             prompt_template or self.default_prompt_template
         )
         self.structured_output: Optional[Type[BaseModel]] = structured_output
+        if api_params is DEFAULT_API_PARAMS:
+            api_params = deepcopy(self.default_api_params or {})
+
+        self.api_params = api_params
 
         if device not in ['cpu', 'cuda', 'auto']:
             raise Exception(
