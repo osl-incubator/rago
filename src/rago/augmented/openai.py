@@ -38,8 +38,9 @@ class OpenAIAug(AugmentedBase):
         response = model.embeddings.create(
             input=content, model=self.model_name
         )
-        result = np.array(response.data[0].embedding)
-        result = result.reshape(1, result.size)
+        result = np.array(
+            [data.embedding for data in response.data], dtype=np.float32
+        )
 
         self._save_cache(cache_key, result)
 

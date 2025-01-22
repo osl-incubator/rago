@@ -52,6 +52,7 @@ url = "https://download.pytorch.org/whl/cpu"
 priority = "explicit"
 
 [tool.poetry.dependencies]
+python = ">=3.9,<4"
 torch = [
   {version = ">=2.5.0", markers="extra!='gpu'", source="pytorch-cpu"},
   {version = ">=2.5.0", markers="extra=='gpu' and extra!='cpu'"},
@@ -88,7 +89,7 @@ makim = "1.19.0"
 virtualenv = "<=20.25.1"
 python-dotenv = ">=1.0"
 # note: Version 3.7.1 requries spaCy >=3.7.2,<3.8.0
-en-core-web-md = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.7.1/en_core_web_md-3.7.1-py3-none-any.whl"}
+en-core-web-md = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl"}
 
 [tool.pytest.ini_options]
 testpaths = [
