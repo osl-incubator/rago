@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [0.11.2](https://github.com/osl-incubator/rago/compare/0.11.1...0.11.2) (2025-01-22)
+
+
+### Bug Fixes
+
+* Fix get_embedding in the augmented classes ([#34](https://github.com/osl-incubator/rago/issues/34)) ([906ee2a](https://github.com/osl-incubator/rago/commit/906ee2ae06be595e8e40c1f2d1364e361c920dbf))
+
 ## [0.11.1](https://github.com/osl-incubator/rago/compare/0.11.0...0.11.1) (2025-01-22)
 
 
