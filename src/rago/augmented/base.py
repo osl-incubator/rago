@@ -36,13 +36,13 @@ class AugmentedBase(RagoBase):
 
     # default values to be overwritten by the derived classes
     default_model_name: str = ''
-    default_top_k: int = 0
+    default_top_k: int = 5
 
     def __init__(
         self,
-        model_name: str = '',
+        model_name: Optional[str] = None,
         db: DBBase = FaissDB(),
-        top_k: int = 0,
+        top_k: Optional[int] = None,
         api_key: str = '',
         cache: Optional[Cache] = None,
         logs: dict[str, Any] = DEFAULT_LOGS,
@@ -54,8 +54,10 @@ class AugmentedBase(RagoBase):
 
         self.db = db
 
-        self.top_k = top_k or self.default_top_k
-        self.model_name = model_name or self.default_model_name
+        self.top_k = top_k if top_k is not None else self.default_top_k
+        self.model_name = (
+            model_name if model_name is not None else self.default_model_name
+        )
         self.model = None
 
         self._validate()

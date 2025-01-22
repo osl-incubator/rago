@@ -47,8 +47,8 @@ class GenerationBase(RagoBase):
 
     def __init__(
         self,
-        model_name: str = '',
-        temperature: float = 0.5,
+        model_name: Optional[str] = None,
+        temperature: Optional[float] = None,
         prompt_template: str = '',
         output_max_length: int = 500,
         device: str = 'auto',
@@ -63,11 +63,17 @@ class GenerationBase(RagoBase):
             logs = {}
         super().__init__(api_key=api_key, cache=cache, logs=logs)
 
-        self.model_name: str = model_name or self.default_model_name
+        self.model_name: str = (
+            model_name if model_name is not None else self.default_model_name
+        )
         self.output_max_length: int = (
             output_max_length or self.default_output_max_length
         )
-        self.temperature: float = temperature or self.default_temperature
+        self.temperature: float = (
+            temperature
+            if temperature is not None
+            else self.default_temperature
+        )
 
         self.prompt_template: str = (
             prompt_template or self.default_prompt_template
