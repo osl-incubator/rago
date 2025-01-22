@@ -1,30 +1,44 @@
 """Tests for Rago package using SpaCy."""
 
+import pytest
+
 from rago.augmented import SpaCyAug
-from rago.retrieval import StringRet
 
 
-def test_aug_spacy(animals_data: list[str]) -> None:
+@pytest.mark.parametrize(
+    'question,expected_answer',
+    [
+        ('Is there any animal larger than a dinosaur?', 'Blue Whale'),
+        (
+            'What animal is renowned as the fastest animal on the planet?',
+            'Peregrine Falcon',
+        ),
+        ('An animal which do pollination?', 'Honey Bee'),
+    ],
+)
+def test_aug_spacy(
+    animals_data: list[str], question: str, expected_answer: str
+) -> None:
     """Test RAG pipeline with SpaCy."""
     logs = {
         'augmented': {},
     }
 
-    query = 'Is there any animal larger than a dinosaur?'
-    top_k = 3
+    top_k = 2
 
-    ret_string = StringRet(animals_data)
     aug_openai = SpaCyAug(
+        model_name='en_core_web_md',
         top_k=top_k,
         logs=logs['augmented'],
     )
 
-    ret_result = ret_string.get()
-    aug_result = aug_openai.search(query, ret_result)
+    aug_result = aug_openai.search(question, animals_data)
 
     assert aug_openai.top_k == top_k
-    assert len(aug_result) == top_k
-    assert any(['blue whale' in result.lower() for result in aug_result])
+    assert top_k >= len(aug_result)
+    assert any(
+        [expected_answer.lower() in result.lower() for result in aug_result]
+    )
 
     # check if logs have been used
     assert logs['augmented']

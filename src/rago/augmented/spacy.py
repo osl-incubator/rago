@@ -33,10 +33,22 @@ class SpaCyAug(AugmentedBase):
 
         model = cast(spacy.language.Language, self.model)
         embeddings = []
+
         for text in content:
             doc = model(text)
+
+            # Ensure the model has proper vectors
+            if not doc.has_vector:
+                raise ValueError(f"Text: '{text}' has no valid word vectors!")
+
             embeddings.append(doc.vector)
-        result = np.array(embeddings)
+
+        result = np.array(embeddings, dtype=np.float32)
+
+        # Ensure 2D shape (num_texts, embedding_dim)
+        if result.ndim == 1:
+            result = result.reshape(1, -1)
+
         self._save_cache(cache_key, result)
         return result
 

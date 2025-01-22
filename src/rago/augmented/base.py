@@ -18,6 +18,7 @@ from rago.extensions.cache import Cache
 
 EmbeddingType: TypeAlias = Union[
     npt.NDArray[np.float64],
+    npt.NDArray[np.float32],
     Tensor,
     list[Tensor],
 ]
