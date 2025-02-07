@@ -49,13 +49,13 @@ gpu = ["torch", "torchvision"]
 [[tool.poetry.source]]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
-priority = "explicit"
+priority = "supplemental"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4"
 torch = [
   {version = ">=2.5.0", markers="extra!='gpu'", source="pytorch-cpu"},
-  {version = ">=2.5.0", markers="extra=='gpu' and extra!='cpu'"},
+  {version = ">=2.5.0", markers="extra=='gpu'"},
 ]
 torchvision = [
   {version = ">=0.20.0", markers="extra!='gpu'", source="pytorch-cpu"},
