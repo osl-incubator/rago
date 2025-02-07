@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [0.11.3](https://github.com/osl-incubator/rago/compare/0.11.2...0.11.3) (2025-02-07)
+
+
+### Bug Fixes
+
+* improve and fix documentation ([#36](https://github.com/osl-incubator/rago/issues/36)) ([3ab061b](https://github.com/osl-incubator/rago/commit/3ab061b7afbe2dd7ba943559d86254a6076fd057))
+
 ## [0.11.2](https://github.com/osl-incubator/rago/compare/0.11.1...0.11.2) (2025-01-22)
 
 
