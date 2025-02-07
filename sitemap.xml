@@ -2,138 +2,138 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://osl-incubator.github.io/rago/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/changelog/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/contributing/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/example/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/installation/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/SUMMARY/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/base/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/core/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/base/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/openai/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/sentence_transformer/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/spacy/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/db/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/db/base/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/augmented/db/faiss/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/extensions/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/extensions/base/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/extensions/cache/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/generation/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/generation/base/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/generation/gemini/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/generation/hugging_face/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/generation/llama/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/generation/openai/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/retrieval/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/retrieval/base/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/retrieval/file/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/retrieval/text_splitter/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/retrieval/text_splitter/base/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/retrieval/text_splitter/langchain/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/retrieval/tools/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
     <url>
          <loc>https://osl-incubator.github.io/rago/api/retrieval/tools/pdf/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-02-07</lastmod>
     </url>
 </urlset>

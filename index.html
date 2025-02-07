@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Rago
             
           </span>
         </div>
@@ -243,7 +243,7 @@
           
   
   <span class="md-ellipsis">
-    Home
+    Rago
   </span>
   
 
@@ -254,7 +254,7 @@
         
   
   <span class="md-ellipsis">
-    Home
+    Rago
   </span>
   
 
@@ -285,11 +285,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#credits" class="md-nav__link">
+  <a href="#installation" class="md-nav__link">
     <span class="md-ellipsis">
-      Credits
+      Installation
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#llama-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Llama 3
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1409,11 +1433,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#credits" class="md-nav__link">
+  <a href="#installation" class="md-nav__link">
     <span class="md-ellipsis">
-      Credits
+      Installation
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#llama-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Llama 3
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1435,46 +1483,64 @@
   
 
 
-<p><img alt="LOGO" src="/images/logo.png" /></p>
 <h1 id="rago">Rago</h1>
-<p>Rago is a lightweight framework for RAG</p>
+<p>Rago is a lightweight framework for RAG.</p>
 <ul>
-<li>License: BSD 3 Clause</li>
-<li>Documentation: <a href="https://rago.github.io">https://rago.github.io</a></li>
+<li>Software License: BSD 3 Clause</li>
+<li>Documentation: <a href="https://osl-incubator.github.io/rago">https://osl-incubator.github.io/rago</a></li>
 </ul>
 <h2 id="features">Features</h2>
 <ul>
-<li>
-<p>The security of our code: Bandit is a powerful tool that we use in our Python
-  project to ensure its security. This tool analyzes the code and detects
-  potential vulnerabilities. Some of the key features of Bandit are its ease of
-  use, its ability to integrate with other tools, and its support for multiple
-  Python versions. If you want to know about bandit you can check its
-  <a href="https://bandit.readthedocs.io/en/latest/">documentation</a>.</p>
-</li>
-<li>
-<p>Finds unused code: <a href="https://github.com/jendrikseipp/vulture">Vulture</a> is
-  useful for cleaning up and finding errors in large code bases in Python.</p>
-</li>
-<li>
-<p>Complexity of functions and modules: We use
-  <a href="https://github.com/PyCQA/mccabe">McCabe</a> to identify the complexity in our
-  Python code that may be difficult to maintain or understand. By identifying
-  complex code at the outset, we as developers can refactor it to make it easier
-  to maintain and understand. In summary, McCabe helps us to improve the quality
-  of our code and make it easier to maintain. If you would like to learn more
-  about McCabe and code complexity, you can visit
-  <a href="https://here-be-pythons.readthedocs.io/en/latest/python/mccabe.html">McCabe - Code Complexity Checker</a>.
-  This tool is included with <a href="https://flake8.pycqa.org/en/latest/">Flake8</a>.</p>
-</li>
-<li>
-<p>TODO</p>
-</li>
+<li>Vector Database support</li>
+<li>FAISS</li>
+<li>Retrieval features</li>
+<li>Support pdf extraction via langchain</li>
+<li>Augmentation (Embedding + Vector Database Search)</li>
+<li>Support for Sentence Transformer (Hugging Face)</li>
+<li>Support for Open AI</li>
+<li>Support for SpaCy</li>
+<li>Generation (LLM)</li>
+<li>Support for Hugging Face</li>
+<li>Support for llama (Huggin FAce)</li>
+<li>Support for OpenAI</li>
+<li>Support for Gemini</li>
 </ul>
-<h2 id="credits">Credits</h2>
-<p>This package was created with Cookiecutter and the
-<a href="https://github.com/osl-incubator/scicookie">osl-incubator/scicookie</a> project
-template.</p>
+<h2 id="installation">Installation</h2>
+<p>If you want to install it for <code class="language-python highlight"><span class="n">cpu</span></code> only, you can run:</p>
+<div class="language-bash highlight"><pre><span></span><code>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>rago<span class="o">[</span>cpu<span class="o">]</span>
+</code></pre></div>
+<p>But, if you want to install it for <code class="language-python highlight"><span class="n">gpu</span></code> (cuda), you can run:</p>
+<div class="language-bash highlight"><pre><span></span><code>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>rago<span class="o">[</span>gpu<span class="o">]</span>
+</code></pre></div>
+<h2 id="setup">Setup</h2>
+<h3 id="llama-3">Llama 3</h3>
+<p>In order to use a llama model, visit its page on huggingface and request your
+access in its form, for example: <a href="https://huggingface.co/meta-llama/Llama-3.2-1B">https://huggingface.co/meta-llama/Llama-3.2-1B</a>.</p>
+<p>After you are granted access to the desired model, you will be able to use it
+with Rago.</p>
+<p>You will also need to provide a hugging face token in order to download the
+models locally, for example:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="n">animals_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;The Blue Whale is the largest animal ever known to have existed, even &quot;</span>
+    <span class="s2">&quot;bigger than the largest dinosaurs.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The Peregrine Falcon is renowned as the fastest animal on the planet, &quot;</span>
+    <span class="s2">&quot;capable of reaching speeds over 240 miles per hour.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The Giant Panda is a bear species endemic to China, easily recognized by &quot;</span>
+    <span class="s2">&quot;its distinctive black-and-white coat.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The Cheetah is the world&#39;s fastest land animal, capable of sprinting at &quot;</span>
+    <span class="s2">&quot;speeds up to 70 miles per hour in short bursts covering distances up to &quot;</span>
+    <span class="s2">&quot;500 meters.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The Komodo Dragon is the largest living species of lizard, found on &quot;</span>
+    <span class="s2">&quot;several Indonesian islands, including its namesake, Komodo.&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">rag</span> <span class="o">=</span> <span class="n">Rago</span><span class="p">(</span>
+    <span class="n">retrieval</span><span class="o">=</span><span class="n">StringRet</span><span class="p">(</span><span class="n">animals_data</span><span class="p">),</span>
+    <span class="n">augmented</span><span class="o">=</span><span class="n">SentenceTransformerAug</span><span class="p">(</span><span class="n">top_k</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">generation</span><span class="o">=</span><span class="n">LlamaGen</span><span class="p">(</span><span class="n">apikey</span><span class="o">=</span><span class="n">HF_TOKEN</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">rag</span><span class="o">.</span><span class="n">prompt</span><span class="p">(</span><span class="s1">&#39;What is the faster animal on Earth?&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 
 
