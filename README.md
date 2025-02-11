@@ -1,5 +1,11 @@
 # Rago
 
+![CI](https://img.shields.io/github/actions/workflow/status/osl-incubator/rago/main.yaml?logo=github&label=CI)
+[![Python Versions](https://img.shields.io/pypi/pyversions/rago)](https://pypi.org/project/rago/)
+[![Package Version](https://img.shields.io/pypi/v/rago?color=blue)](https://pypi.org/project/rago/)
+![License](https://img.shields.io/pypi/l/rago?color=blue)
+![Discord](https://img.shields.io/discord/796786891798085652?logo=discord&color=blue)
+
 Rago is a lightweight framework for RAG.
 
 - Software License: BSD 3 Clause
@@ -8,18 +14,18 @@ Rago is a lightweight framework for RAG.
 ## Features
 
 - Vector Database support
-  - FAISS
+    - FAISS
 - Retrieval features
-  - Support pdf extraction via langchain
+    - Support pdf extraction via langchain
 - Augmentation (Embedding + Vector Database Search)
-  - Support for Sentence Transformer (Hugging Face)
-  - Support for Open AI
-  - Support for SpaCy
+    - Support for Sentence Transformer (Hugging Face)
+    - Support for Open AI
+    - Support for SpaCy
 - Generation (LLM)
-  - Support for Hugging Face
-  - Support for llama (Huggin FAce)
-  - Support for OpenAI
-  - Support for Gemini
+    - Support for Hugging Face
+    - Support for llama (Huggin FAce)
+    - Support for OpenAI
+    - Support for Gemini
 
 ## Installation
 
