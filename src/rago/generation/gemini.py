@@ -47,12 +47,19 @@ class GeminiGen(GenerationBase):
             self.logs['model_params'] = models_params_gen
             return cast(str, response.text.strip())
 
-        messages = [
-            {'role': 'user', 'content': input_text},
-        ]
+        api_params = (
+            self.api_params if self.api_params else self.default_api_params
+        )
+
+        messages = []
+        if self.system_message:
+            messages.append({'role': 'system', 'content': self.system_message})
+        messages.append({'role': 'user', 'content': input_text})
+
         model_params = {
             'messages': messages,
             'response_model': self.structured_output,
+            **api_params,
         }
 
         response = self.model.create(

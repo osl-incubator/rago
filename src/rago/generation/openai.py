@@ -49,9 +49,14 @@ class OpenAIGen(GenerationBase):
             self.api_params if self.api_params else self.default_api_params
         )
 
+        messages = []
+        if self.system_message:
+            messages.append({'role': 'system', 'content': self.system_message})
+        messages.append({'role': 'user', 'content': input_text})
+
         model_params = dict(
             model=self.model_name,
-            messages=[{'role': 'user', 'content': input_text}],
+            messages=messages,
             max_tokens=self.output_max_length,
             temperature=self.temperature,
             **api_params,
