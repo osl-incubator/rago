@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+# [0.12.0](https://github.com/osl-incubator/rago/compare/0.11.3...0.12.0) (2025-02-11)
+
+
+### Features
+
+* Add support system message (LLM/Gen) ([#37](https://github.com/osl-incubator/rago/issues/37)) ([eb6e499](https://github.com/osl-incubator/rago/commit/eb6e4998bdbc346eab2bd3c9840dba14172cbf3c))
+
 ## [0.11.3](https://github.com/osl-incubator/rago/compare/0.11.2...0.11.3) (2025-02-07)
 
 
