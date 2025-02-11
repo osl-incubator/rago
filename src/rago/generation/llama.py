@@ -20,6 +20,10 @@ class LlamaGen(GenerationBase):
     default_model_name: str = 'meta-llama/Llama-3.2-1B'
     default_temperature: float = 0.5
     default_output_max_length: int = 500
+    default_api_params = {  # noqa: RUF012
+        'top_p': 1.0,
+        'num_return_sequences': 1,
+    }
 
     def _validate(self) -> None:
         """Raise an error if the initial parameters are not valid."""
@@ -66,6 +70,10 @@ class LlamaGen(GenerationBase):
         language = str(detect(query)) or 'en'
         self.tokenizer.lang_code = language
 
+        api_params = (
+            self.api_params if self.api_params else self.default_api_params
+        )
+
         # Generate the response with adjusted parameters
 
         model_params = dict(
@@ -73,10 +81,8 @@ class LlamaGen(GenerationBase):
             max_new_tokens=self.output_max_length,
             do_sample=True,
             temperature=self.temperature,
-            top_k=50,  # todo: check if it is necessary
-            top_p=0.95,  # todo: check if it is necessary
-            num_return_sequences=1,
             eos_token_id=self.tokenizer.eos_token_id,
+            **api_params,
         )
         response = self.generator(**model_params)
 

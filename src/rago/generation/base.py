@@ -34,6 +34,7 @@ class GenerationBase(RagoBase):
     )
     structured_output: Optional[Type[BaseModel]] = None
     api_params: dict[str, Any] = {}  # noqa: RUF012
+    system_message: str = ''
 
     # default parameters that can be overwritten by the derived class
     default_device_name: str = 'cpu'
@@ -53,6 +54,7 @@ class GenerationBase(RagoBase):
         output_max_length: int = 500,
         device: str = 'auto',
         structured_output: Optional[Type[BaseModel]] = None,
+        system_message: str = '',
         api_params: dict[str, Any] = DEFAULT_API_PARAMS,
         api_key: str = '',
         cache: Optional[Cache] = None,
@@ -82,6 +84,7 @@ class GenerationBase(RagoBase):
         if api_params is DEFAULT_API_PARAMS:
             api_params = deepcopy(self.default_api_params or {})
 
+        self.system_message = system_message
         self.api_params = api_params
 
         if device not in ['cpu', 'cuda', 'auto']:
