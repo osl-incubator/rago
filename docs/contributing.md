@@ -88,7 +88,7 @@ installation steps here:
 that, ensure that conda is already available in your terminal session and run:
 
 ```bash
-$ conda env create env create --file conda/dev.yaml
+$ conda env create --file conda/dev.yaml
 $ conda activate rago
 ```
 

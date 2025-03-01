@@ -15,7 +15,7 @@ exclude = [
   ".env*",
 ]
 include = ["src/rago/py.typed"]
-requires-python = ">=3.9,<4"
+requires-python = ">=3.9,<3.13"
 
 dependencies = [
   "typeguard >=4.0",
@@ -52,7 +52,7 @@ url = "https://download.pytorch.org/whl/cpu"
 priority = "supplemental"
 
 [tool.poetry.dependencies]
-python = ">=3.9,<4"
+python = ">=3.9,<3.13"
 torch = [
   {version = ">=2.5.0", markers="extra!='gpu'", source="pytorch-cpu"},
   {version = ">=2.5.0", markers="extra=='gpu'"},
