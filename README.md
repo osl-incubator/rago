@@ -4,7 +4,7 @@
 [![Python Versions](https://img.shields.io/pypi/pyversions/rago)](https://pypi.org/project/rago/)
 [![Package Version](https://img.shields.io/pypi/v/rago?color=blue)](https://pypi.org/project/rago/)
 ![License](https://img.shields.io/pypi/l/rago?color=blue)
-[![Discord](https://img.shields.io/discord/796786891798085652?logo=discord&color=blue)]((https://opensciencelabs.org/discord))
+[![Discord](https://img.shields.io/discord/796786891798085652?logo=discord&color=blue)](https://opensciencelabs.org/discord)
 
 Rago is a lightweight framework for RAG.
 
