@@ -56,6 +56,14 @@ models locally, for example:
 
 ```python
 
+from rago.core import Rago
+from rago.generation import LlamaGen
+from rago.retrieval import StringRet
+from rago.augmentation import SentenceTransformerAug
+
+# For Gated LLMs
+HF_TOKEN = 'YOUR_HUGGING_FACE_TOKEN'
+
 animals_data = [
     "The Blue Whale is the largest animal ever known to have existed, even "
     "bigger than the largest dinosaurs.",
