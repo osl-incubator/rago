@@ -1,11 +1,12 @@
-"""OpenAI Generation Model class for flexible GPT-based text generation."""
+"""DeepSeek AI Generation Model class for text generation."""
 
 from __future__ import annotations
 
 from typing import cast
 
 import instructor
-import openai
+# couldn't find the sdk for deepseek and there docs have used openai sdk with base url hence using openai
+from openai import OpenAI
 
 from pydantic import BaseModel
 from typeguard import typechecked
@@ -14,23 +15,29 @@ from rago.generation.base import GenerationBase
 
 
 @typechecked
-class OpenAIGen(GenerationBase):
-    """OpenAI generation model for text generation."""
+class DeepSeekGen(GenerationBase):
+    """DeepSeek AI generation model for text generation."""
 
-    default_model_name = 'gpt-3.5-turbo'
+    default_model_name = 'deepseek-chat'
     default_api_params = {  # noqa: RUF012
-        'top_p': 1.0,
+        'top_p': 0.9,
         'frequency_penalty': 0.0,
         'presence_penalty': 0.0,
     }
 
+    base_url = "https://api.deepseek.com"
+
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        model = openai.OpenAI(api_key=self.api_key)
+        model = OpenAI(api_key=self.api_key, base_url=self.base_url)
 
         self.model = (
-            instructor.from_openai(model)
-            if self.structured_output
+            instructor.from_openai(
+                client=model,
+                mode=instructor.Mode.TOOLS
+                                   )
+            if
+            self.structured_output
             else model
         )
 
@@ -39,7 +46,7 @@ class OpenAIGen(GenerationBase):
         query: str,
         context: list[str],
     ) -> str | BaseModel:
-        """Generate text using OpenAI's API with dynamic model support."""
+        """Generate text using DeepSeek AI's API with dynamic model support."""
         input_text = self.prompt_template.format(
             query=query, context=' '.join(context)
         )
