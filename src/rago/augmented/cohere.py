@@ -5,8 +5,8 @@ from __future__ import annotations
 from hashlib import sha256
 from typing import cast
 
-import numpy as np
 import cohere
+import numpy as np
 
 from typeguard import typechecked
 
@@ -17,7 +17,7 @@ from rago.augmented.base import AugmentedBase, EmbeddingType
 class CohereAug(AugmentedBase):
     """Class for augmentation with Cohere embeddings."""
 
-    default_model_name = 'embed-english-v3.0'  # this is Cohere's recommended model
+    default_model_name = 'embed-english-v3.0'  # Cohere's recommended model
     default_top_k = 3
 
     def _setup(self) -> None:
@@ -35,9 +35,7 @@ class CohereAug(AugmentedBase):
 
         model = cast(cohere.Client, self.model)
         response = model.embed(
-            texts=content,
-            model=self.model_name,
-            input_type="search_document"
+            texts=content, model=self.model_name, input_type='search_document'
         )
 
         result = np.array(response.embeddings, dtype=np.float32)
@@ -55,9 +53,7 @@ class CohereAug(AugmentedBase):
         document_encoded = self.get_embedding(documents)
         model = cast(cohere.Client, self.model)
         response = model.embed(
-            texts=[query],
-            model=self.model_name,
-            input_type="search_query"
+            texts=[query], model=self.model_name, input_type='search_query'
         )
         query_encoded = np.array(response.embeddings, dtype=np.float32)
 
