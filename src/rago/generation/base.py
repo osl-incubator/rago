@@ -55,14 +55,17 @@ class GenerationBase(RagoBase):
         device: str = 'auto',
         structured_output: Optional[Type[BaseModel]] = None,
         system_message: str = '',
-        api_params: dict[str, Any] = DEFAULT_API_PARAMS,
+        api_params: dict[str, Any] = None,
         api_key: str = '',
         cache: Optional[Cache] = None,
-        logs: dict[str, Any] = DEFAULT_LOGS,
+        logs: dict[str, Any] = None,
     ) -> None:
         """Initialize Generation class."""
-        if logs is DEFAULT_LOGS:
-            logs = {}
+        if logs is None:
+            logs = DEFAULT_LOGS
+        if api_params is None:
+            api_params = DEFAULT_API_PARAMS
+
         super().__init__(api_key=api_key, cache=cache, logs=logs)
 
         self.model_name: str = (

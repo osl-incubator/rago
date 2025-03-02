@@ -46,11 +46,11 @@ class AugmentedBase(RagoBase):
         top_k: Optional[int] = None,
         api_key: str = '',
         cache: Optional[Cache] = None,
-        logs: dict[str, Any] = DEFAULT_LOGS,
+        logs: dict[str, Any] = None,
     ) -> None:
         """Initialize AugmentedBase."""
-        if logs is DEFAULT_LOGS:
-            logs = {}
+        if logs is None:
+            logs = DEFAULT_LOGS
         super().__init__(api_key=api_key, cache=cache, logs=logs)
 
         self.db = db
