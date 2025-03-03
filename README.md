@@ -57,9 +57,9 @@ models locally, for example:
 ```python
 
 from rago.core import Rago
-from rago.generation.llama import LlamaGen
-from rago.retrieval.base import StringRet
-from rago.augmented.sentence_transformer import SentenceTransformerAug
+from rago.generation import LlamaGen
+from rago.retrieval import StringRet
+from rago.augmented import SentenceTransformerAug
 
 # For Gated LLMs
 HF_TOKEN = 'YOUR_HUGGING_FACE_TOKEN'
