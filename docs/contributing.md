@@ -106,6 +106,13 @@ $ poetry install
 - `rago` uses a set of `pre-commit` hooks to improve code quality. The hooks can
   be installed locally using:
 
+Ensure `pre-commit` is explicitly installed, if not already installed use:
+
+```bash
+$ conda install pre-commit
+```
+followed by the command:
+
 ```bash
 $ pre-commit install
 ```
