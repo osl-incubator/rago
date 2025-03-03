@@ -99,7 +99,7 @@ def test_cache(
 
     # note: we don't need to test the gen_cache
     for cache in [RET_CACHE, AUG_CACHE]:
-        assert not is_directory_empty(cache.target_dir), (
-            f"Cache for {cache} didn't work."
-        )
+        assert not is_directory_empty(
+            cache.target_dir
+        ), f"Cache for {cache} didn't work."
         clear_folder(cache.target_dir)

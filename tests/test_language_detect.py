@@ -18,6 +18,6 @@ def test_language_detection(
 ) -> None:
     """Test language detection."""
     detected_language = detect(query)
-    assert detected_language == expected_language, (
-        f'Expected {expected_language}, got {detected_language}'
-    )
+    assert (
+        detected_language == expected_language
+    ), f'Expected {expected_language}, got {detected_language}'
