@@ -8,6 +8,7 @@ from rago.generation.gemini import GeminiGen
 from rago.generation.hugging_face import HuggingFaceGen
 from rago.generation.llama import LlamaGen
 from rago.generation.openai import OpenAIGen
+from rago.generation.together import TogetherGen
 
 __all__ = [
     'FireworksGen',
@@ -16,4 +17,5 @@ __all__ = [
     'HuggingFaceGen',
     'LlamaGen',
     'OpenAIGen',
+    'TogetherGen',
 ]
