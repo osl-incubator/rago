@@ -37,3 +37,25 @@ def api_key_openai(env: dict[str, str]) -> str:
             'Please set the OPENAI_API_KEY environment variable.'
         )
     return api_key
+
+
+@pytest.fixture
+def api_key_gemini(env: dict[str, str]) -> str:
+    """Fixture for Gemini API key from environment."""
+    api_key = os.getenv('GEMINI_API_KEY')
+    if not api_key:
+        raise EnvironmentError(
+            'Please set the GEMINI_API_KEY environment variable.'
+        )
+    return api_key
+
+
+@pytest.fixture
+def api_key_hugging_face(env: dict[str, str]) -> str:
+    """Fixture for Hugging Face API key from environment."""
+    api_key = os.getenv('HF_TOKEN')
+    if not api_key:
+        raise EnvironmentError(
+            'Please set the GEMINI_API_KEY environment variable.'
+        )
+    return api_key
