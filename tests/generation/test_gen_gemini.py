@@ -11,7 +11,7 @@ from rago.augmented import SentenceTransformerAug
 from rago.generation import GeminiGen
 from rago.retrieval import StringRet
 
-from .models import AnimalModel
+from ..models import AnimalModel
 
 
 @pytest.fixture

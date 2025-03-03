@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+
 from pathlib import Path
 
 import pytest
@@ -24,3 +26,14 @@ def animals_data() -> list[str]:
     with open(data_path) as f:
         data = [line.strip() for line in f.readlines() if line.strip()]
         return data
+
+
+@pytest.fixture
+def api_key_openai(env: dict[str, str]) -> str:
+    """Fixture for OpenAI API key from environment."""
+    api_key = os.getenv('OPENAI_API_KEY')
+    if not api_key:
+        raise EnvironmentError(
+            'Please set the OPENAI_API_KEY environment variable.'
+        )
+    return api_key
