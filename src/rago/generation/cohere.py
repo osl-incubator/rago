@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+
 from typing import cast
 
 import cohere
@@ -17,20 +19,19 @@ from rago.generation.base import GenerationBase
 class CohereGen(GenerationBase):
     """Cohere generation model for text generation."""
 
-    default_model_name: str = 'command'
-    default_api_params = {
+    default_model_name: str = 'command-r-plus-08-2024'
+    default_api_params = {  # noqa: RUF012
         'p': 0.9,
     }
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        model = cohere.Client(api_key=self.api_key)
-
+        model = cohere.ClientV2(api_key=self.api_key)
         self.model = (
             instructor.from_cohere(
                 client=model,
                 mode=instructor.Mode.COHERE_JSON_SCHEMA,
-                model_name = self.model_name
+                model_name=self.model_name,
             )
             if self.structured_output
             else model
@@ -41,54 +42,69 @@ class CohereGen(GenerationBase):
         input_text = self.prompt_template.format(
             query=query, context=' '.join(context)
         )
-
         api_params = self.api_params or self.default_api_params
 
         if self.structured_output:
             messages = []
+            # Explicit instruction to generate JSON output.
+            system_instruction = (
+                'Generate a JSON object that strictly follows the provided  '
+                'JSON schema. Do not include any additional text.'
+            )
             if self.system_message:
-                messages.append({"role": "SYSTEM", "message": self.system_message})
-            messages.append({"role": "USER", "message": input_text})
+                system_instruction += ' ' + self.system_message
+            messages.append({'role': 'system', 'content': system_instruction})
+            messages.append({'role': 'user', 'content': input_text})
 
+            response_format_config = {
+                'type': 'json_object',
+                'json_schema': (
+                    self.structured_output
+                    if isinstance(self.structured_output, dict)
+                    else self.structured_output.model_json_schema()
+                ),
+            }
+            print('Response format config:', response_format_config)
             model_params = {
-                "chat_history": messages,
-                "max_tokens": self.output_max_length,
-                "temperature": self.temperature,
-                "response_model": self.structured_output,
+                'messages': messages,
+                'max_tokens': self.output_max_length,
+                'temperature': self.temperature,
+                'model': self.model_name,
+                'response_format': response_format_config,
                 **api_params,
             }
 
-            response = self.model.chat(**model_params)
+            response = self.model.client.chat(**model_params)
             self.logs['model_params'] = model_params
-            return cast(BaseModel, response)
+            print('Response message content:', response.message.content)
+            json_text = response.message.content[0].text
+            parsed_dict = json.loads(json_text)
+            parsed_model = self.structured_output(**parsed_dict)
+            return parsed_model
 
         if self.system_message:
             messages = [
-                {"role": "SYSTEM", "message": self.system_message},
-                {"role": "USER", "message": input_text}
+                {'role': 'system', 'content': self.system_message},
+                {'role': 'user', 'content': input_text},
             ]
-
             model_params = {
-                "model": self.model_name,
-                "chat_history": messages,
-                "max_tokens": self.output_max_length,
-                "temperature": self.temperature,
+                'model': self.model_name,
+                'messages': messages,
+                'max_tokens': self.output_max_length,
+                'temperature': self.temperature,
                 **api_params,
             }
-
             response = self.model.chat(**model_params)
             self.logs['model_params'] = model_params
             return cast(str, response.text)
 
-        # Use generate for simple completions
         model_params = {
-            "model": self.model_name,
-            "prompt": input_text,
-            "max_tokens": self.output_max_length,
-            "temperature": self.temperature,
+            'model': self.model_name,
+            'prompt': input_text,
+            'max_tokens': self.output_max_length,
+            'temperature': self.temperature,
             **api_params,
         }
-
         response = self.model.generate(**model_params)
         self.logs['model_params'] = model_params
         return cast(str, response.generations[0].text.strip())

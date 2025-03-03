@@ -155,6 +155,10 @@ following way:
 ```bash
 $ python -m pytest
 ```
+Alternatively, you can also use Poetry so that the virtual environment to Run tests
+```bash
+$ poetry run pytest
+```
 
 ### Running tests with coverage locally
 

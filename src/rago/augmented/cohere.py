@@ -24,7 +24,7 @@ class CohereAug(AugmentedBase):
         """Set up the object with initial parameters."""
         if not self.api_key:
             raise ValueError('API key for Cohere is required.')
-        self.model = cohere.Client(self.api_key)
+        self.model = cohere.ClientV2(self.api_key)
 
     def get_embedding(self, content: list[str]) -> EmbeddingType:
         """Retrieve the embedding for given texts using Cohere API."""
@@ -35,10 +35,12 @@ class CohereAug(AugmentedBase):
 
         model = cast(cohere.Client, self.model)
         response = model.embed(
-            texts=content, model=self.model_name, input_type='search_document'
+            texts=content,
+            model=self.model_name,
+            input_type='search_document',
+            embedding_types=['float'],
         )
-
-        result = np.array(response.embeddings, dtype=np.float32)
+        result = np.array(response.embeddings.float_, dtype=np.float32)  # type: ignore[union-attr]
 
         self._save_cache(cache_key, result)
 
@@ -53,9 +55,12 @@ class CohereAug(AugmentedBase):
         document_encoded = self.get_embedding(documents)
         model = cast(cohere.Client, self.model)
         response = model.embed(
-            texts=[query], model=self.model_name, input_type='search_query'
+            texts=[query],
+            model=self.model_name,
+            input_type='search_query',
+            embedding_types=['float'],
         )
-        query_encoded = np.array(response.embeddings, dtype=np.float32)
+        query_encoded = np.array(response.embeddings.float_, dtype=np.float32)  # type: ignore[union-attr]
 
         top_k = top_k or self.top_k or self.default_top_k or 1
 
