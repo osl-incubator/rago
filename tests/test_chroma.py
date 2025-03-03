@@ -47,7 +47,7 @@ def test_chroma_basic(temp_dir: str) -> None:
         [0.0, 1.0, 0.0],
         [0.0, 0.0, 1.0],
     ]
-    db.embed(documents=documents, embeddings=embeddings)
+    db.embed(documents=(documents, embeddings))
     distances, ids = db.search(query_encoded=[1.0, 0.0, 0.0], top_k=1)
     assert len(distances) == 1
     assert len(ids) == 1
@@ -64,8 +64,26 @@ def test_chroma_no_persist() -> None:
         [0.0, 1.0, 0.0],
         [0.0, 0.0, 1.0],
     ]
-    db.embed(documents=documents, embeddings=embeddings)
+    db.embed(documents=(documents, embeddings))
     distances, ids = db.search(query_encoded=[1.0, 0.0, 0.0], top_k=1)
     assert len(distances) == 1
     assert len(ids) == 1
     assert ids[0] == '0'
+
+
+def test_chroma_top_k_2(temp_dir: str) -> None:
+    """Test ChromaDB functionality with top_k=2."""
+    client = create_chroma_client(temp_dir)
+    db = create_chroma_instance(client)
+    documents = ['doc1', 'doc2', 'doc3']
+    embeddings = [
+        [1.0, 0.0, 0.0],
+        [0.0, 1.0, 0.0],
+        [0.0, 0.0, 1.0],
+    ]
+    db.embed(documents=(documents, embeddings))
+    distances, ids = db.search(query_encoded=[1.0, 0.0, 0.0], top_k=2)
+    assert len(distances) == 2
+    assert len(ids) == 2
+    assert ids[0] == '0'
+    assert ids[1] in ['1', '2']

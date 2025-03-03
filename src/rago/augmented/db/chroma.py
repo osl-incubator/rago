@@ -66,8 +66,6 @@ class ChromaDB(DBBase):
 
         # Ensure distances and ids are not None before indexing
         distances_list: List[float] = distances[0] if distances else []
-        ids_list: List[str] = (
-            [ids[0]] if ids and isinstance(ids[0], str) else []
-        )
+        ids_list: List[str] = ids[0] if ids else []
 
         return distances_list, ids_list
