@@ -38,7 +38,7 @@ class FireworksAug(AugmentedBase):
         if cached is not None:
             return cast(EmbeddingType, cached)
 
-        # Using the OpenAI embeddings API call
+        # Using the OpenAI embeddings API call for fireworks
         response = self.openai_client.embeddings.create(
             model=self.model_name,
             input=content,

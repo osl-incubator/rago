@@ -5,8 +5,8 @@ from __future__ import annotations
 from typing import cast
 
 import instructor
-from fireworks.client import Fireworks
 
+from fireworks.client import Fireworks
 from pydantic import BaseModel
 from typeguard import typechecked
 
@@ -18,7 +18,7 @@ class FireworksGen(GenerationBase):
     """Fireworks AI generation model for text generation."""
 
     default_model_name: str = 'accounts/fireworks/models/llama-v3-8b-instruct'
-    default_api_params = {
+    default_api_params = {  # noqa: RUF012
         'top_p': 0.9,
     }
 
