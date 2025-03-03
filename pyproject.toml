@@ -1,4 +1,4 @@
-[project]
+[tool.poetry]
 name = "rago"
 version = "0.12.0"  # semantic-release
 description = "Rago is a lightweight framework for RAG"
@@ -15,32 +15,37 @@ exclude = [
   ".env*",
 ]
 include = ["src/rago/py.typed"]
-requires-python = ">=3.9,<3.13"
 
-dependencies = [
-  "typeguard >=4.0",
-  "faiss-cpu >=1.9.0",
-  "sentencepiece >=0.2.0",
-  "sentence-transformers >=3.2.0",
-  "transformers >=4",
-  "langdetect >=1",
-  "openai >=1.52.2",
-  "google-generativeai >=0.8.3",
-  "pypdf >=5",
-  "langchain >=0.3.7",
-  "langchain-community >=0.3.7",
-  "spacy >=3",
-  "instructor >=1",
-  "pydantic >=2",
-  "torch >=2.5",
-  "torchvision >=0.20",
-  "eval-type-backport >=0.2 ; python_version < '3.10'",
-  "joblib (>=1.4.2,<2.0.0)",
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+typeguard = ">=4.0"
+faiss-cpu = ">=1.9.0"
+sentencepiece = ">=0.2.0"
+sentence-transformers = ">=3.2.0"
+transformers = ">=4"
+langdetect = ">=1"
+openai = ">=1.52.2"
+google-generativeai = ">=0.8.3"
+pypdf = ">=5"
+langchain = ">=0.3.7"
+langchain-community = ">=0.3.7"
+spacy = ">=3"
+instructor = ">=1"
+pydantic = ">=2"
+torch = [
+  {version = ">=2.5.0", markers="extra!='gpu'", source="pytorch-cpu"},
+  {version = ">=2.5.0", markers="extra=='gpu'"},
 ]
-
-[build-system]
-requires = ["poetry-core>=2", "poetry>=2"]
-build-backend = "poetry.core.masonry.api"
+torchvision = [
+  {version = ">=0.20.0", markers="extra!='gpu'", source="pytorch-cpu"},
+  {version = ">=0.20.0", markers="extra=='gpu'"},
+]
+"eval-type-backport" = { version = ">=0.2", markers = "python_version < '3.10'" }
+joblib = ">=1.4.2,<2.0.0"
+cohere = "^5.14.0"
+"google-cloud-aiplatform" = "*"
+together = "^1.4.1"
+fireworks-ai = "^0.15.12"
 
 [tool.poetry.extras]
 cpu = ["torch", "torchvision"]
@@ -50,17 +55,6 @@ gpu = ["torch", "torchvision"]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
 priority = "supplemental"
-
-[tool.poetry.dependencies]
-python = ">=3.9,<3.13"
-torch = [
-  {version = ">=2.5.0", markers="extra!='gpu'", source="pytorch-cpu"},
-  {version = ">=2.5.0", markers="extra=='gpu'"},
-]
-torchvision = [
-  {version = ">=0.20.0", markers="extra!='gpu'", source="pytorch-cpu"},
-  {version = ">=0.20.0", markers="extra=='gpu'"},
-]
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.3.2"
@@ -90,6 +84,10 @@ virtualenv = "<=20.25.1"
 python-dotenv = ">=1.0"
 # note: Version 3.7.1 requries spaCy >=3.7.2,<3.8.0
 en-core-web-md = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl"}
+
+[build-system]
+requires = ["poetry-core>=2", "poetry>=2"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 testpaths = [
@@ -137,7 +135,6 @@ fixable = ["I001"]
 convention = "numpy"
 
 [tool.ruff.lint.isort]
-# Use a single line between direct and from import
 lines-between-types = 1
 
 [tool.ruff.format]
