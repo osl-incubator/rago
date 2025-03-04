@@ -1,7 +1,5 @@
 """Tests for Rago package using OpenAI GPT."""
 
-import os
-
 from functools import partial
 from typing import cast
 
@@ -9,7 +7,6 @@ import pytest
 
 from rago.generation import (
     GeminiGen,
-    GenerationBase,
     HuggingFaceGen,
     LlamaGen,
     OpenAIGen,
@@ -17,7 +14,8 @@ from rago.generation import (
 
 from .models import AnimalModel
 
-TEMPERATURE = 0
+# LlamaGen doesn't support temperature zero
+TEMPERATURE = 0.0001
 GENERATION_LOG = {'generation': {}}
 
 API_MAP = {
@@ -28,43 +26,35 @@ API_MAP = {
 }
 
 gen_models = [
+    # model 0
     partial(
         OpenAIGen,
         **dict(
             model_name='gpt-3.5-turbo',
-            temperature=TEMPERATURE,
-            logs=GENERATION_LOG['generation'],
         ),
     ),
+    # model 1
     partial(
         GeminiGen,
         **dict(
             model_name='gemini-1.5-flash',
-            temperature=TEMPERATURE,
-            logs=GENERATION_LOG['generation'],
         ),
     ),
+    # model 2
     partial(
         HuggingFaceGen,
-        **dict(
-            temperature=TEMPERATURE,
-            logs=GENERATION_LOG['generation'],
-        ),
     ),
+    # model 3
     partial(
         LlamaGen,
-        **dict(
-            device='auto',
-            temperature=TEMPERATURE,
-            logs=GENERATION_LOG['generation'],
-        ),
+        **dict(device='auto'),
     ),
 ]
 
 
 @pytest.mark.skip_on_ci
 @pytest.mark.parametrize('partial_model', gen_models)
-def test_rag_openai_gpt_general(
+def test_generation_simple_output(
     animals_data: list[str],
     api_key_openai: str,
     api_key_gemini: str,
@@ -72,15 +62,23 @@ def test_rag_openai_gpt_general(
     partial_model: partial,
 ) -> None:
     """Test RAG pipeline with OpenAI's GPT."""
-    api_key_name: str = API_MAP.get(partial_model.func, '')
+    model_class = partial_model.func
+
+    api_key_name: str = API_MAP.get(model_class, '')
     api_key = locals().get(api_key_name, '')
+
+    model_args = {
+        'temperature': TEMPERATURE,
+        'logs': GENERATION_LOG['generation'],
+        **({'api_key': api_key} if api_key else {}),
+    }
 
     expected_answer = 'blue whale'
     context = [
         text for text in animals_data if expected_answer in text.lower()
     ]
 
-    gen_model = partial_model(**{'api_key': key for key in [api_key] if key})
+    gen_model = partial_model(**model_args)
 
     query = 'Is there any animal larger than a dinosaur?'
     result = gen_model.generate(query, context)
@@ -106,7 +104,7 @@ def test_rag_openai_gpt_general(
     ],
 )
 @pytest.mark.parametrize('partial_model', gen_models)
-def test_rag_openai_gpt_structured_output(
+def test_generation_structure_output(
     api_key_openai: str,
     api_key_gemini: str,
     api_key_hugging_face: str,
@@ -116,13 +114,22 @@ def test_rag_openai_gpt_structured_output(
     expected_answer: tuple[str],
 ) -> None:
     """Test OpenAI's GPT Generation with structure output."""
-    api_key_name: str = API_MAP.get(partial_model.func, '')
+    model_class = partial_model.func
+
+    if issubclass(model_class, (HuggingFaceGen, LlamaGen)):
+        pytest.skip(f"{model_class} doesn't support structured output.")
+
+    api_key_name: str = API_MAP.get(model_class, '')
     api_key = locals().get(api_key_name, '')
 
-    gen_model = partial_model(
-        structured_output=AnimalModel,
-        **{'api_key': key for key in [api_key] if key},
-    )
+    model_args = {
+        'temperature': TEMPERATURE,
+        'logs': GENERATION_LOG['generation'],
+        'structured_output': AnimalModel,
+        **({'api_key': api_key} if api_key else {}),
+    }
+
+    gen_model = partial_model(**model_args)
 
     context = [
         text
