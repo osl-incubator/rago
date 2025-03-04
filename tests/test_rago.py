@@ -21,6 +21,7 @@ def api_key(env) -> str:
     return api_key
 
 
+@pytest.mark.skip_on_ci
 def test_rag_openai_gpt_general(animals_data: list[str], api_key: str) -> None:
     """Test RAG pipeline with OpenAI's GPT."""
     logs = {

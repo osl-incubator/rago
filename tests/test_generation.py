@@ -52,6 +52,7 @@ gen_models = [
 ]
 
 
+@pytest.mark.skip_on_ci
 @pytest.mark.parametrize('partial_model', gen_models)
 def test_generation_simple_output(
     animals_data: list[str],
@@ -91,6 +92,7 @@ def test_generation_simple_output(
     assert GENERATION_LOG['generation']
 
 
+@pytest.mark.skip_on_ci
 @pytest.mark.parametrize(
     'question,expected_answer',
     [

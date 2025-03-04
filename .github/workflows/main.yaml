@@ -79,8 +79,13 @@ jobs:
           poetry config virtualenvs.create false
           poetry install
 
-      - name: Run unit tests
+      - name: Run unit tests (PR)
+        if: ${{ github.event_name == 'pull_request' }}
         run: makim tests.unit --params '-m "not skip_on_ci" -vvv'
+
+      - name: Run unit tests (push)
+        if: ${{ github.event_name == 'push' }}
+        run: makim tests.unit
 
       - name: Semantic Release PR Title Check
         uses: osl-incubator/semantic-release-pr-title-check@v1.4.1

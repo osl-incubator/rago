@@ -63,6 +63,7 @@ def api_keys(env) -> {str, str}:
     return keys
 
 
+@pytest.mark.skip_on_ci
 @pytest.mark.parametrize(
     'aug_class',
     [

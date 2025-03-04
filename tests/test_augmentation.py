@@ -28,6 +28,7 @@ gen_models = [
 ]
 
 
+@pytest.mark.skip_on_ci
 @pytest.mark.parametrize(
     'question,expected_answer',
     [
