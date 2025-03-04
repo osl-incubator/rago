@@ -18,10 +18,9 @@ repos:
     hooks:
       - id: ruff-linter
         name: ruff-linter
-        entry: ruff check --fix
+        entry: ruff check
         language: system
         pass_filenames: true
-        require_serial: yes
         files: "./"
         types:
           - python
@@ -31,7 +30,6 @@ repos:
         entry: ruff format
         language: system
         pass_filenames: true
-        require_serial: yes
         files: "./"
         types:
           - python
