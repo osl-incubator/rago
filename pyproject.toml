@@ -36,7 +36,9 @@ dependencies = [
   "torchvision >=0.20",
   "eval-type-backport >=0.2 ; python_version < '3.10'",
   "joblib (>=1.4.2,<2.0.0)",
+  "fireworks-ai>0.15.10"
 ]
+
 
 [build-system]
 requires = ["poetry-core>=2", "poetry>=2"]
