@@ -81,7 +81,7 @@ jobs:
 
       - name: Run unit tests (PR)
         if: ${{ github.event_name == 'pull_request' }}
-        run: makim tests.unit --params '-m "not skip_on_ci" -vvv'
+        run: pytest -m "not skip_on_ci" -vvv
 
       - name: Run unit tests (push)
         if: ${{ github.event_name == 'push' }}
