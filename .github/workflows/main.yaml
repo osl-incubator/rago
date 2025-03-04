@@ -55,6 +55,7 @@ jobs:
     env:
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
     steps:
       - uses: actions/checkout@v4
@@ -68,12 +69,6 @@ jobs:
           auto-update-conda: true
           conda-solver: libmamba
           python-version: "${{ matrix.python_version }}"
-
-      - name: Create environment variables for tests
-        run: |
-          pushd tests
-          envsubst < .env.tpl > .env
-          popd
 
       - name: Check Poetry lock
         run: poetry check

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import warnings
 
 from pathlib import Path
 
@@ -15,6 +16,9 @@ from dotenv import dotenv_values, load_dotenv
 def env() -> dict[str, str]:
     """Return a fixture for the environment variables from .env."""
     dotenv_file = Path(__file__).parent / '.env'
+    if not dotenv_file.exists():
+        warnings.warn('No .env file found.')
+        return {}
     load_dotenv(dotenv_file)
     return dotenv_values(dotenv_file)
 
