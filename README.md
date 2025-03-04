@@ -59,7 +59,7 @@ models locally, for example:
 from rago.core import Rago
 from rago.generation import LlamaGen
 from rago.retrieval import StringRet
-from rago.augmentation import SentenceTransformerAug
+from rago.augmented import SentenceTransformerAug
 
 # For Gated LLMs
 HF_TOKEN = 'YOUR_HUGGING_FACE_TOKEN'

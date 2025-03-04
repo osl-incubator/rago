@@ -55,7 +55,11 @@ groups:
             type: string
             default: "-vvv"
         run: |
-          pytest ${{ args.path }} ${{ args.params }}
+          pytest \
+            --cov=rago \
+            --cov-fail-under=91 \
+            --cov-report term-missing \
+            --no-cov-on-fail ${{ args.path }} ${{ args.params }}
 
       ci:
         help: run the sames tests executed on CI
