@@ -55,6 +55,8 @@ jobs:
     env:
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TOKENIZERS_PARALLELISM: false
 
     steps:
       - uses: actions/checkout@v4
@@ -69,12 +71,6 @@ jobs:
           conda-solver: libmamba
           python-version: "${{ matrix.python_version }}"
 
-      - name: Create environment variables for tests
-        run: |
-          pushd tests
-          envsubst < .env.tpl > .env
-          popd
-
       - name: Check Poetry lock
         run: poetry check
 
@@ -83,8 +79,13 @@ jobs:
           poetry config virtualenvs.create false
           poetry install
 
-      - name: Run unit tests
-        run: makim tests.unit --params '-m "not skip_on_ci" -vvv'
+      - name: Run unit tests (PR)
+        if: ${{ github.event_name == 'pull_request' }}
+        run: pytest -m "not skip_on_ci" -vvv
+
+      - name: Run unit tests (push)
+        if: ${{ github.event_name == 'push' }}
+        run: makim tests.unit
 
       - name: Semantic Release PR Title Check
         uses: osl-incubator/semantic-release-pr-title-check@v1.4.1
