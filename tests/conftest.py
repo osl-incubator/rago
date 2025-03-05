@@ -63,3 +63,14 @@ def api_key_hugging_face(env: dict[str, str]) -> str:
             'Please set the GEMINI_API_KEY environment variable.'
         )
     return api_key
+
+
+@pytest.fixture
+def api_key_cohere(env) -> str:
+    """Fixture for Cohere API key from environment."""
+    key = os.getenv('COHERE_API_KEY')
+    if not key:
+        raise EnvironmentError(
+            'Please set the COHERE_API_KEY environment variable.'
+        )
+    return key

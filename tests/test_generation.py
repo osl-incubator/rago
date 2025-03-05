@@ -6,6 +6,7 @@ from typing import cast
 import pytest
 
 from rago.generation import (
+    CohereGen,
     GeminiGen,
     HuggingFaceGen,
     LlamaGen,
@@ -23,6 +24,7 @@ API_MAP = {
     OpenAIGen: 'api_key_openai',
     HuggingFaceGen: 'api_key_hugging_face',
     LlamaGen: 'api_key_hugging_face',
+    CohereGen: 'api_key_cohere',
 }
 
 gen_models = [
@@ -49,6 +51,12 @@ gen_models = [
         LlamaGen,
         **dict(device='auto'),
     ),
+    partial(
+        CohereGen,
+        **dict(
+            model_name='command-r-plus-08-2024',
+        ),
+    ),
 ]
 
 
@@ -57,6 +65,7 @@ gen_models = [
 def test_generation_simple_output(
     animals_data: list[str],
     api_key_openai: str,
+    api_key_cohere: str,
     api_key_gemini: str,
     api_key_hugging_face: str,
     partial_model: partial,
@@ -108,6 +117,7 @@ def test_generation_structure_output(
     api_key_openai: str,
     api_key_gemini: str,
     api_key_hugging_face: str,
+    api_key_cohere: str,
     animals_data: list[str],
     question: str,
     partial_model: partial,
