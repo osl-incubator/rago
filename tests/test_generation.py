@@ -1,4 +1,4 @@
-"""Tests for Rago package using OpenAI GPT."""
+"""Tests for Rago generation module."""
 
 from functools import partial
 from typing import cast
@@ -6,6 +6,7 @@ from typing import cast
 import pytest
 
 from rago.generation import (
+    DeepSeekGen,
     GeminiGen,
     HuggingFaceGen,
     LlamaGen,
@@ -49,6 +50,13 @@ gen_models = [
         LlamaGen,
         **dict(device='auto'),
     ),
+    # model 4
+    partial(
+        DeepSeekGen,
+        **dict(
+            device='auto',
+        ),
+    ),
 ]
 
 
@@ -61,7 +69,7 @@ def test_generation_simple_output(
     api_key_hugging_face: str,
     partial_model: partial,
 ) -> None:
-    """Test RAG pipeline with OpenAI's GPT."""
+    """Test RAG pipeline with model generation."""
     model_class = partial_model.func
 
     api_key_name: str = API_MAP.get(model_class, '')
@@ -113,10 +121,11 @@ def test_generation_structure_output(
     partial_model: partial,
     expected_answer: tuple[str],
 ) -> None:
-    """Test OpenAI's GPT Generation with structure output."""
+    """Test Model Generation with structure output."""
     model_class = partial_model.func
 
-    if issubclass(model_class, (HuggingFaceGen, LlamaGen)):
+    # Skip structured output for models that don't support it
+    if issubclass(model_class, (HuggingFaceGen, LlamaGen, DeepSeekGen)):
         pytest.skip(f"{model_class} doesn't support structured output.")
 
     api_key_name: str = API_MAP.get(model_class, '')
