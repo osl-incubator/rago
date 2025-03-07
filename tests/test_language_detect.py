@@ -1,4 +1,4 @@
-cl"""Tests for language detection."""
+"""Tests for language detection."""
 
 import pytest
 
