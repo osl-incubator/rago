@@ -1,12 +1,15 @@
-"""Hugging Face classes for text generation."""
+"""Hugging Face classes for text generation with optimization."""
 
 from __future__ import annotations
 
 import warnings
-
 import torch
 
-from transformers import T5ForConditionalGeneration, T5Tokenizer
+from transformers import (
+    T5ForConditionalGeneration,
+    T5Tokenizer,
+    BitsAndBytesConfig
+)
 from typeguard import typechecked
 
 from rago.generation.base import GenerationBase
@@ -14,11 +17,12 @@ from rago.generation.base import GenerationBase
 
 @typechecked
 class HuggingFaceGen(GenerationBase):
-    """HuggingFaceGen."""
+    """Optimized HuggingFaceGen with 4-bit quantization."""
 
     default_model_name = 't5-small'
 
     def _validate(self) -> None:
+        """Validate if the model parameters are correct."""
         if self.model_name != 't5-small':
             raise Exception(
                 f'The given model {self.model_name} is not supported.'
@@ -31,13 +35,25 @@ class HuggingFaceGen(GenerationBase):
             )
 
     def _setup(self) -> None:
-        """Set models to t5-small models."""
+        """Set up the model with optimized quantization."""
+
+        # Define quantization configuration for efficiency
+        quantization_config = BitsAndBytesConfig(
+            load_in_4bit=True,   # Enable 4-bit quantization
+            bnb_4bit_compute_dtype=torch.float16,  # Use FP16 for better performance
+            bnb_4bit_use_double_quant=True,  # Enable double quantization
+        )
+
         self.tokenizer = T5Tokenizer.from_pretrained(self.model_name)
-        model = T5ForConditionalGeneration.from_pretrained(self.model_name)
-        self.model = model.to(self.device)
+
+        self.model = T5ForConditionalGeneration.from_pretrained(
+            self.model_name,
+            quantization_config=quantization_config,  # Apply quantization
+            device_map="auto"  # Automatically place on the best available device
+        )
 
     def generate(self, query: str, context: list[str]) -> str:
-        """Generate the text from the query and augmented context."""
+        """Generate text from query and context using the optimized model."""
         with torch.no_grad():
             input_text = self.prompt_template.format(
                 query=query, context=' '.join(context)
@@ -47,7 +63,7 @@ class HuggingFaceGen(GenerationBase):
                 return_tensors='pt',
                 truncation=True,
                 max_length=512,
-            ).to(self.device_name)
+            ).to(self.model.device)  # Ensure tensor is on the correct device
 
             api_params = (
                 self.api_params if self.api_params else self.default_api_params
@@ -68,7 +84,8 @@ class HuggingFaceGen(GenerationBase):
                 outputs[0], skip_special_tokens=True
             )
 
-        if self.device_name == 'cuda':
+        # Clear CUDA cache to free up memory
+        if torch.cuda.is_available():
             torch.cuda.empty_cache()
 
         return str(response)
