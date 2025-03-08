@@ -60,6 +60,17 @@ def api_key_hugging_face(env: dict[str, str]) -> str:
     api_key = os.getenv('HF_TOKEN')
     if not api_key:
         raise EnvironmentError(
-            'Please set the GEMINI_API_KEY environment variable.'
+            'Please set the HF_TOKEN environment variable.'
+        )
+    return api_key
+
+
+@pytest.fixture
+def api_key_claude(env: dict[str, str]) -> str:
+    """Fixture for Claude API key from environment."""
+    api_key = os.getenv('CLAUDE_API_KEY')
+    if not api_key:
+        raise EnvironmentError(
+            'Please set the CLAUDE_API_KEY environment variable.'
         )
     return api_key
