@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from rago.generation.base import GenerationBase
+from rago.generation.claude import ClaudeGen
 from rago.generation.deepseek import DeepSeekGen
 from rago.generation.gemini import GeminiGen
 from rago.generation.hugging_face import HuggingFaceGen
@@ -16,4 +17,5 @@ __all__ = [
     'HuggingFaceGen',
     'LlamaGen',
     'OpenAIGen',
+    'ClaudeGen',
 ]
