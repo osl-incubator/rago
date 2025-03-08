@@ -4,10 +4,11 @@ from functools import partial
 
 import pytest
 
-from rago.augmented import OpenAIAug, SpaCyAug
+from rago.augmented import OpenAIAug, SpaCyAug, MistralAug
 
 API_MAP = {
     OpenAIAug: 'api_key_openai',
+    MistralAug: 'api_key_mistral',
 }
 
 gen_models = [
@@ -23,6 +24,15 @@ gen_models = [
         OpenAIAug,
         **dict(
             model_name='text-embedding-3-small',
+        ),
+    ),
+    # model 2
+    partial(
+        MistralAug,
+        **dict(
+            model_name='mistral-embed',
+            api_key='your_mistral_api_key',
+            top_k=3,
         ),
     ),
 ]
@@ -48,6 +58,7 @@ def test_aug_spacy(
     api_key_openai: str,
     api_key_gemini: str,
     api_key_hugging_face: str,
+    api_key_mistral: str,
     partial_model: partial,
 ) -> None:
     """Test RAG pipeline with SpaCy."""
