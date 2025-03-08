@@ -7,8 +7,8 @@ from typing import cast, List, Dict, Any
 
 import os
 import numpy as np
-from mistralai.client import Mistral
-from mistralai.models.embeddings import EmbeddingRequest
+from mistral.client import Mistral
+from mistral.models.embeddings import EmbeddingRequest
 
 from typeguard import typechecked
 

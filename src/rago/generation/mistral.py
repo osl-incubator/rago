@@ -11,7 +11,7 @@ from typeguard import typechecked
 from rago.generation.base import GenerationBase
 
 @typechecked
-class MistralGen(GenerationBase):
+class MistralAiGen(GenerationBase):
     """Mistral AI generation model for text generation."""
 
     default_model_name: str = 'mistral-large'
