@@ -11,6 +11,7 @@ from rago.generation import (
     HuggingFaceGen,
     LlamaGen,
     OpenAIGen,
+    ClaudeGen,
 )
 
 from .models import AnimalModel
@@ -24,6 +25,7 @@ API_MAP = {
     OpenAIGen: 'api_key_openai',
     HuggingFaceGen: 'api_key_hugging_face',
     LlamaGen: 'api_key_hugging_face',
+    ClaudeGen: 'api_key_claude',
 }
 
 gen_models = [
@@ -57,6 +59,20 @@ gen_models = [
             device='auto',
         ),
     ),
+    # model 5
+    partial(
+        ClaudeGen,
+        **dict(
+            model_name='anthropic.claude-v2',
+            api_key='your_claude_api_key',
+            temperature=0.7,
+            output_max_length=500,
+            api_params={
+                'top_p': 0.9,
+                'max_tokens_to_sample': 500,
+            },
+        ),
+    ),
 ]
 
 
@@ -67,6 +83,7 @@ def test_generation_simple_output(
     api_key_openai: str,
     api_key_gemini: str,
     api_key_hugging_face: str,
+    api_key_claude: str,
     partial_model: partial,
 ) -> None:
     """Test RAG pipeline with model generation."""
@@ -116,12 +133,13 @@ def test_generation_structure_output(
     api_key_openai: str,
     api_key_gemini: str,
     api_key_hugging_face: str,
+    api_key_claude: str,
     animals_data: list[str],
     question: str,
     partial_model: partial,
     expected_answer: tuple[str],
 ) -> None:
-    """Test Model Generation with structure output."""
+    """Test Model Generation with structured output."""
     model_class = partial_model.func
 
     # Skip structured output for models that don't support it
