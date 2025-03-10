@@ -1,13 +1,14 @@
-"""Tests for Rago package using SpaCy."""
+"""Tests for Rago package for augmentation."""
 
 from functools import partial
 
 import pytest
 
-from rago.augmented import OpenAIAug, SpaCyAug
+from rago.augmented import CohereAug, OpenAIAug, SpaCyAug
 
 API_MAP = {
     OpenAIAug: 'api_key_openai',
+    CohereAug: 'api_key_cohere',
 }
 
 gen_models = [
@@ -24,6 +25,9 @@ gen_models = [
         **dict(
             model_name='text-embedding-3-small',
         ),
+    ),
+    partial(
+        CohereAug,
     ),
 ]
 
@@ -46,6 +50,7 @@ def test_aug_spacy(
     question: str,
     expected_answer: str,
     api_key_openai: str,
+    api_key_cohere: str,
     api_key_gemini: str,
     api_key_hugging_face: str,
     partial_model: partial,
