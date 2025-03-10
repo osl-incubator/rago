@@ -56,7 +56,7 @@ models locally, for example:
 
 ```python
 
-from rago.core import Rago
+from rago import Rago
 from rago.generation import LlamaGen
 from rago.retrieval import StringRet
 from rago.augmented import SentenceTransformerAug
@@ -81,7 +81,7 @@ animals_data = [
 rag = Rago(
     retrieval=StringRet(animals_data),
     augmented=SentenceTransformerAug(top_k=2),
-    generation=LlamaGen(apikey=HF_TOKEN),
+    generation=LlamaGen(api_key=HF_TOKEN),
 )
 rag.prompt('What is the faster animal on Earth?')
 ```
