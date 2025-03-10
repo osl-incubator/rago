@@ -32,9 +32,12 @@ dependencies = [
   "spacy >=3",
   "instructor >=1",
   "pydantic >=2",
+  "torch >=2.5",
+  "torchvision >=0.20",
   "eval-type-backport >=0.2 ; python_version < '3.10'",
   "joblib (>=1.4.2,<2.0.0)",
-  "chromadb >=0.3.23",
+  "cohere >=5.13.4",
+  "chromadb >=0.3.23"
 ]
 
 [build-system]
@@ -53,12 +56,12 @@ priority = "supplemental"
 [tool.poetry.dependencies]
 python = ">=3.9,<3.13"
 torch = [
-  {version = ">=2.5.0,<2.6.0", markers="extra!='gpu'", source="pytorch-cpu"},
-  {version = ">=2.5.0,<2.6.0", markers="extra=='gpu'"},
+  {version = ">=2.5.0", markers="extra!='gpu'", source="pytorch-cpu"},
+  {version = ">=2.5.0", markers="extra=='gpu'"},
 ]
 torchvision = [
-  {version = ">=0.20.0,<0.21.0", markers="extra!='gpu'", source="pytorch-cpu"},
-  {version = ">=0.20.0,<0.21.0", markers="extra=='gpu'"},
+  {version = ">=0.20.0", markers="extra!='gpu'", source="pytorch-cpu"},
+  {version = ">=0.20.0", markers="extra=='gpu'"},
 ]
 
 [tool.poetry.group.dev.dependencies]
