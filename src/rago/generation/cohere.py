@@ -64,7 +64,6 @@ class CohereGen(GenerationBase):
                     else self.structured_output.model_json_schema()
                 ),
             }
-            print('Response format config:', response_format_config)
             model_params = {
                 'messages': messages,
                 'max_tokens': self.output_max_length,
@@ -76,7 +75,6 @@ class CohereGen(GenerationBase):
 
             response = self.model.client.chat(**model_params)
             self.logs['model_params'] = model_params
-            print('Response message content:', response.message.content)
             json_text = response.message.content[0].text
             parsed_dict = json.loads(json_text)
             parsed_model = self.structured_output(**parsed_dict)

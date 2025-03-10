@@ -50,7 +50,7 @@ class CohereAug(AugmentedBase):
         self, query: str, documents: list[str], top_k: int = 0
     ) -> list[str]:
         """Search an encoded query into vector database."""
-        if not hasattr(self, 'db') or not self.db:
+        if not getattr(self, 'db', None):
             raise Exception('Vector database (db) is not initialized.')
         document_encoded = self.get_embedding(documents)
         model = cast(cohere.Client, self.model)
