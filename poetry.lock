@@ -1108,6 +1108,28 @@ testing = ["covdefaults (>=2.3)", "coverage (>=7.6.10)", "diff-cover (>=9.2.1)",
 typing = ["typing-extensions (>=4.12.2) ; python_version < \"3.11\""]
 
 [[package]]
+name = "fireworks-ai"
+version = "0.15.12"
+description = "Python client library for the Fireworks.ai Generative AI Platform"
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+files = [
+    {file = "fireworks_ai-0.15.12-py3-none-any.whl", hash = "sha256:3fbf3f89e65ccfc46c88b71246b9d4fdf3301955ac4050193d8f4b4058cb193a"},
+    {file = "fireworks_ai-0.15.12.tar.gz", hash = "sha256:2380a53d92244c608fd398f8d97b97380d899f3ff710091f4b50917b75119ec2"},
+]
+
+[package.dependencies]
+httpx = "*"
+httpx_sse = "*"
+httpx-ws = "*"
+Pillow = "*"
+pydantic = "*"
+
+[package.extras]
+flumina = ["fastapi", "gitignore-parser", "openapi-spec-validator", "prance", "safetensors", "tabulate", "torch", "tqdm"]
+
+[[package]]
 name = "frozenlist"
 version = "1.5.0"
 description = "A list-like structure which implements collections.abc.MutableSequence"
@@ -1706,6 +1728,24 @@ files = [
 ]
 
 [[package]]
+name = "httpx-ws"
+version = "0.7.1"
+description = "WebSockets support for HTTPX"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "httpx_ws-0.7.1-py3-none-any.whl", hash = "sha256:7970e470840d8e6c17bd45ed4e7af06f9144a4a9decab2ff226f3ff9accb65b4"},
+    {file = "httpx_ws-0.7.1.tar.gz", hash = "sha256:72f355d4b9b16d8fa59e5e68efdfcb1f3c7dca944901b373791245c8f67f9f95"},
+]
+
+[package.dependencies]
+anyio = ">=4"
+httpcore = ">=1.0.4"
+httpx = ">=0.23.1"
+wsproto = "*"
+
+[[package]]
 name = "huggingface-hub"
 version = "0.29.3"
 description = "Client library to download and publish models, datasets and other repos on the huggingface.co hub"
@@ -2271,14 +2311,14 @@ tenacity = ">=8.1.0,<8.4.0 || >8.4.0,<10"
 
 [[package]]
 name = "langchain-core"
-version = "0.3.44"
+version = "0.3.45"
 description = "Building applications with LLMs through composability"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
 files = [
-    {file = "langchain_core-0.3.44-py3-none-any.whl", hash = "sha256:d989ce8bd62f1d07765acd575e6ec1254aec0cf7775aaea39fe4af8102377459"},
-    {file = "langchain_core-0.3.44.tar.gz", hash = "sha256:7c0a01e78360f007cbca448178fe7e032404068e6431dbe8ce905f84febbdfa5"},
+    {file = "langchain_core-0.3.45-py3-none-any.whl", hash = "sha256:fe560d644c102c3f5dcfb44eb5295e26d22deab259fdd084f6b1b55a0350b77c"},
+    {file = "langchain_core-0.3.45.tar.gz", hash = "sha256:a39b8446495d1ea97311aa726478c0a13ef1d77cb7644350bad6d9d3c0141a0c"},
 ]
 
 [package.dependencies]
@@ -6891,6 +6931,21 @@ files = [
 ]
 
 [[package]]
+name = "wsproto"
+version = "1.2.0"
+description = "WebSockets state-machine based protocol implementation"
+optional = false
+python-versions = ">=3.7.0"
+groups = ["main"]
+files = [
+    {file = "wsproto-1.2.0-py3-none-any.whl", hash = "sha256:b9acddd652b585d75b20477888c56642fdade28bdfd3579aa24a4d2c037dd736"},
+    {file = "wsproto-1.2.0.tar.gz", hash = "sha256:ad565f26ecb92588a3e43bc3d96164de84cd9902482b130d0ddbaa9664a85065"},
+]
+
+[package.dependencies]
+h11 = ">=0.9.0,<1"
+
+[[package]]
 name = "xonsh"
 version = "0.19.2"
 description = "Python-powered shell. Full-featured and cross-platform."
@@ -7152,4 +7207,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<3.13"
-content-hash = "f99251d15c8ec53a370e693b070627ae897a0a0de4f3476136500e072a8b31e1"
+content-hash = "f86985d65ac0013a392abcc06477437fe0bcecb07c701ce34160ae419aaa7e80"
