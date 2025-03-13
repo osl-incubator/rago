@@ -1,6 +1,19 @@
 # Release Notes
 ---
 
+# [0.13.0](https://github.com/osl-incubator/rago/compare/0.12.0...0.13.0) (2025-03-13)
+
+
+### Bug Fixes
+
+* **pkg:** Add support for MacOS ([#75](https://github.com/osl-incubator/rago/issues/75)) ([e6a33b0](https://github.com/osl-incubator/rago/commit/e6a33b0d967d21130cf005789989dc9e1c28c4fb))
+
+
+### Features
+
+* Add cohere backend support ([#62](https://github.com/osl-incubator/rago/issues/62)) ([6817ba0](https://github.com/osl-incubator/rago/commit/6817ba08607e5366b4b36dba7b91644eced7edb7))
+* **generation:** add backend for DeepSeek's generation class ([#49](https://github.com/osl-incubator/rago/issues/49)) ([47947d6](https://github.com/osl-incubator/rago/commit/47947d65105db88c7a021ae7da8b48cff8ce58d1))
+
 # [0.12.0](https://github.com/osl-incubator/rago/compare/0.11.3...0.12.0) (2025-02-11)
 
 
