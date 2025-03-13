@@ -19,6 +19,8 @@ requires-python = ">=3.9,<3.13"
 
 dependencies = [
   "typeguard >=4.0",
+  "numpy >=2,<=2.2 ; python_version > '3.9'",
+  "numpy >=2,<2.1 ; python_version < '3.10'",
   "faiss-cpu >=1.9.0",
   "sentencepiece >=0.2.0",
   "sentence-transformers >=3.2.0",
@@ -29,11 +31,11 @@ dependencies = [
   "pypdf >=5",
   "langchain >=0.3.7",
   "langchain-community >=0.3.7",
-  "spacy >=3",
+  "spacy >=3.8.0 ; python_version > '3.9'",
+  "spacy >=3.8.0,<3.8.4 ; python_version < '3.10'",
   "instructor >=1",
   "pydantic >=2",
-  "torch >=2.5",
-  "torchvision >=0.20",
+  "torch >=2,<2.6",
   "eval-type-backport >=0.2 ; python_version < '3.10'",
   "joblib (>=1.4.2,<2.0.0)",
   "cohere >=5.13.4"
@@ -43,25 +45,22 @@ dependencies = [
 requires = ["poetry-core>=2", "poetry>=2"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.poetry.extras]
-cpu = ["torch", "torchvision"]
-gpu = ["torch", "torchvision"]
+# [project.optional-dependencies]
+# cpu = ["torch"]
+# gpu = ["torch"]
 
-[[tool.poetry.source]]
-name = "pytorch-cpu"
-url = "https://download.pytorch.org/whl/cpu"
-priority = "supplemental"
+# [[tool.poetry.source]]
+# name = "pytorch-cpu"
+# url = "https://download.pytorch.org/whl/cpu"
+# priority = "explicit"
 
-[tool.poetry.dependencies]
-python = ">=3.9,<3.13"
-torch = [
-  {version = ">=2.5.0", markers="extra!='gpu'", source="pytorch-cpu"},
-  {version = ">=2.5.0", markers="extra=='gpu'"},
-]
-torchvision = [
-  {version = ">=0.20.0", markers="extra!='gpu'", source="pytorch-cpu"},
-  {version = ">=0.20.0", markers="extra=='gpu'"},
-]
+# [tool.poetry.dependencies]
+# python = ">=3.9,<3.13"
+# torch = [
+#   { version = ">=2,<2.6", platform = "darwin" },
+#   { version = ">=2,<2.6", platform = "linux", source="pytorch-cpu", markers="extra!='gpu'" },
+#   { version = ">=2,<2.6", platform = "linux", markers="extra=='gpu'" },
+# ]
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.3.2"
