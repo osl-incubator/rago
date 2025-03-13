@@ -54,9 +54,9 @@ priority = "explicit"
 [tool.poetry.dependencies]
 python = ">=3.9,<3.13"
 torch = [
-  { version = ">=2", platform = "!=darwin", source="pytorch-cpu", markers="extra!='gpu'" },
-  { version = ">=2", platform = "!=darwin", markers="extra=='gpu'" },
-  { version = ">=2", platform = "darwin" },
+  { version = ">=2,<2.6", platform = "!=darwin", source="pytorch-cpu", markers="extra!='gpu'" },
+  { version = ">=2,<2.6", platform = "!=darwin", markers="extra=='gpu'" },
+  { version = ">=2,<2.6", platform = "darwin" },
 ]
 
 [tool.poetry.group.dev.dependencies]
