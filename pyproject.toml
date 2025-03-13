@@ -42,21 +42,21 @@ dependencies = [
 requires = ["poetry-core>=2", "poetry>=2"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.poetry.extras]
+[project.optional-dependencies]
 cpu = ["torch"]
 gpu = ["torch"]
 
 [[tool.poetry.source]]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
-priority = "supplemental"
+priority = "explicit"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.13"
 torch = [
-  { version = ">=2", markers="extra!='gpu'", source="pytorch-cpu", platform = "!=darwin" },
-  { version = ">=2", markers="extra=='gpu'", platform = "!=darwin" },
-  { version = ">=2", source = "pypi", platform = "darwin" },
+  { version = ">=2", platform = "!=darwin", source="pytorch-cpu", markers="extra!='gpu'" },
+  { version = ">=2", platform = "!=darwin", markers="extra=='gpu'" },
+  { version = ">=2", platform = "darwin" },
 ]
 
 [tool.poetry.group.dev.dependencies]
