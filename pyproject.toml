@@ -45,22 +45,22 @@ dependencies = [
 requires = ["poetry-core>=2", "poetry>=2"]
 build-backend = "poetry.core.masonry.api"
 
-[project.optional-dependencies]
-cpu = ["torch"]
-gpu = ["torch"]
+# [project.optional-dependencies]
+# cpu = ["torch"]
+# gpu = ["torch"]
 
-[[tool.poetry.source]]
-name = "pytorch-cpu"
-url = "https://download.pytorch.org/whl/cpu"
-priority = "explicit"
+# [[tool.poetry.source]]
+# name = "pytorch-cpu"
+# url = "https://download.pytorch.org/whl/cpu"
+# priority = "explicit"
 
-[tool.poetry.dependencies]
-python = ">=3.9,<3.13"
-torch = [
-  { version = ">=2,<2.6", platform = "darwin" },
-  { version = ">=2,<2.6", platform = "linux", source="pytorch-cpu", markers="extra!='gpu'" },
-  { version = ">=2,<2.6", platform = "linux", markers="extra=='gpu'" },
-]
+# [tool.poetry.dependencies]
+# python = ">=3.9,<3.13"
+# torch = [
+#   { version = ">=2,<2.6", platform = "darwin" },
+#   { version = ">=2,<2.6", platform = "linux", source="pytorch-cpu", markers="extra!='gpu'" },
+#   { version = ">=2,<2.6", platform = "linux", markers="extra=='gpu'" },
+# ]
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.3.2"
