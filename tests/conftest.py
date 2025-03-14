@@ -85,3 +85,14 @@ def api_key_fireworks(env) -> str:
             'Please set the FIREWORKS_API_KEY environment variable.'
         )
     return key
+
+
+@pytest.fixture
+def api_key_together(env) -> str:
+    """Fixture for Together API key from environment."""
+    key = os.getenv('TOGETHER_API_KEY')
+    if not key:
+        raise EnvironmentError(
+            'Please set the TOGETHER_API_KEY environment variable.'
+        )
+    return key

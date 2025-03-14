@@ -13,6 +13,7 @@ from rago.generation import (
     HuggingFaceGen,
     LlamaGen,
     OpenAIGen,
+    TogetherGen,
 )
 
 from .models import AnimalModel
@@ -28,6 +29,7 @@ API_MAP = {
     LlamaGen: 'api_key_hugging_face',
     CohereGen: 'api_key_cohere',
     FireworksGen: 'api_key_fireworks',
+    TogetherGen: 'api_key_together',
 }
 
 gen_models = [
@@ -72,6 +74,10 @@ gen_models = [
     partial(
         FireworksGen,
     ),
+    partial(
+        TogetherGen,
+        **dict(model_name='meta-llama/Llama-3.3-70B-Instruct-Turbo-Free'),
+    ),
 ]
 
 
@@ -83,6 +89,7 @@ def test_generation_simple_output(
     api_key_cohere: str,
     api_key_fireworks: str,
     api_key_gemini: str,
+    api_key_together: str,
     api_key_hugging_face: str,
     partial_model: partial,
 ) -> None:
@@ -134,6 +141,7 @@ def test_generation_structure_output(
     api_key_cohere: str,
     api_key_fireworks: str,
     api_key_gemini: str,
+    api_key_together: str,
     api_key_hugging_face: str,
     animals_data: list[str],
     question: str,
