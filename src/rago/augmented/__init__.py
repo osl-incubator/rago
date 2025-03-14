@@ -8,6 +8,7 @@ from rago.augmented.fireworks import FireworksAug
 from rago.augmented.openai import OpenAIAug
 from rago.augmented.sentence_transformer import SentenceTransformerAug
 from rago.augmented.spacy import SpaCyAug
+from rago.augmented.together import TogetherAug
 
 __all__ = [
     'AugmentedBase',
@@ -16,4 +17,5 @@ __all__ = [
     'OpenAIAug',
     'SentenceTransformerAug',
     'SpaCyAug',
+    'TogetherAug',
 ]
