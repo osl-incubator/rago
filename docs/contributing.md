@@ -121,6 +121,10 @@ $ pre-commit run --all-files
 If you would like to skip the failing checks and push the code for further
 discussion, use the `--no-verify` option with `git commit`.
 
+```bash
+$ git commit -m "Your commit message" --no-verify
+```
+
 This project uses `pytest` as a testing tool. `pytest` is responsible for
 testing the code, whose configuration is available in pyproject.toml.
 Additionally, this project also uses `pytest-cov` to calculate the coverage of
@@ -131,7 +135,7 @@ this document.
 
 ```bash
 $ git add .
-$ git commit -m "Your detailed description of your changes.""
+$ git commit -m "Your detailed description of your changes."
 $ git push origin name-of-your-bugfix-or-feature
 ```
 
