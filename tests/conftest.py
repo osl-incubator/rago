@@ -74,3 +74,14 @@ def api_key_cohere(env) -> str:
             'Please set the COHERE_API_KEY environment variable.'
         )
     return key
+
+
+@pytest.fixture
+def api_key_fireworks(env) -> str:
+    """Fixture for Fireworks API key from environment."""
+    key = os.getenv('FIREWORKS_API_KEY')
+    if not key:
+        raise EnvironmentError(
+            'Please set the FIREWORKS_API_KEY environment variable.'
+        )
+    return key

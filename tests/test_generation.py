@@ -8,6 +8,7 @@ import pytest
 from rago.generation import (
     CohereGen,
     DeepSeekGen,
+    FireworksGen,
     GeminiGen,
     HuggingFaceGen,
     LlamaGen,
@@ -26,6 +27,7 @@ API_MAP = {
     HuggingFaceGen: 'api_key_hugging_face',
     LlamaGen: 'api_key_hugging_face',
     CohereGen: 'api_key_cohere',
+    FireworksGen: 'api_key_fireworks',
 }
 
 gen_models = [
@@ -52,18 +54,23 @@ gen_models = [
         LlamaGen,
         **dict(device='auto'),
     ),
+    # model 4
     partial(
         CohereGen,
         **dict(
             model_name='command-r-plus-08-2024',
         ),
     ),
-    # model 4
+    # model 5
     partial(
         DeepSeekGen,
         **dict(
             device='auto',
         ),
+    ),
+    # model 6
+    partial(
+        FireworksGen,
     ),
 ]
 
@@ -74,6 +81,7 @@ def test_generation_simple_output(
     animals_data: list[str],
     api_key_openai: str,
     api_key_cohere: str,
+    api_key_fireworks: str,
     api_key_gemini: str,
     api_key_hugging_face: str,
     partial_model: partial,
@@ -123,6 +131,8 @@ def test_generation_simple_output(
 @pytest.mark.parametrize('partial_model', gen_models)
 def test_generation_structure_output(
     api_key_openai: str,
+    api_key_cohere: str,
+    api_key_fireworks: str,
     api_key_gemini: str,
     api_key_hugging_face: str,
     animals_data: list[str],
