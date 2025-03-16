@@ -72,7 +72,7 @@ def api_keys(env) -> {str, str}:
     ],
 )
 def test_cache(
-    animals_data: list[str], api_keys: str, aug_class: partial
+    animals_data: list[str], api_keys: dict[str, str], aug_class: partial
 ) -> None:
     """Test RAG pipeline with OpenAI's GPT."""
     api_name = aug_class.func.__name__
