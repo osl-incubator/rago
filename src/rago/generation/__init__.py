@@ -8,6 +8,7 @@ from rago.generation.deepseek import DeepSeekGen
 from rago.generation.fireworks import FireworksGen
 from rago.generation.gemini import GeminiGen
 from rago.generation.hugging_face import HuggingFaceGen
+from rago.generation.hymba import HymbaGen
 from rago.generation.llama import LlamaGen
 from rago.generation.openai import OpenAIGen
 
@@ -18,6 +19,7 @@ __all__ = [
     'GeminiGen',
     'GenerationBase',
     'HuggingFaceGen',
+    'HymbaGen',
     'LlamaGen',
     'OpenAIGen',
 ]
