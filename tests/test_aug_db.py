@@ -3,7 +3,7 @@
 import tempfile
 
 from functools import partial
-from typing import Generator
+from typing import Generator, Optional
 
 import chromadb
 import pytest
@@ -31,7 +31,7 @@ def temp_dir() -> Generator[str, None, None]:
 
 
 def create_chroma_client(
-    persist_directory: str | None = None,
+    persist_directory: Optional[str] = None,
 ) -> chromadb.Client:
     """Create a Chroma client instance with specified persist directory."""
     settings = Settings()
@@ -49,7 +49,7 @@ def create_chroma_client(
 #     return ChromaDB(client=client, collection_name=collection_name)
 
 
-@pytest.mark.skip_on_ci
+# @pytest.mark.skip_on_ci
 @pytest.mark.parametrize(
     'question,expected_answer',
     [
