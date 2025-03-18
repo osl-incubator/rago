@@ -14,18 +14,89 @@ Rago is a lightweight framework for RAG.
 ## Features
 
 - Vector Database support
-    - FAISS
+  - FAISS
 - Retrieval features
-    - Support pdf extraction via langchain
+  - Support pdf extraction via langchain
 - Augmentation (Embedding + Vector Database Search)
-    - Support for Sentence Transformer (Hugging Face)
-    - Support for Open AI
-    - Support for SpaCy
+  - Support for Sentence Transformer (Hugging Face)
+  - Support for Open AI
+  - Support for SpaCy
 - Generation (LLM)
-    - Support for Hugging Face
-    - Support for llama (Huggin FAce)
-    - Support for OpenAI
-    - Support for Gemini
+  - Support for Hugging Face
+  - Support for llama (Huggin FAce)
+  - Support for OpenAI
+  - Support for Gemini
+
+## Roadmap
+
+### 1. Add new Backends
+
+As noted in several GitHub issues, our initial goal is to support as many
+backends as possible. This approach will provide valuable insights into user
+needs and inform the structure for the next phase.
+
+### 2. Declarative API for Rago
+
+#### Objective
+
+To simplify and streamline the user experience in configuring RAG by introducing
+a declarative, composable API—similar to how Plotnine or Altair allows users to
+build visualizations.
+
+#### Overview
+
+The current procedural approach in Rago requires users to instantiate and
+connect individual components (retrieval, augmentation, generation, etc.)
+manually. This can become cumbersome as support for multiple backends grows. We
+propose a new declarative interface that lets users define their entire RAG
+steps in a single, fluent expression using operator overloading.
+
+#### Proposed Syntax Example
+
+```python
+from rago import Rago, Retrieval, Augmentation, Generation, DB, Cache
+
+datasource = ...
+
+rag = (
+    Rago()
+    + DB(backend="faiss", top_k=5)
+    + Cache(backend="file")
+    + Retrieval(backend="dummy")
+    + Augmentation(backend="openai", model="text-embedding-3-small")
+    + Generation(
+        backend="openai",
+        model="gpt-4o-mini",
+        prompt_template="Question: {query}\nContext: {context}\nAnswer:"
+    )
+)
+
+result = rag.run(query="What is the capital of France?", data=datasource)
+```
+
+#### Key Benefits
+
+- **Intuitive Composition:** Users can build complex pipelines by simply adding
+  layers together.
+- **Modularity:** Each component is encapsulated, making it easy to swap or
+  extend backends without altering the overall architecture.
+- **Reduced Boilerplate:** The declarative syntax minimizes the need for
+  repetitive setup code, focusing on the "what" rather than the "how."
+- **Enhanced Readability:** The pipeline’s structure becomes immediately clear,
+  promoting easier maintenance and collaboration.
+
+#### Implementation Plan
+
+1. **Define Base Classes:** Develop abstract base classes for each component
+   (DB, Cache, Retrieval, Augmentation, Generation) to standardize interfaces
+   and facilitate future extensions.
+2. **Operator Overloading:** Implement the `__add__` method in the main `Rago`
+   class to allow chaining of components, effectively building the pipeline
+   through a fluent interface.
+3. **Configuration and Defaults:** Integrate sensible defaults and validation
+   (using tools like Pydantic) so that users can override only when necessary.
+4. **Documentation and Examples:** Provide comprehensive documentation and
+   examples to illustrate the new declarative syntax and usage scenarios.
 
 ## Installation
 

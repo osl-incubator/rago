@@ -41,7 +41,7 @@ dependencies = [
   "joblib (>=1.4.2,<2.0.0)",
   "cohere >=5.13.4",
   "fireworks-ai>0.15.10",
-  "chromadb >=0.3.23"
+  "chromadb >=0.3.23",
 ]
 
 [build-system]

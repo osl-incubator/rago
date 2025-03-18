@@ -4,11 +4,12 @@ from functools import partial
 
 import pytest
 
-from rago.augmented import CohereAug, OpenAIAug, SpaCyAug
+from rago.augmented import CohereAug, FireworksAug, OpenAIAug, SpaCyAug
 
 API_MAP = {
     OpenAIAug: 'api_key_openai',
     CohereAug: 'api_key_cohere',
+    FireworksAug: 'api_key_fireworks',
 }
 
 gen_models = [
@@ -26,8 +27,13 @@ gen_models = [
             model_name='text-embedding-3-small',
         ),
     ),
+    # model 2
     partial(
         CohereAug,
+    ),
+    # model 3
+    partial(
+        FireworksAug,
     ),
 ]
 
@@ -52,6 +58,7 @@ def test_aug_spacy(
     api_key_openai: str,
     api_key_cohere: str,
     api_key_gemini: str,
+    api_key_fireworks: str,
     api_key_hugging_face: str,
     partial_model: partial,
 ) -> None:
