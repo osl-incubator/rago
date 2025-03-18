@@ -94,3 +94,14 @@ def api_key_together(env) -> str:
             'Please set the TOGETHER_API_KEY environment variable.'
         )
     return key
+
+
+@pytest.fixture
+def api_key_groq(env) -> str:
+    """Fixture for GROQ API key from environment."""
+    key = os.getenv('GROQ_API_KEY')
+    if not key:
+        raise EnvironmentError(
+            'Please set the GROQ_API_KEY environment variable.'
+        )
+    return key

@@ -10,6 +10,7 @@ from rago.generation import (
     DeepSeekGen,
     FireworksGen,
     GeminiGen,
+    GroqGen,
     HuggingFaceGen,
     HuggingFaceInfGen,
     LlamaGen,
@@ -32,6 +33,7 @@ API_MAP = {
     CohereGen: 'api_key_cohere',
     FireworksGen: 'api_key_fireworks',
     TogetherGen: 'api_key_together',
+    GroqGen: 'api_key_groq',
 }
 
 gen_models = [
@@ -85,6 +87,10 @@ gen_models = [
     partial(
         HuggingFaceInfGen,
     ),
+    # model 9
+    partial(
+        GroqGen,
+    ),
 ]
 
 
@@ -98,6 +104,7 @@ def test_generation_simple_output(
     api_key_gemini: str,
     api_key_together: str,
     api_key_hugging_face: str,
+    api_key_groq: str,
     partial_model: partial,
 ) -> None:
     """Test RAG pipeline with model generation."""
@@ -150,6 +157,7 @@ def test_generation_structure_output(
     api_key_gemini: str,
     api_key_together: str,
     api_key_hugging_face: str,
+    api_key_groq: str,
     animals_data: list[str],
     question: str,
     partial_model: partial,

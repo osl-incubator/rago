@@ -7,6 +7,7 @@ from rago.generation.cohere import CohereGen
 from rago.generation.deepseek import DeepSeekGen
 from rago.generation.fireworks import FireworksGen
 from rago.generation.gemini import GeminiGen
+from rago.generation.groq import GroqGen
 from rago.generation.hugging_face import HuggingFaceGen
 from rago.generation.hugging_face_inf import HuggingFaceInfGen
 from rago.generation.llama import LlamaGen
@@ -19,6 +20,7 @@ __all__ = [
     'FireworksGen',
     'GeminiGen',
     'GenerationBase',
+    'GroqGen',
     'HuggingFaceGen',
     'HuggingFaceInfGen',
     'LlamaGen',
