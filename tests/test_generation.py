@@ -11,6 +11,7 @@ from rago.generation import (
     FireworksGen,
     GeminiGen,
     HuggingFaceGen,
+    HuggingFaceInfGen,
     LlamaGen,
     OpenAIGen,
     TogetherGen,
@@ -26,6 +27,7 @@ API_MAP = {
     GeminiGen: 'api_key_gemini',
     OpenAIGen: 'api_key_openai',
     HuggingFaceGen: 'api_key_hugging_face',
+    HuggingFaceInfGen: 'api_key_hugging_face',
     LlamaGen: 'api_key_hugging_face',
     CohereGen: 'api_key_cohere',
     FireworksGen: 'api_key_fireworks',
@@ -74,9 +76,14 @@ gen_models = [
     partial(
         FireworksGen,
     ),
+    # model 7
     partial(
         TogetherGen,
         **dict(model_name='meta-llama/Llama-3.3-70B-Instruct-Turbo-Free'),
+    ),
+    # model 8
+    partial(
+        HuggingFaceInfGen,
     ),
 ]
 
@@ -152,7 +159,9 @@ def test_generation_structure_output(
     model_class = partial_model.func
 
     # Skip structured output for models that don't support it
-    if issubclass(model_class, (HuggingFaceGen, LlamaGen, DeepSeekGen)):
+    if issubclass(
+        model_class, (HuggingFaceGen, LlamaGen, HuggingFaceInfGen, DeepSeekGen)
+    ):
         pytest.skip(f"{model_class} doesn't support structured output.")
 
     api_key_name: str = API_MAP.get(model_class, '')
