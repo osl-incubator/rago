@@ -59,9 +59,7 @@ def api_key_hugging_face(env: dict[str, str]) -> str:
     """Fixture for Hugging Face API key from environment."""
     api_key = os.getenv('HF_TOKEN')
     if not api_key:
-        raise EnvironmentError(
-            'Please set the GEMINI_API_KEY environment variable.'
-        )
+        raise EnvironmentError('Please set the HF_TOKEN environment variable.')
     return api_key
 
 
