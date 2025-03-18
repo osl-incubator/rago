@@ -46,4 +46,5 @@ class HuggingFaceInfGen(GenerationBase):
             max_new_tokens=api_params['max_new_tokens'],
             temperature=api_params['temperature'],
         )
+
         return generated_text.strip()
