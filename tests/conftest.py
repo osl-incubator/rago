@@ -25,7 +25,7 @@ def env() -> dict[str, str]:
 
 @pytest.fixture
 def animals_data() -> list[str]:
-    """Fixture for loading the animals dataset."""
+    """Fixture for loading the "animals" dataset."""
     data_path = Path(__file__).parent / 'data' / 'animals.txt'
     with open(data_path) as f:
         data = [line.strip() for line in f.readlines() if line.strip()]
