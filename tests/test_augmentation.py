@@ -4,12 +4,19 @@ from functools import partial
 
 import pytest
 
-from rago.augmented import CohereAug, FireworksAug, OpenAIAug, SpaCyAug
+from rago.augmented import (
+    CohereAug,
+    FireworksAug,
+    OpenAIAug,
+    SpaCyAug,
+    TogetherAug,
+)
 
 API_MAP = {
     OpenAIAug: 'api_key_openai',
     CohereAug: 'api_key_cohere',
     FireworksAug: 'api_key_fireworks',
+    TogetherAug: 'api_key_together',
 }
 
 gen_models = [
@@ -35,6 +42,8 @@ gen_models = [
     partial(
         FireworksAug,
     ),
+    # model 4
+    partial(TogetherAug, **dict(model_name='BAAI/bge-base-en-v1.5')),
 ]
 
 
@@ -59,6 +68,7 @@ def test_aug_spacy(
     api_key_cohere: str,
     api_key_gemini: str,
     api_key_fireworks: str,
+    api_key_together: str,
     api_key_hugging_face: str,
     partial_model: partial,
 ) -> None:
@@ -80,7 +90,6 @@ def test_aug_spacy(
     gen_model = partial_model(**model_args)
 
     aug_result = gen_model.search(question, animals_data)
-
     assert gen_model.top_k == top_k
     assert top_k >= len(aug_result)
     assert any(

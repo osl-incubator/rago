@@ -25,7 +25,7 @@ def env() -> dict[str, str]:
 
 @pytest.fixture
 def animals_data() -> list[str]:
-    """Fixture for loading the animals dataset."""
+    """Fixture for loading the "animals" dataset."""
     data_path = Path(__file__).parent / 'data' / 'animals.txt'
     with open(data_path) as f:
         data = [line.strip() for line in f.readlines() if line.strip()]
@@ -59,9 +59,7 @@ def api_key_hugging_face(env: dict[str, str]) -> str:
     """Fixture for Hugging Face API key from environment."""
     api_key = os.getenv('HF_TOKEN')
     if not api_key:
-        raise EnvironmentError(
-            'Please set the GEMINI_API_KEY environment variable.'
-        )
+        raise EnvironmentError('Please set the HF_TOKEN environment variable.')
     return api_key
 
 
@@ -83,5 +81,16 @@ def api_key_fireworks(env) -> str:
     if not key:
         raise EnvironmentError(
             'Please set the FIREWORKS_API_KEY environment variable.'
+        )
+    return key
+
+
+@pytest.fixture
+def api_key_together(env) -> str:
+    """Fixture for Together API key from environment."""
+    key = os.getenv('TOGETHER_API_KEY')
+    if not key:
+        raise EnvironmentError(
+            'Please set the TOGETHER_API_KEY environment variable.'
         )
     return key

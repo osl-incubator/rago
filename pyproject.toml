@@ -42,6 +42,7 @@ dependencies = [
   "cohere >=5.13.4",
   "fireworks-ai>0.15.10",
   "chromadb >=0.3.23",
+  "together>=1.4.0",
 ]
 
 [build-system]
