@@ -11,7 +11,7 @@ def test_langchain_text_splitter_with_separator(
     """Test the langchain text splitter."""
     text = '/n'.join(animals_data)
 
-    # /n can also be used as separator with langchaing splitter
+    # /n can also be used as separator with langchain splitter
     max_chunk_size_original = max([len(line) for line in animals_data])
 
     # chunk_size is the max size of the chunk
