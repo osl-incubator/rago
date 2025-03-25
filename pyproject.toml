@@ -36,11 +36,13 @@ dependencies = [
   "instructor >=1",
   "pydantic >=2",
   "torch >=2,<2.6",
+  "onnxruntime <=1.19.2 ; python_version < '3.10'",  # indirect dependency
   "eval-type-backport >=0.2 ; python_version < '3.10'",
   "joblib (>=1.4.2,<2.0.0)",
   "cohere >=5.13.4",
   "fireworks-ai>0.15.10",
-  "together>=1.4.0"
+  "chromadb >=0.3.23",
+  "together>=1.4.0",
 ]
 
 [build-system]
