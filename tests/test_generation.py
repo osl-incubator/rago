@@ -15,6 +15,7 @@ from rago.generation import (
     HuggingFaceInfGen,
     LlamaGen,
     OpenAIGen,
+    PhiGen,
     TogetherGen,
 )
 
@@ -90,6 +91,11 @@ gen_models = [
     # model 9
     partial(
         GroqGen,
+    ),
+    # model 10
+    partial(
+        PhiGen,
+        **dict(model_name='microsoft/phi-2'),
     ),
 ]
 
