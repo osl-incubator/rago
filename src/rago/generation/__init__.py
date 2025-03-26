@@ -12,6 +12,7 @@ from rago.generation.hugging_face import HuggingFaceGen
 from rago.generation.hugging_face_inf import HuggingFaceInfGen
 from rago.generation.llama import LlamaGen
 from rago.generation.openai import OpenAIGen
+from rago.generation.phi import PhiGen
 from rago.generation.together import TogetherGen
 
 __all__ = [
@@ -25,5 +26,6 @@ __all__ = [
     'HuggingFaceInfGen',
     'LlamaGen',
     'OpenAIGen',
+    'PhiGen',
     'TogetherGen',
 ]
