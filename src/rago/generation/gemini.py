@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import cast
+from typing import Any, cast
 
 import google.generativeai as genai
 import instructor
@@ -21,8 +21,9 @@ class GeminiGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        genai.configure(api_key=self.api_key)  # type: ignore[attr-defined]
-        model = genai.GenerativeModel(self.model_name)  # type: ignore[attr-defined]
+        genai_any = cast(Any, genai)
+        genai_any.configure(api_key=self.api_key)
+        model = genai_any.GenerativeModel(self.model_name)
 
         self.model = (
             instructor.from_gemini(

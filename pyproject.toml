@@ -35,7 +35,6 @@ dependencies = [
   "spacy >=3.8.0,<3.8.4 ; python_version < '3.10'",
   "instructor >=1",
   "pydantic >=2",
-  "torch >=2,<2.6",
   "onnxruntime <=1.19.2 ; python_version < '3.10'",  # indirect dependency
   "eval-type-backport >=0.2 ; python_version < '3.10'",
   "joblib (>=1.4.2,<2.0.0)",
@@ -49,22 +48,24 @@ dependencies = [
 requires = ["poetry-core>=2", "poetry>=2"]
 build-backend = "poetry.core.masonry.api"
 
-# [project.optional-dependencies]
-# cpu = ["torch"]
-# gpu = ["torch"]
+[project.optional-dependencies]
+cuda = ["torch-cuda>=2,<2.6"]
+default = ["torch>=2,<2.6"]
 
-# [[tool.poetry.source]]
-# name = "pytorch-cpu"
-# url = "https://download.pytorch.org/whl/cpu"
-# priority = "explicit"
+[[tool.poetry.source]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "explicit"
 
-# [tool.poetry.dependencies]
-# python = ">=3.9,<3.13"
-# torch = [
-#   { version = ">=2,<2.6", platform = "darwin" },
-#   { version = ">=2,<2.6", platform = "linux", source="pytorch-cpu", markers="extra!='gpu'" },
-#   { version = ">=2,<2.6", platform = "linux", markers="extra=='gpu'" },
-# ]
+[[tool.poetry.source]]
+name = "pytorch-cuda"
+url = "https://download.pytorch.org/whl/cu118"
+priority = "explicit"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+torch = {version = ">=2,<2.6", source = "pytorch-cpu"}
+torch-cuda = {version = ">=2,<2.6", source = "pytorch-cuda", optional = true}
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.3.2"
@@ -88,9 +89,7 @@ mkdocs-material = ">=9.1.15"
 mkdocstrings = ">=0.21.2"
 mkdocstrings-python = ">= 1.1.2"
 mkdocs-gen-files = ">=0.5.0"
-makim = "1.19.0"
-# 'PosixPath' object has no attribute 'endswith'
-virtualenv = "<=20.25.1"
+makim = "1.25.0"
 python-dotenv = ">=1.0"
 # note: Version 3.7.1 requries spaCy >=3.7.2,<3.8.0
 en-core-web-md = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl"}
