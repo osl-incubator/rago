@@ -32,10 +32,10 @@ jobs:
           conda-solver: libmamba
           python-version: "3.9"
 
-      - name: Install deps
+      - name: Install dependencies (with all extras)
         run: |
           poetry config virtualenvs.create false
-          poetry install
+          poetry install --with dev --all-extras
 
       - name: Generate documentation with changes from semantic-release
         run: makim --verbose docs.build

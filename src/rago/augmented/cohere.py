@@ -8,6 +8,7 @@ from typing import cast
 import cohere
 import numpy as np
 
+from cohere.types import EmbedByTypeResponseEmbeddings
 from typeguard import typechecked
 
 from rago.augmented.base import AugmentedBase, EmbeddingType
@@ -40,7 +41,12 @@ class CohereAug(AugmentedBase):
             input_type='search_document',
             embedding_types=['float'],
         )
-        result = np.array(response.embeddings.float_, dtype=np.float32)  # type: ignore[union-attr]
+        embeddings = (
+            response.embeddings.float_
+            if isinstance(response.embeddings, EmbedByTypeResponseEmbeddings)
+            else response.embeddings
+        )
+        result = np.array(embeddings, dtype=np.float32)
 
         self._save_cache(cache_key, result)
 
@@ -60,7 +66,12 @@ class CohereAug(AugmentedBase):
             input_type='search_query',
             embedding_types=['float'],
         )
-        query_encoded = np.array(response.embeddings.float_, dtype=np.float32)  # type: ignore[union-attr]
+        embeddings = (
+            response.embeddings.float_
+            if isinstance(response.embeddings, EmbedByTypeResponseEmbeddings)
+            else response.embeddings
+        )
+        query_encoded = np.array(embeddings, dtype=np.float32)
 
         top_k = top_k or self.top_k or self.default_top_k or 1
 

@@ -9,7 +9,6 @@ on:
 jobs:
   check-branch:
     runs-on: ubuntu-latest
-
     timeout-minutes: 2
     concurrency:
       group: ci-check-branch-${{ github.ref }}
@@ -32,17 +31,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python_version:
-          - "3.9"
-          - "3.10"
-          - "3.11"
-          - "3.12"
-          # - "3.13"
-        os:
-          - "ubuntu"
-          - "macos"
+        python_version: ["3.9", "3.10", "3.11", "3.12"]
+        os: ["ubuntu-latest", "macos-latest"]
+        build_type: ["cpu", "gpu"]
+        exclude:
+          - os: macos-latest
+            build_type: gpu
 
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 20
 
     defaults:
@@ -50,7 +46,7 @@ jobs:
         shell: bash -l {0}
 
     concurrency:
-      group: ci-tests-${{ matrix.os }}-${{ matrix.python_version }}-${{ github.ref }}
+      group: ci-tests-${{ matrix.os }}-${{ matrix.python_version }}-${{ matrix.build_type }}-${{ github.ref }}
       cancel-in-progress: true
 
     env:
@@ -79,7 +75,11 @@ jobs:
       - name: Install dependencies
         run: |
           poetry config virtualenvs.create false
-          poetry install
+          if [ "${{ matrix.build_type }}" = "gpu" ]; then
+            poetry install --with dev --extras "cuda"
+          else
+            poetry install --with dev
+          fi
 
       - name: Run unit tests (PR)
         if: ${{ github.event_name == 'pull_request' }}
@@ -108,7 +108,7 @@ jobs:
         shell: bash -l {0}
 
     concurrency:
-      group: ci-linter-docs-${{ matrix.os }}-${{ matrix.python_version }}-${{ github.ref }}
+      group: ci-linter-docs-${{ github.ref }}
       cancel-in-progress: true
 
     steps:
@@ -127,7 +127,7 @@ jobs:
       - name: Install dependencies
         run: |
           poetry config virtualenvs.create false
-          poetry install
+          poetry install --with dev
 
       - name: Run style checks
         if: success() || failure()
@@ -138,3 +138,38 @@ jobs:
       - name: Setup tmate session
         if: "${{ failure() && (contains(github.event.pull_request.labels.*.name, 'ci:enable-debugging')) }}"
         uses: mxschmitt/action-tmate@v3
+
+  install-test:
+    runs-on: ${{ matrix.os }}-latest
+    strategy:
+      matrix:
+        os: ["ubuntu", "macos"]
+        install_type: ["default", "cuda"]
+        exclude:
+          - os: macos
+            install_type: cuda # prevent CUDA install on macOS
+    name: Install test (${{ matrix.os }} - ${{ matrix.install_type }})
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: |
+          if [ "${{ matrix.install_type }}" = "cuda" ]; then
+            poetry install --extras "cuda"
+          else
+            poetry install --extras "cpu"
+          fi
+
+      - name: Check torch install
+        run: |
+          poetry run python -c "import torch; print('Torch version:', torch.__version__); print('CUDA available:', getattr(torch, 'cuda', None) and torch.cuda.is_available())"
