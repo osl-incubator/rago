@@ -2,7 +2,10 @@
 
 from importlib import metadata as importlib_metadata
 
+from rago.augmented import Augmented
 from rago.core import Rago
+from rago.generation import Generation
+from rago.retrieval import Retrieval
 
 
 def get_version() -> str:
@@ -20,7 +23,10 @@ __author__ = 'Ivan Ogasawara'
 __email__ = 'ivan.ogasawara@gmail.com'
 
 __all__ = [
+    'Augmented',
+    'Generation',
     'Rago',
+    'Retrieval',
     '__author__',
     '__email__',
     '__version__',

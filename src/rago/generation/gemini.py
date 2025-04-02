@@ -44,16 +44,16 @@ class GeminiGen(GenerationBase):
             else model
         )
 
-    def generate(self, query: str, context: list[str]) -> str | BaseModel:
+    def generate(self, query: str, data: list[str]) -> str | BaseModel:
         """Generate text using Gemini model support."""
         input_text = self.prompt_template.format(
-            query=query, context=' '.join(context)
+            query=query, data=' '.join(data)
         )
 
         if not self.structured_output:
             models_params_gen = {'contents': input_text}
             response = self.model.generate_content(**models_params_gen)
-            self.logs['model_params'] = models_params_gen
+            # self.logs['model_params'] = models_params_gen
             return cast(str, response.text.strip())
 
         api_params = (
@@ -75,6 +75,6 @@ class GeminiGen(GenerationBase):
             **model_params,
         )
 
-        self.logs['model_params'] = model_params
+        # self.logs['model_params'] = model_params
 
         return cast(BaseModel, response)

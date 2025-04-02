@@ -55,10 +55,10 @@ class TogetherGen(GenerationBase):
             self._together.api_key = self.api_key
             self.model = self._together.Together()
 
-    def generate(self, query: str, context: list[str]) -> str | BaseModel:
+    def generate(self, query: str, data: list[str]) -> str | BaseModel:
         """Generate text using Together AI's API."""
         input_text = self.prompt_template.format(
-            query=query, context=' '.join(context)
+            query=query, data=' '.join(data)
         )
 
         api_params = self.api_params or self.default_api_params
@@ -79,9 +79,9 @@ class TogetherGen(GenerationBase):
         if self.structured_output:
             model_params['response_model'] = self.structured_output
             response = self.model.chat.completions.create(**model_params)
-            self.logs['model_params'] = model_params
+            # self.logs['model_params'] = model_params
             return cast(BaseModel, response)
 
         response = self.model.chat.completions.create(**model_params)
-        self.logs['model_params'] = model_params
+        # self.logs['model_params'] = model_params
         return cast(str, response.choices[0].message.content.strip())

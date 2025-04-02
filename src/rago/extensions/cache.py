@@ -1,4 +1,4 @@
-"""Provide an extension for caching."""
+"""Provide a declarative cache extension."""
 
 from __future__ import annotations
 
@@ -11,27 +11,46 @@ import joblib
 
 from typeguard import typechecked
 
-from rago.extensions.base import Extension
+from rago.base import StepBase
 
 
 @typechecked
-class Cache(Extension):
-    """Define an extension base for caching."""
+class Cache(StepBase):
+    """Abstract base class for caching steps in a declarative pipeline."""
 
     @abstractmethod
     def load(self, key: Any) -> Any:
-        """Load the cache for given key."""
-        raise Exception(f'Load method is not implemented: {key}')
+        """Load cached data for the given key."""
+        raise Exception(f'Load method is not implemented for key: {key}')
 
     @abstractmethod
     def save(self, key: Any, data: Any) -> None:
-        """Save the cache for given key."""
-        raise Exception(f'Save method is not implemented: {key}')
+        """Save data to cache under the given key."""
+        raise Exception(f'Save method is not implemented for key: {key}')
+
+    def process(self, inp: Input) -> Output:
+        """
+        Default processing method: compute a key from the query and data,
+        attempt to load a cached result, and return it if found. Otherwise,
+        return the data unchanged.
+        """
+        key = self._compute_key(query, data)
+        cached = self.load(key)
+        if cached is not None:
+            logs['cache'] = f'Cache hit for key: {key}'
+            return cached
+        logs['cache'] = f'No cache found for key: {key}'
+        return data
+
+    def _compute_key(self, query: str, data: Any) -> str:
+        """Compute a cache key based on the query and data."""
+        combined = str(query) + str(data)
+        return sha256(combined.encode('utf-8')).hexdigest()
 
 
 @typechecked
 class CacheFile(Cache):
-    """Define a extra step for caching."""
+    """File-based cache step that saves and loads data using joblib."""
 
     target_dir: Path
 
@@ -40,18 +59,36 @@ class CacheFile(Cache):
         self.target_dir.mkdir(parents=True, exist_ok=True)
 
     def get_file_path(self, key: Any) -> Path:
-        """Return the file path."""
+        """Return the file path for the given key."""
         ref = sha256(str(key).encode('utf-8')).hexdigest()
         return self.target_dir / f'{ref}.pkl'
 
     def load(self, key: Any) -> Any:
-        """Load the cache for given key."""
+        """Load the cache for the given key if it exists."""
         file_path = self.get_file_path(key)
         if not file_path.exists():
-            return
+            return None
         return joblib.load(file_path)
 
     def save(self, key: Any, data: Any) -> None:
-        """Load the cache for given key."""
+        """Save data to the cache under the given key."""
         file_path = self.get_file_path(key)
         joblib.dump(data, file_path)
+
+    def process(self, inp: Input) -> Output:
+        """
+        Compute a cache key and attempt to load cached data. If found, return
+        the cached result. Otherwise, save the current data to the cache and
+        return it.
+        """
+        key = self._compute_key(query, data)
+        cached = self.load(key)
+        if cached is not None:
+            logs['cache'] = f'Cache hit for key: {key}'
+            return cached
+        result = (
+            data  # Pass-through; assume later steps produce the final output.
+        )
+        self.save(key, result)
+        logs['cache'] = f'Cache saved for key: {key}'
+        return result

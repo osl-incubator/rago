@@ -70,12 +70,12 @@ class DeepSeekGen(GenerationBase):
             self.model.generation_config.eos_token_id
         )
 
-    def generate(self, query: str, context: list[str]) -> str:
+    def generate(self, query: str, data: list[str]) -> str:
         """Generate text using DeepSeek model with chat template."""
         messages = [
             {
                 'role': 'user',
-                'content': f'{query}\nContext: {" ".join(context)}',
+                'content': f'{query}\nContext: {" ".join(data)}',
             }
         ]
 
@@ -89,7 +89,7 @@ class DeepSeekGen(GenerationBase):
             temperature=self.temperature,
         )
 
-        self.logs['model_params'] = model_params
+        # self.logs['model_params'] = model_params
 
         outputs = self.model.generate(input_tensor, **model_params)
 

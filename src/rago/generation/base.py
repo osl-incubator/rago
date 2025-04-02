@@ -11,7 +11,7 @@ import torch
 from pydantic import BaseModel
 from typeguard import typechecked
 
-from rago.base import RagoBase
+from rago.base import RagBase
 from rago.extensions.cache import Cache
 
 DEFAULT_LOGS: dict[str, Any] = {}
@@ -19,7 +19,7 @@ DEFAULT_API_PARAMS: dict[str, Any] = {}
 
 
 @typechecked
-class GenerationBase(RagoBase):
+class GenerationBase(RagBase):
     """Generic Generation class."""
 
     device_name: str = 'cpu'
@@ -30,7 +30,7 @@ class GenerationBase(RagoBase):
     temperature: float = 0.5
     output_max_length: int = 500
     prompt_template: str = (
-        'question: \n```\n{query}\n```\ncontext: ```\n{context}\n```'
+        'question: \n```\n{query}\n```\ncontext: ```\n{data}\n```'
     )
     structured_output: Optional[Type[BaseModel]] = None
     api_params: dict[str, Any] = {}
@@ -39,10 +39,10 @@ class GenerationBase(RagoBase):
     # default parameters that can be overwritten by the derived class
     default_device_name: str = 'cpu'
     default_model_name: str = ''
-    default_temperature: float = 0.5
+    default_temperature: float = 0.0
     default_output_max_length: int = 500
     default_prompt_template: str = (
-        'question: \n```\n{query}\n```\ncontext: ```\n{context}\n```'
+        'question: \n```\n{query}\n```\ncontext: ```\n{data}\n```'
     )
     default_api_params: dict[str, Any] = {}
 
@@ -58,12 +58,11 @@ class GenerationBase(RagoBase):
         api_params: dict[str, Any] = DEFAULT_API_PARAMS,
         api_key: str = '',
         cache: Optional[Cache] = None,
-        logs: dict[str, Any] = DEFAULT_LOGS,
     ) -> None:
         """Initialize Generation class."""
-        if logs is DEFAULT_LOGS:
-            logs = {}
-        super().__init__(api_key=api_key, cache=cache, logs=logs)
+        super().__init__()
+        self.api_key = api_key
+        self.cache = cache
 
         self.model_name: str = (
             model_name if model_name is not None else self.default_model_name
@@ -114,7 +113,7 @@ class GenerationBase(RagoBase):
     def generate(
         self,
         query: str,
-        context: list[str],
+        data: list[str],
     ) -> str | BaseModel:
         """Generate text with optional language parameter.
 
@@ -122,12 +121,12 @@ class GenerationBase(RagoBase):
         ----------
         query : str
             The input query or prompt.
-        context : list[str]
-            Additional context information for the generation.
+        data : list[str]
+            Additional data information for the generation.
 
         Returns
         -------
         str
-            Generated text based on query and context.
+            Generated text based on query and data.
         """
         ...

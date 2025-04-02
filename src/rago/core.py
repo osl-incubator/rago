@@ -4,76 +4,39 @@ from __future__ import annotations
 
 from typing import Any
 
-from pydantic import BaseModel
 from typeguard import typechecked
 
-from rago.augmented.base import AugmentedBase
-from rago.generation.base import GenerationBase
-from rago.retrieval.base import RetrievalBase
+from rago.base import (
+    PipelineBase,
+)  # Assumed to provide self.stack (list of StepBase instances)
+from rago.io import Input, Output
 
 
 @typechecked
-class Rago:
-    """RAG class."""
+class Rago(PipelineBase):
+    """RAG pipeline that composes retrieval, augmentation, and generation."""
 
-    retrieval: RetrievalBase
-    augmented: AugmentedBase
-    generation: GenerationBase
-
-    logs: dict[str, dict[str, Any]]
-
-    def __init__(
-        self,
-        retrieval: RetrievalBase,
-        augmented: AugmentedBase,
-        generation: GenerationBase,
-    ) -> None:
-        """Initialize the RAG structure.
-
-        Parameters
-        ----------
-        retrieval : RetrievalBase
-            The retrieval component used to fetch relevant data based
-            on the query.
-        augmented : AugmentedBase
-            The augmentation module responsible for enriching the
-            retrieved data.
-        generation : GenerationBase
-            The text generation model used to generate a response based
-            on the query and augmented data.
+    def run(self, query: str, source: Any, device: str = 'auto') -> Output:
         """
-        self.retrieval = retrieval
-        self.augmented = augmented
-        self.generation = generation
-        self.logs: dict[str, dict[str, Any]] = {
-            'retrieval': retrieval.logs,
-            'augmented': augmented.logs,
-            'generation': generation.logs,
-        }
-
-    def prompt(self, query: str, device: str = 'auto') -> str | BaseModel:
-        """Run the pipeline for a specific prompt.
+        Run the pipeline for a given query and source data.
 
         Parameters
         ----------
         query : str
-            The query or prompt from the user.
-        device : str (default 'auto')
-            Device for generation (e.g., 'auto', 'cpu', 'cuda'), by
-            default 'auto'.
+            The user query.
+        source : Any
+            The source data to process (e.g., documents).
+        device : str, optional
+            The device to use (default 'auto').
 
         Returns
         -------
-        str
-            Generated text based on the query and augmented data.
+        dict[str, Any]
         """
-        ret_data = self.retrieval.get(query)
-        self.logs['retrieval']['result'] = ret_data
-
-        aug_data = self.augmented.search(query, ret_data)
-        self.logs['augmented']['result'] = aug_data
-
-        gen_data = self.generation.generate(query, context=aug_data)
-        self.logs['generation']['result'] = gen_data
-
-        return gen_data
+        cur_input = Input(query=query, source=source)
+        cur_output = Output.from_input(cur_input)
+        for step in self.stack:
+            cur_input = cur_output.as_input()
+            cur_input.query = query
+            cur_output = step.process(cur_input)
+        return cur_output

@@ -144,8 +144,21 @@ exclude = ["docs"]
 fix = true
 
 [tool.ruff.lint]
-ignore = ["F811","PLR0911","PLR0912","PLR0913","RUF012"]
-select = ["E","F","D","YTT","RUF","I001"]
+ignore = [
+  "F811",
+  "PLR0911",  # Too many return statements
+  "PLR0912",  # Too many branches
+  "PLR0913",
+  "RUF012",  # class var
+]
+select = [
+  "E",   # pycodestyle
+  "F",   # pyflakes
+  "D",   # pydocstyle
+  "YTT", # flake8-2020
+  "RUF", # Ruff-specific rules
+  "I001", # isort
+]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"

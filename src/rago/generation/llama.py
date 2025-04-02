@@ -83,10 +83,10 @@ class LlamaGen(GenerationBase):
             device=0 if self.device_name == 'cuda' else -1,
         )
 
-    def generate(self, query: str, context: list[str]) -> str:
+    def generate(self, query: str, data: list[str]) -> str:
         """Generate text using Llama model with language support."""
         input_text = self.prompt_template.format(
-            query=query, context=' '.join(context)
+            query=query, data=' '.join(data)
         )
 
         # Detect and set the language code for multilingual models (optional)
@@ -109,7 +109,7 @@ class LlamaGen(GenerationBase):
         )
         response = self.generator(**model_params)
 
-        self.logs['model_params'] = model_params
+        # self.logs['model_params'] = model_params
 
         # Extract and return the answer only
         answer = str(response[0].get('generated_text', ''))

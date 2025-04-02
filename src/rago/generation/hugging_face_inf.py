@@ -33,21 +33,21 @@ class HuggingFaceInfGen(GenerationBase):
             provider='hf-inference', api_key=self.api_key
         )
 
-    def generate(self, query: str, context: list[str]) -> str | BaseModel:
-        """Generate the text from the query and augmented context."""
+    def generate(self, query: str, data: list[str]) -> str | BaseModel:
+        """Generate the text from the query and augmented data."""
         input_text = self.prompt_template.format(
-            query=query, context=' '.join(context)
+            query=query, data=' '.join(data)
         )
         if self.system_message:
             input_text = f'{self.system_message}\n{input_text}'
 
         api_params = self.api_params or self.default_api_params
 
-        self.logs['model_params'] = {
-            'model': self.model_name,
-            'inputs': input_text,
-            'parameters': api_params,
-        }
+        # self.logs['model_params'] = {
+        #     'model': self.model_name,
+        #     'inputs': input_text,
+        #     'parameters': api_params,
+        # }
         generated_text = self.client.text_generation(
             prompt=input_text,
             model=self.model_name,

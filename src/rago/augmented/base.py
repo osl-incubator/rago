@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, Optional, Union
+from typing import Any, Dict, Optional, Union
 
 import numpy as np
 import numpy.typing as npt
@@ -13,9 +13,11 @@ from typeguard import typechecked
 from typing_extensions import TypeAlias
 
 from rago.augmented.db import DBBase, FaissDB
-from rago.base import RagoBase
+from rago.base import RagBase
 from rago.extensions.cache import Cache
+from rago.io import Input, Output
 
+# Define a type alias for embeddings.
 EmbeddingType: TypeAlias = Union[
     npt.NDArray[np.float64],
     npt.NDArray[np.float32],
@@ -27,15 +29,15 @@ DEFAULT_LOGS: dict[str, Any] = {}
 
 
 @typechecked
-class AugmentedBase(RagoBase):
-    """Define the base structure for Augmented classes."""
+class AugmentedBase(RagBase):
+    """Base class for all augmented steps."""
 
     model: Optional[Any]
     model_name: str = ''
-    db: Any
+    db: DBBase
     top_k: int = 0
 
-    # default values to be overwritten by the derived classes
+    # Default values to be overwritten by derived classes.
     default_model_name: str = ''
     default_top_k: int = 5
 
@@ -45,44 +47,50 @@ class AugmentedBase(RagoBase):
         db: DBBase = FaissDB(),
         top_k: Optional[int] = None,
         api_key: str = '',
+        api_params: Optional[Dict[str, Any]] = None,
         cache: Optional[Cache] = None,
-        logs: dict[str, Any] = DEFAULT_LOGS,
     ) -> None:
-        """Initialize AugmentedBase."""
-        if logs is DEFAULT_LOGS:
-            logs = {}
-        super().__init__(api_key=api_key, cache=cache, logs=logs)
-
+        # super().__init__(api_key=api_key, cache=cache, logs=logs)
+        super().__init__()
+        self.api_key = api_key
+        self.cache = cache
+        self.api_params = api_params
         self.db = db
-
         self.top_k = top_k if top_k is not None else self.default_top_k
         self.model_name = (
             model_name if model_name is not None else self.default_model_name
         )
         self.model = None
-
         self._validate()
         self._load_optional_modules()
         self._setup()
 
     def _validate(self) -> None:
-        """Raise an error if the initial parameters are not valid."""
-        return
+        """Override to validate initial parameters."""
+        pass
 
     def _setup(self) -> None:
-        """Set up the object with the initial parameters."""
-        return
+        """Override to set up the augmented model."""
+        pass
 
     def get_embedding(self, content: list[str]) -> EmbeddingType:
-        """Retrieve the embedding for a given text using OpenAI API."""
+        """Retrieve the embedding for given text."""
         raise Exception('Method not implemented.')
 
+    def _get_cache(self, cache_key: str) -> Any:
+        return None
+
+    def _save_cache(self, cache_key: str, data: Any) -> None:
+        return
+
     @abstractmethod
-    def search(
-        self,
-        query: str,
-        documents: Any,
-        top_k: int = 0,
-    ) -> list[str]:
-        """Search an encoded query into vector database."""
+    def search(self, query: str, documents: Any, top_k: int = 0) -> list[str]:
+        """Search for the most relevant documents."""
         ...
+
+    def process(self, inp: Input) -> Output:
+        """Process the augmented step."""
+        query = str(inp.query)
+        content = inp.content
+        result = self.search(query, content, top_k=self.top_k)
+        return Output(data=result)

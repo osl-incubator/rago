@@ -72,9 +72,9 @@ class PhiGen(GenerationBase):
             self.model.generation_config.eos_token_id
         )
 
-    def generate(self, query: str, context: list[str]) -> str:
-        """Generate text using Phi model with context."""
-        full_prompt = f'{query}\nContext: {" ".join(context)}'
+    def generate(self, query: str, data: list[str]) -> str:
+        """Generate text using Phi model with data."""
+        full_prompt = f'{query}\nContext: {" ".join(data)}'
 
         inputs = self.tokenizer(
             full_prompt, return_tensors='pt', return_attention_mask=True
@@ -90,7 +90,7 @@ class PhiGen(GenerationBase):
             ],
         )
 
-        self.logs['model_params'] = model_params
+        # self.logs['model_params'] = model_params
 
         outputs = self.model.generate(
             input_ids=inputs.input_ids,

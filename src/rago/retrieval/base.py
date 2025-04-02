@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, Iterable, Optional
+from typing import Any, Iterable, cast
 
 from typeguard import typechecked
 
-from rago.base import RagoBase
-from rago.extensions.cache import Cache
+from rago.base import RagBase
 from rago.retrieval.text_splitter import (
     LangChainTextSplitter,
     TextSplitterBase,
@@ -18,12 +17,13 @@ DEFAULT_LOGS: dict[str, Any] = {}
 
 
 @typechecked
-class RetrievalBase(RagoBase):
+class RetrievalBase(RagBase):
     """Base Retrieval class."""
 
     content: Any
     source: Any
     splitter: TextSplitterBase
+    api_params: dict[str, Any] = {}
 
     def __init__(
         self,
@@ -32,28 +32,26 @@ class RetrievalBase(RagoBase):
             'RecursiveCharacterTextSplitter'
         ),
         api_key: str = '',
-        cache: Optional[Cache] = None,
-        logs: dict[str, Any] = DEFAULT_LOGS,
+        api_params: dict[str, Any] = {},
     ) -> None:
-        """Initialize the Retrieval class."""
-        if logs is DEFAULT_LOGS:
-            logs = {}
-        super().__init__(api_key=api_key, cache=cache, logs=logs)
+        super().__init__()
         self.source = source
         self.splitter = splitter
+        self.api_key = api_key
+        self.api_params = api_params
 
         self._validate()
         self._setup()
 
     def _validate(self) -> None:
-        """Validate if the source is valid, otherwise raises an exception."""
-        return None
+        """Validate the source. Override if needed."""
+        pass
 
     def _setup(self) -> None:
-        """Set up the object with the giving initial parameters."""
-        return None
+        """Set up the object with the initial parameters."""
+        pass
 
     @abstractmethod
-    def get(self, query: str = '') -> Iterable[str]:
+    def retrieve(self, query: str = '', source: Any = None) -> Iterable[str]:
         """Get the data from the source."""
         return []

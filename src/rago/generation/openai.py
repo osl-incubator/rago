@@ -39,11 +39,11 @@ class OpenAIGen(GenerationBase):
     def generate(
         self,
         query: str,
-        context: list[str],
+        data: list[str],
     ) -> str | BaseModel:
         """Generate text using OpenAI's API with dynamic model support."""
         input_text = self.prompt_template.format(
-            query=query, context=' '.join(context)
+            query=query, data=' '.join(data)
         )
 
         if not self.model:
@@ -67,7 +67,7 @@ class OpenAIGen(GenerationBase):
 
         response = self.model.chat.completions.create(**model_params)
 
-        self.logs['model_params'] = model_params
+        # self.logs['model_params'] = model_params
 
         has_choices = hasattr(response, 'choices')
 
