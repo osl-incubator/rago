@@ -9,6 +9,7 @@ dependencies:
   - nodejs # used by semantic-release
   - tokenizers
   - compilers
+  - blis
   - pip:
       # distlib issue
       - paginate==0.5.6

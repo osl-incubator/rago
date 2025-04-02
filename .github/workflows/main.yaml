@@ -77,12 +77,6 @@ jobs:
       - name: Check Poetry lock
         run: poetry check
 
-      - name: Install dependencies with pip
-        if: ${{ matrix.os == 'windows' }}
-        run: |
-          pip install -U pip setuptools wheel
-          pip install blis
-
       - name: Install dependencies
         run: |
           poetry config virtualenvs.create false
