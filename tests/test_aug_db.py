@@ -3,7 +3,7 @@
 import tempfile
 
 from functools import partial
-from typing import Generator, Optional
+from typing import Optional
 
 import chromadb
 import pytest
@@ -23,13 +23,6 @@ dbs = [
 ]
 
 
-@pytest.fixture
-def temp_dir() -> Generator[str, None, None]:
-    """Provide temporary directory."""
-    with tempfile.TemporaryDirectory() as tmp_dir:
-        yield tmp_dir
-
-
 def create_chroma_client(
     persist_directory: Optional[str] = None,
 ) -> chromadb.Client:
@@ -40,13 +33,6 @@ def create_chroma_client(
             persist_directory=persist_directory, is_persistent=True
         )
     return chromadb.Client(settings=settings)
-
-
-# def create_chroma_instance(
-#     client: chromadb.Client, collection_name: str = 'test_collection'
-# ) -> ChromaDB:
-#     """Create a Chroma instance with specified client and collection name."""
-#     return ChromaDB(client=client, collection_name=collection_name)
 
 
 # @pytest.mark.skip_on_ci
@@ -71,7 +57,6 @@ def test_aug_chromadb(
     question: str,
     expected_answer: str,
     partial_model: partial,
-    temp_dir: str,
 ) -> None:
     """Test RAG pipeline with ChromaDB."""
     question_id = request.node.callspec._idlist[1]
@@ -89,24 +74,25 @@ def test_aug_chromadb(
     api_key_name: str = API_MAP.get(model_class, '')
     api_key = locals().get(api_key_name, '')
 
-    client = create_chroma_client(temp_dir)
-
     documents = animals_data
     # Create fixed-size dummy embeddings
     embeddings = [[i] * embedding_size for i in range(len(documents))]
 
-    model_args = {
-        'client': client,
-        **({'api_key': api_key} if api_key else {}),
-    }
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        chroma_client = create_chroma_client(tmp_dir)
 
-    db = partial_model(**model_args)
-    db.embed(documents=(documents, embeddings))
+        model_args = {
+            'client': chroma_client,
+            **({'api_key': api_key} if api_key else {}),
+        }
 
-    query_encoded = [question_id] * embedding_size
-    distances, ids = db.search(query_encoded=query_encoded, top_k=top_k)
+        db = partial_model(**model_args)
+        db.embed(documents=(documents, embeddings))
 
-    assert len(distances) == 2
-    assert len(ids) == 2
-    assert ids[0] == question_id
-    assert expected_answer.lower() in documents[int(ids[0])].lower()
+        query_encoded = [question_id] * embedding_size
+        distances, ids = db.search(query_encoded=query_encoded, top_k=top_k)
+
+        assert len(distances) == 2
+        assert len(ids) == 2
+        assert ids[0] == question_id
+        assert expected_answer.lower() in documents[int(ids[0])].lower()
