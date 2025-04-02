@@ -64,6 +64,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Copy ci conda env file for Windows
+        if: ${{ matrix.os == 'windows' }}
+        run: cp conda/ci-win.yaml conda/ci.yaml
+
       - uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
