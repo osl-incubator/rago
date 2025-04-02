@@ -1,5 +1,6 @@
 """Tests for Rago package: Vector DBs."""
 
+import sys
 import tempfile
 
 from functools import partial
@@ -49,7 +50,10 @@ def create_chroma_client(
 #     return ChromaDB(client=client, collection_name=collection_name)
 
 
-# @pytest.mark.skip_on_ci
+@pytest.mark.skipif(
+    sys.platform == 'win32',
+    reason='Skipping test on Windows due to file locking issues.',
+)
 @pytest.mark.parametrize(
     'question,expected_answer',
     [

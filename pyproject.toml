@@ -88,9 +88,7 @@ mkdocs-material = ">=9.1.15"
 mkdocstrings = ">=0.21.2"
 mkdocstrings-python = ">= 1.1.2"
 mkdocs-gen-files = ">=0.5.0"
-makim = "1.19.0"
-# 'PosixPath' object has no attribute 'endswith'
-virtualenv = "<=20.25.1"
+makim = "1.25.0"
 python-dotenv = ">=1.0"
 # note: Version 3.7.1 requries spaCy >=3.7.2,<3.8.0
 en-core-web-md = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl"}
