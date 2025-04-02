@@ -77,6 +77,11 @@ jobs:
       - name: Check Poetry lock
         run: poetry check
 
+      - name: Install dependencies with pip
+        if: ${{ matrix.os == 'windows' }}
+        run: |
+          pip wheel --no-cache-dir --use-pep517 "blis (==1.2.1)"
+
       - name: Install dependencies
         run: |
           poetry config virtualenvs.create false
