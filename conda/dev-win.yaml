@@ -1,0 +1,16 @@
+name: rago
+channels:
+  - nodefaults
+  - conda-forge
+dependencies:
+  - python 3.9.*
+  - pip
+  - poetry >=2
+  - nodejs # used by semantic-release
+  - tokenizers
+  - compilers
+  - blis
+  - pip:
+      # distlib issue
+      - paginate==0.5.6
+      - langdetect
