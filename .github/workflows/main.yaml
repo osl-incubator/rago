@@ -80,7 +80,8 @@ jobs:
       - name: Install dependencies with pip
         if: ${{ matrix.os == 'windows' }}
         run: |
-          pip wheel --no-cache-dir --use-pep517 "blis (==1.2.1)"
+          pip install -U pip setuptools wheel
+          pip install blis
 
       - name: Install dependencies
         run: |
