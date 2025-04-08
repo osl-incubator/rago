@@ -2,6 +2,7 @@
 
 from importlib import metadata as importlib_metadata
 
+from rago.components import Augmentation, Cache, DB, Generation, Retrieval
 from rago.core import Rago
 
 
@@ -21,6 +22,11 @@ __email__ = 'ivan.ogasawara@gmail.com'
 
 __all__ = [
     'Rago',
+    'Retrieval',
+    'Augmentation',
+    'Generation',
+    'DB',
+    'Cache',
     '__author__',
     '__email__',
     '__version__',

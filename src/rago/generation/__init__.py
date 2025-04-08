@@ -14,6 +14,7 @@ from rago.generation.llama import LlamaGen
 from rago.generation.openai import OpenAIGen
 from rago.generation.phi import PhiGen
 from rago.generation.together import TogetherGen
+from rago.generation.vllm import VllmGen  # Add the new VllmGen import
 
 __all__ = [
     'CohereGen',
@@ -28,4 +29,5 @@ __all__ = [
     'OpenAIGen',
     'PhiGen',
     'TogetherGen',
+    'VllmGen', 
 ]

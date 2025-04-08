@@ -43,28 +43,12 @@ dependencies = [
   "fireworks-ai>0.15.10",
   "chromadb >=0.3.23",
   "together>=1.4.0",
+  "vllm>=0.5.0",  # Added vllm dependency
 ]
 
 [build-system]
 requires = ["poetry-core>=2", "poetry>=2"]
 build-backend = "poetry.core.masonry.api"
-
-# [project.optional-dependencies]
-# cpu = ["torch"]
-# gpu = ["torch"]
-
-# [[tool.poetry.source]]
-# name = "pytorch-cpu"
-# url = "https://download.pytorch.org/whl/cpu"
-# priority = "explicit"
-
-# [tool.poetry.dependencies]
-# python = ">=3.9,<3.13"
-# torch = [
-#   { version = ">=2,<2.6", platform = "darwin" },
-#   { version = ">=2,<2.6", platform = "linux", source="pytorch-cpu", markers="extra!='gpu'" },
-#   { version = ">=2,<2.6", platform = "linux", markers="extra=='gpu'" },
-# ]
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.3.2"
@@ -92,7 +76,6 @@ makim = "1.25.0"
 python-dotenv = ">=1.0"
 # note: Version 3.7.1 requries spaCy >=3.7.2,<3.8.0
 en-core-web-md = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl"}
-
 [tool.pytest.ini_options]
 testpaths = [
     "tests",
