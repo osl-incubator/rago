@@ -58,10 +58,13 @@ jobs:
       cancel-in-progress: true
 
     env:
-      HF_TOKEN: ${{ secrets.HF_TOKEN }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+      HF_TOKEN: "nokey"
+      OPENAI_API_KEY: "nokey"
+      GEMINI_API_KEY: "nokey"
+      COHERE_API_KEY: "nokey"
+      FIREWORKS_API_KEY: "nokey"
+      TOGETHER_API_KEY: "nokey"
+      GROQ_API_KEY: "nokey"
       TOKENIZERS_PARALLELISM: false
 
     steps:
