@@ -92,6 +92,11 @@ jobs:
           poetry config virtualenvs.create false
           poetry install
 
+      - name: Execute ollama
+        run: |
+          ollama pull llama3.2:1b
+          ollama serve &
+
       - name: Run unit tests (PR)
         if: ${{ github.event_name == 'pull_request' }}
         run: pytest -m "not skip_on_ci" -vvv
@@ -139,11 +144,6 @@ jobs:
         run: |
           poetry config virtualenvs.create false
           poetry install
-
-      - name: run ollama
-        run: |
-          ollama pull llama3.2:1b
-          ollama serve &
 
       - name: Run style checks
         if: success() || failure()
