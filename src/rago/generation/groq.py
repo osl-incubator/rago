@@ -18,7 +18,7 @@ class GroqGen(GenerationBase):
     """Groq generation model for text generation."""
 
     default_model_name = 'gemma2-9b-it'
-    default_api_params = {  # noqa: RUF012
+    default_api_params = {
         'top_p': 1.0,
     }
 

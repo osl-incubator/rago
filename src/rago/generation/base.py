@@ -33,7 +33,7 @@ class GenerationBase(RagoBase):
         'question: \n```\n{query}\n```\ncontext: ```\n{context}\n```'
     )
     structured_output: Optional[Type[BaseModel]] = None
-    api_params: dict[str, Any] = {}  # noqa: RUF012
+    api_params: dict[str, Any] = {}
     system_message: str = ''
 
     # default parameters that can be overwritten by the derived class
@@ -44,7 +44,7 @@ class GenerationBase(RagoBase):
     default_prompt_template: str = (
         'question: \n```\n{query}\n```\ncontext: ```\n{context}\n```'
     )
-    default_api_params: dict[str, Any] = {}  # noqa: RUF012
+    default_api_params: dict[str, Any] = {}
 
     def __init__(
         self,

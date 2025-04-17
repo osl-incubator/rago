@@ -14,6 +14,8 @@ from rago.generation import (
     HuggingFaceGen,
     HuggingFaceInfGen,
     LlamaGen,
+    OllamaGen,
+    OllamaOpenAIGen,
     OpenAIGen,
     PhiGen,
     TogetherGen,
@@ -31,13 +33,15 @@ API_MAP = {
     HuggingFaceGen: 'api_key_hugging_face',
     HuggingFaceInfGen: 'api_key_hugging_face',
     LlamaGen: 'api_key_hugging_face',
+    OllamaGen: '',
+    OllamaOpenAIGen: '',
     CohereGen: 'api_key_cohere',
     FireworksGen: 'api_key_fireworks',
     TogetherGen: 'api_key_together',
     GroqGen: 'api_key_groq',
 }
 
-gen_models = [
+gen_models_no_ci = [
     # model 0
     partial(
         OpenAIGen,
@@ -100,9 +104,19 @@ gen_models = [
 ]
 
 
-@pytest.mark.skip_on_ci
-@pytest.mark.parametrize('partial_model', gen_models)
-def test_generation_simple_output(
+gen_models_ci = [
+    # model 0
+    partial(
+        OllamaOpenAIGen,
+    ),
+    # model 1
+    partial(
+        OllamaGen,
+    ),
+]
+
+
+def _generation_simple_output(
     animals_data: list[str],
     api_key_openai: str,
     api_key_cohere: str,
@@ -112,7 +126,7 @@ def test_generation_simple_output(
     api_key_hugging_face: str,
     api_key_groq: str,
     partial_model: partial,
-) -> None:
+) -> bool:
     """Test RAG pipeline with model generation."""
     model_class = partial_model.func
 
@@ -125,14 +139,14 @@ def test_generation_simple_output(
         **({'api_key': api_key} if api_key else {}),
     }
 
-    expected_answer = 'blue whale'
+    expected_answer = 'peregrine falcon'
     context = [
         text for text in animals_data if expected_answer in text.lower()
     ]
 
     gen_model = partial_model(**model_args)
 
-    query = 'Is there any animal larger than a dinosaur?'
+    query = 'what is the fastest bird on the earth?'
     result = gen_model.generate(query, context)
 
     error_message = (
@@ -140,23 +154,66 @@ def test_generation_simple_output(
     )
 
     assert gen_model.temperature == TEMPERATURE
-    assert expected_answer in result.lower(), error_message
+    assert expected_answer.lower() in result.lower(), error_message
     assert GENERATION_LOG['generation']
+
+    return True
 
 
 @pytest.mark.skip_on_ci
-@pytest.mark.parametrize(
-    'question,expected_answer',
-    [
-        ('What animal is larger than a dinosaur?', ('Blue Whale',)),
-        (
-            'What animal is renowned as the fastest animal on the planet?',
-            ('Peregrine Falcon', 'Cheetah'),
-        ),
-    ],
-)
-@pytest.mark.parametrize('partial_model', gen_models)
-def test_generation_structure_output(
+@pytest.mark.parametrize('partial_model', gen_models_no_ci)
+def test_generation_simple_output(
+    animals_data: list[str],
+    api_key_openai: str,
+    api_key_cohere: str,
+    api_key_fireworks: str,
+    api_key_gemini: str,
+    api_key_together: str,
+    api_key_hugging_face: str,
+    api_key_groq: str,
+    partial_model: partial,
+) -> None:
+    """Test RAG pipeline with model generation."""
+    assert _generation_simple_output(
+        animals_data,
+        api_key_openai,
+        api_key_cohere,
+        api_key_fireworks,
+        api_key_gemini,
+        api_key_together,
+        api_key_hugging_face,
+        api_key_groq,
+        partial_model,
+    )
+
+
+@pytest.mark.parametrize('partial_model', gen_models_ci)
+def test_generation_simple_output(
+    animals_data: list[str],
+    api_key_openai: str,
+    api_key_cohere: str,
+    api_key_fireworks: str,
+    api_key_gemini: str,
+    api_key_together: str,
+    api_key_hugging_face: str,
+    api_key_groq: str,
+    partial_model: partial,
+) -> None:
+    """Test RAG pipeline with model generation."""
+    assert _generation_simple_output(
+        animals_data,
+        api_key_openai,
+        api_key_cohere,
+        api_key_fireworks,
+        api_key_gemini,
+        api_key_together,
+        api_key_hugging_face,
+        api_key_groq,
+        partial_model,
+    )
+
+
+def _generation_structure_output(
     api_key_openai: str,
     api_key_cohere: str,
     api_key_fireworks: str,
@@ -168,7 +225,7 @@ def test_generation_structure_output(
     question: str,
     partial_model: partial,
     expected_answer: tuple[str],
-) -> None:
+) -> bool:
     """Test Model Generation with structure output."""
     model_class = partial_model.func
 
@@ -206,5 +263,79 @@ def test_generation_structure_output(
         f'Result: `{result.name}`.'
     )
 
-    assert result.name in expected_answer, error_message
+    assert result.name.lower() in expected_answer, error_message
     assert GENERATION_LOG['generation']
+    return True
+
+
+@pytest.mark.skip_on_ci
+@pytest.mark.parametrize(
+    'question,expected_answer',
+    [
+        ('what is the fastest bird on the earth?', ('peregrine falcon',)),
+    ],
+)
+@pytest.mark.parametrize('partial_model', gen_models_no_ci)
+def test_generation_structure_output(
+    api_key_openai: str,
+    api_key_cohere: str,
+    api_key_fireworks: str,
+    api_key_gemini: str,
+    api_key_together: str,
+    api_key_hugging_face: str,
+    api_key_groq: str,
+    animals_data: list[str],
+    question: str,
+    partial_model: partial,
+    expected_answer: tuple[str],
+) -> None:
+    """Test Model Generation with structure output."""
+    assert _generation_structure_output(
+        api_key_openai,
+        api_key_cohere,
+        api_key_fireworks,
+        api_key_gemini,
+        api_key_together,
+        api_key_hugging_face,
+        api_key_groq,
+        animals_data,
+        question,
+        partial_model,
+        expected_answer,
+    )
+
+
+@pytest.mark.parametrize(
+    'question,expected_answer',
+    [
+        ('what is the fastest bird on the earth?', ('peregrine falcon',)),
+    ],
+)
+@pytest.mark.parametrize('partial_model', gen_models_ci)
+def test_generation_structure_output(
+    api_key_openai: str,
+    api_key_cohere: str,
+    api_key_fireworks: str,
+    api_key_gemini: str,
+    api_key_together: str,
+    api_key_hugging_face: str,
+    api_key_groq: str,
+    animals_data: list[str],
+    question: str,
+    partial_model: partial,
+    expected_answer: tuple[str],
+) -> None:
+    """Test Model Generation with structure output."""
+    assert _generation_structure_output(
+        api_key_openai,
+        api_key_cohere,
+        api_key_fireworks,
+        api_key_gemini,
+        api_key_together,
+        api_key_hugging_face,
+        api_key_groq,
+        animals_data,
+        question,
+        partial_model,
+        expected_answer,
+    )

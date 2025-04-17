@@ -13,7 +13,7 @@ class RagoBase(ABC):
 
     api_key: str = ''
     cache: Optional[Cache] = None
-    logs: dict[str, Any] = {}  # noqa: RUF012
+    logs: dict[str, Any] = {}
 
     def __init__(
         self,

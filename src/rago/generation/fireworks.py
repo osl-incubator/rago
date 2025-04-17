@@ -18,7 +18,7 @@ class FireworksGen(GenerationBase):
     """Fireworks AI generation model for text generation."""
 
     default_model_name: str = 'accounts/fireworks/models/llama-v3-8b-instruct'
-    default_api_params = {  # noqa: RUF012
+    default_api_params = {
         'top_p': 0.9,
     }
 

@@ -20,7 +20,7 @@ class CohereGen(GenerationBase):
     """Cohere generation model for text generation."""
 
     default_model_name: str = 'command-r-plus-08-2024'
-    default_api_params = {  # noqa: RUF012
+    default_api_params = {
         'p': 0.9,
     }
 

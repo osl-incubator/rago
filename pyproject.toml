@@ -43,6 +43,7 @@ dependencies = [
   "fireworks-ai>0.15.10",
   "chromadb >=0.3.23",
   "together>=1.4.0",
+  "ollama (>=0.4.8)",
 ]
 
 [build-system]
@@ -130,6 +131,8 @@ ignore = [
   "PLR0911",  # Too many return statements
   "PLR0912",  # Too many branches
   "PLR0913",
+  "RUF012",  # Mutable class attr should be annotated with `typing.ClassVar`
+
 ]
 select = [
   "E",   # pycodestyle

@@ -137,6 +137,11 @@ jobs:
           poetry config virtualenvs.create false
           poetry install
 
+      - name: run ollama
+        run: |
+          ollama pull llama3.2:1b
+          ollama serve &
+
       - name: Run style checks
         if: success() || failure()
         run: |

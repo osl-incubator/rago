@@ -156,3 +156,12 @@ rag = Rago(
 )
 rag.prompt('What is the faster animal on Earth?')
 ```
+
+### Ollama
+
+For testing the generation with Ollama, run first the following commands:
+
+```bash
+$ ollama pull llama3.2:1b
+$ ollama serve
+```
