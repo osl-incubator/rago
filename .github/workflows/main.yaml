@@ -77,14 +77,10 @@ jobs:
       #     path: ~/.ollama
       #     key: ${{ matrix.os }}-ollama
 
-      - name: Copy ci conda env file for Windows
-        if: ${{ matrix.os == 'windows' }}
-        run: cp conda/ci-win.yaml conda/ci.yaml
-
       - uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
-          environment-file: conda/ci.yaml
+          environment-file: conda/ci-${{ matrix.os }}.yaml
           channels: conda-forge,nodefaults
           activate-environment: rago
           auto-update-conda: true
@@ -111,10 +107,8 @@ jobs:
       - name: Download llama model
         run: |
           sleep 20
+          ollama list
           ollama pull llama3.2:1b
-
-      - name: Run LLM
-        run: ollama run tinyllama 'Explain the basics of machine learning.'
 
       - name: check ollama installation
         run: |
@@ -156,7 +150,7 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
-          environment-file: conda/ci.yaml
+          environment-file: conda/ci-ubuntu.yaml
           channels: conda-forge,nodefaults
           activate-environment: rago
           auto-update-conda: true
