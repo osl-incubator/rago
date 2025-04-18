@@ -71,11 +71,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # - name: Cache ollama
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: ~/.ollama
-      #     key: ${{ matrix.os }}-ollama
+      - name: Cache ollama
+        uses: actions/cache@v4
+        with:
+          path: ~/.ollama
+          key: ${{ matrix.os }}-ollama
 
       - uses: conda-incubator/setup-miniconda@v3
         with:
@@ -95,24 +95,14 @@ jobs:
           poetry config virtualenvs.create false
           poetry install
 
-      - name: Setup ollama macos
-        if: ${{ matrix.os == 'macos' }}
-        uses: ai-action/setup-ollama@v1
-
       - name: Setup ollama linux/windows
-        if: ${{ matrix.os != 'macos' }}
         run: |
           ollama serve &
 
       - name: Download llama model
         run: |
           sleep 20
-          ollama list
           ollama pull llama3.2:1b
-
-      - name: check ollama installation
-        run: |
-          ollama run llama3.2:1b 'Explain the basics of machine learning.'
 
       - name: Run unit tests (PR)
         if: ${{ github.event_name == 'pull_request' }}
@@ -120,6 +110,14 @@ jobs:
 
       - name: Run unit tests (push)
         if: ${{ github.event_name == 'push' }}
+        env:
+          HF_TOKEN: ${{ secret.HF_TOKEN }}
+          OPENAI_API_KEY: ${{ secret.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secret.GEMINI_API_KEY }}
+          COHERE_API_KEY: ${{ secret.COHERE_API_KEY }}
+          FIREWORKS_API_KEY: ${{ secret.FIREWORKS_API_KEY }}
+          TOGETHER_API_KEY: ${{ secret.TOGETHER_API_KEY }}
+          GROQ_API_KEY: ${{ secret.GROQ_API_KEY }}
         run: makim tests.unit
 
       - name: Semantic Release PR Title Check

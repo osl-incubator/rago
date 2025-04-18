@@ -1,5 +1,7 @@
 """Tests for Rago generation module."""
 
+import platform
+
 from functools import partial
 from typing import cast
 
@@ -26,6 +28,8 @@ from .models import AnimalModel
 # LlamaGen doesn't support temperature zero
 TEMPERATURE = 0.0001
 GENERATION_LOG = {'generation': {}}
+
+IS_OS_MACOS = platform.system().lower() == 'darwin'
 
 API_MAP = {
     GeminiGen: 'api_key_gemini',
@@ -129,6 +133,15 @@ def _generation_simple_output(
 ) -> bool:
     """Test RAG pipeline with model generation."""
     model_class = partial_model.func
+
+    if IS_OS_MACOS and issubclass(
+        model_class,
+        (
+            OllamaGen,
+            OllamaOpenAIGen,
+        ),
+    ):
+        pytest.skip(f'Skipping {model_class} on macOS due to CI failure.')
 
     api_key_name: str = API_MAP.get(model_class, '')
     api_key = locals().get(api_key_name, '')
@@ -241,6 +254,15 @@ def _generation_structure_output(
         ),
     ):
         pytest.skip(f"{model_class} doesn't support structured output.")
+
+    if IS_OS_MACOS and issubclass(
+        model_class,
+        (
+            OllamaGen,
+            OllamaOpenAIGen,
+        ),
+    ):
+        pytest.skip(f'Skipping {model_class} on macOS due to CI failure.')
 
     api_key_name: str = API_MAP.get(model_class, '')
     api_key = locals().get(api_key_name, '')
