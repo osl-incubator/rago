@@ -115,7 +115,7 @@ jobs:
 
       - name: check ollama installation
         run: |
-          Run ollama-cli run llama3.2:1b 'Explain the basics of machine learning.'
+          ollama run llama3.2:1b 'Explain the basics of machine learning.'
 
       - name: Run unit tests (PR)
         if: ${{ github.event_name == 'pull_request' }}
