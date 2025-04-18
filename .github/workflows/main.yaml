@@ -71,6 +71,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Cache ollama
+        uses: actions/cache@v4
+        with:
+          path: ~/.ollama
+          key: ${{ matrix.os }}-ollama
+
       - name: Copy ci conda env file for Windows
         if: ${{ matrix.os == 'windows' }}
         run: cp conda/ci-win.yaml conda/ci.yaml
@@ -101,10 +107,10 @@ jobs:
         if: ${{ matrix.os != 'macos' }}
         run: |
           ollama serve &
-          sleep 10
 
       - name: download llama model
         run: |
+          sleep 20
           ollama pull llama3.2:1b
 
       - name: Run unit tests (PR)
