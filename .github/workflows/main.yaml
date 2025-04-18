@@ -94,8 +94,9 @@ jobs:
 
       - name: Execute ollama
         run: |
-          ollama pull llama3.2:1b
           ollama serve &
+          sleep 10
+          ollama pull llama3.2:1b
 
       - name: Run unit tests (PR)
         if: ${{ github.event_name == 'pull_request' }}
