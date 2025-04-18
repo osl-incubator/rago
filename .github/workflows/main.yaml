@@ -93,10 +93,18 @@ jobs:
           poetry config virtualenvs.create false
           poetry install
 
-      - name: Execute ollama
+      - name: Setup ollama macos
+        if: ${{ matrix.os == 'macos' }}
+        uses: ai-action/setup-ollama@v1
+
+      - name: Setup ollama linux/windows
+        if: ${{ matrix.os != 'macos' }}
         run: |
           ollama serve &
           sleep 10
+
+      - name: download llama model
+        run: |
           ollama pull llama3.2:1b
 
       - name: Run unit tests (PR)
