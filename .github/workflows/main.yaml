@@ -71,11 +71,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache ollama
-        uses: actions/cache@v4
-        with:
-          path: ~/.ollama
-          key: ${{ matrix.os }}-ollama
+      # - name: Cache ollama
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: ~/.ollama
+      #     key: ${{ matrix.os }}-ollama
 
       - name: Copy ci conda env file for Windows
         if: ${{ matrix.os == 'windows' }}
@@ -112,6 +112,10 @@ jobs:
         run: |
           sleep 20
           ollama pull llama3.2:1b
+
+      - name: check ollama installation
+        run: |
+          Run ollama-cli run llama3.2:1b 'Explain the basics of machine learning.'
 
       - name: Run unit tests (PR)
         if: ${{ github.event_name == 'pull_request' }}
