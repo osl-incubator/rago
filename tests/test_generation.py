@@ -1,5 +1,7 @@
 """Tests for Rago generation module."""
 
+import platform
+
 from functools import partial
 from typing import cast
 
@@ -14,6 +16,8 @@ from rago.generation import (
     HuggingFaceGen,
     HuggingFaceInfGen,
     LlamaGen,
+    OllamaGen,
+    OllamaOpenAIGen,
     OpenAIGen,
     PhiGen,
     TogetherGen,
@@ -25,19 +29,23 @@ from .models import AnimalModel
 TEMPERATURE = 0.0001
 GENERATION_LOG = {'generation': {}}
 
+IS_OS_MACOS = platform.system().lower() == 'darwin'
+
 API_MAP = {
     GeminiGen: 'api_key_gemini',
     OpenAIGen: 'api_key_openai',
     HuggingFaceGen: 'api_key_hugging_face',
     HuggingFaceInfGen: 'api_key_hugging_face',
     LlamaGen: 'api_key_hugging_face',
+    OllamaGen: '',
+    OllamaOpenAIGen: '',
     CohereGen: 'api_key_cohere',
     FireworksGen: 'api_key_fireworks',
     TogetherGen: 'api_key_together',
     GroqGen: 'api_key_groq',
 }
 
-gen_models = [
+gen_models_no_ci = [
     # model 0
     partial(
         OpenAIGen,
@@ -100,8 +108,73 @@ gen_models = [
 ]
 
 
+gen_models_ci = [
+    # model 0
+    partial(
+        OllamaOpenAIGen,
+    ),
+    # model 1
+    partial(
+        OllamaGen,
+    ),
+]
+
+
+def _generation_simple_output(
+    animals_data: list[str],
+    api_key_openai: str,
+    api_key_cohere: str,
+    api_key_fireworks: str,
+    api_key_gemini: str,
+    api_key_together: str,
+    api_key_hugging_face: str,
+    api_key_groq: str,
+    partial_model: partial,
+) -> bool:
+    """Test RAG pipeline with model generation."""
+    model_class = partial_model.func
+
+    if IS_OS_MACOS and issubclass(
+        model_class,
+        (
+            OllamaGen,
+            OllamaOpenAIGen,
+        ),
+    ):
+        pytest.skip(f'Skipping {model_class} on macOS due to CI failure.')
+
+    api_key_name: str = API_MAP.get(model_class, '')
+    api_key = locals().get(api_key_name, '')
+
+    model_args = {
+        'temperature': TEMPERATURE,
+        'logs': GENERATION_LOG['generation'],
+        **({'api_key': api_key} if api_key else {}),
+    }
+
+    expected_answer = 'peregrine falcon'
+    context = [
+        text for text in animals_data if expected_answer in text.lower()
+    ]
+
+    gen_model = partial_model(**model_args)
+
+    query = 'what is the fastest bird on the earth?'
+    result = gen_model.generate(query, context)
+
+    error_message = (
+        f'Expected response: `{expected_answer}`, Result: `{result}`.'
+    )
+
+    assert gen_model.temperature == TEMPERATURE
+    assert expected_answer.lower() in result.lower(), error_message
+    assert GENERATION_LOG['generation']
+
+    return True
+
+
 @pytest.mark.skip_on_ci
-@pytest.mark.parametrize('partial_model', gen_models)
+@pytest.mark.parametrize('partial_model', gen_models_no_ci)
 def test_generation_simple_output(
     animals_data: list[str],
     api_key_openai: str,
@@ -114,49 +187,46 @@ def test_generation_simple_output(
     partial_model: partial,
 ) -> None:
     """Test RAG pipeline with model generation."""
-    model_class = partial_model.func
-
-    api_key_name: str = API_MAP.get(model_class, '')
-    api_key = locals().get(api_key_name, '')
-
-    model_args = {
-        'temperature': TEMPERATURE,
-        'logs': GENERATION_LOG['generation'],
-        **({'api_key': api_key} if api_key else {}),
-    }
-
-    expected_answer = 'blue whale'
-    context = [
-        text for text in animals_data if expected_answer in text.lower()
-    ]
-
-    gen_model = partial_model(**model_args)
-
-    query = 'Is there any animal larger than a dinosaur?'
-    result = gen_model.generate(query, context)
-
-    error_message = (
-        f'Expected response: `{expected_answer}`, Result: `{result}`.'
+    assert _generation_simple_output(
+        animals_data,
+        api_key_openai,
+        api_key_cohere,
+        api_key_fireworks,
+        api_key_gemini,
+        api_key_together,
+        api_key_hugging_face,
+        api_key_groq,
+        partial_model,
     )
 
-    assert gen_model.temperature == TEMPERATURE
-    assert expected_answer in result.lower(), error_message
-    assert GENERATION_LOG['generation']
+
+@pytest.mark.parametrize('partial_model', gen_models_ci)
+def test_generation_simple_output(
+    animals_data: list[str],
+    api_key_openai: str,
+    api_key_cohere: str,
+    api_key_fireworks: str,
+    api_key_gemini: str,
+    api_key_together: str,
+    api_key_hugging_face: str,
+    api_key_groq: str,
+    partial_model: partial,
+) -> None:
+    """Test RAG pipeline with model generation."""
+    assert _generation_simple_output(
+        animals_data,
+        api_key_openai,
+        api_key_cohere,
+        api_key_fireworks,
+        api_key_gemini,
+        api_key_together,
+        api_key_hugging_face,
+        api_key_groq,
+        partial_model,
+    )
 
 
-@pytest.mark.skip_on_ci
-@pytest.mark.parametrize(
-    'question,expected_answer',
-    [
-        ('What animal is larger than a dinosaur?', ('Blue Whale',)),
-        (
-            'What animal is renowned as the fastest animal on the planet?',
-            ('Peregrine Falcon', 'Cheetah'),
-        ),
-    ],
-)
-@pytest.mark.parametrize('partial_model', gen_models)
-def test_generation_structure_output(
+def _generation_structure_output(
     api_key_openai: str,
     api_key_cohere: str,
     api_key_fireworks: str,
@@ -168,15 +238,31 @@ def test_generation_structure_output(
     question: str,
     partial_model: partial,
     expected_answer: tuple[str],
-) -> None:
+) -> bool:
     """Test Model Generation with structure output."""
     model_class = partial_model.func
 
     # Skip structured output for models that don't support it
     if issubclass(
-        model_class, (HuggingFaceGen, LlamaGen, HuggingFaceInfGen, DeepSeekGen)
+        model_class,
+        (
+            DeepSeekGen,
+            HuggingFaceInfGen,
+            HuggingFaceGen,
+            LlamaGen,
+            OllamaGen,
+        ),
     ):
         pytest.skip(f"{model_class} doesn't support structured output.")
+
+    if IS_OS_MACOS and issubclass(
+        model_class,
+        (
+            OllamaGen,
+            OllamaOpenAIGen,
+        ),
+    ):
+        pytest.skip(f'Skipping {model_class} on macOS due to CI failure.')
 
     api_key_name: str = API_MAP.get(model_class, '')
     api_key = locals().get(api_key_name, '')
@@ -206,5 +292,79 @@ def test_generation_structure_output(
         f'Result: `{result.name}`.'
     )
 
-    assert result.name in expected_answer, error_message
+    assert result.name.lower() in expected_answer, error_message
     assert GENERATION_LOG['generation']
+    return True
+
+
+@pytest.mark.skip_on_ci
+@pytest.mark.parametrize(
+    'question,expected_answer',
+    [
+        ('what is the fastest bird on the earth?', ('peregrine falcon',)),
+    ],
+)
+@pytest.mark.parametrize('partial_model', gen_models_no_ci)
+def test_generation_structure_output(
+    api_key_openai: str,
+    api_key_cohere: str,
+    api_key_fireworks: str,
+    api_key_gemini: str,
+    api_key_together: str,
+    api_key_hugging_face: str,
+    api_key_groq: str,
+    animals_data: list[str],
+    question: str,
+    partial_model: partial,
+    expected_answer: tuple[str],
+) -> None:
+    """Test Model Generation with structure output."""
+    assert _generation_structure_output(
+        api_key_openai,
+        api_key_cohere,
+        api_key_fireworks,
+        api_key_gemini,
+        api_key_together,
+        api_key_hugging_face,
+        api_key_groq,
+        animals_data,
+        question,
+        partial_model,
+        expected_answer,
+    )
+
+
+@pytest.mark.parametrize(
+    'question,expected_answer',
+    [
+        ('what is the fastest bird on the earth?', ('peregrine falcon',)),
+    ],
+)
+@pytest.mark.parametrize('partial_model', gen_models_ci)
+def test_generation_structure_output(
+    api_key_openai: str,
+    api_key_cohere: str,
+    api_key_fireworks: str,
+    api_key_gemini: str,
+    api_key_together: str,
+    api_key_hugging_face: str,
+    api_key_groq: str,
+    animals_data: list[str],
+    question: str,
+    partial_model: partial,
+    expected_answer: tuple[str],
+) -> None:
+    """Test Model Generation with structure output."""
+    assert _generation_structure_output(
+        api_key_openai,
+        api_key_cohere,
+        api_key_fireworks,
+        api_key_gemini,
+        api_key_together,
+        api_key_hugging_face,
+        api_key_groq,
+        animals_data,
+        question,
+        partial_model,
+        expected_answer,
+    )

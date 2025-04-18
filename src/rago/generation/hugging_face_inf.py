@@ -14,7 +14,7 @@ class HuggingFaceInfGen(GenerationBase):
     """HuggingFaceGen with InferenceClient."""
 
     default_model_name: str = 'google/gemma-2-2b-it'
-    default_api_params = {  # noqa: RUF012
+    default_api_params = {
         'temperature': 0.7,
         'max_new_tokens': 512,
     }

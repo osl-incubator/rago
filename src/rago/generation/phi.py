@@ -17,7 +17,7 @@ class PhiGen(GenerationBase):
     default_model_name: str = 'microsoft/phi-2'
     default_temperature: float = 0.7
     default_output_max_length: int = 500
-    default_api_params = {  # noqa: RUF012
+    default_api_params = {
         'top_p': 0.9,
         'num_return_sequences': 1,
     }

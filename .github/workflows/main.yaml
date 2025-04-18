@@ -58,23 +58,33 @@ jobs:
       cancel-in-progress: true
 
     env:
-      HF_TOKEN: ${{ secrets.HF_TOKEN }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+      HF_TOKEN: "nokey"
+      OPENAI_API_KEY: "nokey"
+      GEMINI_API_KEY: "nokey"
+      COHERE_API_KEY: "nokey"
+      FIREWORKS_API_KEY: "nokey"
+      TOGETHER_API_KEY: "nokey"
+      GROQ_API_KEY: "nokey"
       TOKENIZERS_PARALLELISM: false
+      OLLAMA_LLM_LIBRARY: cpu
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Copy ci conda env file for Windows
-        if: ${{ matrix.os == 'windows' }}
-        run: cp conda/ci-win.yaml conda/ci.yaml
+      - name: Cache ollama
+        uses: actions/cache@v4
+        with:
+          path: ~/.ollama
+          key: ${{ matrix.os }}-ollama
+
+      - name: Setup ollama macos
+        if: ${{ matrix.os == 'macos' }}
+        uses: ai-action/setup-ollama@v1
 
       - uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
-          environment-file: conda/ci.yaml
+          environment-file: conda/ci-${{ matrix.os }}.yaml
           channels: conda-forge,nodefaults
           activate-environment: rago
           auto-update-conda: true
@@ -89,12 +99,30 @@ jobs:
           poetry config virtualenvs.create false
           poetry install
 
+      - name: Setup ollama linux/windows
+        if: ${{ matrix.os != 'macos' }}
+        run: |
+          ollama serve &
+
+      - name: Download llama model
+        run: |
+          sleep 20
+          ollama pull llama3.2:1b
+
       - name: Run unit tests (PR)
         if: ${{ github.event_name == 'pull_request' }}
         run: pytest -m "not skip_on_ci" -vvv
 
       - name: Run unit tests (push)
         if: ${{ github.event_name == 'push' }}
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+          FIREWORKS_API_KEY: ${{ secrets.FIREWORKS_API_KEY }}
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: makim tests.unit
 
       - name: Semantic Release PR Title Check
@@ -125,7 +153,7 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
-          environment-file: conda/ci.yaml
+          environment-file: conda/ci-ubuntu.yaml
           channels: conda-forge,nodefaults
           activate-environment: rago
           auto-update-conda: true

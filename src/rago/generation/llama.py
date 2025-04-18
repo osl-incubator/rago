@@ -4,13 +4,21 @@ from __future__ import annotations
 
 import warnings
 
+from copy import copy
+from typing import Any
+
+import instructor
+import openai
 import torch
 
 from langdetect import detect
+from ollama import Client as Ollama
+from pydantic import BaseModel
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 from typeguard import typechecked
 
 from rago.generation.base import GenerationBase
+from rago.generation.openai import OpenAIGen
 
 
 @typechecked
@@ -20,7 +28,7 @@ class LlamaGen(GenerationBase):
     default_model_name: str = 'meta-llama/Llama-3.2-1B'
     default_temperature: float = 0.5
     default_output_max_length: int = 500
-    default_api_params = {  # noqa: RUF012
+    default_api_params = {
         'top_p': 1.0,
         'num_return_sequences': 1,
     }
@@ -92,3 +100,87 @@ class LlamaGen(GenerationBase):
         answer = str(response[0].get('generated_text', ''))
         # Strip off any redundant text after the answer itself
         return answer.split('Answer:')[-1].strip()
+
+
+@typechecked
+class OllamaGen(GenerationBase):
+    """Ollama Generation class for local inference via ollama-python."""
+
+    default_model_name = 'llama3.2:1b'
+    default_temperature: float = 0.5
+    default_output_max_length: int = 500
+    default_api_params: dict[str, Any] = {
+        'base_url': 'http://localhost:11434/'
+    }
+
+    def _setup(self) -> None:
+        """Instantiate the Ollama client."""
+        self.api_params = copy(
+            self.api_params if self.api_params else self.default_api_params
+        )
+        base_url = self.api_params.pop('base_url')
+
+        self.model = Ollama(
+            host=base_url, headers={'x-some-header': 'some-value'}
+        )
+
+    def generate(self, query: str, context: list[str]) -> str | BaseModel:
+        """
+        Generate text by sending a prompt to the local Ollama model.
+
+        Parameters
+        ----------
+        query : str
+            The user query.
+        context : list[str]
+            Augmented context strings.
+
+        Returns
+        -------
+        str
+            The generated response text.
+        """
+        input_text = self.prompt_template.format(
+            query=query,
+            context=' '.join(context),
+        )
+
+        messages = []
+        if self.system_message:
+            messages.append({'role': 'system', 'content': self.system_message})
+        messages.append({'role': 'user', 'content': input_text})
+
+        params = {
+            'model': self.model_name,
+            'messages': messages,
+            **(self.api_params or {}),
+        }
+        response = self.model.chat(**params)
+        return str(response.message.content).strip()
+
+
+@typechecked
+class OllamaOpenAIGen(OpenAIGen):
+    """OllamaGen via the Ollama Python client."""
+
+    default_model_name = 'llama3.2:1b'
+    default_api_params: dict[str, Any] = {
+        'base_url': 'http://localhost:11434/v1'
+    }
+
+    def _setup(self) -> None:
+        self.api_params = copy(
+            self.api_params if self.api_params else self.default_api_params
+        )
+        base_url = self.api_params.pop('base_url')
+
+        model = openai.OpenAI(
+            api_key='nokey',
+            base_url=base_url,
+        )
+
+        self.model = (
+            instructor.from_openai(model, mode=instructor.Mode.JSON)
+            if self.structured_output
+            else model
+        )

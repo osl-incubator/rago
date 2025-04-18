@@ -19,7 +19,7 @@ class DeepSeekGen(GenerationBase):
     default_model_name: str = 'deepseek-ai/deepseek-llm-7b-chat'
     default_temperature: float = 0.5
     default_output_max_length: int = 500
-    default_api_params = {  # noqa: RUF012
+    default_api_params = {
         'top_p': 0.9,
         'num_return_sequences': 1,
     }

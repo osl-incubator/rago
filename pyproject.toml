@@ -36,6 +36,7 @@ dependencies = [
   "instructor >=1",
   "pydantic >=2",
   "torch >=2,<2.6",
+  "torchvision >=0.20.0",
   "onnxruntime <=1.19.2 ; python_version < '3.10'",  # indirect dependency
   "eval-type-backport >=0.2 ; python_version < '3.10'",
   "joblib (>=1.4.2,<2.0.0)",
@@ -43,6 +44,9 @@ dependencies = [
   "fireworks-ai>0.15.10",
   "chromadb >=0.3.23",
   "together>=1.4.0",
+  "ollama (>=0.4.8)",
+  # Unable to find installation candidates for pillow (11.2.0)
+  "pillow (>=11.2.1)",
 ]
 
 [build-system]
@@ -130,6 +134,8 @@ ignore = [
   "PLR0911",  # Too many return statements
   "PLR0912",  # Too many branches
   "PLR0913",
+  "RUF012",  # Mutable class attr should be annotated with `typing.ClassVar`
+
 ]
 select = [
   "E",   # pycodestyle

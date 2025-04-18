@@ -3,6 +3,7 @@ channels:
   - nodefaults
   - conda-forge
 dependencies:
+  - ollama
   - python 3.9.*
   - pip
   - poetry >=2
