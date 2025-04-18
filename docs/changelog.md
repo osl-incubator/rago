@@ -1,6 +1,19 @@
 # Release Notes
 ---
 
+# [0.14.0](https://github.com/osl-incubator/rago/compare/0.13.0...0.14.0) (2025-04-18)
+
+
+### Features
+
+* Add `microsoft/phi-2` for Text Generation ([#91](https://github.com/osl-incubator/rago/issues/91)) ([9b2399f](https://github.com/osl-incubator/rago/commit/9b2399f071c1696bcb562ccbf825900798d20bf8))
+* Add support for fireworks-ai ([#74](https://github.com/osl-incubator/rago/issues/74)) ([db852ae](https://github.com/osl-incubator/rago/commit/db852aef229d8ce2ce33d89ba85110565a9b3d4d))
+* Add support for Ollama ([#97](https://github.com/osl-incubator/rago/issues/97)) ([5cae045](https://github.com/osl-incubator/rago/commit/5cae0457764f6bb95ddde48c78563ea092b1f82a))
+* **augmented:** add ChromaBD backend support ([#54](https://github.com/osl-incubator/rago/issues/54)) ([22105c2](https://github.com/osl-incubator/rago/commit/22105c2062acfe497b0d47b76815291a6432d691))
+* **generation:** add backend support for Groq ([#86](https://github.com/osl-incubator/rago/issues/86)) ([3cda11b](https://github.com/osl-incubator/rago/commit/3cda11b81ed9f5818c9648cbe07f191a9a8099be))
+* **generation:** add backend support for HuggingFace using inference ([#85](https://github.com/osl-incubator/rago/issues/85)) ([0be567f](https://github.com/osl-incubator/rago/commit/0be567f335857b35a1df6a9218b12ed5aaad165e))
+* **generation:** add backend support for Together ([#79](https://github.com/osl-incubator/rago/issues/79)) ([30c13ad](https://github.com/osl-incubator/rago/commit/30c13ad125ed964cfbfafbf6b452f16f55ec8d10))
+
 # [0.13.0](https://github.com/osl-incubator/rago/compare/0.12.0...0.13.0) (2025-03-13)
 
 
