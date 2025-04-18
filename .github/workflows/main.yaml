@@ -66,6 +66,7 @@ jobs:
       TOGETHER_API_KEY: "nokey"
       GROQ_API_KEY: "nokey"
       TOKENIZERS_PARALLELISM: false
+      OLLAMA_LLM_LIBRARY: cpu
 
     steps:
       - uses: actions/checkout@v4
