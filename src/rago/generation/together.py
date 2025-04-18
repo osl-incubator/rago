@@ -19,7 +19,7 @@ class TogetherGen(GenerationBase):
     """Together AI generation model for text generation."""
 
     default_model_name: str = 'mistralai/Mixtral-8x7B-Instruct-v0.1'
-    default_api_params = {  # noqa : RUF012
+    default_api_params = {
         'top_p': 0.9,
         'frequency_penalty': 0.0,
         'presence_penalty': 0.0,
