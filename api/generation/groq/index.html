@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://osl-incubator.github.io/rago/contributing/">
+        <link rel="canonical" href="https://osl-incubator.github.io/rago/api/generation/groq/">
       
       
-        <link rel="prev" href="../changelog/">
+        <link rel="prev" href="../gemini/">
       
       
-        <link rel="next" href="../api/">
+        <link rel="next" href="../hugging_face/">
       
       
-      <link rel="icon" href="../images/favicon.png">
+      <link rel="icon" href="../../../images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
     
     
       
-        <title>Contributing - Rago</title>
+        <title>groq - Rago</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4af4bdda.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#contributing" class="md-skip">
+        <a href="#rago.generation.groq" class="md-skip">
           Skip to content
         </a>
       
@@ -90,9 +90,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Rago" class="md-header__button md-logo" aria-label="Rago" data-md-component="logo">
+    <a href="../../.." title="Rago" class="md-header__button md-logo" aria-label="Rago" data-md-component="logo">
       
-  <img src="../images/logo.png" alt="logo">
+  <img src="../../../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Contributing
+              <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> groq
             
           </span>
         </div>
@@ -206,9 +206,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Rago" class="md-nav__button md-logo" aria-label="Rago" data-md-component="logo">
+    <a href="../../.." title="Rago" class="md-nav__button md-logo" aria-label="Rago" data-md-component="logo">
       
-  <img src="../images/logo.png" alt="logo">
+  <img src="../../../images/logo.png" alt="logo">
 
     </a>
     Rago
@@ -235,7 +235,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -257,7 +257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
+      <a href="../../../installation/" class="md-nav__link">
         
   
   
@@ -279,7 +279,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../changelog/" class="md-nav__link">
+      <a href="../../../changelog/" class="md-nav__link">
         
   
   
@@ -298,32 +298,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Contributing
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../contributing/" class="md-nav__link">
         
   
   
@@ -334,194 +312,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#types-of-contributions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Types of Contributions
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Types of Contributions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#report-bugs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Report Bugs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix-bugs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fix Bugs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#implement-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implement Features
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#write-documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Write Documentation
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#submit-feedback" class="md-nav__link">
-    <span class="md-ellipsis">
-      Submit Feedback
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get-started" class="md-nav__link">
-    <span class="md-ellipsis">
-      Get Started
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Get Started">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prepare-and-use-virtual-environment" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prepare and use virtual environment
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-the-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      Install the dependencies
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#commit-your-changes-and-push-your-branch-to-github" class="md-nav__link">
-    <span class="md-ellipsis">
-      Commit your changes and push your branch to GitHub
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pull-request-guidelines" class="md-nav__link">
-    <span class="md-ellipsis">
-      Pull Request Guidelines
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#running-tests-locally" class="md-nav__link">
-    <span class="md-ellipsis">
-      Running tests locally
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Running tests locally">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#running-tests-with-coverage-locally" class="md-nav__link">
-    <span class="md-ellipsis">
-      Running tests with coverage locally
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#automation-tasks-with-makim" class="md-nav__link">
-    <span class="md-ellipsis">
-      Automation Tasks with Makim
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#release" class="md-nav__link">
-    <span class="md-ellipsis">
-      Release
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Release">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#commit-message-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      Commit message format
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -530,8 +320,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -541,11 +333,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -561,7 +353,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             API
@@ -572,6 +364,8 @@
                 
   
   
+    
+  
   
   
     
@@ -597,15 +391,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../api/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   
@@ -624,7 +418,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5_1">
             <span class="md-nav__icon md-icon"></span>
             <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> rago
@@ -674,7 +468,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../api/augmented/" class="md-nav__link ">
+            <a href="../../augmented/" class="md-nav__link ">
               
   
   
@@ -709,7 +503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/augmented/base/" class="md-nav__link">
+      <a href="../../augmented/base/" class="md-nav__link">
         
   
   
@@ -732,7 +526,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/augmented/cohere/" class="md-nav__link">
+      <a href="../../augmented/cohere/" class="md-nav__link">
         
   
   
@@ -779,7 +573,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../api/augmented/db/" class="md-nav__link ">
+            <a href="../../augmented/db/" class="md-nav__link ">
               
   
   
@@ -814,7 +608,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/augmented/db/base/" class="md-nav__link">
+      <a href="../../augmented/db/base/" class="md-nav__link">
         
   
   
@@ -837,7 +631,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/augmented/db/chroma/" class="md-nav__link">
+      <a href="../../augmented/db/chroma/" class="md-nav__link">
         
   
   
@@ -860,7 +654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/augmented/db/faiss/" class="md-nav__link">
+      <a href="../../augmented/db/faiss/" class="md-nav__link">
         
   
   
@@ -891,7 +685,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/augmented/fireworks/" class="md-nav__link">
+      <a href="../../augmented/fireworks/" class="md-nav__link">
         
   
   
@@ -914,7 +708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/augmented/openai/" class="md-nav__link">
+      <a href="../../augmented/openai/" class="md-nav__link">
         
   
   
@@ -937,7 +731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/augmented/sentence_transformer/" class="md-nav__link">
+      <a href="../../augmented/sentence_transformer/" class="md-nav__link">
         
   
   
@@ -960,7 +754,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/augmented/spacy/" class="md-nav__link">
+      <a href="../../augmented/spacy/" class="md-nav__link">
         
   
   
@@ -983,7 +777,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/augmented/together/" class="md-nav__link">
+      <a href="../../augmented/together/" class="md-nav__link">
         
   
   
@@ -1014,7 +808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/base/" class="md-nav__link">
+      <a href="../../base/" class="md-nav__link">
         
   
   
@@ -1037,7 +831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/core/" class="md-nav__link">
+      <a href="../../core/" class="md-nav__link">
         
   
   
@@ -1082,7 +876,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../api/extensions/" class="md-nav__link ">
+            <a href="../../extensions/" class="md-nav__link ">
               
   
   
@@ -1117,7 +911,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/extensions/base/" class="md-nav__link">
+      <a href="../../extensions/base/" class="md-nav__link">
         
   
   
@@ -1140,7 +934,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/extensions/cache/" class="md-nav__link">
+      <a href="../../extensions/cache/" class="md-nav__link">
         
   
   
@@ -1168,6 +962,8 @@
                 
   
   
+    
+  
   
   
     
@@ -1205,15 +1001,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_6" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../api/generation/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -1232,7 +1028,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5_1_6">
             <span class="md-nav__icon md-icon"></span>
             <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> generation
@@ -1248,7 +1044,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/generation/base/" class="md-nav__link">
+      <a href="../base/" class="md-nav__link">
         
   
   
@@ -1271,7 +1067,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/generation/cohere/" class="md-nav__link">
+      <a href="../cohere/" class="md-nav__link">
         
   
   
@@ -1294,7 +1090,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/generation/deepseek/" class="md-nav__link">
+      <a href="../deepseek/" class="md-nav__link">
         
   
   
@@ -1317,7 +1113,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/generation/fireworks/" class="md-nav__link">
+      <a href="../fireworks/" class="md-nav__link">
         
   
   
@@ -1340,7 +1136,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/generation/gemini/" class="md-nav__link">
+      <a href="../gemini/" class="md-nav__link">
         
   
   
@@ -1360,10 +1156,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../api/generation/groq/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> groq
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1374,6 +1192,50 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rago.generation.groq.GroqGen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;GroqGen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" GroqGen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rago.generation.groq.GroqGen.generate" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;generate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1386,7 +1248,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/generation/hugging_face/" class="md-nav__link">
+      <a href="../hugging_face/" class="md-nav__link">
         
   
   
@@ -1409,7 +1271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/generation/hugging_face_inf/" class="md-nav__link">
+      <a href="../hugging_face_inf/" class="md-nav__link">
         
   
   
@@ -1432,7 +1294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/generation/llama/" class="md-nav__link">
+      <a href="../llama/" class="md-nav__link">
         
   
   
@@ -1455,7 +1317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/generation/openai/" class="md-nav__link">
+      <a href="../openai/" class="md-nav__link">
         
   
   
@@ -1478,7 +1340,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/generation/phi/" class="md-nav__link">
+      <a href="../phi/" class="md-nav__link">
         
   
   
@@ -1501,7 +1363,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/generation/together/" class="md-nav__link">
+      <a href="../together/" class="md-nav__link">
         
   
   
@@ -1558,7 +1420,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../api/retrieval/" class="md-nav__link ">
+            <a href="../../retrieval/" class="md-nav__link ">
               
   
   
@@ -1593,7 +1455,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/retrieval/base/" class="md-nav__link">
+      <a href="../../retrieval/base/" class="md-nav__link">
         
   
   
@@ -1616,7 +1478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/retrieval/file/" class="md-nav__link">
+      <a href="../../retrieval/file/" class="md-nav__link">
         
   
   
@@ -1661,7 +1523,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../api/retrieval/text_splitter/" class="md-nav__link ">
+            <a href="../../retrieval/text_splitter/" class="md-nav__link ">
               
   
   
@@ -1696,7 +1558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/retrieval/text_splitter/base/" class="md-nav__link">
+      <a href="../../retrieval/text_splitter/base/" class="md-nav__link">
         
   
   
@@ -1719,7 +1581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/retrieval/text_splitter/langchain/" class="md-nav__link">
+      <a href="../../retrieval/text_splitter/langchain/" class="md-nav__link">
         
   
   
@@ -1770,7 +1632,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../api/retrieval/tools/" class="md-nav__link ">
+            <a href="../../retrieval/tools/" class="md-nav__link ">
               
   
   
@@ -1805,7 +1667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/retrieval/tools/pdf/" class="md-nav__link">
+      <a href="../../retrieval/tools/pdf/" class="md-nav__link">
         
   
   
@@ -1859,7 +1721,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../example/" class="md-nav__link">
+      <a href="../../../example/" class="md-nav__link">
         
   
   
@@ -1901,163 +1763,19 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#types-of-contributions" class="md-nav__link">
+  <a href="#rago.generation.groq.GroqGen" class="md-nav__link">
     <span class="md-ellipsis">
-      Types of Contributions
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;GroqGen
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Types of Contributions">
+    <nav class="md-nav" aria-label=" GroqGen">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#report-bugs" class="md-nav__link">
+  <a href="#rago.generation.groq.GroqGen.generate" class="md-nav__link">
     <span class="md-ellipsis">
-      Report Bugs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix-bugs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fix Bugs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#implement-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implement Features
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#write-documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Write Documentation
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#submit-feedback" class="md-nav__link">
-    <span class="md-ellipsis">
-      Submit Feedback
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get-started" class="md-nav__link">
-    <span class="md-ellipsis">
-      Get Started
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Get Started">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prepare-and-use-virtual-environment" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prepare and use virtual environment
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-the-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      Install the dependencies
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#commit-your-changes-and-push-your-branch-to-github" class="md-nav__link">
-    <span class="md-ellipsis">
-      Commit your changes and push your branch to GitHub
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pull-request-guidelines" class="md-nav__link">
-    <span class="md-ellipsis">
-      Pull Request Guidelines
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#running-tests-locally" class="md-nav__link">
-    <span class="md-ellipsis">
-      Running tests locally
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Running tests locally">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#running-tests-with-coverage-locally" class="md-nav__link">
-    <span class="md-ellipsis">
-      Running tests with coverage locally
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#automation-tasks-with-makim" class="md-nav__link">
-    <span class="md-ellipsis">
-      Automation Tasks with Makim
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#release" class="md-nav__link">
-    <span class="md-ellipsis">
-      Release
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Release">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#commit-message-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      Commit message format
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;generate
     </span>
   </a>
   
@@ -2087,185 +1805,349 @@
   
 
 
-<h1 id="contributing">Contributing</h1>
-<p>In order to be able to contribute, it is important that you understand the
-project layout.</p>
-<p>This project uses the <em>src layout</em>, which means that the package code is located
-at <code class="language-python highlight"><span class="o">./</span><span class="n">src</span><span class="o">/</span><span class="n">rago</span></code>.</p>
-<p>For my information, check the official documentation:
-<a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/">https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/</a></p>
-<p>In addition, you should know that to build our package we use
-<a href="https://python-poetry.org/">Poetry</a>, it's a Python package management tool that
-simplifies the process of building and publishing Python packages. It allows us
-to easily manage dependencies, virtual environments and package versions. Poetry
-also includes features such as dependency resolution, lock files and publishing
-to PyPI. Overall, Poetry streamlines the process of managing Python packages,
-making it easier for us to create and share our code with others.</p>
-<p>Contributions are welcome, and they are greatly appreciated! Every little bit
-helps, and credit will always be given.</p>
-<p>You can contribute in many ways:</p>
-<h2 id="types-of-contributions">Types of Contributions</h2>
-<h3 id="report-bugs">Report Bugs</h3>
-<p>Report bugs at <a href="https://github.com/osl-incubator/rago.git/issues">https://github.com/osl-incubator/rago.git/issues</a>.</p>
-<p>If you are reporting a bug, please include:</p>
-<ul>
-<li>Your operating system name and version.</li>
-<li>Any details about your local setup that might be helpful in troubleshooting.</li>
-<li>Detailed steps to reproduce the bug.</li>
-</ul>
-<h3 id="fix-bugs">Fix Bugs</h3>
-<p>Look through the GitHub issues for bugs. Anything tagged with “bug” and “help
-wanted” is open to whoever wants to implement it.</p>
-<h3 id="implement-features">Implement Features</h3>
-<p>Look through the GitHub issues for features. Anything tagged with “enhancement”
-and “help wanted” is open to whoever wants to implement it.</p>
-<h3 id="write-documentation">Write Documentation</h3>
-<p>Rago could always use more documentation, whether as part of the official Rago
-docs, in docstrings, or even on the web in blog posts, articles, and such.</p>
-<h3 id="submit-feedback">Submit Feedback</h3>
-<p>The best way to send feedback is to file an issue at
-<a href="https://github.com/osl-incubator/rago.git/issues">https://github.com/osl-incubator/rago.git/issues</a>.</p>
-<p>If you are proposing a feature:</p>
-<ul>
-<li>Explain in detail how it would work.</li>
-<li>Keep the scope as narrow as possible, to make it easier to implement.</li>
-<li>Remember that this is a volunteer-driven project, and that contributions are
-  welcome :)</li>
-</ul>
-<h2 id="get-started">Get Started</h2>
-<p>Ready to contribute? Here’s how to set up <code class="language-python highlight"><span class="n">rago</span></code> for local development.</p>
-<ol>
-<li>Fork the <code class="language-python highlight"><span class="n">rago</span></code> repo on GitHub.</li>
-<li>Clone your fork locally and change to the directory of your project:</li>
-</ol>
-<div class="language-bash highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:your_name_here/rago.git
-$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>rago/
+<div class="doc doc-object doc-module">
+
+
+
+<h1 id="rago.generation.groq" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <span class="doc doc-object-name doc-module-name">groq</span>
+
+
+</h1>
+
+    <div class="doc doc-contents first">
+
+        <p>Groq class for text generation.</p>
+
+
+
+
+
+
+
+
+<p><span class="doc-section-title">Classes:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+          <b><code><a class="autorefs autorefs-internal" title="            GroqGen (rago.generation.groq.GroqGen)" href="#rago.generation.groq.GroqGen">GroqGen</a></code></b>
+          –
+          <div class="doc-md-description">
+            <p>Groq generation model for text generation.</p>
+          </div>
+        </li>
+    </ul>
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="rago.generation.groq.GroqGen" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <span class="doc doc-object-name doc-class-name">GroqGen</span>
+
+
+</h2>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">GroqGen</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float">float</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">prompt_template</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">output_max_length</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a></span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="n">device</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+    <span class="n">structured_output</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" title="typing.Type" href="https://docs.python.org/3/library/typing.html#typing.Type">Type</a></span><span class="p">[</span><span class="n"><span title="pydantic.BaseModel">BaseModel</span></span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">system_message</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">api_params</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a></span><span class="p">]</span> <span class="o">=</span> <span class="n"><span title="rago.generation.base.DEFAULT_API_PARAMS">DEFAULT_API_PARAMS</span></span><span class="p">,</span>
+    <span class="n">api_key</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">cache</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="            Cache (rago.extensions.cache.Cache)" href="../../extensions/cache/#rago.extensions.cache.Cache">Cache</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">logs</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-external" title="typing.Any" href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a></span><span class="p">]</span> <span class="o">=</span> <span class="n"><span title="rago.generation.base.DEFAULT_LOGS">DEFAULT_LOGS</span></span><span class="p">,</span>
+<span class="p">)</span>
 </code></pre></div>
-<p>Also, create a remote to the upstream repository, you will need that later:</p>
-<div class="language-bash highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/osl-incubator/rago.git
-$<span class="w"> </span>git<span class="w"> </span>fetch<span class="w"> </span>--all
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="            GenerationBase (rago.generation.base.GenerationBase)" href="../base/#rago.generation.base.GenerationBase">GenerationBase</a></code></p>
+
+
+        <p>Groq generation model for text generation.</p>
+
+
+
+
+
+
+
+
+
+
+<p><span class="doc-section-title">Methods:</span></p>
+    <ul>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="            generate (rago.generation.groq.GroqGen.generate)" href="#rago.generation.groq.GroqGen.generate">generate</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Generate text using the Groq AP.</p>
+            </div>
+          </li>
+    </ul>
+
+
+
+                  <details class="quote">
+                    <summary>Source code in <code>src/rago/generation/base.py</code></summary>
+                    <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">prompt_template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">output_max_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+    <span class="n">structured_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="n">BaseModel</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">system_message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">api_params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">DEFAULT_API_PARAMS</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">cache</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Cache</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">logs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">DEFAULT_LOGS</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize Generation class.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">logs</span> <span class="ow">is</span> <span class="n">DEFAULT_LOGS</span><span class="p">:</span>
+        <span class="n">logs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span> <span class="n">logs</span><span class="o">=</span><span class="n">logs</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">model_name</span> <span class="k">if</span> <span class="n">model_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_model_name</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">output_max_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">output_max_length</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_output_max_length</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">temperature</span>
+        <span class="k">if</span> <span class="n">temperature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_temperature</span>
+    <span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">prompt_template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">prompt_template</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_prompt_template</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">structured_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="n">BaseModel</span><span class="p">]]</span> <span class="o">=</span> <span class="n">structured_output</span>
+    <span class="k">if</span> <span class="n">api_params</span> <span class="ow">is</span> <span class="n">DEFAULT_API_PARAMS</span><span class="p">:</span>
+        <span class="n">api_params</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">default_api_params</span> <span class="ow">or</span> <span class="p">{})</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">system_message</span> <span class="o">=</span> <span class="n">system_message</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">api_params</span> <span class="o">=</span> <span class="n">api_params</span>
+
+    <span class="k">if</span> <span class="n">device</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cpu&#39;</span><span class="p">,</span> <span class="s1">&#39;cuda&#39;</span><span class="p">,</span> <span class="s1">&#39;auto&#39;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Device </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s1"> not supported. Options: cpu, cuda, auto.&#39;</span>
+        <span class="p">)</span>
+
+    <span class="n">cuda_available</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">device_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;cpu&#39;</span> <span class="k">if</span> <span class="n">device</span> <span class="o">==</span> <span class="s1">&#39;cpu&#39;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">cuda_available</span> <span class="k">else</span> <span class="s1">&#39;cuda&#39;</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device_name</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_setup</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+                  </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="rago.generation.groq.GroqGen.generate" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">generate</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">generate</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#list">list</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">|</span> <span class="n"><span title="pydantic.BaseModel">BaseModel</span></span>
 </code></pre></div>
-<h3 id="prepare-and-use-virtual-environment">Prepare and use virtual environment</h3>
-<p>If you don't have yet conda installed in your machine, you can check the
-installation steps here:
-<a class="magiclink magiclink-github magiclink-repository" href="https://github.com/conda-forge/miniforge?tab=readme-ov-file#download" title="GitHub Repository: conda-forge/miniforge?tab=readme-ov-file#download">conda-forge/miniforge?tab=readme-ov-file#download</a> After
-that, ensure that conda is already available in your terminal session and run:</p>
-<div class="language-bash highlight"><pre><span></span><code>$<span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>conda/dev.yaml
-$<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>rago
-</code></pre></div>
-<p>Note: you can use <code class="language-python highlight"><span class="n">mamba</span> <span class="n">env</span> <span class="n">create</span></code> instead, if you have it already installed,
-in order to boost the installation step.</p>
-<h3 id="install-the-dependencies">Install the dependencies</h3>
-<p>Now, you can already install the dependencies for the project:</p>
-<div class="language-bash highlight"><pre><span></span><code>$<span class="w"> </span>poetry<span class="w"> </span>install
-</code></pre></div>
-<ul>
-<li><code class="language-python highlight"><span class="n">rago</span></code> uses a set of <code class="language-python highlight"><span class="n">pre</span><span class="o">-</span><span class="n">commit</span></code> hooks to improve code quality. The hooks can
-  be installed locally using:</li>
-</ul>
-<div class="language-bash highlight"><pre><span></span><code>$<span class="w"> </span>pre-commit<span class="w"> </span>install
-</code></pre></div>
-<p>This would run the checks every time a <code class="language-python highlight"><span class="n">git</span> <span class="n">commit</span></code> is executed locally.
-Usually, the verification will only run on the files modified by that commit,
-but the verification can also be triggered for all the files using:</p>
-<div class="language-bash highlight"><pre><span></span><code>$<span class="w"> </span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
-</code></pre></div>
-<p>If you would like to skip the failing checks and push the code for further
-discussion, use the <code class="language-python highlight"><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">verify</span></code> option with <code class="language-python highlight"><span class="n">git</span> <span class="n">commit</span></code>.</p>
-<div class="language-bash highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Your commit message&quot;</span><span class="w"> </span>--no-verify
-</code></pre></div>
-<p>This project uses <code class="language-python highlight"><span class="n">pytest</span></code> as a testing tool. <code class="language-python highlight"><span class="n">pytest</span></code> is responsible for
-testing the code, whose configuration is available in pyproject.toml.
-Additionally, this project also uses <code class="language-python highlight"><span class="n">pytest</span><span class="o">-</span><span class="n">cov</span></code> to calculate the coverage of
-these unit tests. For more information, check the section about tests later in
-this document.</p>
-<h3 id="commit-your-changes-and-push-your-branch-to-github">Commit your changes and push your branch to GitHub</h3>
-<div class="language-bash highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.
-$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Your detailed description of your changes.&quot;</span>
-$<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>name-of-your-bugfix-or-feature
-</code></pre></div>
-<ul>
-<li>Submit a pull request through the GitHub website.</li>
-</ul>
-<h2 id="pull-request-guidelines">Pull Request Guidelines</h2>
-<p>Before you submit a pull request, check that it meets these guidelines:</p>
-<ol>
-<li>The pull request should include tests.</li>
-<li>If the pull request adds functionality, the docs should be updated. Put your
-   new functionality into a function with a docstring, and add the feature to
-   the list in README.rst.</li>
-<li>The pull request should work for Python &gt;= 3.8.</li>
-</ol>
-<h2 id="running-tests-locally">Running tests locally</h2>
-<p>The tests can be executed using the <code class="language-python highlight"><span class="n">test</span></code> dependencies of <code class="language-python highlight"><span class="n">rago</span></code> in the
-following way:</p>
-<div class="language-bash highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pytest
-</code></pre></div>
-<h3 id="running-tests-with-coverage-locally">Running tests with coverage locally</h3>
-<p>The coverage value can be obtained while running the tests using <code class="language-python highlight"><span class="n">pytest</span><span class="o">-</span><span class="n">cov</span></code> in
-the following way:</p>
-<div class="language-bash highlight"><pre><span></span><code>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>--cov<span class="o">=</span>rago<span class="w"> </span>tests/
-</code></pre></div>
-<p>A much more detailed guide on testing with <code class="language-python highlight"><span class="n">pytest</span></code> is available
-<a href="https://docs.pytest.org/en/8.0.x/how-to/index.html">here</a>.</p>
-<h2 id="automation-tasks-with-makim">Automation Tasks with Makim</h2>
-<p>This project uses <code class="language-python highlight"><span class="n">makim</span></code> as an automation tool. Please, check the <code class="language-python highlight"><span class="o">.</span><span class="n">makim</span><span class="o">.</span><span class="n">yaml</span></code>
-file to check all the tasks available or run:</p>
-<div class="language-bash highlight"><pre><span></span><code>$<span class="w"> </span>makim<span class="w"> </span>--help
-</code></pre></div>
-<h2 id="release">Release</h2>
-<p>This project uses semantic-release in order to cut a new release based on the
-commit-message.</p>
-<h3 id="commit-message-format">Commit message format</h3>
-<p><strong>semantic-release</strong> uses the commit messages to determine the consumer impact
-of changes in the codebase. Following formalized conventions for commit
-messages, <strong>semantic-release</strong> automatically determines the next
-<a href="https://semver.org">semantic version</a> number, generates a changelog and
-publishes the release.</p>
-<p>By default, <strong>semantic-release</strong> uses
-<a href="https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-format">Angular Commit Message Conventions</a>.
-The commit message format can be changed with the <code class="language-python highlight"><span class="n">preset</span></code> or <code class="language-python highlight"><span class="n">config</span></code> options_
-of the
-<a href="https://github.com/semantic-release/commit-analyzer#options">@semantic-release/commit-analyzer</a>
-and
-<a href="https://github.com/semantic-release/release-notes-generator#options">@semantic-release/release-notes-generator</a>
-plugins.</p>
-<p>Tools such as <a href="https://github.com/commitizen/cz-cli">commitizen</a> or
-<a href="https://github.com/conventional-changelog/commitlint">commitlint</a> can be used
-to help contributors and enforce valid commit messages.</p>
-<p>The table below shows which commit message gets you which release type when
-<code class="language-python highlight"><span class="n">semantic</span><span class="o">-</span><span class="n">release</span></code> runs (using the default configuration):</p>
-<table>
-<thead>
-<tr>
-<th>Commit message</th>
-<th>Release type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-python highlight"><span class="n">fix</span><span class="p">(</span><span class="n">pencil</span><span class="p">):</span> <span class="n">stop</span> <span class="n">graphite</span> <span class="n">breaking</span> <span class="n">when</span> <span class="n">pressure</span> <span class="ow">is</span> <span class="n">applied</span></code></td>
-<td>Fix Release</td>
-</tr>
-<tr>
-<td><code class="language-python highlight"><span class="n">feat</span><span class="p">(</span><span class="n">pencil</span><span class="p">):</span> <span class="n">add</span> <span class="s1">&#39;graphiteWidth&#39;</span> <span class="n">option</span></code></td>
-<td>Feature Release</td>
-</tr>
-<tr>
-<td><code class="language-python highlight"><span class="n">perf</span><span class="p">(</span><span class="n">pencil</span><span class="p">):</span> <span class="n">remove</span> <span class="n">graphiteWidth</span> <span class="n">option</span></code></td>
-<td>Chore</td>
-</tr>
-<tr>
-<td><code class="language-python highlight"><span class="n">feat</span><span class="p">(</span><span class="n">pencil</span><span class="p">)</span><span class="err">!</span><span class="p">:</span> <span class="n">The</span> <span class="n">graphiteWidth</span> <span class="n">option</span> <span class="n">has</span> <span class="n">been</span> <span class="n">removed</span></code></td>
-<td>Breaking Release</td>
-</tr>
-</tbody>
-</table>
-<p>Note: For a breaking change release, uses <code class="language-python highlight"><span class="err">!</span></code> at the end of the message prefix.</p>
-<p>source:
-<a href="https://github.com/semantic-release/semantic-release/blob/master/README.md#commit-message-format">https://github.com/semantic-release/semantic-release/blob/master/README.md#commit-message-format</a></p>
-<p>As this project uses the <code class="language-python highlight"><span class="n">squash</span> <span class="ow">and</span> <span class="n">merge</span></code> strategy, ensure to apply the commit
-message format to the PR's title.</p>
+
+    <div class="doc doc-contents ">
+
+        <p>Generate text using the Groq AP.</p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>src/rago/generation/groq.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">BaseModel</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate text using the Groq AP.&quot;&quot;&quot;</span>
+    <span class="n">input_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;The model was not created.&#39;</span><span class="p">)</span>
+
+    <span class="n">api_params</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api_params</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_params</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_api_params</span>
+    <span class="p">)</span>
+
+    <span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_message</span><span class="p">:</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_message</span><span class="p">})</span>
+    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">input_text</span><span class="p">})</span>
+
+    <span class="n">model_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">,</span>
+        <span class="n">max_completion_tokens</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_max_length</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">api_params</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">structured_output</span><span class="p">:</span>
+        <span class="n">model_params</span><span class="p">[</span><span class="s1">&#39;response_model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">structured_output</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">**</span><span class="n">model_params</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;model_params&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_params</span>
+
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;choices&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
 
 
 
@@ -2346,10 +2228,10 @@ message format to the PR's title.</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.tabs.link", "header.autohide", "navigation.indexes", "navigation.instant", "search.highlight", "search.share", "search.suggest"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.tabs.link", "header.autohide", "navigation.indexes", "navigation.instant", "search.highlight", "search.share", "search.suggest"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
       
     
   </body>
