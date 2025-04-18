@@ -108,10 +108,13 @@ jobs:
         run: |
           ollama serve &
 
-      - name: download llama model
+      - name: Download llama model
         run: |
           sleep 20
           ollama pull llama3.2:1b
+
+      - name: Run LLM
+        run: ollama run tinyllama 'Explain the basics of machine learning.'
 
       - name: check ollama installation
         run: |
