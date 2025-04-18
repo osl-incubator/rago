@@ -77,6 +77,10 @@ jobs:
           path: ~/.ollama
           key: ${{ matrix.os }}-ollama
 
+      - name: Setup ollama macos
+        if: ${{ matrix.os == 'macos' }}
+        uses: ai-action/setup-ollama@v1
+
       - uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
@@ -96,6 +100,7 @@ jobs:
           poetry install
 
       - name: Setup ollama linux/windows
+        if: ${{ matrix.os != 'macos' }}
         run: |
           ollama serve &
 
