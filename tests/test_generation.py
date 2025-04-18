@@ -231,7 +231,14 @@ def _generation_structure_output(
 
     # Skip structured output for models that don't support it
     if issubclass(
-        model_class, (HuggingFaceGen, LlamaGen, HuggingFaceInfGen, DeepSeekGen)
+        model_class,
+        (
+            DeepSeekGen,
+            HuggingFaceInfGen,
+            HuggingFaceGen,
+            LlamaGen,
+            OllamaGen,
+        ),
     ):
         pytest.skip(f"{model_class} doesn't support structured output.")
 
