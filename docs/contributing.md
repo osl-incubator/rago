@@ -10,11 +10,11 @@ For my information, check the official documentation:
 <https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/>
 
 In addition, you should know that to build our package we use
-[Poetry](https://python-poetry.org/), it's a Python package management tool that
+[PDM](https://pdm-project.org/), it's a Python package management tool that
 simplifies the process of building and publishing Python packages. It allows us
-to easily manage dependencies, virtual environments and package versions. Poetry
+to easily manage dependencies, virtual environments and package versions. PDM
 also includes features such as dependency resolution, lock files and publishing
-to PyPI. Overall, Poetry streamlines the process of managing Python packages,
+to PyPI. Overall, PDM streamlines the process of managing Python packages,
 making it easier for us to create and share our code with others.
 
 Contributions are welcome, and they are greatly appreciated! Every little bit
@@ -100,7 +100,9 @@ in order to boost the installation step.
 Now, you can already install the dependencies for the project:
 
 ```bash
-$ poetry install
+$ pdm config use_uv true
+$ pdm init -n --python $(which python)
+$ pdm install
 ```
 
 - `rago` uses a set of `pre-commit` hooks to improve code quality. The hooks can

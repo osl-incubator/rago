@@ -5,11 +5,14 @@ channels:
 dependencies:
   - python
   - pip
-  - poetry >=2
+  - pdm >=2.19.0
+  - pdm-backend
   - nodejs # used by semantic-release
   - tokenizers
   - compilers
+  - uv
   - pip:
       # distlib issue
       - paginate==0.5.6
       - langdetect
+      - pdm-conda

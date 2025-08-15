@@ -49,8 +49,8 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "poetry build",
-        "publishCmd": "poetry publish"
+        "prepareCmd": "pdm build",
+        "publishCmd": "pdm publish --repository pypi"
       }
     ],
     [

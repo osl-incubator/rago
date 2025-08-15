@@ -73,7 +73,7 @@ groups:
       build:
         help: "Build the package"
         run: |
-          poetry build
+          pdm build
 
   release:
     vars:

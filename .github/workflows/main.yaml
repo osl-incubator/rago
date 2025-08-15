@@ -33,8 +33,6 @@ jobs:
       fail-fast: false
       matrix:
         python_version:
-          - "3.9"
-          - "3.10"
           - "3.11"
           - "3.12"
           # - "3.13"
@@ -91,13 +89,14 @@ jobs:
           conda-solver: libmamba
           python-version: "${{ matrix.python_version }}"
 
-      - name: Check Poetry lock
-        run: poetry check
+      - name: Check pdm lock
+        run: pdm lock --check
 
       - name: Install dependencies
         run: |
-          poetry config virtualenvs.create false
-          poetry install
+          pdm config use_uv true
+          pdm init -n --python $(which python)
+          pdm install
 
       - name: Setup ollama linux/windows
         if: ${{ matrix.os != 'macos' }}
@@ -158,12 +157,13 @@ jobs:
           activate-environment: rago
           auto-update-conda: true
           conda-solver: libmamba
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
-          poetry config virtualenvs.create false
-          poetry install
+          pdm config use_uv true
+          pdm init -n --python $(which python)
+          pdm install
 
       - name: Run style checks
         if: success() || failure()
