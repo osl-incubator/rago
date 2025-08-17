@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [0.14.1](https://github.com/osl-incubator/rago/compare/0.14.0...0.14.1) (2025-08-17)
+
+
+### Bug Fixes
+
+* fix packaging and replace poetry by setuptools ([#99](https://github.com/osl-incubator/rago/issues/99)) ([339cebf](https://github.com/osl-incubator/rago/commit/339cebf0cfcacbb67945e71b361123c5e22dfc43))
+
 # [0.14.0](https://github.com/osl-incubator/rago/compare/0.13.0...0.14.0) (2025-04-18)
 
 
