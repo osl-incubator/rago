@@ -17,19 +17,14 @@ case "$OS" in
     uv pip install \
       "torch==2.5.0+cpu" "torchvision==0.20.0+cpu" \
       --index-url https://download.pytorch.org/whl/cpu
-
-    # Dev + base extras (torch already satisfied; no need to install [torch] again)
-    uv pip install -e ".[dev,base]"
     ;;
 
   Darwin*)
     # macOS PyPI wheels are CPU-only by default
-    uv pip install -e ".[dev,base,torch]"
     ;;
 
   MINGW*|MSYS*|CYGWIN*)
     # Windows (Git Bash/MSYS). PyPI wheels are CPU-only by default.
-    uv pip install -e ".[dev,base,torch]"
     ;;
 
   *)
@@ -37,3 +32,5 @@ case "$OS" in
     exit 1
     ;;
 esac
+
+uv pip install -e ".[dev,all]"
