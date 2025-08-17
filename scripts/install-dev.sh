@@ -34,3 +34,7 @@ case "$OS" in
 esac
 
 uv pip install -e ".[dev,all]"
+
+# Install spaCy model for docs/dev (outside package metadata)
+# prefer downloader to stay version-compatible with installed spacy:
+python -m spacy download en_core_web_md
