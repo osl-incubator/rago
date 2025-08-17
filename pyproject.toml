@@ -1,7 +1,7 @@
 [project]
 name = "rago"
 version = "0.1.0"  # semantic-release
-description = "Default template for PDM package"
+description = "RAG framework"
 readme = "README.md"
 authors = [
     { name = "Ivan Ogasawara", email = "ivan.ogasawara@gmail.com" },
@@ -83,6 +83,7 @@ dev = [
   "ipykernel >=6.30.0",
   "python-dotenv >=1.1",
   "Jinja2 >=3.1.2",
+  "makim==1.27.0",
   "mkdocs >=1.6",
   "mkdocs-exclude >=1.0.2",
   "mkdocs-jupyter >=0.25",
