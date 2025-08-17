@@ -1,6 +1,6 @@
 [project]
 name = "rago"
-version = "0.14.1"  # semantic-release
+version = "0.14.2"  # semantic-release
 description = "RAG framework"
 readme = "README.md"
 authors = [
