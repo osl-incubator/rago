@@ -9,14 +9,6 @@ at `./src/rago`.
 For my information, check the official documentation:
 <https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/>
 
-In addition, you should know that to build our package we use
-[PDM](https://pdm-project.org/), it's a Python package management tool that
-simplifies the process of building and publishing Python packages. It allows us
-to easily manage dependencies, virtual environments and package versions. PDM
-also includes features such as dependency resolution, lock files and publishing
-to PyPI. Overall, PDM streamlines the process of managing Python packages,
-making it easier for us to create and share our code with others.
-
 Contributions are welcome, and they are greatly appreciated! Every little bit
 helps, and credit will always be given.
 
@@ -100,9 +92,7 @@ in order to boost the installation step.
 Now, you can already install the dependencies for the project:
 
 ```bash
-$ pdm config use_uv true
-$ pdm init -n --python $(which python)
-$ pdm install
+$ ./scripts/install-dev-linux-cpu.sh
 ```
 
 - `rago` uses a set of `pre-commit` hooks to improve code quality. The hooks can

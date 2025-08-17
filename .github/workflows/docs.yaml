@@ -33,10 +33,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install deps
-        run: |
-          pdm config use_uv true
-          pdm init -n --python $(which python)
-          pdm install
+        run: ./scripts/install-dev-linux-cpu.sh
 
       - name: Generate documentation with changes from semantic-release
         run: makim --verbose docs.build

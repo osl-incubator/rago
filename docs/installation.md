@@ -36,5 +36,5 @@ curl -OJL https://github.com/osl-incubator/rago.git/tarball/main
 Once you have a copy of the source, you can install it with:
 
 ```bash
-pdm install
+./scripts/install-dev-linux-cpu.sh
 ```

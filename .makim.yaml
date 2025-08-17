@@ -72,8 +72,7 @@ groups:
     tasks:
       build:
         help: "Build the package"
-        run: |
-          pdm build
+        run: build
 
   release:
     vars:

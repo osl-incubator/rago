@@ -89,14 +89,8 @@ jobs:
           conda-solver: libmamba
           python-version: "${{ matrix.python_version }}"
 
-      - name: Check pdm lock
-        run: pdm lock --check
-
       - name: Install dependencies
-        run: |
-          pdm config use_uv true
-          pdm init -n --python $(which python)
-          pdm install
+        run: ./scripts/install-dev-linux-cpu.sh
 
       - name: Setup ollama linux/windows
         if: ${{ matrix.os != 'macos' }}
@@ -160,10 +154,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: |
-          pdm config use_uv true
-          pdm init -n --python $(which python)
-          pdm install
+        run: ./scripts/install-dev-linux-cpu.sh
 
       - name: Run style checks
         if: success() || failure()
