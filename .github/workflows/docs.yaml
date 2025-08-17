@@ -30,12 +30,10 @@ jobs:
           activate-environment: rago
           auto-update-conda: true
           conda-solver: libmamba
-          python-version: "3.9"
+          python-version: "3.11"
 
       - name: Install deps
-        run: |
-          poetry config virtualenvs.create false
-          poetry install
+        run: ./scripts/install-dev.sh
 
       - name: Generate documentation with changes from semantic-release
         run: makim --verbose docs.build

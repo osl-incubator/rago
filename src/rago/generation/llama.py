@@ -51,7 +51,7 @@ class LlamaGen(GenerationBase):
         """Set up the object with the initial parameters."""
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.model_name, token=self.api_key
-        )
+        )  # type: ignore
 
         self.model = AutoModelForCausalLM.from_pretrained(
             self.model_name,

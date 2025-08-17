@@ -72,8 +72,7 @@ groups:
     tasks:
       build:
         help: "Build the package"
-        run: |
-          poetry build
+        run: build
 
   release:
     vars:

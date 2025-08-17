@@ -1,109 +1,126 @@
 [project]
 name = "rago"
-version = "0.14.0"  # semantic-release
-description = "Rago is a lightweight framework for RAG"
+version = "0.1.0"  # semantic-release
+description = "RAG framework"
 readme = "README.md"
 authors = [
-  { name = "Ivan Ogasawara", email = "ivan.ogasawara@gmail.com" }
+    { name = "Ivan Ogasawara", email = "ivan.ogasawara@gmail.com" },
 ]
-packages = [
-  {include = "rago", from="src"},
-]
-license = "BSD 3 Clause"
-exclude = [
-  ".git/*",
-  ".env*",
-]
-include = ["src/rago/py.typed"]
-requires-python = ">=3.9,<3.13"
+license = { text = "MIT" }
+requires-python = ">=3.11,<3.13"
 
+# Minimal core deps
 dependencies = [
-  "typeguard >=4.0",
-  "numpy >=2,<=2.2 ; python_version > '3.9'",
-  "numpy >=2,<2.1 ; python_version < '3.10'",
+    "typeguard >=4.0",
+    "numpy >=2",
+    "pydantic >=2",
+    "joblib >=1.4.2",
+    "pypdf >=5",
+]
+
+[project.optional-dependencies]
+# Vector / ANN
+faiss = ["faiss-cpu >=1.9.0"]
+chromadb = ["chromadb >=0.3.23"]
+
+# LLM providers (opt-in)
+openai = ["openai >=1.52.2"]
+google = ["google-generativeai >=0.8.3"]
+cohere = ["cohere >=5.13.4"]
+fireworks = ["fireworks-ai >=0.15.11,<1.0.0"]
+together = ["together >=1.4.0"]
+ollama = ["ollama >=0.4.8"]
+
+torch = [
+  "torch >=2.5.0",
+  "torchvision  >=0.20.0",
+]
+
+# Common RAG stack without forcing torch install path
+base = [
+  "transformers >=4",
+  "sentence-transformers >=3.2.0",
   "faiss-cpu >=1.9.0",
   "sentencepiece >=0.2.0",
-  "sentence-transformers >=3.2.0",
-  "transformers >=4",
   "langdetect >=1",
+  "instructor >=1",
+  "torch >=2.5.0",
+  "torchvision  >=0.20.0",
+]
+
+# Convenience bundle
+all = [
   "openai >=1.52.2",
   "google-generativeai >=0.8.3",
-  "pypdf >=5",
+  "cohere >=5.13.4",
+  "fireworks-ai >=0.15.11,<1.0.0",
+  "together >=1.4.0",
+  "ollama >=0.4.8",
+  "spacy >=3.8.0",
+  "chromadb >=0.3.23",
   "langchain >=0.3.7",
   "langchain-community >=0.3.7",
-  "spacy >=3.8.0 ; python_version > '3.9'",
-  "spacy >=3.8.0,<3.8.4 ; python_version < '3.10'",
+  # base
+  "torch >=2.5.0",
+  "torchvision  >=0.20.0",
+  "transformers >=4",
+  "sentence-transformers >=3.2.0",
+  "faiss-cpu >=1.9.0",
+  "sentencepiece >=0.2.0",
+  "langdetect >=1",
   "instructor >=1",
-  "pydantic >=2",
-  "torch >=2,<2.6",
-  "torchvision >=0.20.0",
-  "onnxruntime <=1.19.2 ; python_version < '3.10'",  # indirect dependency
-  "eval-type-backport >=0.2 ; python_version < '3.10'",
-  "joblib (>=1.4.2,<2.0.0)",
-  "cohere >=5.13.4",
-  "fireworks-ai>0.15.10",
-  "chromadb >=0.3.23",
-  "together>=1.4.0",
-  "ollama (>=0.4.8)",
-  # Unable to find installation candidates for pillow (11.2.0)
-  "pillow (>=11.2.1)",
 ]
+
+dev = [
+  "pytest >=8.4",
+  "pytest-cov >=6.2",
+  "coverage >=7.10",
+  "pre-commit >=4.3",
+  "ruff >=0.12.0",
+  "mypy >=1.17.0",
+  "bandit >=1.8",
+  "vulture >=2.14",
+  "mccabe >=0.7",
+  "ipython >=9.4",
+  "ipykernel >=6.30.0",
+  "python-dotenv >=1.1",
+  "Jinja2 >=3.1.2",
+  "makim==1.27.0",
+  "mkdocs >=1.6",
+  "mkdocs-exclude >=1.0.2",
+  "mkdocs-jupyter >=0.25",
+  "mkdocs-literate-nav >=0.6",
+  "mkdocs-macros-plugin >=1.3",
+  "mkdocs-material >=9.6",
+  "mkdocstrings >=0.30",
+  "mkdocstrings-python >=1.17",
+  "mkdocs-gen-files >=0.5.0",
+  "build>=1.3.0",
+  "twine>=6.1.0",
+  "en-core-web-md @ https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl",
+]
+
+[project.urls]
+Homepage = "https://github.com/osl-incubator/rago"
+Issues = "https://github.com/osl-incubator/rago/issues"
 
 [build-system]
-requires = ["poetry-core>=2", "poetry>=2"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=70.1.0,<80.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
-# [project.optional-dependencies]
-# cpu = ["torch"]
-# gpu = ["torch"]
+[tool.setuptools]
+package-dir = { "" = "src" }
 
-# [[tool.poetry.source]]
-# name = "pytorch-cpu"
-# url = "https://download.pytorch.org/whl/cpu"
-# priority = "explicit"
+[tool.setuptools.packages.find]
+where = ["src"]
 
-# [tool.poetry.dependencies]
-# python = ">=3.9,<3.13"
-# torch = [
-#   { version = ">=2,<2.6", platform = "darwin" },
-#   { version = ">=2,<2.6", platform = "linux", source="pytorch-cpu", markers="extra!='gpu'" },
-#   { version = ">=2,<2.6", platform = "linux", markers="extra=='gpu'" },
-# ]
+[tool.setuptools.package-data]
+rago = ["py.typed"]
 
-[tool.poetry.group.dev.dependencies]
-pytest = ">=7.3.2"
-pytest-cov = ">=4.1.0"
-coverage = ">=7.2.7"
-pre-commit = ">=3.3.2"
-ruff = ">=0.9.5"
-mypy = ">=1.5.0"
-bandit = ">=1.7.5"
-vulture = ">=2.7"
-mccabe = ">=0.6.1"
-ipython = "<8"
-ipykernel = ">=6.0.0"
-Jinja2 = ">=3.1.2"
-mkdocs = ">=1.4.3"
-mkdocs-exclude = ">=1.0.2"
-mkdocs-jupyter = ">=0.24.1"
-mkdocs-literate-nav = ">=0.6.0"
-mkdocs-macros-plugin = ">=0.7.0,<1"
-mkdocs-material = ">=9.1.15"
-mkdocstrings = ">=0.21.2"
-mkdocstrings-python = ">= 1.1.2"
-mkdocs-gen-files = ">=0.5.0"
-makim = "1.25.0"
-python-dotenv = ">=1.0"
-# note: Version 3.7.1 requries spaCy >=3.7.2,<3.8.0
-en-core-web-md = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl"}
-
+# ----- Tooling configs (kept from your setup, adjusted to Python 3.11) -----
 [tool.pytest.ini_options]
-testpaths = [
-    "tests",
-]
-markers = [
-    "skip_on_ci: Skip these tests in CI",
-]
+testpaths = ["tests"]
+markers = ["skip_on_ci: Skip these tests in CI"]
 
 [tool.bandit]
 exclude_dirs = ["tests"]
@@ -123,41 +140,24 @@ verbose = false
 line-length = 79
 force-exclude = true
 src = ["./"]
-exclude = [
-  'docs',
-]
+exclude = ["docs"]
 fix = true
 
 [tool.ruff.lint]
-ignore = [
-  "F811",
-  "PLR0911",  # Too many return statements
-  "PLR0912",  # Too many branches
-  "PLR0913",
-  "RUF012",  # Mutable class attr should be annotated with `typing.ClassVar`
-
-]
-select = [
-  "E",   # pycodestyle
-  "F",   # pyflakes
-  "D",   # pydocstyle
-  "YTT", # flake8-2020
-  "RUF", # Ruff-specific rules
-  "I001", # isort
-]
+ignore = ["F811","PLR0911","PLR0912","PLR0913","RUF012"]
+select = ["E","F","D","YTT","RUF","I001"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
 
 [tool.ruff.lint.isort]
-# Use a single line between direct and from import
 lines-between-types = 1
 
 [tool.ruff.format]
 quote-style = "single"
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.11"
 check_untyped_defs = true
 strict = true
 ignore_missing_imports = true

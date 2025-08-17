@@ -5,11 +5,13 @@ channels:
 dependencies:
   - python
   - pip
-  - poetry >=2
   - nodejs # used by semantic-release
   - tokenizers
   - compilers
+  - uv
   - pip:
       # distlib issue
       - paginate==0.5.6
       - langdetect
+      - build
+      - twine

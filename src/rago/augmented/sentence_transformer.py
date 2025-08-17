@@ -19,7 +19,7 @@ class SentenceTransformerAug(AugmentedBase):
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        self.model = SentenceTransformer(self.model_name)  # type: ignore
+        self.model = SentenceTransformer(self.model_name)
 
     def get_embedding(self, content: list[str]) -> EmbeddingType:
         """Retrieve the embedding for a given text using OpenAI API."""
