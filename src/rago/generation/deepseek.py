@@ -40,7 +40,9 @@ class DeepSeekGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(  # type: ignore
+            self.model_name
+        )
 
         device_map = 'auto' if self.device_name == 'cuda' else None
 
