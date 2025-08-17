@@ -92,7 +92,7 @@ in order to boost the installation step.
 Now, you can already install the dependencies for the project:
 
 ```bash
-$ ./scripts/install-dev-linux-cpu.sh
+$ ./scripts/install-dev.sh
 ```
 
 - `rago` uses a set of `pre-commit` hooks to improve code quality. The hooks can

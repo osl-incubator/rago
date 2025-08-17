@@ -90,7 +90,7 @@ jobs:
           python-version: "${{ matrix.python_version }}"
 
       - name: Install dependencies
-        run: ./scripts/install-dev-linux-cpu.sh
+        run: ./scripts/install-dev.sh
 
       - name: Setup ollama linux/windows
         if: ${{ matrix.os != 'macos' }}
@@ -154,7 +154,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: ./scripts/install-dev-linux-cpu.sh
+        run: ./scripts/install-dev.sh
 
       - name: Run style checks
         if: success() || failure()

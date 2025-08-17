@@ -33,7 +33,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install deps
-        run: ./scripts/install-dev-linux-cpu.sh
+        run: ./scripts/install-dev.sh
 
       - name: Run semantic release (for tests)
         if: ${{ github.event_name != 'workflow_dispatch' }}
