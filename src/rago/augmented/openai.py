@@ -3,14 +3,17 @@
 from __future__ import annotations
 
 from hashlib import sha256
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 import numpy as np
-import openai
 
 from typeguard import typechecked
 
+from rago._optional import require_dependency
 from rago.augmented.base import AugmentedBase, EmbeddingType
+
+if TYPE_CHECKING:
+    import openai
 
 
 @typechecked
@@ -20,12 +23,19 @@ class OpenAIAug(AugmentedBase):
     default_model_name = 'text-embedding-3-small'
     default_top_k = 3
 
+    def _load_optional_modules(self) -> None:
+        self._openai = require_dependency(
+            'openai',
+            extra='openai',
+            context='OpenAI',
+        )
+
     def _setup(self) -> None:
         """Set up the object with initial parameters."""
         if not self.api_key:
             raise ValueError('API key for OpenAI is required.')
-        openai.api_key = self.api_key
-        self.model = openai.OpenAI(api_key=self.api_key)
+        self._openai.api_key = self.api_key
+        self.model = self._openai.OpenAI(api_key=self.api_key)
 
     def get_embedding(self, content: list[str]) -> EmbeddingType:
         """Retrieve the embedding for a given text using OpenAI API."""
@@ -34,7 +44,7 @@ class OpenAIAug(AugmentedBase):
         if cached is not None:
             return cast(EmbeddingType, cached)
 
-        model = cast(openai.OpenAI, self.model)
+        model = cast('openai.OpenAI', self.model)
         response = model.embeddings.create(
             input=content, model=self.model_name
         )

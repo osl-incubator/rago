@@ -30,6 +30,10 @@ class RagoBase(ABC):
             return
         return self.cache.load(key)
 
+    def _load_optional_modules(self) -> None:
+        """Load optional modules."""
+        ...
+
     def _save_cache(self, key: Any, data: Any) -> None:
         if not self.cache:
             return

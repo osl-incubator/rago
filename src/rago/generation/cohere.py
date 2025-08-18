@@ -4,15 +4,18 @@ from __future__ import annotations
 
 import json
 
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
-import cohere
 import instructor
 
 from pydantic import BaseModel
 from typeguard import typechecked
 
+from rago._optional import require_dependency
 from rago.generation.base import GenerationBase
+
+if TYPE_CHECKING:
+    pass
 
 
 @typechecked
@@ -24,9 +27,18 @@ class CohereGen(GenerationBase):
         'p': 0.9,
     }
 
+    def _load_optional_modules(self) -> None:
+        self._cohere = require_dependency(
+            'cohere',
+            extra='cohere',
+            context='Cohere embeddings',
+        )
+
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        model = cohere.ClientV2(api_key=self.api_key)
+        self._load_optional_modules()
+
+        model = self._cohere.ClientV2(api_key=self.api_key)
         self.model = (
             instructor.from_cohere(
                 client=model,

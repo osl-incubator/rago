@@ -3,14 +3,17 @@
 from __future__ import annotations
 
 from hashlib import sha256
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 import numpy as np
 
-from together import Together
 from typeguard import typechecked
 
+from rago._optional import require_dependency
 from rago.augmented.base import AugmentedBase, EmbeddingType
+
+if TYPE_CHECKING:
+    from together import Together
 
 
 @typechecked
@@ -23,11 +26,19 @@ class TogetherAug(AugmentedBase):
     )
     default_top_k = 3
 
+    def _load_optional_modules(self) -> None:
+        self._together = require_dependency(
+            'together',
+            extra='together',
+            context='Together',
+        )
+        self._Together = self._together.Together
+
     def _setup(self) -> None:
         """Set up the object with initial parameters."""
         if not self.api_key:
             raise ValueError('API key for Together is required.')
-        self.model = Together(api_key=self.api_key)
+        self.model = self._Together(api_key=self.api_key)
 
     def get_embedding(self, content: list[str]) -> EmbeddingType:
         """Retrieve the embedding for given texts using Together API."""
@@ -36,7 +47,7 @@ class TogetherAug(AugmentedBase):
         if cached is not None:
             return cast(EmbeddingType, cached)
 
-        client = cast(Together, self.model)
+        client = cast('Together', self.model)
         all_embeddings = []
         for text in content:
             response = client.embeddings.create(

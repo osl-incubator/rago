@@ -1,12 +1,13 @@
 """ChromaDB implementation for vector database."""
 
-from typing import Any, List, Tuple
+from typing import TYPE_CHECKING, Any, List, Tuple
 
 import numpy as np
 
-from chromadb.api import ClientAPI
-
 from rago.augmented.db.base import DBBase
+
+if TYPE_CHECKING:
+    from chromadb.api import ClientAPI
 
 
 class ChromaDB(DBBase):
