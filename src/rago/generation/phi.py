@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import warnings
 
-from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig
 from typeguard import typechecked
 
+from rago._optional import require_dependency
 from rago.generation.base import GenerationBase
 
 
@@ -21,6 +21,17 @@ class PhiGen(GenerationBase):
         'top_p': 0.9,
         'num_return_sequences': 1,
     }
+
+    def _load_optional_modules(self) -> None:
+        self._transformers = require_dependency(
+            'transformers',
+            extra='transformers',
+            context='transformers',
+        )
+
+        self._AutoModelForCausalLM = self._transformers.AutoModelForCausalLM
+        self._AutoTokenizer = self._transformers.AutoTokenizer
+        self._GenerationConfig = self._transformers.GenerationConfig
 
     def _validate(self) -> None:
         """Raise an error if the initial parameters are not valid."""
@@ -38,13 +49,13 @@ class PhiGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        self.tokenizer = AutoTokenizer.from_pretrained(  # type: ignore
+        self.tokenizer = self._AutoTokenizer.from_pretrained(
             self.model_name, trust_remote_code=True
         )
 
         device_map = 'auto' if self.device_name == 'cuda' else None
 
-        self.model = AutoModelForCausalLM.from_pretrained(
+        self.model = self._AutoModelForCausalLM.from_pretrained(
             self.model_name,
             torch_dtype='auto',
             device_map=device_map,
@@ -54,7 +65,7 @@ class PhiGen(GenerationBase):
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
-        self.model.generation_config = GenerationConfig.from_pretrained(
+        self.model.generation_config = self._GenerationConfig.from_pretrained(
             self.model_name
         )
         self.model.generation_config.pad_token_id = (

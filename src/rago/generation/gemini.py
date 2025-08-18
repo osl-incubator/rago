@@ -2,15 +2,18 @@
 
 from __future__ import annotations
 
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
-import google.generativeai as genai
 import instructor
 
 from pydantic import BaseModel
 from typeguard import typechecked
 
+from rago._optional import require_dependency
 from rago.generation.base import GenerationBase
+
+if TYPE_CHECKING:
+    import google.generativeai as genai
 
 
 @typechecked
@@ -19,10 +22,18 @@ class GeminiGen(GenerationBase):
 
     default_model_name: str = 'gemini-1.5-flash'
 
+    def _load_optional_modules(self) -> None:
+        self._google = require_dependency(
+            'google',
+            extra='google',
+            context='Google',
+        )
+        self._genai = self._google.generativeai
+
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
         genai.configure(api_key=self.api_key)  # type: ignore[attr-defined]
-        model = genai.GenerativeModel(self.model_name)  # type: ignore[attr-defined]
+        model = self._genai.GenerativeModel(self.model_name)
 
         self.model = (
             instructor.from_gemini(

@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from rago.retrieval.base import RetrievalBase, StringRet
+from rago.retrieval.base import RetrievalBase
+from rago.retrieval.dummy import StringRet
 from rago.retrieval.file import PDFPathRet
 
 __all__ = [

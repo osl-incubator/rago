@@ -3,14 +3,17 @@
 from __future__ import annotations
 
 from hashlib import sha256
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
-import cohere
 import numpy as np
 
 from typeguard import typechecked
 
+from rago._optional import require_dependency
 from rago.augmented.base import AugmentedBase, EmbeddingType
+
+if TYPE_CHECKING:
+    import cohere
 
 
 @typechecked
@@ -20,11 +23,18 @@ class CohereAug(AugmentedBase):
     default_model_name = 'embed-english-v3.0'  # Cohere's recommended model
     default_top_k = 3
 
+    def _load_optional_modules(self) -> None:
+        self._cohere = require_dependency(
+            'cohere',
+            extra='cohere',
+            context='Cohere embeddings',
+        )
+
     def _setup(self) -> None:
         """Set up the object with initial parameters."""
         if not self.api_key:
             raise ValueError('API key for Cohere is required.')
-        self.model = cohere.ClientV2(self.api_key)
+        self.model = self._cohere.ClientV2(self.api_key)
 
     def get_embedding(self, content: list[str]) -> EmbeddingType:
         """Retrieve the embedding for given texts using Cohere API."""
@@ -33,7 +43,7 @@ class CohereAug(AugmentedBase):
         if cached is not None:
             return cast(EmbeddingType, cached)
 
-        model = cast(cohere.Client, self.model)
+        model = cast('cohere.Client', self.model)
         response = model.embed(
             texts=content,
             model=self.model_name,
@@ -53,7 +63,7 @@ class CohereAug(AugmentedBase):
         if not getattr(self, 'db', None):
             raise Exception('Vector database (db) is not initialized.')
         document_encoded = self.get_embedding(documents)
-        model = cast(cohere.Client, self.model)
+        model = cast('cohere.Client', self.model)
         response = model.embed(
             texts=[query],
             model=self.model_name,

@@ -11,12 +11,10 @@ import instructor
 import openai
 import torch
 
-from langdetect import detect
-from ollama import Client as Ollama
 from pydantic import BaseModel
-from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 from typeguard import typechecked
 
+from rago._optional import require_dependency
 from rago.generation.base import GenerationBase
 from rago.generation.openai import OpenAIGen
 
@@ -32,6 +30,23 @@ class LlamaGen(GenerationBase):
         'top_p': 1.0,
         'num_return_sequences': 1,
     }
+
+    def _load_optional_modules(self) -> None:
+        self._langdetect = require_dependency(
+            'langdetect',
+            extra='langdetect',
+            context='LangDetect',
+        )
+        self._transformers = require_dependency(
+            'transformers',
+            extra='transformers',
+            context='transformers',
+        )
+
+        self._detect = self._langdetect.detect
+        self._AutoModelForCausalLM = self._transformers.AutoModelForCausalLM
+        self._AutoTokenizer = self._transformers.AutoTokenizer
+        self._pipeline = self._transformers.pipeline
 
     def _validate(self) -> None:
         """Raise an error if the initial parameters are not valid."""
@@ -49,11 +64,11 @@ class LlamaGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        self.tokenizer = AutoTokenizer.from_pretrained(
+        self.tokenizer = self._AutoTokenizer.from_pretrained(
             self.model_name, token=self.api_key
-        )  # type: ignore
+        )
 
-        self.model = AutoModelForCausalLM.from_pretrained(
+        self.model = self._AutoModelForCausalLM.from_pretrained(
             self.model_name,
             token=self.api_key,
             torch_dtype=torch.float16
@@ -61,7 +76,7 @@ class LlamaGen(GenerationBase):
             else torch.float32,
         )
 
-        self.generator = pipeline(
+        self.generator = self._pipeline(
             'text-generation',
             model=self.model,
             tokenizer=self.tokenizer,
@@ -75,7 +90,7 @@ class LlamaGen(GenerationBase):
         )
 
         # Detect and set the language code for multilingual models (optional)
-        language = str(detect(query)) or 'en'
+        language = str(self._detect(query)) or 'en'
         self.tokenizer.lang_code = language
 
         api_params = (
@@ -113,6 +128,14 @@ class OllamaGen(GenerationBase):
         'base_url': 'http://localhost:11434/'
     }
 
+    def _load_optional_modules(self) -> None:
+        self._ollama = require_dependency(
+            'ollama',
+            extra='ollama',
+            context='Ollama',
+        )
+        self._Ollama = self._ollama.Client
+
     def _setup(self) -> None:
         """Instantiate the Ollama client."""
         self.api_params = copy(
@@ -120,7 +143,7 @@ class OllamaGen(GenerationBase):
         )
         base_url = self.api_params.pop('base_url')
 
-        self.model = Ollama(
+        self.model = self._Ollama(
             host=base_url, headers={'x-some-header': 'some-value'}
         )
 

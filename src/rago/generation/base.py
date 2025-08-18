@@ -99,6 +99,7 @@ class GenerationBase(RagoBase):
         self.device = torch.device(self.device_name)
 
         self._validate()
+        self._load_optional_modules()
         self._setup()
 
     def _validate(self) -> None:

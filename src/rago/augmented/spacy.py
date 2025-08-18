@@ -3,14 +3,17 @@
 from __future__ import annotations
 
 from hashlib import sha256
-from typing import List, cast
+from typing import TYPE_CHECKING, List, cast
 
 import numpy as np
-import spacy
 
 from typeguard import typechecked
 
+from rago._optional import require_dependency
 from rago.augmented.base import AugmentedBase, EmbeddingType
+
+if TYPE_CHECKING:
+    import spacy
 
 
 @typechecked
@@ -20,9 +23,16 @@ class SpaCyAug(AugmentedBase):
     default_model_name = 'en_core_web_md'
     default_top_k = 3
 
+    def _load_optional_modules(self) -> None:
+        self._spacy = require_dependency(
+            'spacy',
+            extra='spacy',
+            context='Spacy',
+        )
+
     def _setup(self) -> None:
         """Set up the object with initial parameters."""
-        self.model = spacy.load(self.model_name)
+        self.model = self._spacy.load(self.model_name)
 
     def get_embedding(self, content: List[str]) -> EmbeddingType:
         """Retrieve the embedding for a given text using SpaCy."""
@@ -31,7 +41,7 @@ class SpaCyAug(AugmentedBase):
         if cached is not None:
             return cast(EmbeddingType, cached)
 
-        model = cast(spacy.language.Language, self.model)
+        model = cast('spacy.language.Language', self.model)
         embeddings = []
 
         for text in content:

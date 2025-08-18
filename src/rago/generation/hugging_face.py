@@ -6,9 +6,9 @@ import warnings
 
 import torch
 
-from transformers import T5ForConditionalGeneration, T5Tokenizer
 from typeguard import typechecked
 
+from rago._optional import require_dependency
 from rago.generation.base import GenerationBase
 
 
@@ -17,6 +17,17 @@ class HuggingFaceGen(GenerationBase):
     """HuggingFaceGen."""
 
     default_model_name = 't5-small'
+
+    def _load_optional_modules(self) -> None:
+        self._transformers = require_dependency(
+            'transformers',
+            extra='transformers',
+            context='Transformers',
+        )
+        self._T5ForConditionalGeneration = (
+            self._transformers.T5ForConditionalGeneration
+        )
+        self._T5Tokenizer = self._transformers.T5Tokenizer
 
     def _validate(self) -> None:
         if self.model_name != 't5-small':
@@ -32,8 +43,10 @@ class HuggingFaceGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set models to t5-small models."""
-        self.tokenizer = T5Tokenizer.from_pretrained(self.model_name)
-        model = T5ForConditionalGeneration.from_pretrained(self.model_name)
+        self.tokenizer = self._T5Tokenizer.from_pretrained(self.model_name)
+        model = self._T5ForConditionalGeneration.from_pretrained(
+            self.model_name
+        )
         self.model = model.to(self.device)
 
     def generate(self, query: str, context: list[str]) -> str:

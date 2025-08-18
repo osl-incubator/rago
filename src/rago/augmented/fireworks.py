@@ -6,10 +6,8 @@ from hashlib import sha256
 from typing import cast
 
 import numpy as np
-import openai  # fireworks client doesnt have query
+import openai
 
-
-# embeddings model feature yet
 from typeguard import typechecked
 
 from rago.augmented.base import AugmentedBase, EmbeddingType

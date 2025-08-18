@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, Iterable, Optional, cast
+from typing import Any, Iterable, Optional
 
 from typeguard import typechecked
 
@@ -57,17 +57,3 @@ class RetrievalBase(RagoBase):
     def get(self, query: str = '') -> Iterable[str]:
         """Get the data from the source."""
         return []
-
-
-@typechecked
-class StringRet(RetrievalBase):
-    """
-    String Retrieval class.
-
-    This is a very generic class that assumes that the input (source) is
-    already a list of strings.
-    """
-
-    def get(self, query: str = '') -> Iterable[str]:
-        """Get the data from the sources."""
-        return cast(list[str], self.source)

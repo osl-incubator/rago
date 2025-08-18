@@ -2,15 +2,18 @@
 
 from __future__ import annotations
 
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 import instructor
 
-from fireworks.client import Fireworks
 from pydantic import BaseModel
 from typeguard import typechecked
 
+from rago._optional import require_dependency
 from rago.generation.base import GenerationBase
+
+if TYPE_CHECKING:
+    pass
 
 
 @typechecked
@@ -22,9 +25,17 @@ class FireworksGen(GenerationBase):
         'top_p': 0.9,
     }
 
+    def _load_optional_modules(self) -> None:
+        self._fireworks = require_dependency(
+            'fireworks',
+            extra='fireworks',
+            context='Fireworks',
+        )
+        self._Fireworks = self._fireworks.client.Fireworks
+
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        model = Fireworks(api_key=self.api_key)
+        model = self._Fireworks(api_key=self.api_key)
 
         self.model = (
             instructor.from_fireworks(

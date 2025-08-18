@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from huggingface_hub import InferenceClient
 from pydantic import BaseModel
 from typeguard import typechecked
 
+from rago._optional import require_dependency
 from rago.generation.base import GenerationBase
 
 
@@ -19,9 +19,17 @@ class HuggingFaceInfGen(GenerationBase):
         'max_new_tokens': 512,
     }
 
+    def _load_optional_modules(self) -> None:
+        self._huggingface_hub = require_dependency(
+            'huggingface_hub',
+            extra='huggingface_hub',
+            context='HuggingfaceHub',
+        )
+        self._InferenceClient = self._huggingface_hub.InferenceClient
+
     def _setup(self) -> None:
         """Set up InferenceClient with API key."""
-        self.client = InferenceClient(
+        self.client = self._InferenceClient(
             provider='hf-inference', api_key=self.api_key
         )
 
@@ -47,4 +55,4 @@ class HuggingFaceInfGen(GenerationBase):
             temperature=api_params['temperature'],
         )
 
-        return generated_text.strip()
+        return str(generated_text.strip())

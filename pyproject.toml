@@ -16,41 +16,35 @@ dependencies = [
     "pydantic >=2",
     "joblib >=1.4.2",
     "pypdf >=5",
+    "faiss-cpu >=1.9.0",
+    "torch >=2.5.0",
+    "langchain >=0.3.7",
+    "langchain-community >=0.3.7",
+    "instructor >=1",
+    "openai >=1.52.2",  # it is already a direct dependence in "instructor"
 ]
 
 [project.optional-dependencies]
 # Vector / ANN
-faiss = ["faiss-cpu >=1.9.0"]
 chromadb = ["chromadb >=0.3.23"]
 
 # LLM providers (opt-in)
-openai = ["openai >=1.52.2"]
 google = ["google-generativeai >=0.8.3"]
 cohere = ["cohere >=5.13.4"]
 fireworks = ["fireworks-ai >=0.15.11,<1.0.0"]
 together = ["together >=1.4.0"]
 ollama = ["ollama >=0.4.8"]
 
-torch = [
-  "torch >=2.5.0",
-  "torchvision  >=0.20.0",
-]
-
 # Common RAG stack without forcing torch install path
 base = [
   "transformers >=4",
   "sentence-transformers >=3.2.0",
-  "faiss-cpu >=1.9.0",
   "sentencepiece >=0.2.0",
   "langdetect >=1",
-  "instructor >=1",
-  "torch >=2.5.0",
-  "torchvision  >=0.20.0",
 ]
 
 # Convenience bundle
 all = [
-  "openai >=1.52.2",
   "google-generativeai >=0.8.3",
   "cohere >=5.13.4",
   "fireworks-ai >=0.15.11,<1.0.0",
@@ -58,17 +52,11 @@ all = [
   "ollama >=0.4.8",
   "spacy >=3.8.0",
   "chromadb >=0.3.23",
-  "langchain >=0.3.7",
-  "langchain-community >=0.3.7",
   # base
-  "torch >=2.5.0",
-  "torchvision  >=0.20.0",
   "transformers >=4",
   "sentence-transformers >=3.2.0",
-  "faiss-cpu >=1.9.0",
   "sentencepiece >=0.2.0",
   "langdetect >=1",
-  "instructor >=1",
 ]
 
 dev = [
