@@ -35,6 +35,8 @@ class FireworksGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
+        self._load_optional_modules()
+
         model = self._Fireworks(api_key=self.api_key)
 
         self.model = (

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 
-from typing import TYPE_CHECKING, cast
+from typing import cast
 
 import instructor
 
@@ -13,9 +13,6 @@ from typeguard import typechecked
 
 from rago._optional import require_dependency
 from rago.generation.base import GenerationBase
-
-if TYPE_CHECKING:
-    pass
 
 
 @typechecked
@@ -31,7 +28,7 @@ class CohereGen(GenerationBase):
         self._cohere = require_dependency(
             'cohere',
             extra='cohere',
-            context='Cohere embeddings',
+            context='Cohere',
         )
 
     def _setup(self) -> None:

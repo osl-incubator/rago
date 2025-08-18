@@ -21,7 +21,7 @@ dependencies = [
     "langchain >=0.3.7",
     "langchain-community >=0.3.7",
     "instructor >=1",
-
+    "openai >=1.52.2",  # it is already a direct dependence in "instructor"
 ]
 
 [project.optional-dependencies]
@@ -29,7 +29,6 @@ dependencies = [
 chromadb = ["chromadb >=0.3.23"]
 
 # LLM providers (opt-in)
-openai = ["openai >=1.52.2"]
 google = ["google-generativeai >=0.8.3"]
 cohere = ["cohere >=5.13.4"]
 fireworks = ["fireworks-ai >=0.15.11,<1.0.0"]
@@ -46,7 +45,6 @@ base = [
 
 # Convenience bundle
 all = [
-  "openai >=1.52.2",
   "google-generativeai >=0.8.3",
   "cohere >=5.13.4",
   "fireworks-ai >=0.15.11,<1.0.0",

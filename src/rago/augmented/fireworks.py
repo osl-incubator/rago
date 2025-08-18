@@ -6,10 +6,10 @@ from hashlib import sha256
 from typing import cast
 
 import numpy as np
+import openai
 
 from typeguard import typechecked
 
-from rago._optional import require_dependency
 from rago.augmented.base import AugmentedBase, EmbeddingType
 
 
@@ -20,19 +20,12 @@ class FireworksAug(AugmentedBase):
     default_model_name = 'nomic-ai/nomic-embed-text-v1.5'  # embedding model
     default_top_k = 3
 
-    def _load_optional_modules(self) -> None:
-        self._openai = require_dependency(
-            'openai',
-            extra='openai',
-            context='OpenAI',
-        )
-
     def _setup(self) -> None:
         """Set up the object with initial parameters."""
         if not self.api_key:
             raise ValueError('API key for Fireworks is required.')
         self._load_optional_modules()
-        self.openai_client = self._openai.OpenAI(
+        self.openai_client = openai.OpenAI(
             base_url='https://api.fireworks.ai/inference/v1',
             api_key=self.api_key,
         )

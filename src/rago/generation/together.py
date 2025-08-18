@@ -6,11 +6,11 @@ from typing import cast
 
 import instructor
 import openai
-import together
 
 from pydantic import BaseModel
 from typeguard import typechecked
 
+from rago._optional import require_dependency
 from rago.generation.base import GenerationBase
 
 
@@ -25,8 +25,17 @@ class TogetherGen(GenerationBase):
         'presence_penalty': 0.0,
     }
 
+    def _load_optional_modules(self) -> None:
+        self._together = require_dependency(
+            'together',
+            extra='together',
+            context='together',
+        )
+
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
+        self._load_optional_modules()
+
         # if we have to get structured output instructor uses doesn't
         # have support for together yet but we can access the model
         # and use openai sdk if we need to get structured output
@@ -45,8 +54,8 @@ class TogetherGen(GenerationBase):
             )
 
         else:
-            together.api_key = self.api_key
-            self.model = together.Together()
+            self._together.api_key = self.api_key
+            self.model = self._together.Together()
 
     def generate(self, query: str, context: list[str]) -> str | BaseModel:
         """Generate text using Together AI's API."""
