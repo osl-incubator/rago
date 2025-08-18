@@ -29,8 +29,6 @@ class HuggingFaceInfGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set up InferenceClient with API key."""
-        self._load_optional_modules()
-
         self.client = self._InferenceClient(
             provider='hf-inference', api_key=self.api_key
         )

@@ -64,8 +64,6 @@ class LlamaGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        self._load_optional_modules()
-
         self.tokenizer = self._AutoTokenizer.from_pretrained(
             self.model_name, token=self.api_key
         )
@@ -140,8 +138,6 @@ class OllamaGen(GenerationBase):
 
     def _setup(self) -> None:
         """Instantiate the Ollama client."""
-        self._load_optional_modules()
-
         self.api_params = copy(
             self.api_params if self.api_params else self.default_api_params
         )

@@ -34,8 +34,6 @@ class TogetherGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        self._load_optional_modules()
-
         # if we have to get structured output instructor uses doesn't
         # have support for together yet but we can access the model
         # and use openai sdk if we need to get structured output

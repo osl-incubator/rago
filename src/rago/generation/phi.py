@@ -49,8 +49,6 @@ class PhiGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        self._load_optional_modules()
-
         self.tokenizer = self._AutoTokenizer.from_pretrained(
             self.model_name, trust_remote_code=True
         )

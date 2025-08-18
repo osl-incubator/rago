@@ -43,8 +43,6 @@ class HuggingFaceGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set models to t5-small models."""
-        self._load_optional_modules()
-
         self.tokenizer = self._T5Tokenizer.from_pretrained(self.model_name)
         model = self._T5ForConditionalGeneration.from_pretrained(
             self.model_name

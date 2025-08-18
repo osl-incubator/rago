@@ -34,7 +34,6 @@ class CohereAug(AugmentedBase):
         """Set up the object with initial parameters."""
         if not self.api_key:
             raise ValueError('API key for Cohere is required.')
-        self._load_optional_modules()
         self.model = self._cohere.ClientV2(self.api_key)
 
     def get_embedding(self, content: list[str]) -> EmbeddingType:

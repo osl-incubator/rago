@@ -15,7 +15,7 @@ class ChromaDB(DBBase):
 
     def __init__(
         self,
-        client: ClientAPI,
+        client: 'ClientAPI',
         collection_name: str = 'rago',
     ) -> None:
         """Initialize ChromaDB."""

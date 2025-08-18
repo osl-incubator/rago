@@ -32,8 +32,6 @@ class GeminiGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        self._load_optional_modules()
-
         genai.configure(api_key=self.api_key)  # type: ignore[attr-defined]
         model = self._genai.GenerativeModel(self.model_name)
 

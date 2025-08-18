@@ -24,7 +24,6 @@ class FireworksAug(AugmentedBase):
         """Set up the object with initial parameters."""
         if not self.api_key:
             raise ValueError('API key for Fireworks is required.')
-        self._load_optional_modules()
         self.openai_client = openai.OpenAI(
             base_url='https://api.fireworks.ai/inference/v1',
             api_key=self.api_key,

@@ -33,8 +33,6 @@ class CohereGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        self._load_optional_modules()
-
         model = self._cohere.ClientV2(api_key=self.api_key)
         self.model = (
             instructor.from_cohere(
