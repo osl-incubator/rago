@@ -23,7 +23,8 @@ dependencies = [
   "openai >=1.52.2",
 
   # NumPy: macOS stays on 1.x; others use 2.x (with your Python guards)
-  "numpy >=1.26,<2 ; sys_platform == 'darwin'",
+  "numpy >=1.26,<2 ; python_version <  '3.13' and sys_platform == 'darwin'",
+  "numpy >=2       ; python_version >= '3.13' and sys_platform == 'darwin'",
   "numpy >=2,<2.1  ; python_version <  '3.10' and sys_platform != 'darwin'",
   "numpy >=2,<2.2  ; python_version == '3.10' and sys_platform != 'darwin'",
   "numpy >=2       ; python_version >= '3.11' and sys_platform != 'darwin'",

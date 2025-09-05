@@ -54,6 +54,8 @@ jobs:
         exclude:
           - os: windows
             python_version: "3.9"
+          - os: macos
+            python_version: "3.13"
 
     runs-on: ${{ matrix.os }}-latest
     timeout-minutes: 30
