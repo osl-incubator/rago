@@ -15,7 +15,7 @@ case "$OS" in
   Linux*)
     # Linux needs explicit CPU wheels and the CPU index
     uv pip install \
-      "torch==2.5.0+cpu" "torchvision==0.20.0+cpu" \
+      torch torchvision \
       --index-url https://download.pytorch.org/whl/cpu
     ;;
 
