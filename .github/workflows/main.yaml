@@ -47,7 +47,7 @@ jobs:
             python_version: "3.9"
 
     runs-on: ${{ matrix.os }}-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
 
     defaults:
       run:
