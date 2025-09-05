@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [0.14.4](https://github.com/osl-incubator/rago/compare/0.14.3...0.14.4) (2025-09-05)
+
+
+### Bug Fixes
+
+* Fix packaging for older python versions ([#102](https://github.com/osl-incubator/rago/issues/102)) ([58db6c9](https://github.com/osl-incubator/rago/commit/58db6c9233f4df5355d422ae70ab7335fb1b955b))
+
 ## [0.14.3](https://github.com/osl-incubator/rago/compare/0.14.2...0.14.3) (2025-08-18)
 
 
