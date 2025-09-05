@@ -7,21 +7,25 @@ authors = [
     { name = "Ivan Ogasawara", email = "ivan.ogasawara@gmail.com" },
 ]
 license = { text = "MIT" }
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.9,<4"
 
 # Minimal core deps
 dependencies = [
     "typeguard >=4.0",
-    "numpy >=2",
+    "numpy >=2,<2.1 ; python_version < '3.10'",
+    "numpy >=2,<2.2 ; python_version == '3.10'",
+    "numpy >=2      ; python_version >= '3.11'",
     "pydantic >=2",
     "joblib >=1.4.2",
     "pypdf >=5",
     "faiss-cpu >=1.9.0",
-    "torch >=2.5.0",
+    "torch >=2",
     "langchain >=0.3.7",
     "langchain-community >=0.3.7",
     "instructor >=1",
-    "openai >=1.52.2",  # it is already a direct dependence in "instructor"
+    # OpenAI is also required by `instructor`, but keeping it explicit is fine
+    "openai >=1.52.2",
+    "typing-extensions >=4.8 ; python_version < '3.10'",
 ]
 
 [project.optional-dependencies]
@@ -60,7 +64,7 @@ all = [
 ]
 
 dev = [
-  "pytest >=8.4",
+  "pytest >=6",
   "pytest-cov >=6.2",
   "coverage >=7.10",
   "pre-commit >=4.3",
