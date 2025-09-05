@@ -6,6 +6,15 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  LANGCHAIN_TRACING_V2: "false"
+  LANGSMITH_TRACING: "false"
+  LANGCHAIN_ENDPOINT: ""
+  LANGCHAIN_API_KEY: ""
+  POSTHOG_DISABLED: "1"
+  OMP_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+
 jobs:
   check-branch:
     runs-on: ubuntu-latest
