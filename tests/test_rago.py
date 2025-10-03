@@ -36,7 +36,7 @@ def test_simple_rag_openai_gpt_general(
     )
 
     # Compose the pipeline
-    rag = Rago() + ret + aug + gen
+    rag = Rago() | ret | aug | gen
 
     # Define the query and run the pipeline.
     query = 'Is there any animal larger than a dinosaur?'

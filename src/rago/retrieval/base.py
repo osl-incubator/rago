@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, Iterable, cast
+from typing import Any, Iterable
 
 from typeguard import typechecked
 
-from rago.base import RagBase
+from rago.base import StepBase
 from rago.retrieval.text_splitter import (
     LangChainTextSplitter,
     TextSplitterBase,
@@ -17,7 +17,7 @@ DEFAULT_LOGS: dict[str, Any] = {}
 
 
 @typechecked
-class RetrievalBase(RagBase):
+class RetrievalBase(StepBase):
     """Base Retrieval class."""
 
     content: Any

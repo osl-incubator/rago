@@ -9,10 +9,10 @@ from pathlib import Path
 import pytest
 
 from rago import Rago
-from rago.augmented import OpenAIAug, SpaCyAug
+from rago.augmented import Augmented
 from rago.extensions.cache import CacheFile
-from rago.generation import OpenAIGen
-from rago.retrieval import PDFPathRet
+from rago.generation import Generation
+from rago.retrieval import Retrieval
 
 PDF_DATA_PATH = Path(__file__).parent / 'data' / 'pdf'
 TMP_DIR = Path('/tmp') / 'rago'
@@ -20,6 +20,12 @@ TMP_DIR = Path('/tmp') / 'rago'
 RET_CACHE = CacheFile(target_dir=TMP_DIR / 'ret')
 AUG_CACHE = CacheFile(target_dir=TMP_DIR / 'aug')
 GEN_CACHE = CacheFile(target_dir=TMP_DIR / 'gen')
+
+OpenAIAug = partial(Augmented, backend='openai')
+SpaCyAug = partial(Augmented, backend='spacy')
+PDFPathRet = partial(Retrieval, backend='pdf')
+
+OpenAIGen = partial(Generation, backend='openai')
 
 
 def clear_folder(folder: Path):
@@ -67,8 +73,8 @@ def api_keys(env) -> {str, str}:
 @pytest.mark.parametrize(
     'aug_class',
     [
-        partial(OpenAIAug, top_k=3, cache=AUG_CACHE),
-        partial(SpaCyAug, top_k=3, cache=AUG_CACHE),
+        partial(OpenAIAug, top_k=3),
+        partial(SpaCyAug, top_k=3),
     ],
 )
 def test_cache(
@@ -82,20 +88,16 @@ def test_cache(
     for cache in [RET_CACHE, AUG_CACHE, GEN_CACHE]:
         clear_folder(cache.target_dir)
 
-    ret = PDFPathRet(PDF_DATA_PATH / '1.pdf', cache=RET_CACHE)
+    ret = PDFPathRet(PDF_DATA_PATH / '1.pdf') | RET_CACHE
     aug = aug_class(api_key=aug_api_key)
-    gen = OpenAIGen(
-        api_key=gen_api_key, model_name='gpt-3.5-turbo', cache=GEN_CACHE
+    gen = (
+        OpenAIGen(api_key=gen_api_key, model_name='gpt-3.5-turbo') | GEN_CACHE
     )
 
-    rag = Rago(
-        retrieval=ret,
-        augmented=aug,
-        generation=gen,
-    )
+    rag = Rago() | ret | aug | gen
 
     query = 'Is vitamin D effective?'
-    rag.prompt(query)
+    rag.run(query=query, source=[])
 
     # note: we don't need to test the gen_cache
     for cache in [RET_CACHE, AUG_CACHE]:

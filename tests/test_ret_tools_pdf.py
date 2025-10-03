@@ -1,13 +1,18 @@
 """Test the PDF retrieval."""
 
+from functools import partial
 from pathlib import Path
 
 import pytest
 
-from rago.augmented import SpaCyAug
-from rago.retrieval import PDFPathRet
+from rago.augmented import Augmented
+from rago.retrieval import Retrieval
 
 PDF_DATA_PATH = Path(__file__).parent / 'data' / 'pdf'
+
+
+SpaCyAug = Augmented(backend='spacy')
+PDFPathRet = partial(Retrieval, backend='pdf')
 
 
 def test_retrieval_pdf_extraction_basic() -> None:

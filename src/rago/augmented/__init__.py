@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from abc import abstractmethod
 from copy import deepcopy
+from dataclasses import dataclass, field
 from typing import Any, Dict, Optional, Union
 
 import numpy as np
@@ -31,13 +32,14 @@ DEFAULT_LOGS: dict[str, Any] = {}
 
 
 @typechecked
+@dataclass
 class AugmentedParameters(ParametersBase):
     """Parameters for configuring pipeline steps (can be used for augmented and generation)."""
 
     api_key: str = ''
     model_name: str = ''
     top_k: Optional[int] = 3
-    api_params: Optional[Dict[str, Any]] = {}
+    api_params: Optional[Dict[str, Any]] = field(default_factory=dict)
 
 
 @typechecked
@@ -45,10 +47,12 @@ class Augmented(StepBase):
     """
     Public Augmented class for Rago.
 
-    Users instantiate this with parameters (e.g., api_key, model_name, backend, top_k, etc.).
-    They can combine configuration via the '+' operator or callable syntax.
+    Users instantiate this with parameters (e.g., api_key, model_name, backend,
+    top_k, etc.).
+    They can combine configuration via the '|' operator or callable syntax.
 
-    When search() is called, the proper specialized augmented instance is resolved based on the configuration.
+    When search() is called, the proper specialized augmented instance is
+    resolved based on the configuration.
     """
 
     params: AugmentedParameters
@@ -86,7 +90,8 @@ class Augmented(StepBase):
 
     def _resolve(self) -> AugmentedBase:
         """Resolve and return the specialized augmented instance based on configuration."""
-        common_params = self.params
+        common_params = self.params.__dict__
+
         if self.backend == 'cohere':
             from rago.augmented.cohere import CohereAug
 
@@ -120,7 +125,7 @@ class Augmented(StepBase):
         """Resolve the specialized augmented and delegate the search method."""
         augmented_instance = self._resolve()
         return augmented_instance.search(
-            query, documents, top_k=top_k or self.top_k
+            query, documents, top_k=top_k or self.params.top_k
         )
 
     def process(self, inp: Input) -> Output:

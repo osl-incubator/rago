@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import logging
+
 from abc import abstractmethod
 from hashlib import sha256
 from pathlib import Path
@@ -12,6 +14,7 @@ import joblib
 from typeguard import typechecked
 
 from rago.base import StepBase
+from rago.io import Input, Output
 
 
 @typechecked
@@ -30,16 +33,21 @@ class Cache(StepBase):
 
     def process(self, inp: Input) -> Output:
         """
-        Default processing method: compute a key from the query and data,
+        Run the default processing method.
+
+        Compute a key from the query and data,
         attempt to load a cached result, and return it if found. Otherwise,
         return the data unchanged.
         """
+        query = inp.query
+        data = inp.data
+
         key = self._compute_key(query, data)
         cached = self.load(key)
         if cached is not None:
-            logs['cache'] = f'Cache hit for key: {key}'
+            logging.debug(f'Cache hit for key: {key}')
             return cached
-        logs['cache'] = f'No cache found for key: {key}'
+        logging.debug(f'No cache found for key: {key}')
         return data
 
     def _compute_key(self, query: str, data: Any) -> str:
@@ -77,18 +85,23 @@ class CacheFile(Cache):
 
     def process(self, inp: Input) -> Output:
         """
+        Process the cache for files.
+
         Compute a cache key and attempt to load cached data. If found, return
         the cached result. Otherwise, save the current data to the cache and
         return it.
         """
+        query = inp.query
+        data = inp.data
+
         key = self._compute_key(query, data)
         cached = self.load(key)
         if cached is not None:
-            logs['cache'] = f'Cache hit for key: {key}'
+            logging.debug(f'Cache hit for key: {key}')
             return cached
         result = (
             data  # Pass-through; assume later steps produce the final output.
         )
         self.save(key, result)
-        logs['cache'] = f'Cache saved for key: {key}'
+        logging.debug(f'Cache saved for key: {key}')
         return result

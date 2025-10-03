@@ -11,7 +11,7 @@ import torch
 from pydantic import BaseModel
 from typeguard import typechecked
 
-from rago.base import RagBase
+from rago.base import StepBase
 from rago.extensions.cache import Cache
 
 DEFAULT_LOGS: dict[str, Any] = {}
@@ -19,7 +19,7 @@ DEFAULT_API_PARAMS: dict[str, Any] = {}
 
 
 @typechecked
-class GenerationBase(RagBase):
+class GenerationBase(StepBase):
     """Generic Generation class."""
 
     device_name: str = 'cpu'

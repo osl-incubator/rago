@@ -6,6 +6,8 @@ from abc import ABC, abstractmethod
 from collections import UserDict
 from typing import Any, List, Self
 
+from typeguard import typechecked
+
 from rago.io import Input, Output
 
 
@@ -17,6 +19,15 @@ class StepBase(ABC):
 
     params: ParametersBase
 
+    def __or__(self, other: StepBase) -> PipelineBase:
+        """Overload the '|' operator to add a new step to the pipeline.
+
+        If a ParametersBase is added when no steps exist, store it globally.
+        Otherwise, apply global parameters to the new step.
+        """
+        pipeline = Pipeline() | self | other
+        return pipeline
+
     def _load_optional_modules(self) -> None:
         """Load optional modules."""
         ...
@@ -25,6 +36,7 @@ class StepBase(ABC):
         if not self.cache:
             return
         self.cache.save(key, data)
+
     @abstractmethod
     def process(self, inp: Input) -> Output:
         """Process the query and data, updating logs as needed."""
@@ -61,8 +73,8 @@ class PipelineBase(ABC):
         self.stack: List[StepBase] = []
         self.global_params: List[ParametersBase] = []
 
-    def __add__(self, other: StepBase) -> Self:
-        """Overload the '+' operator to add a new step to the pipeline.
+    def __or__(self, other: StepBase) -> Self:
+        """Overload the '|' operator to add a new step to the pipeline.
 
         If a ParametersBase is added when no steps exist, store it globally.
         Otherwise, apply global parameters to the new step.
@@ -85,3 +97,33 @@ class PipelineBase(ABC):
     def run(self, query: str, data: Any) -> Any:
         """Run the pipeline given a query and some data."""
         pass
+
+
+@typechecked
+class Pipeline(PipelineBase):
+    """RAG pipeline that composes retrieval, augmentation, and generation."""
+
+    def run(self, query: str, source: Any, device: str = 'auto') -> Output:
+        """
+        Run the pipeline for a given query and source data.
+
+        Parameters
+        ----------
+        query : str
+            The user query.
+        source : Any
+            The source data to process (e.g., documents).
+        device : str, optional
+            The device to use (default 'auto').
+
+        Returns
+        -------
+        dict[str, Any]
+        """
+        cur_input = Input(query=query, source=source)
+        cur_output = Output.from_input(cur_input)
+        for step in self.stack:
+            cur_input = cur_output.as_input()
+            cur_input.query = query
+            cur_output = step.process(cur_input)
+        return cur_output

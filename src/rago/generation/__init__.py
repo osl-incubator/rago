@@ -42,6 +42,7 @@ __all__ = [
     'TogetherGen',
 ]
 
+
 # ---------------------------------------
 # GenerationParameters (inherits from StepBase)
 # ---------------------------------------
@@ -69,7 +70,7 @@ class Generation(StepBase):
 
         api_key, model_name, backend, engine, temperature, etc.
 
-    They can combine these with a Parameters object via '+' or callable syntax.
+    They can combine these with a Parameters object via '|' or callable syntax.
 
     When generate() is called, the proper specialized generation instance is resolved
     based on the configuration.

@@ -45,7 +45,8 @@ class Retrieval(StepBase):
       - source: the data source (e.g., a list of strings or a file path)
       - backend: the retrieval backend to use ("string", "pdf", etc.)
 
-    When get() or process() is called, the proper specialized retrieval instance is lazily resolved.
+    When get() or process() is called, the proper specialized retrieval instance
+    is lazily resolved.
     """
 
     def __init__(

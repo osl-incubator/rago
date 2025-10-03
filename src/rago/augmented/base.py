@@ -13,7 +13,7 @@ from typeguard import typechecked
 from typing_extensions import TypeAlias
 
 from rago.augmented.db import DBBase, FaissDB
-from rago.base import RagBase
+from rago.base import StepBase
 from rago.extensions.cache import Cache
 from rago.io import Input, Output
 
@@ -29,7 +29,7 @@ DEFAULT_LOGS: dict[str, Any] = {}
 
 
 @typechecked
-class AugmentedBase(RagBase):
+class AugmentedBase(StepBase):
     """Base class for all augmented steps."""
 
     model: Optional[Any]

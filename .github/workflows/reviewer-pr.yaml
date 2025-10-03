@@ -1,4 +1,3 @@
-# .github/workflows/review-pr.yml
 name: Review PR with ChatGPT (secure)
 on:
   pull_request_target:
