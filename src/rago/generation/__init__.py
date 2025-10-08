@@ -107,10 +107,6 @@ class Generation(StepBase):
         for key, value in parameters.params.items():
             setattr(self, key, value)
 
-    def __add__(self, params: GenerationParameters) -> Generation:
-        self.params = params
-        return self
-
     def __call__(self, **kwargs: Any) -> Generation:
         self.params = GenerationParameters(**kwargs)
         return self

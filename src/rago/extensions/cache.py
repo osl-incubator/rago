@@ -99,9 +99,8 @@ class CacheFile(Cache):
         if cached is not None:
             logging.debug(f'Cache hit for key: {key}')
             return cached
-        result = (
-            data  # Pass-through; assume later steps produce the final output.
-        )
-        self.save(key, result)
+
+        # TODO: fix this
+        self.save(key, data)
         logging.debug(f'Cache saved for key: {key}')
-        return result
+        return Output(data=data)

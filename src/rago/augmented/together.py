@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from hashlib import sha256
 from typing import TYPE_CHECKING, cast
 
 import numpy as np
@@ -42,11 +41,6 @@ class TogetherAug(AugmentedBase):
 
     def get_embedding(self, content: list[str]) -> EmbeddingType:
         """Retrieve the embedding for given texts using Together API."""
-        cache_key = sha256(''.join(content).encode('utf-8')).hexdigest()
-        cached = self._get_cache(cache_key)
-        if cached is not None:
-            return cast(EmbeddingType, cached)
-
         client = cast('Together', self.model)
         all_embeddings = []
         for text in content:
@@ -56,9 +50,6 @@ class TogetherAug(AugmentedBase):
             embedding = response.data[0].embedding
             all_embeddings.append(embedding)
         result = np.array(all_embeddings, dtype=np.float32)
-
-        self._save_cache(cache_key, result)
-
         return result
 
     def search(

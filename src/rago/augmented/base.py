@@ -77,12 +77,6 @@ class AugmentedBase(StepBase):
         """Retrieve the embedding for given text."""
         raise Exception('Method not implemented.')
 
-    def _get_cache(self, cache_key: str) -> Any:
-        return None
-
-    def _save_cache(self, cache_key: str, data: Any) -> None:
-        return
-
     @abstractmethod
     def search(self, query: str, documents: Any, top_k: int = 0) -> list[str]:
         """Search for the most relevant documents."""

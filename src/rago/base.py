@@ -53,6 +53,9 @@ class ParametersBase(UserDict, StepBase):
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(kwargs)
 
+    def __repr__(self) -> str:
+        return f'{self.__class__.__name__}({self.data})'
+
     def process(self, inp: Input) -> Output:
         """Parameter steps do not process data directly."""
         self.apply(inp)
@@ -61,9 +64,6 @@ class ParametersBase(UserDict, StepBase):
     def apply(self, inp: Input) -> None:
         """Apply the parameters."""
         self.data.update(inp)
-
-    def __repr__(self) -> str:
-        return f'{self.__class__.__name__}({self.data})'
 
 
 class PipelineBase(ABC):
@@ -94,9 +94,13 @@ class PipelineBase(ABC):
             return self
 
     @abstractmethod
-    def run(self, query: str, data: Any) -> Any:
+    def run(self, query: str, source: Any, device: str = 'auto') -> Any:
         """Run the pipeline given a query and some data."""
         pass
+
+    def process(self, inp: Input) -> Output:
+        """Process the query and data, updating logs as needed."""
+        self.run(inp.query, inp.source)
 
 
 @typechecked

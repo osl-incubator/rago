@@ -60,11 +60,11 @@ datasource = ...
 
 rag = (
     Rago()
-    + DB(backend="faiss", top_k=5)
-    + Cache(backend="file")
-    + Retrieval(backend="dummy")
-    + Augmentation(backend="openai", model="text-embedding-3-small")
-    + Generation(
+    | DB(backend="faiss", top_k=5)
+    | Cache(backend="file")
+    | Retrieval(backend="dummy")
+    | Augmentation(backend="openai", model="text-embedding-3-small")
+    | Generation(
         backend="openai",
         model="gpt-4o-mini",
         prompt_template="Question: {query}\nContext: {context}\nAnswer:"

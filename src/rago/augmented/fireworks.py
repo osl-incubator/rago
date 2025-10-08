@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 
-from hashlib import sha256
-from typing import cast
-
 import numpy as np
 import openai
 
@@ -31,11 +28,6 @@ class FireworksAug(AugmentedBase):
 
     def get_embedding(self, content: list[str]) -> EmbeddingType:
         """Retrieve the embedding for given texts using the OpenAI client."""
-        cache_key = sha256(''.join(content).encode('utf-8')).hexdigest()
-        cached = self._get_cache(cache_key)
-        if cached is not None:
-            return cast(EmbeddingType, cached)
-
         # Using the OpenAI embeddings API call for fireworks
         response = self.openai_client.embeddings.create(
             model=self.model_name,
@@ -44,7 +36,6 @@ class FireworksAug(AugmentedBase):
         result = np.array(
             [data.embedding for data in response.data], dtype=np.float32
         )
-        self._save_cache(cache_key, result)
         return result
 
     def search(

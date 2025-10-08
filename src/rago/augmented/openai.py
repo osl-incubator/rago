@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from hashlib import sha256
 from typing import cast
 
 import numpy as np
@@ -29,11 +28,6 @@ class OpenAIAug(AugmentedBase):
 
     def get_embedding(self, content: list[str]) -> EmbeddingType:
         """Retrieve the embedding for a given text using OpenAI API."""
-        cache_key = sha256(''.join(content).encode('utf-8')).hexdigest()
-        cached = self._get_cache(cache_key)
-        if cached is not None:
-            return cast(EmbeddingType, cached)
-
         model = cast(openai.OpenAI, self.model)
         response = model.embeddings.create(
             input=content, model=self.model_name
@@ -41,8 +35,6 @@ class OpenAIAug(AugmentedBase):
         result = np.array(
             [data.embedding for data in response.data], dtype=np.float32
         )
-
-        self._save_cache(cache_key, result)
 
         return result
 

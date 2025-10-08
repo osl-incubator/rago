@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Iterable, cast
 
 from typeguard import typechecked
 
+from rago.io import Input, Output
 from rago.retrieval.base import RetrievalBase
 from rago.retrieval.tools.pdf import extract_text_from_pdf, is_pdf
 
@@ -34,15 +34,13 @@ class PDFPathRet(FilePathRet):
         if not is_pdf(self.source):
             raise Exception('Given file is not a PDF.')
 
-    def retrieve(self, query: str = '') -> Iterable[str]:
+    def retrieve(self, inp: Input) -> Output:
         """Extract text from the PDF, split into chunks, and use caching."""
-        cache_key = self.source
-        cached = self._get_cache(cache_key)
-        if cached is not None:
-            return cast(Iterable[str], cached)
-
+        # query = inp.query
+        # source = inp.source
         text = extract_text_from_pdf(self.source)
-        # self.logs['text'] = text
         result = self.splitter.split(text)
-        self._save_cache(cache_key, result)
-        return result
+        return Output(content=result)
+
+    def process(self, inp: Input) -> Output:
+        return self.retrieve(inp.query)

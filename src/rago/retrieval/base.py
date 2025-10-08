@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, Iterable
+from typing import Any
 
 from typeguard import typechecked
 
 from rago.base import StepBase
+from rago.io import Input, Output
 from rago.retrieval.text_splitter import (
     LangChainTextSplitter,
     TextSplitterBase,
@@ -52,6 +53,6 @@ class RetrievalBase(StepBase):
         pass
 
     @abstractmethod
-    def retrieve(self, query: str = '', source: Any = None) -> Iterable[str]:
+    def retrieve(self, inp: Input) -> Output:
         """Get the data from the source."""
-        return []
+        return Output()

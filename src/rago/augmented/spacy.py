@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from hashlib import sha256
 from typing import TYPE_CHECKING, List, cast
 
 import numpy as np
@@ -36,11 +35,6 @@ class SpaCyAug(AugmentedBase):
 
     def get_embedding(self, content: List[str]) -> EmbeddingType:
         """Retrieve the embedding for a given text using SpaCy."""
-        cache_key = sha256(''.join(content).encode('utf-8')).hexdigest()
-        cached = self._get_cache(cache_key)
-        if cached is not None:
-            return cast(EmbeddingType, cached)
-
         model = cast('spacy.language.Language', self.model)
         embeddings = []
 
@@ -59,7 +53,6 @@ class SpaCyAug(AugmentedBase):
         if result.ndim == 1:
             result = result.reshape(1, -1)
 
-        self._save_cache(cache_key, result)
         return result
 
     def search(

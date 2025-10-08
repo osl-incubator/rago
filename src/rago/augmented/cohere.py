@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from hashlib import sha256
 from typing import TYPE_CHECKING, cast
 
 import numpy as np
@@ -38,11 +37,6 @@ class CohereAug(AugmentedBase):
 
     def get_embedding(self, content: list[str]) -> EmbeddingType:
         """Retrieve the embedding for given texts using Cohere API."""
-        cache_key = sha256(''.join(content).encode('utf-8')).hexdigest()
-        cached = self._get_cache(cache_key)
-        if cached is not None:
-            return cast(EmbeddingType, cached)
-
         model = cast('cohere.Client', self.model)
         response = model.embed(
             texts=content,
@@ -51,8 +45,6 @@ class CohereAug(AugmentedBase):
             embedding_types=['float'],
         )
         result = np.array(response.embeddings.float_, dtype=np.float32)  # type: ignore[union-attr]
-
-        self._save_cache(cache_key, result)
 
         return result
 

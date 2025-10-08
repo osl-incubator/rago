@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from dataclasses import dataclass, field
 from typing import Any, Dict, Iterable, Optional, cast
 
 from typeguard import typechecked
@@ -18,12 +19,13 @@ from rago.retrieval.dummy import StringRet
 
 
 @typechecked
+@dataclass
 class RetrievalParameters(ParametersBase):
     """Parameters for configuring retrieval steps."""
 
     source: Any = None
     api_key: str = ''
-    api_params: Dict[str, Any] = {}
+    api_params: Dict[str, Any] = field(default_factory=dict)
 
     def process(self, inp: Input) -> Output:
         data = inp.get('data')
@@ -33,7 +35,7 @@ class RetrievalParameters(ParametersBase):
         self.params.update(parameters.params)
 
     def __repr__(self) -> str:
-        return f'RetrievalParameters({self.params})'
+        return f'RetrievalParameters({self.__dict__.keys()})'
 
 
 @typechecked
@@ -64,22 +66,18 @@ class Retrieval(StepBase):
 
         self.backend = backend
 
-    def apply(self, parameters: RetrievalParameters) -> None:
-        for key, value in parameters.params.items():
-            setattr(self.params, key, value)
-
-    def __add__(self, params: RetrievalParameters) -> Retrieval:
-        self.apply(params)
-        return self
-
     def __call__(self, **kwargs: Any) -> Retrieval:
         params = RetrievalParameters(**kwargs)
         self.apply(params)
         return self
 
+    def apply(self, parameters: RetrievalParameters) -> None:
+        for key, value in parameters.params.items():
+            setattr(self.params, key, value)
+
     def _resolve(self) -> RetrievalBase:
-        """Resolve and return the specialized retrieval instance based on configuration."""
-        common_params = deepcopy(self.params)
+        """Resolve and return the specialized retrieval instance."""
+        common_params = deepcopy(self.params.__dict__)
 
         if self.backend == 'string':
             return StringRet(**common_params)
@@ -91,12 +89,11 @@ class Retrieval(StepBase):
         else:
             raise Exception(f'Unsupported retrieval backend: {self.backend}')
 
-    def retrieve(self, query: str = '', source: Any = None) -> Iterable[str]:
+    def retrieve(self, inp: Input) -> Iterable[str]:
         """Delegate get() to the specialized retrieval instance."""
         retrieval_instance = self._resolve()
-        return retrieval_instance.retrieve(query, source)
+        return retrieval_instance.retrieve(inp)
 
     def process(self, inp: Input) -> Output:
         """Process the retrieval step."""
-        result = self.retrieve(inp.query, inp.source)
-        return Output(content=result)
+        return self.retrieve(inp)
