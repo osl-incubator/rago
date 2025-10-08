@@ -16,14 +16,14 @@ Rago is a lightweight framework for RAG.
 - Vector Database support
   - FAISS
 - Retrieval features
-  - Support pdf extraction via langchain
+  - Support PDF extraction via Langchain
 - Augmentation (Embedding + Vector Database Search)
   - Support for Sentence Transformer (Hugging Face)
   - Support for Open AI
   - Support for SpaCy
 - Generation (LLM)
   - Support for Hugging Face
-  - Support for llama (Huggin FAce)
+  - Support for Llama (Hugging Face)
   - Support for OpenAI
   - Support for Gemini
 
@@ -116,13 +116,12 @@ $ pip install rago[gpu]
 
 ### Llama 3
 
-In order to use a llama model, visit its page on huggingface and request your
-access in its form, for example: https://huggingface.co/meta-llama/Llama-3.2-1B.
+In order to use a Llama model, visit its page on Hugging Face and request access via its form, for example: https://huggingface.co/meta-llama/Llama-3.2-1B.
 
 After you are granted access to the desired model, you will be able to use it
 with Rago.
 
-You will also need to provide a hugging face token in order to download the
+You will also need to provide a Hugging Face token in order to download the
 models locally, for example:
 
 ```python
@@ -154,7 +153,7 @@ rag = Rago(
     augmented=SentenceTransformerAug(top_k=2),
     generation=LlamaGen(api_key=HF_TOKEN),
 )
-rag.prompt('What is the faster animal on Earth?')
+rag.prompt('What is the fastest animal on Earth?')
 ```
 
 ### Ollama
