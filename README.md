@@ -116,7 +116,8 @@ $ pip install rago[gpu]
 
 ### Llama 3
 
-In order to use a Llama model, visit its page on Hugging Face and request access via its form, for example: https://huggingface.co/meta-llama/Llama-3.2-1B.
+In order to use a Llama model, visit its page on Hugging Face and request access via its form, 
+for example: https://huggingface.co/meta-llama/Llama-3.2-1B.
 
 After you are granted access to the desired model, you will be able to use it
 with Rago.
