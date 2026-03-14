@@ -51,7 +51,7 @@ class SentenceTransformerAug(AugmentedBase):
 
         self.db.embed(document_encoded)
 
-        scores, indices = self.db.search(query_encoded, top_k=top_k)
+        _, indices = self.db.search(query_encoded, top_k=top_k)
 
         retrieved_docs = [documents[i] for i in indices]
 

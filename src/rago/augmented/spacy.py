@@ -68,7 +68,7 @@ class SpaCyAug(AugmentedBase):
         top_k = top_k or self.top_k or self.default_top_k or 1
 
         self.db.embed(document_encoded)
-        scores, indices = self.db.search(query_encoded, top_k=top_k)
+        _, indices = self.db.search(query_encoded, top_k=top_k)
 
         # self.logs['indices'] = indices
         # self.logs['scores'] = scores
