@@ -4,7 +4,10 @@ from __future__ import annotations
 
 from typing import List, cast
 
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+try:
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
+except ImportError:  # pragma: no cover - compatibility with older LangChain
+    from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 from rago.retrieval.text_splitter.base import TextSplitterBase
 
