@@ -11,14 +11,17 @@
         <link rel="canonical" href="https://osl-incubator.github.io/rago/api/core/">
       
       
-        <link rel="prev" href="../base/">
+        <link rel="prev" href="../config/">
       
       
         <link rel="next" href="../extensions/">
       
       
+        
+      
+      
       <link rel="icon" href="../../images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
     
     
       
@@ -26,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -54,7 +57,6 @@
     
       
 
-    
     
     
   </head>
@@ -173,7 +175,7 @@
         <a href="https://github.com/osl-incubator/rago.git" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -218,7 +220,7 @@
       <a href="https://github.com/osl-incubator/rago.git" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -240,9 +242,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Rago
+  
+
     
   </span>
+  
   
 
       </a>
@@ -262,9 +269,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Installation
+  
+
     
   </span>
+  
   
 
       </a>
@@ -284,9 +296,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Changelog
+  
+
     
   </span>
+  
   
 
       </a>
@@ -306,9 +323,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Contributing
+  
+
     
   </span>
+  
   
 
       </a>
@@ -345,9 +367,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     API
+  
+
     
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -356,7 +383,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
-            API
+            
+  
+    API
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -373,6 +404,10 @@
       
         
           
+        
+      
+        
+      
         
       
         
@@ -404,9 +439,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> rago
+  
+
     
   </span>
+  
   
 
             </a>
@@ -421,7 +461,11 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5_1">
             <span class="md-nav__icon md-icon"></span>
-            <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> rago
+            
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> rago
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -473,9 +517,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> augmented
+  
+
     
   </span>
+  
   
 
             </a>
@@ -490,7 +539,11 @@
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_1_2">
             <span class="md-nav__icon md-icon"></span>
-            <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> augmented
+            
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> augmented
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -508,9 +561,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> base
+  
+
     
   </span>
+  
   
 
       </a>
@@ -531,9 +589,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> cohere
+  
+
     
   </span>
+  
   
 
       </a>
@@ -578,9 +641,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> db
+  
+
     
   </span>
+  
   
 
             </a>
@@ -595,7 +663,11 @@
         <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_1_2_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_1_2_4">
             <span class="md-nav__icon md-icon"></span>
-            <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> db
+            
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> db
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -613,9 +685,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> base
+  
+
     
   </span>
+  
   
 
       </a>
@@ -636,9 +713,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> chroma
+  
+
     
   </span>
+  
   
 
       </a>
@@ -659,9 +741,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> faiss
+  
+
     
   </span>
+  
   
 
       </a>
@@ -690,9 +777,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> fireworks
+  
+
     
   </span>
+  
   
 
       </a>
@@ -713,9 +805,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> openai
+  
+
     
   </span>
+  
   
 
       </a>
@@ -736,9 +833,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> sentence_transformer
+  
+
     
   </span>
+  
   
 
       </a>
@@ -759,9 +861,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> spacy
+  
+
     
   </span>
+  
   
 
       </a>
@@ -782,9 +889,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> together
+  
+
     
   </span>
+  
   
 
       </a>
@@ -813,9 +925,42 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> base
+  
+
     
   </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> config
+  
+
+    
+  </span>
+  
   
 
       </a>
@@ -845,9 +990,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> core
+  
+
     
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -858,9 +1008,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> core
+  
+
     
   </span>
+  
   
 
       </a>
@@ -883,7 +1038,9 @@
         <li class="md-nav__item">
   <a href="#rago.core.Rago" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;Rago
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;Rago
+      
     </span>
   </a>
   
@@ -891,9 +1048,44 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#rago.core.Rago.logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rago.core.Rago.process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;process
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#rago.core.Rago.prompt" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;prompt
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rago.core.Rago.run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;run
+      
     </span>
   </a>
   
@@ -930,6 +1122,8 @@
       
         
       
+        
+      
     
     
     
@@ -938,7 +1132,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_6" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -947,24 +1141,33 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> extensions
+  
+
     
   </span>
+  
   
 
             </a>
             
               
-              <label class="md-nav__link " for="__nav_5_1_5" id="__nav_5_1_5_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_5_1_6" id="__nav_5_1_6_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_1_5">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_6">
             <span class="md-nav__icon md-icon"></span>
-            <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> extensions
+            
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> extensions
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -982,9 +1185,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> base
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1005,9 +1213,42 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> cache
+  
+
     
   </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extensions/logs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> logs
+  
+
+    
+  </span>
+  
   
 
       </a>
@@ -1049,353 +1290,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_6" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../generation/" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> generation
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_5_1_6" id="__nav_5_1_6_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_1_6">
-            <span class="md-nav__icon md-icon"></span>
-            <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> generation
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../generation/base/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> base
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../generation/cohere/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> cohere
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../generation/deepseek/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> deepseek
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../generation/fireworks/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> fireworks
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../generation/gemini/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> gemini
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../generation/groq/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> groq
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../generation/hugging_face/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> hugging_face
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../generation/hugging_face_inf/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> hugging_face_inf
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../generation/llama/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> llama
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../generation/openai/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> openai
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../generation/phi/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> phi
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../generation/together/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> together
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-          
         
       
         
@@ -1420,14 +1314,19 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../retrieval/" class="md-nav__link ">
+            <a href="../generation/" class="md-nav__link ">
               
   
   
   <span class="md-ellipsis">
-    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> retrieval
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> generation
+  
+
     
   </span>
+  
   
 
             </a>
@@ -1442,7 +1341,455 @@
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_1_7">
             <span class="md-nav__icon md-icon"></span>
-            <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> retrieval
+            
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> generation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/cohere/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> cohere
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/deepseek/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> deepseek
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/fireworks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> fireworks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/gemini/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> gemini
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/groq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> groq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/hugging_face/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> hugging_face
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/hugging_face_inf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> hugging_face_inf
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/llama/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> llama
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> openai
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/phi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> phi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/together/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> together
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> io
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../retrieval/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> retrieval
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_1_9" id="__nav_5_1_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> retrieval
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1460,9 +1807,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> base
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1483,9 +1835,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> dummy
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1506,9 +1863,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> file
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1542,7 +1904,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_7_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_9_5" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -1551,24 +1913,33 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> text_splitter
+  
+
     
   </span>
+  
   
 
             </a>
             
               
-              <label class="md-nav__link " for="__nav_5_1_7_5" id="__nav_5_1_7_5_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_5_1_9_5" id="__nav_5_1_9_5_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_1_7_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_1_7_5">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_1_9_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_9_5">
             <span class="md-nav__icon md-icon"></span>
-            <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> text_splitter
+            
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> text_splitter
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1586,9 +1957,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> base
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1609,9 +1985,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> langchain
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1651,7 +2032,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_7_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_9_6" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -1660,24 +2041,33 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> tools
+  
+
     
   </span>
+  
   
 
             </a>
             
               
-              <label class="md-nav__link " for="__nav_5_1_7_6" id="__nav_5_1_7_6_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_5_1_9_6" id="__nav_5_1_9_6_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_1_7_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_1_7_6">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_1_9_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_9_6">
             <span class="md-nav__icon md-icon"></span>
-            <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> tools
+            
+  
+    <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> tools
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1695,9 +2085,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     <code class="doc-symbol doc-symbol-nav doc-symbol-module"></code> pdf
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1749,9 +2144,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Rago
+  
+
     
   </span>
+  
   
 
       </a>
@@ -1788,7 +2188,9 @@
         <li class="md-nav__item">
   <a href="#rago.core.Rago" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;Rago
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;Rago
+      
     </span>
   </a>
   
@@ -1796,9 +2198,44 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#rago.core.Rago.logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rago.core.Rago.process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;process
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#rago.core.Rago.prompt" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;prompt
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rago.core.Rago.run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;run
+      
     </span>
   </a>
   
@@ -1819,6 +2256,7 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
@@ -1840,7 +2278,7 @@
 
     <div class="doc doc-contents first">
 
-        <p>Rago is Retrieval Augmented Generation lightweight framework.</p>
+        <p>Rago core pipeline.</p>
 
 
 
@@ -1857,7 +2295,7 @@
           <b><code><a class="autorefs autorefs-internal" title="            Rago (rago.core.Rago)" href="#rago.core.Rago">Rago</a></code></b>
           –
           <div class="doc-md-description">
-            <p>RAG class.</p>
+            <p>Composable Rago pipeline.</p>
           </div>
         </li>
     </ul>
@@ -1868,7 +2306,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -1888,49 +2326,19 @@
 
 </h2>
 <div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">Rago</span><span class="p">(</span>
-    <span class="n">retrieval</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            RetrievalBase (rago.retrieval.base.RetrievalBase)" href="../retrieval/base/#rago.retrieval.base.RetrievalBase">RetrievalBase</a></span><span class="p">,</span>
-    <span class="n">augmented</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            AugmentedBase (rago.augmented.base.AugmentedBase)" href="../augmented/base/#rago.augmented.base.AugmentedBase">AugmentedBase</a></span><span class="p">,</span>
-    <span class="n">generation</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            GenerationBase (rago.generation.base.GenerationBase)" href="../generation/base/#rago.generation.base.GenerationBase">GenerationBase</a></span><span class="p">,</span>
+    <span class="n">retrieval</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StepBase (rago.base.StepBase)" href="../base/#rago.base.StepBase">StepBase</a></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">augmented</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StepBase (rago.base.StepBase)" href="../base/#rago.base.StepBase">StepBase</a></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">generation</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            StepBase (rago.base.StepBase)" href="../base/#rago.base.StepBase">StepBase</a></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="            Pipeline (rago.base.Pipeline)" href="../base/#rago.base.Pipeline">Pipeline</a></code></p>
 
 
-        <p>RAG class.</p>
 
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>retrieval</code></b>
-              (<code><a class="autorefs autorefs-internal" title="            RetrievalBase (rago.retrieval.base.RetrievalBase)" href="../retrieval/base/#rago.retrieval.base.RetrievalBase">RetrievalBase</a></code>)
-          –
-          <div class="doc-md-description">
-            <p>The retrieval component used to fetch relevant data based
-on the query.</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>augmented</code></b>
-              (<code><a class="autorefs autorefs-internal" title="            AugmentedBase (rago.augmented.base.AugmentedBase)" href="../augmented/base/#rago.augmented.base.AugmentedBase">AugmentedBase</a></code>)
-          –
-          <div class="doc-md-description">
-            <p>The augmentation module responsible for enriching the
-retrieved data.</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>generation</code></b>
-              (<code><a class="autorefs autorefs-internal" title="            GenerationBase (rago.generation.base.GenerationBase)" href="../generation/base/#rago.generation.base.GenerationBase">GenerationBase</a></code>)
-          –
-          <div class="doc-md-description">
-            <p>The text generation model used to generate a response based
-on the query and augmented data.</p>
-          </div>
-        </li>
-    </ul>
+        <p>Composable Rago pipeline.</p>
 
 
 
@@ -1946,79 +2354,75 @@ on the query and augmented data.</p>
 <p><span class="doc-section-title">Methods:</span></p>
     <ul>
           <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="            process (rago.core.Rago.process)" href="#rago.core.Rago.process">process</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Run this pipeline when embedded as a step.</p>
+            </div>
+          </li>
+          <li class="doc-section-item field-body">
             <b><code><a class="autorefs autorefs-internal" title="            prompt (rago.core.Rago.prompt)" href="#rago.core.Rago.prompt">prompt</a></code></b>
             –
             <div class="doc-md-description">
-              <p>Run the pipeline for a specific prompt.</p>
+              <p>Run the pipeline and return the primary result value.</p>
+            </div>
+          </li>
+          <li class="doc-section-item field-body">
+            <b><code><a class="autorefs autorefs-internal" title="            run (rago.core.Rago.run)" href="#rago.core.Rago.run">run</a></code></b>
+            –
+            <div class="doc-md-description">
+              <p>Run all configured steps for the given query and source.</p>
             </div>
           </li>
     </ul>
 
 
 
-                  <details class="quote">
-                    <summary>Source code in <code>src/rago/core.py</code></summary>
-                    <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span>
-    <span class="n">retrieval</span><span class="p">:</span> <span class="n">RetrievalBase</span><span class="p">,</span>
-    <span class="n">augmented</span><span class="p">:</span> <span class="n">AugmentedBase</span><span class="p">,</span>
-    <span class="n">generation</span><span class="p">:</span> <span class="n">GenerationBase</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize the RAG structure.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    retrieval : RetrievalBase</span>
-<span class="sd">        The retrieval component used to fetch relevant data based</span>
-<span class="sd">        on the query.</span>
-<span class="sd">    augmented : AugmentedBase</span>
-<span class="sd">        The augmentation module responsible for enriching the</span>
-<span class="sd">        retrieved data.</span>
-<span class="sd">    generation : GenerationBase</span>
-<span class="sd">        The text generation model used to generate a response based</span>
-<span class="sd">        on the query and augmented data.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">retrieval</span> <span class="o">=</span> <span class="n">retrieval</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">augmented</span> <span class="o">=</span> <span class="n">augmented</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">generation</span> <span class="o">=</span> <span class="n">generation</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;retrieval&#39;</span><span class="p">:</span> <span class="n">retrieval</span><span class="o">.</span><span class="n">logs</span><span class="p">,</span>
-        <span class="s1">&#39;augmented&#39;</span><span class="p">:</span> <span class="n">augmented</span><span class="o">.</span><span class="n">logs</span><span class="p">,</span>
-        <span class="s1">&#39;generation&#39;</span><span class="p">:</span> <span class="n">generation</span><span class="o">.</span><span class="n">logs</span><span class="p">,</span>
-    <span class="p">}</span>
+<p><span class="doc-section-title">Attributes:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+          <b><code><a class="autorefs autorefs-internal" title="            logs
+
+
+  
+      property
+   (rago.core.Rago.logs)" href="#rago.core.Rago.logs">logs</a></code></b>
+              (<code><span title="dict">dict</span>[<span title="str">str</span>, <span title="dict">dict</span>[<span title="str">str</span>, <span title="typing.Any">Any</span>]]</code>)
+          –
+          <div class="doc-md-description">
+            <p>Expose step logs using stable public names when possible.</p>
+          </div>
+        </li>
+    </ul>
+
+                  <details class="mkdocstrings-source">
+                    <summary>Source code in <code>src/rago/core.py</code></summary>
+                    <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">retrieval</span><span class="p">:</span> <span class="n">StepBase</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">augmented</span><span class="p">:</span> <span class="n">StepBase</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">generation</span><span class="p">:</span> <span class="n">StepBase</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="p">(</span><span class="n">retrieval</span><span class="p">,</span> <span class="n">augmented</span><span class="p">,</span> <span class="n">generation</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">step</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span> <span class="o">|</span> <span class="n">step</span>
 </code></pre></div></td></tr></table></div>
                   </details>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -2026,8 +2430,75 @@ on the query and augmented data.</p>
 
 
 
+<div class="doc doc-object doc-attribute">
 
 
+
+<h3 id="rago.core.Rago.logs" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <span class="doc doc-object-name doc-attribute-name">logs</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="n">logs</span><span class="p">:</span> <span class="n"><span title="dict">dict</span></span><span class="p">[</span><span class="n"><span title="str">str</span></span><span class="p">,</span> <span class="n"><span title="dict">dict</span></span><span class="p">[</span><span class="n"><span title="str">str</span></span><span class="p">,</span> <span class="n"><span title="typing.Any">Any</span></span><span class="p">]]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Expose step logs using stable public names when possible.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="rago.core.Rago.process" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">process</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">process</span><span class="p">(</span><span class="n">inp</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="            Input (rago.io.Input)" href="../io/#rago.io.Input">Input</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="            Output (rago.io.Output)" href="../io/#rago.io.Output">Output</a></span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Run this pipeline when embedded as a step.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/rago/base.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Output</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run this pipeline when embedded as a step.&quot;&quot;&quot;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;source&#39;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">inp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="n">source</span><span class="p">))</span>
+    <span class="n">extra</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">key</span><span class="p">:</span> <span class="n">value</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">inp</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;query&#39;</span><span class="p">,</span> <span class="s1">&#39;source&#39;</span><span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">query</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">extra</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
 
 <div class="doc doc-object doc-function">
 
@@ -2037,103 +2508,134 @@ on the query and augmented data.</p>
 
 
 </h3>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">prompt</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></span> <span class="o">|</span> <span class="n"><span title="pydantic.BaseModel">BaseModel</span></span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">prompt</span><span class="p">(</span>
+    <span class="n">query</span><span class="p">:</span> <span class="n"><span title="str">str</span></span><span class="p">,</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n"><span title="typing.Any">Any</span></span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n"><span title="typing.Any">Any</span></span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><span title="typing.Any">Any</span></span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="typing.Any">Any</span></span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
-        <p>Run the pipeline for a specific prompt.</p>
+        <p>Run the pipeline and return the primary result value.</p>
 
 
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>query</code></b>
-              (<code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>)
-          –
-          <div class="doc-md-description">
-            <p>The query or prompt from the user.</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>device</code></b>
-              (<code>str (default &#39;auto&#39;)</code>, default:
-                  <code>&#39;auto&#39;</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>Device for generation (e.g., 'auto', 'cpu', 'cuda'), by
-default 'auto'.</p>
-          </div>
-        </li>
-    </ul>
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/rago/base.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">prompt</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the pipeline and return the primary result value.&quot;&quot;&quot;</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s1">&#39;result&#39;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">result</span>
+    <span class="k">if</span> <span class="s1">&#39;content&#39;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">content</span>
+    <span class="k">return</span> <span class="n">output</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
 
 
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
-          –
-          <div class="doc-md-description">
-            <p>Generated text based on the query and augmented data.</p>
-          </div>
-        </li>
-    </ul>
+<h3 id="rago.core.Rago.run" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">run</span>
 
 
-            <details class="quote">
-              <summary>Source code in <code>src/rago/core.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">prompt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">BaseModel</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the pipeline for a specific prompt.</span>
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">run</span><span class="p">(</span>
+    <span class="n">query</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n"><span title="typing.Any">Any</span></span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n"><span title="typing.Any">Any</span></span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><span title="typing.Any">Any</span></span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="            Output (rago.io.Output)" href="../io/#rago.io.Output">Output</a></span>
+</code></pre></div>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    query : str</span>
-<span class="sd">        The query or prompt from the user.</span>
-<span class="sd">    device : str (default &#39;auto&#39;)</span>
-<span class="sd">        Device for generation (e.g., &#39;auto&#39;, &#39;cpu&#39;, &#39;cuda&#39;), by</span>
-<span class="sd">        default &#39;auto&#39;.</span>
+    <div class="doc doc-contents ">
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    str</span>
-<span class="sd">        Generated text based on the query and augmented data.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">ret_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieval</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;retrieval&#39;</span><span class="p">][</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret_data</span>
+        <p>Run all configured steps for the given query and source.</p>
 
-    <span class="n">aug_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">augmented</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">ret_data</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;augmented&#39;</span><span class="p">][</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aug_data</span>
 
-    <span class="n">gen_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generation</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">aug_data</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;generation&#39;</span><span class="p">][</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gen_data</span>
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>src/rago/base.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">query</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Output</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run all configured steps for the given query and source.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">source</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">data</span>
 
-    <span class="k">return</span> <span class="n">gen_data</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">content</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">data</span> <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">source</span>
+
+    <span class="n">cur_output</span> <span class="o">=</span> <span class="n">Output</span><span class="p">(</span>
+        <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
+        <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">content</span><span class="p">,</span>
+        <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">:</span>
+        <span class="n">cur_input</span> <span class="o">=</span> <span class="n">cur_output</span><span class="o">.</span><span class="n">as_input</span><span class="p">()</span>
+        <span class="n">cur_input</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">query</span>
+        <span class="n">cur_output</span> <span class="o">=</span> <span class="n">step</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">cur_input</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">cur_output</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -2209,7 +2711,7 @@ default 'auto'.</p>
       
     
     <a href="https://twitter.com/xmnlab" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
     </a>
   
     
@@ -2220,7 +2722,7 @@ default 'auto'.</p>
       
     
     <a href="https://github.com/osl-incubator/rago.git" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   
 </div>
@@ -2237,10 +2739,11 @@ default 'auto'.</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "header.autohide", "navigation.indexes", "navigation.instant", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.annotate", "content.tabs.link", "header.autohide", "navigation.indexes", "navigation.instant", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
