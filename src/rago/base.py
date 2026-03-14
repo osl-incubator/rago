@@ -5,7 +5,12 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from collections import UserDict
 from collections.abc import Iterable, Mapping
-from typing import Any, Self
+from typing import Any
+
+try:
+    from typing import Self
+except ImportError:  # pragma: no cover - Python < 3.11
+    from typing_extensions import Self
 
 from typeguard import typechecked
 
