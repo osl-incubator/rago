@@ -117,3 +117,12 @@ def call_or_skip(
     except Exception as exc:
         skip_if_runtime_unavailable(backend, exc)
         raise
+
+
+def get_api_key_fixture(
+    request: pytest.FixtureRequest, fixture_name: str
+) -> str:
+    """Load an API-key fixture only when the current backend needs it."""
+    if not fixture_name:
+        return ''
+    return str(request.getfixturevalue(fixture_name))

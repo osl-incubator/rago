@@ -6,7 +6,12 @@ import pytest
 
 from rago.augmented import Augmented
 
-from tests.helpers import call_or_skip, partial_backend, require_spacy_model
+from tests.helpers import (
+    call_or_skip,
+    get_api_key_fixture,
+    partial_backend,
+    require_spacy_model,
+)
 
 CohereAug = partial(
     Augmented, backend='cohere', model_name='embed-english-light-v3.0'
@@ -59,15 +64,10 @@ gen_models = [
 )
 @pytest.mark.parametrize('partial_model', gen_models)
 def test_aug_spacy(
+    request: pytest.FixtureRequest,
     animals_data: list[str],
     question: str,
     expected_answer: str,
-    api_key_openai: str,
-    api_key_cohere: str,
-    api_key_gemini: str,
-    api_key_fireworks: str,
-    api_key_together: str,
-    api_key_hugging_face: str,
     partial_model: partial,
 ) -> None:
     """Test RAG pipeline with SpaCy."""
@@ -75,7 +75,7 @@ def test_aug_spacy(
 
     backend = partial_backend(partial_model)
     api_key_name: str = API_MAP.get(backend, '')
-    api_key = locals().get(api_key_name, '')
+    api_key = get_api_key_fixture(request, api_key_name)
 
     model_args = {
         'top_k': top_k,

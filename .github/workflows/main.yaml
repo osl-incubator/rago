@@ -132,7 +132,7 @@ jobs:
 
       - name: Semantic Release PR Title Check
         uses: osl-incubator/semantic-release-pr-title-check@v1.4.1
-        if: success() || failure()
+        if: ${{ github.event_name == 'pull_request' && always() }}
         with:
           convention-name: conventionalcommits
 
