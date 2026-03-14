@@ -6,6 +6,8 @@ import pytest
 
 from rago.augmented import Augmented
 
+from tests.helpers import call_or_skip, partial_backend, require_spacy_model
+
 CohereAug = partial(
     Augmented, backend='cohere', model_name='embed-english-light-v3.0'
 )
@@ -23,10 +25,10 @@ TogetherAug = partial(
 )
 
 API_MAP = {
-    OpenAIAug: 'api_key_openai',
-    CohereAug: 'api_key_cohere',
-    FireworksAug: 'api_key_fireworks',
-    TogetherAug: 'api_key_together',
+    'cohere': 'api_key_cohere',
+    'fireworks': 'api_key_fireworks',
+    'openai': 'api_key_openai',
+    'together': 'api_key_together',
 }
 
 gen_models = [
@@ -71,9 +73,8 @@ def test_aug_spacy(
     """Test RAG pipeline with SpaCy."""
     top_k = 2
 
-    model_class = partial_model
-
-    api_key_name: str = API_MAP.get(model_class, '')
+    backend = partial_backend(partial_model)
+    api_key_name: str = API_MAP.get(backend, '')
     api_key = locals().get(api_key_name, '')
 
     model_args = {
@@ -81,17 +82,20 @@ def test_aug_spacy(
         **({'api_key': api_key} if api_key else {}),
     }
 
-    gen_model = partial_model(**model_args)
+    if backend == 'spacy':
+        require_spacy_model('en_core_web_md')
 
-    aug_result = gen_model.search(question, animals_data)
+    gen_model = call_or_skip(
+        backend or 'augmented', partial_model, **model_args
+    )
+    aug_result = call_or_skip(
+        backend or 'augmented',
+        gen_model.search,
+        question,
+        animals_data,
+    )
     assert gen_model.params.top_k == top_k
     assert top_k >= len(aug_result)
-    try:
-        assert any(
-            [
-                expected_answer.lower() in result.lower()
-                for result in aug_result
-            ]
-        )
-    except Exception as e:
-        print(e)
+    assert any(
+        expected_answer.lower() in result.lower() for result in aug_result
+    )

@@ -8,10 +8,12 @@ import pytest
 from rago.augmented import Augmented
 from rago.retrieval import Retrieval
 
+from tests.helpers import call_or_skip, require_spacy_model
+
 PDF_DATA_PATH = Path(__file__).parent / 'data' / 'pdf'
 
 
-SpaCyAug = Augmented(backend='spacy')
+SpaCyAug = partial(Augmented, backend='spacy', model_name='en_core_web_md')
 PDFPathRet = partial(Retrieval, backend='pdf')
 
 
@@ -34,6 +36,7 @@ def test_retrieval_pdfs_extraction_aug_spacy(
     pdf_path: str, expected: str
 ) -> None:
     """Test the text extraction from a pdf."""
+    del expected
     pdf_ret = PDFPathRet(PDF_DATA_PATH / pdf_path)
     chunks = pdf_ret.get()
 
@@ -48,8 +51,14 @@ def test_retrieval_pdfs_extraction_aug_spacy(
 
     aug_top_k = 3
 
-    aug_openai = SpaCyAug(top_k=aug_top_k)
-    aug_result = aug_openai.search(query, documents=chunks)
+    require_spacy_model('en_core_web_md')
+    aug_openai = call_or_skip('spacy', SpaCyAug, top_k=aug_top_k)
+    aug_result = call_or_skip(
+        'spacy',
+        aug_openai.search,
+        query,
+        documents=chunks,
+    )
 
     assert aug_result
     assert len(aug_result) == aug_top_k

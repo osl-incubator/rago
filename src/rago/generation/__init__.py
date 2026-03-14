@@ -1,28 +1,15 @@
-"""RAG Generation package."""
+"""Composable generation APIs for Rago."""
 
 from __future__ import annotations
 
 from copy import deepcopy
-from typing import Any, Dict, List, Optional, Type, Union
-
-import torch
+from typing import Any, Type
 
 from pydantic import BaseModel
 from typeguard import typechecked
 
-from rago.base import ParametersBase, StepBase
+from rago.base import ParametersBase, StepBase, config_to_dict, ensure_list
 from rago.generation.base import GenerationBase
-from rago.generation.cohere import CohereGen
-from rago.generation.deepseek import DeepSeekGen
-from rago.generation.fireworks import FireworksGen
-from rago.generation.gemini import GeminiGen
-from rago.generation.groq import GroqGen
-from rago.generation.hugging_face import HuggingFaceGen
-from rago.generation.hugging_face_inf import HuggingFaceInfGen
-from rago.generation.llama import LlamaGen, OllamaGen, OllamaOpenAIGen
-from rago.generation.openai import OpenAIGen
-from rago.generation.phi import PhiGen
-from rago.generation.together import TogetherGen
 from rago.io import Input, Output
 
 __all__ = [
@@ -30,7 +17,9 @@ __all__ = [
     'DeepSeekGen',
     'FireworksGen',
     'GeminiGen',
+    'Generation',
     'GenerationBase',
+    'GenerationParameters',
     'GroqGen',
     'HuggingFaceGen',
     'HuggingFaceInfGen',
@@ -43,40 +32,16 @@ __all__ = [
 ]
 
 
-# ---------------------------------------
-# GenerationParameters (inherits from StepBase)
-# ---------------------------------------
 @typechecked
 class GenerationParameters(ParametersBase):
     """Parameters for configuring generation steps."""
 
-    api_key: str = ''
-    model_name: str = ''
-    backend: str = ''
-    engine: str = ''
-    temperature: float = 0.0
-    prompt_template: str = ''
-    output_max_length: int = 500
-    structured_output: Optional[Type[BaseModel]] = None
-    api_params: Optional[Dict[str, Any]] = {}
-
 
 @typechecked
 class Generation(StepBase):
-    """
-    Public Generation class for Rago.
+    """Public generation wrapper that resolves a concrete backend lazily."""
 
-    Users instantiate Generation with desired configuration parameters such as:
-
-        api_key, model_name, backend, engine, temperature, etc.
-
-    They can combine these with a Parameters object via '|' or callable syntax.
-
-    When generate() is called, the proper specialized generation instance is resolved
-    based on the configuration.
-    """
-
-    params: GenerationParameters
+    log_name = 'generation'
 
     def __init__(
         self,
@@ -87,9 +52,16 @@ class Generation(StepBase):
         temperature: float = 0.0,
         prompt_template: str = '',
         output_max_length: int = 500,
-        structured_output: Optional[Type[BaseModel]] = None,
-        api_params: Optional[Dict[str, Any]] = {},
+        structured_output: Type[BaseModel] | None = None,
+        api_params: dict[str, Any] | None = None,
+        device: str = 'auto',
+        system_message: str = '',
+        cache: Any = None,
+        logs: dict[str, Any] | None = None,
     ) -> None:
+        super().__init__()
+        self.backend = backend.lower() if backend else ''
+        self.engine = engine.lower() if engine else ''
         self.params = GenerationParameters(
             api_key=api_key,
             model_name=model_name,
@@ -97,57 +69,163 @@ class Generation(StepBase):
             prompt_template=prompt_template,
             output_max_length=output_max_length,
             structured_output=structured_output,
-            api_params=api_params,
+            api_params=api_params or {},
+            device=device,
+            system_message=system_message,
         )
-        # Additional parameters to select the proper backend/engine.
-        self.backend: str = backend.lower() if backend else ''
-        self.engine: Optional[str] = engine.lower() if engine else None
-
-    def apply(self, parameters: GenerationParameters) -> None:
-        for key, value in parameters.params.items():
-            setattr(self, key, value)
+        self.cache = cache
+        self.logs = logs or {}
 
     def __call__(self, **kwargs: Any) -> Generation:
-        self.params = GenerationParameters(**kwargs)
+        """Update this wrapper with additional generation parameters."""
+        self.apply(GenerationParameters(**kwargs))
         return self
 
+    def apply(self, parameters: Any) -> None:
+        """Apply declarative configuration to the generation wrapper."""
+        super().apply(parameters)
+        for key, value in config_to_dict(parameters).items():
+            if key == 'backend' and isinstance(value, str):
+                self.backend = value.lower()
+            elif key == 'engine' and isinstance(value, str):
+                self.engine = value.lower()
+            else:
+                self.params.params[key] = value
+
     def _resolve(self) -> GenerationBase:
-        """Resolve and return the specialized generation instance based on configuration."""
-        # Prepare common parameters to pass to the specialized generator.
-        common_params = self.params
+        config = deepcopy(self.params.params)
+        if self.cache is not None:
+            config['cache'] = self.cache
+        if self.logs:
+            config['logs'] = self.logs
 
         if self.backend == 'openai':
-            return OpenAIGen(**common_params)
-        elif self.backend == 'llama':
-            if self.engine is None or self.engine == 'huggingface':
-                return LlamaGen(**common_params)
-            elif self.engine == 'ollama':
-                raise NotImplementedError('Ollama engine not implemented.')
-            else:
-                raise Exception(f'Unsupported engine for llama: {self.engine}')
-        elif self.backend == 'cohere':
-            return CohereGen(**common_params)
-        elif self.backend == 'deepseek':
-            return DeepSeekGen(**common_params)
-        elif self.backend == 'fireworks':
-            return FireworksGen(**common_params)
-        elif self.backend == 'gemini':
-            return GeminiGen(**common_params)
-        elif self.backend == 'groq':
-            return GroqGen(**common_params)
-        elif self.backend == 'huggingface':
-            return HuggingFaceGen(**common_params)
-        elif self.backend == 'phi':
-            return PhiGen(**common_params)
-        elif self.backend == 'together':
-            return TogetherGen(**common_params)
-        else:
-            raise Exception(f'Unsupported backend: {self.backend}')
+            from rago.generation.openai import OpenAIGen
+
+            return OpenAIGen(**config)
+        if self.backend == 'llama':
+            if not self.engine or self.engine == 'huggingface':
+                from rago.generation.llama import LlamaGen
+
+                return LlamaGen(**config)
+            if self.engine == 'ollama':
+                from rago.generation.llama import OllamaGen
+
+                return OllamaGen(**config)
+            if self.engine == 'openai':
+                from rago.generation.llama import OllamaOpenAIGen
+
+                return OllamaOpenAIGen(**config)
+            raise Exception(f'Unsupported engine for llama: {self.engine}')
+        if self.backend == 'ollama':
+            from rago.generation.llama import OllamaGen
+
+            return OllamaGen(**config)
+        if self.backend == 'ollama-openai':
+            from rago.generation.llama import OllamaOpenAIGen
+
+            return OllamaOpenAIGen(**config)
+        if self.backend == 'cohere':
+            from rago.generation.cohere import CohereGen
+
+            return CohereGen(**config)
+        if self.backend == 'deepseek':
+            from rago.generation.deepseek import DeepSeekGen
+
+            return DeepSeekGen(**config)
+        if self.backend == 'fireworks':
+            from rago.generation.fireworks import FireworksGen
+
+            return FireworksGen(**config)
+        if self.backend == 'gemini':
+            from rago.generation.gemini import GeminiGen
+
+            return GeminiGen(**config)
+        if self.backend == 'groq':
+            from rago.generation.groq import GroqGen
+
+            return GroqGen(**config)
+        if self.backend == 'huggingface':
+            from rago.generation.hugging_face import HuggingFaceGen
+
+            return HuggingFaceGen(**config)
+        if self.backend == 'huggingface-inference':
+            from rago.generation.hugging_face_inf import HuggingFaceInfGen
+
+            return HuggingFaceInfGen(**config)
+        if self.backend == 'phi':
+            from rago.generation.phi import PhiGen
+
+            return PhiGen(**config)
+        if self.backend == 'together':
+            from rago.generation.together import TogetherGen
+
+            return TogetherGen(**config)
+        raise Exception(f'Unsupported backend: {self.backend}')
+
+    def generate(self, query: str, data: list[str]) -> str | BaseModel:
+        """Resolve the concrete generator and run generation."""
+        generator_instance = self._resolve()
+        normalized_data = [str(item) for item in ensure_list(data)]
+        return generator_instance.generate(query, normalized_data)
 
     def process(self, inp: Input) -> Output:
-        """Resolve the specialized generator and delegate the generate() call."""
-        query = inp.query
-        data = inp.content
+        """Process the current pipeline content with generation."""
         generator_instance = self._resolve()
-        result = generator_instance.generate(query, data)
-        return Output(result=result)
+        return generator_instance.process(inp)
+
+
+def __getattr__(name: str) -> Any:
+    if name == 'OpenAIGen':
+        from rago.generation.openai import OpenAIGen
+
+        return OpenAIGen
+    if name == 'GeminiGen':
+        from rago.generation.gemini import GeminiGen
+
+        return GeminiGen
+    if name == 'HuggingFaceGen':
+        from rago.generation.hugging_face import HuggingFaceGen
+
+        return HuggingFaceGen
+    if name == 'HuggingFaceInfGen':
+        from rago.generation.hugging_face_inf import HuggingFaceInfGen
+
+        return HuggingFaceInfGen
+    if name == 'LlamaGen':
+        from rago.generation.llama import LlamaGen
+
+        return LlamaGen
+    if name == 'OllamaGen':
+        from rago.generation.llama import OllamaGen
+
+        return OllamaGen
+    if name == 'OllamaOpenAIGen':
+        from rago.generation.llama import OllamaOpenAIGen
+
+        return OllamaOpenAIGen
+    if name == 'CohereGen':
+        from rago.generation.cohere import CohereGen
+
+        return CohereGen
+    if name == 'DeepSeekGen':
+        from rago.generation.deepseek import DeepSeekGen
+
+        return DeepSeekGen
+    if name == 'FireworksGen':
+        from rago.generation.fireworks import FireworksGen
+
+        return FireworksGen
+    if name == 'TogetherGen':
+        from rago.generation.together import TogetherGen
+
+        return TogetherGen
+    if name == 'GroqGen':
+        from rago.generation.groq import GroqGen
+
+        return GroqGen
+    if name == 'PhiGen':
+        from rago.generation.phi import PhiGen
+
+        return PhiGen
+    raise AttributeError(f'module {__name__!r} has no attribute {name!r}')

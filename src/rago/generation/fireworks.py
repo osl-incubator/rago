@@ -48,9 +48,7 @@ class FireworksGen(GenerationBase):
 
     def generate(self, query: str, data: list[str]) -> str | BaseModel:
         """Generate text using Fireworks AI's API."""
-        input_text = self.prompt_template.format(
-            query=query, data=' '.join(data)
-        )
+        input_text = self._format_prompt(query, data)
 
         api_params = self.api_params or self.default_api_params
 

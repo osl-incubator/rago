@@ -54,24 +54,31 @@ steps in a single, fluent expression using operator overloading.
 #### Proposed Syntax Example
 
 ```python
-from rago import Rago, Retrieval, Augmentation, Generation, DB, Cache
+from pathlib import Path
+
+from rago import Rago, Retrieval, Augmented, Generation, DB, Cache
 
 datasource = ...
 
 rag = (
     Rago()
-    | DB(backend="faiss", top_k=5)
-    | Cache(backend="file")
-    | Retrieval(backend="dummy")
-    | Augmentation(backend="openai", model="text-embedding-3-small")
+    | DB(backend="faiss")
+    | Cache(backend="file", target_dir=Path(".rago-cache"))
+    | Retrieval(backend="string")
+    | Augmented(
+        backend="openai",
+        model_name="text-embedding-3-small",
+        top_k=5,
+    )
     | Generation(
         backend="openai",
-        model="gpt-4o-mini",
+        model_name="gpt-4o-mini",
         prompt_template="Question: {query}\nContext: {context}\nAnswer:"
     )
 )
 
-result = rag.run(query="What is the capital of France?", data=datasource)
+result = rag.run(query="What is the capital of France?", source=datasource)
+print(result.result)
 ```
 
 #### Key Benefits
@@ -88,9 +95,9 @@ result = rag.run(query="What is the capital of France?", data=datasource)
 #### Implementation Plan
 
 1. **Define Base Classes:** Develop abstract base classes for each component
-   (DB, Cache, Retrieval, Augmentation, Generation) to standardize interfaces
-   and facilitate future extensions.
-2. **Operator Overloading:** Implement the `__add__` method in the main `Rago`
+   (DB, Cache, Retrieval, Augmented, Generation) to standardize interfaces and
+   facilitate future extensions.
+2. **Operator Overloading:** Implement the `__or__` method in the main `Rago`
    class to allow chaining of components, effectively building the pipeline
    through a fluent interface.
 3. **Configuration and Defaults:** Integrate sensible defaults and validation
@@ -116,8 +123,8 @@ $ pip install rago[gpu]
 
 ### Llama 3
 
-In order to use a Llama model, visit its page on Hugging Face and request access via its form, 
-for example: https://huggingface.co/meta-llama/Llama-3.2-1B.
+In order to use a Llama model, visit its page on Hugging Face and request access
+via its form, for example: https://huggingface.co/meta-llama/Llama-3.2-1B.
 
 After you are granted access to the desired model, you will be able to use it
 with Rago.
@@ -127,10 +134,7 @@ models locally, for example:
 
 ```python
 
-from rago import Rago
-from rago.generation import LlamaGen
-from rago.retrieval import StringRet
-from rago.augmented import SentenceTransformerAug
+from rago import Augmented, Generation, Rago, Retrieval
 
 # For Gated LLMs
 HF_TOKEN = 'YOUR_HUGGING_FACE_TOKEN'
@@ -149,12 +153,22 @@ animals_data = [
     "several Indonesian islands, including its namesake, Komodo.",
 ]
 
-rag = Rago(
-    retrieval=StringRet(animals_data),
-    augmented=SentenceTransformerAug(top_k=2),
-    generation=LlamaGen(api_key=HF_TOKEN),
+rag = (
+    Rago()
+    | Retrieval(backend='string')
+    | Augmented(
+        backend='sentence_transformers',
+        model_name='paraphrase-MiniLM-L12-v2',
+        top_k=2,
+    )
+    | Generation(
+        backend='llama',
+        model_name='meta-llama/Llama-3.2-1B',
+        api_key=HF_TOKEN,
+    )
 )
-rag.prompt('What is the fastest animal on Earth?')
+
+rag.prompt('What is the fastest animal on Earth?', source=animals_data)
 ```
 
 ### Ollama

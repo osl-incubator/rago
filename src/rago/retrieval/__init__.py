@@ -1,99 +1,126 @@
-"""Declarative Retrieval API for Rago."""
+"""Composable retrieval APIs for Rago."""
 
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import dataclass, field
-from typing import Any, Dict, Iterable, Optional, cast
+from typing import Any
 
 from typeguard import typechecked
 
-from rago.base import ParametersBase, StepBase
+from rago.base import ParametersBase, StepBase, config_to_dict
 from rago.io import Input, Output
-
-# Import specialized retrieval implementations
 from rago.retrieval.base import RetrievalBase
-from rago.retrieval.dummy import StringRet
+from rago.retrieval.text_splitter import LangChainTextSplitter
 
-# from rago.retrieval.file import PDFPathRet
+__all__ = [
+    'PDFPathRet',
+    'Retrieval',
+    'RetrievalBase',
+    'RetrievalParameters',
+    'StringRet',
+]
 
 
 @typechecked
-@dataclass
 class RetrievalParameters(ParametersBase):
     """Parameters for configuring retrieval steps."""
-
-    source: Any = None
-    api_key: str = ''
-    api_params: Dict[str, Any] = field(default_factory=dict)
-
-    def process(self, inp: Input) -> Output:
-        data = inp.get('data')
-        return data
-
-    def apply(self, parameters: RetrievalParameters) -> None:
-        self.params.update(parameters.params)
-
-    def __repr__(self) -> str:
-        return f'RetrievalParameters({self.__dict__.keys()})'
 
 
 @typechecked
 class Retrieval(StepBase):
-    """
-    Public Retrieval class for Rago.
+    """Public retrieval wrapper that resolves a concrete backend lazily."""
 
-    Users instantiate Retrieval with desired configuration parameters such as:
-      - source: the data source (e.g., a list of strings or a file path)
-      - backend: the retrieval backend to use ("string", "pdf", etc.)
-
-    When get() or process() is called, the proper specialized retrieval instance
-    is lazily resolved.
-    """
+    log_name = 'retrieval'
 
     def __init__(
         self,
         source: Any = None,
         backend: str = 'string',
         api_key: str = '',
-        api_params: Dict[str, Any] = {},
+        api_params: dict[str, Any] | None = None,
+        splitter: Any = None,
+        cache: Any = None,
+        logs: dict[str, Any] | None = None,
     ) -> None:
+        super().__init__()
+        self.backend = backend.lower()
         self.params = RetrievalParameters(
             source=source,
             api_key=api_key,
-            api_params=api_params,
+            api_params=api_params or {},
         )
-
-        self.backend = backend
+        self.splitter = splitter or LangChainTextSplitter(
+            'RecursiveCharacterTextSplitter'
+        )
+        self.cache = cache
+        self.logs = logs or {}
 
     def __call__(self, **kwargs: Any) -> Retrieval:
-        params = RetrievalParameters(**kwargs)
-        self.apply(params)
+        """Update this wrapper with additional retrieval parameters."""
+        self.apply(RetrievalParameters(**kwargs))
         return self
 
-    def apply(self, parameters: RetrievalParameters) -> None:
-        for key, value in parameters.params.items():
-            setattr(self.params, key, value)
+    def apply(self, parameters: Any) -> None:
+        """Apply declarative configuration to the retrieval wrapper."""
+        super().apply(parameters)
+        for key, value in config_to_dict(parameters).items():
+            if key == 'backend' and isinstance(value, str):
+                self.backend = value.lower()
+            elif key == 'splitter':
+                self.splitter = value
+            else:
+                self.params.params[key] = value
 
-    def _resolve(self) -> RetrievalBase:
-        """Resolve and return the specialized retrieval instance."""
-        common_params = deepcopy(self.params.__dict__)
+    def _resolve(self, source: Any = None) -> RetrievalBase:
+        config = deepcopy(self.params.params)
+        if config.get('source') is None and source is not None:
+            config['source'] = source
+        if self.splitter is not None:
+            config['splitter'] = self.splitter
+        if self.cache is not None:
+            config['cache'] = self.cache
+        if self.logs:
+            config['logs'] = self.logs
 
         if self.backend == 'string':
-            return StringRet(**common_params)
-        elif self.backend == 'pdf':
-            # Lazy import for PDFPathRet.
+            from rago.retrieval.dummy import StringRet
+
+            return StringRet(**config)
+        if self.backend == 'pdf':
             from rago.retrieval.file import PDFPathRet
 
-            return PDFPathRet(**common_params)
-        else:
-            raise Exception(f'Unsupported retrieval backend: {self.backend}')
+            return PDFPathRet(**config)
+        raise Exception(f'Unsupported retrieval backend: {self.backend}')
 
-    def retrieve(self, inp: Input) -> Iterable[str]:
-        """Delegate get() to the specialized retrieval instance."""
-        retrieval_instance = self._resolve()
-        return retrieval_instance.retrieve(inp)
+    def retrieve(self, query: str = '', source: Any = None) -> list[str]:
+        """Resolve the concrete retriever and fetch content."""
+        retrieval_instance = self._resolve(source=source)
+        return retrieval_instance.retrieve(query=query, source=source)
+
+    def get(self, query: str = '', source: Any = None) -> list[str]:
+        """Backward-compatible alias for `retrieve`."""
+        return self.retrieve(query=query, source=source)
 
     def process(self, inp: Input) -> Output:
-        """Process the retrieval step."""
-        return self.retrieve(inp)
+        """Process the current pipeline source with retrieval."""
+        source = self.params.params.get('source')
+        if source is None:
+            source = inp.get('source', inp.get('content'))
+
+        result = self.retrieve(query=inp.query, source=source)
+        output = Output.from_input(inp)
+        output.content = result
+        output.data = result
+        return output
+
+
+def __getattr__(name: str) -> Any:
+    if name == 'StringRet':
+        from rago.retrieval.dummy import StringRet
+
+        return StringRet
+    if name == 'PDFPathRet':
+        from rago.retrieval.file import PDFPathRet
+
+        return PDFPathRet
+    raise AttributeError(f'module {__name__!r} has no attribute {name!r}')

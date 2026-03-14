@@ -35,9 +35,7 @@ class HuggingFaceInfGen(GenerationBase):
 
     def generate(self, query: str, data: list[str]) -> str | BaseModel:
         """Generate the text from the query and augmented data."""
-        input_text = self.prompt_template.format(
-            query=query, data=' '.join(data)
-        )
+        input_text = self._format_prompt(query, data)
         if self.system_message:
             input_text = f'{self.system_message}\n{input_text}'
 

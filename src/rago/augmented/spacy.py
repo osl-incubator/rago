@@ -77,6 +77,4 @@ class SpaCyAug(AugmentedBase):
         #     'top_k': top_k,
         # }
 
-        retrieved_docs = [documents[i] for i in indices if i >= 0]
-
-        return retrieved_docs
+        return self._resolve_retrieved_docs(documents, indices)

@@ -85,9 +85,7 @@ class LlamaGen(GenerationBase):
 
     def generate(self, query: str, data: list[str]) -> str:
         """Generate text using Llama model with language support."""
-        input_text = self.prompt_template.format(
-            query=query, data=' '.join(data)
-        )
+        input_text = self._format_prompt(query, data)
 
         # Detect and set the language code for multilingual models (optional)
         language = str(self._detect(query)) or 'en'
@@ -147,7 +145,7 @@ class OllamaGen(GenerationBase):
             host=base_url, headers={'x-some-header': 'some-value'}
         )
 
-    def generate(self, query: str, context: list[str]) -> str | BaseModel:
+    def generate(self, query: str, data: list[str]) -> str | BaseModel:
         """
         Generate text by sending a prompt to the local Ollama model.
 
@@ -155,7 +153,7 @@ class OllamaGen(GenerationBase):
         ----------
         query : str
             The user query.
-        context : list[str]
+        data : list[str]
             Augmented context strings.
 
         Returns
@@ -163,10 +161,7 @@ class OllamaGen(GenerationBase):
         str
             The generated response text.
         """
-        input_text = self.prompt_template.format(
-            query=query,
-            context=' '.join(context),
-        )
+        input_text = self._format_prompt(query, data)
 
         messages = []
         if self.system_message:

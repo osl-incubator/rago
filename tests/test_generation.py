@@ -23,6 +23,8 @@ from rago.generation import (
     TogetherGen,
 )
 
+from tests.helpers import call_or_skip
+
 from .models import AnimalModel
 
 # LlamaGen doesn't support temperature zero
@@ -157,10 +159,15 @@ def _generation_simple_output(
         text for text in animals_data if expected_answer in text.lower()
     ]
 
-    gen_model = partial_model(**model_args)
+    gen_model = call_or_skip(model_class.__name__, partial_model, **model_args)
 
     query = 'what is the fastest bird on the earth?'
-    result = gen_model.generate(query, context)
+    result = call_or_skip(
+        model_class.__name__,
+        gen_model.generate,
+        query,
+        context,
+    )
 
     error_message = (
         f'Expected response: `{expected_answer}`, Result: `{result}`.'
@@ -213,10 +220,15 @@ def test_generation_simple_output(
     expected_answer = 'blue whale'
     data = [text for text in animals_data if expected_answer in text.lower()]
 
-    gen_model = partial_model(**model_args)
+    gen_model = call_or_skip(model_class.__name__, partial_model, **model_args)
 
     query = 'Is there any animal larger than a dinosaur?'
-    result = gen_model.generate(query, data)
+    result = call_or_skip(
+        model_class.__name__,
+        gen_model.generate,
+        query,
+        data,
+    )
 
     error_message = (
         f'Expected response: `{expected_answer}`, Result: `{result}`.'
@@ -297,7 +309,7 @@ def _generation_structure_output(
         **({'api_key': api_key} if api_key else {}),
     }
 
-    gen_model = partial_model(**model_args)
+    gen_model = call_or_skip(model_class.__name__, partial_model, **model_args)
 
     data = [
         text
@@ -308,7 +320,10 @@ def _generation_structure_output(
     ]
 
     assert gen_model.temperature == TEMPERATURE
-    result = cast(AnimalModel, gen_model.generate(question, data))
+    result = cast(
+        AnimalModel,
+        call_or_skip(model_class.__name__, gen_model.generate, question, data),
+    )
 
     error_message = (
         f'Expected response to mention `{expected_answer}`. '

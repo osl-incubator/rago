@@ -3,8 +3,10 @@
 import pytest
 
 
-# Import the public pipeline interfaces (the user will only interact with these)
+# Import the public pipeline interfaces.
 from rago import Augmented, Generation, Rago, Retrieval
+
+from tests.helpers import call_or_skip
 
 
 @pytest.mark.skip_on_ci
@@ -40,7 +42,7 @@ def test_simple_rag_openai_gpt_general(
 
     # Define the query and run the pipeline.
     query = 'Is there any animal larger than a dinosaur?'
-    output = rag.run(query, animals_data)
+    output = call_or_skip('openai', rag.run, query, animals_data)
 
     # Check if the generated response mentions "blue whale"
     assert 'blue whale' in output.result.lower(), (

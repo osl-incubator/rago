@@ -42,9 +42,7 @@ class OpenAIGen(GenerationBase):
         data: list[str],
     ) -> str | BaseModel:
         """Generate text using OpenAI's API with dynamic model support."""
-        input_text = self.prompt_template.format(
-            query=query, data=' '.join(data)
-        )
+        input_text = self._format_prompt(query, data)
 
         if not self.model:
             raise Exception('The model was not created.')
