@@ -168,10 +168,16 @@ class OllamaGen(GenerationBase):
             messages.append({'role': 'system', 'content': self.system_message})
         messages.append({'role': 'user', 'content': input_text})
 
+        request_params = copy(self.api_params or {})
+        options = copy(request_params.pop('options', {}))
+        options.setdefault('temperature', self.temperature)
+        options.setdefault('num_predict', self.output_max_length)
+
         params = {
             'model': self.model_name,
             'messages': messages,
-            **(self.api_params or {}),
+            'options': options,
+            **request_params,
         }
         response = self.model.chat(**params)
         return str(response.message.content).strip()
