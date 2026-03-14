@@ -82,7 +82,7 @@ class RetrievalBase(StepBase):
         self.api_key = api_key
         self.api_params = api_params or {}
         self.cache = cache
-        self.logs = logs or {}
+        self.logs = logs if logs is not None else {}
 
         self._validate()
         self._setup()

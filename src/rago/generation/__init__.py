@@ -74,7 +74,7 @@ class Generation(StepBase):
             system_message=system_message,
         )
         self.cache = cache
-        self.logs = logs or {}
+        self.logs = logs if logs is not None else {}
 
     def __call__(self, **kwargs: Any) -> Generation:
         """Update this wrapper with additional generation parameters."""
@@ -96,8 +96,7 @@ class Generation(StepBase):
         config = deepcopy(self.params.params)
         if self.cache is not None:
             config['cache'] = self.cache
-        if self.logs:
-            config['logs'] = self.logs
+        config['logs'] = self.logs
 
         if self.backend == 'openai':
             from rago.generation.openai import OpenAIGen

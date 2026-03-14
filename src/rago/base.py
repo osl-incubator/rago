@@ -200,7 +200,7 @@ class StepBase(ABC):
             if key == 'cache':
                 self.cache = value
             elif key == 'logs':
-                self.logs = value or {}
+                self.logs = value if value is not None else {}
             else:
                 setattr(self, key, value)
 

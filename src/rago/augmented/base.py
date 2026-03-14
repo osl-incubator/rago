@@ -106,7 +106,7 @@ class AugmentedBase(StepBase):
         self.api_key = api_key
         self.api_params = api_params or {}
         self.cache = cache
-        self.logs = logs or {}
+        self.logs = logs if logs is not None else {}
         self.db = db or FaissDB()
         self.top_k = top_k if top_k is not None else self.default_top_k
         self.model_name = (

@@ -116,7 +116,7 @@ class GenerationBase(StepBase):
         super().__init__()
         self.api_key = api_key
         self.cache = cache
-        self.logs = logs or {}
+        self.logs = logs if logs is not None else {}
 
         self.model_name = (
             model_name if model_name is not None else self.default_model_name

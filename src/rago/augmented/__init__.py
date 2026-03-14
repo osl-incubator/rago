@@ -58,7 +58,7 @@ class Augmented(StepBase):
         )
         self.db = db
         self.cache = cache
-        self.logs = logs or {}
+        self.logs = logs if logs is not None else {}
 
     def __call__(self, **kwargs: Any) -> Augmented:
         """Update this wrapper with additional augmentation parameters."""
@@ -84,8 +84,7 @@ class Augmented(StepBase):
             config['db'] = self.db
         if self.cache is not None:
             config['cache'] = self.cache
-        if self.logs:
-            config['logs'] = self.logs
+        config['logs'] = self.logs
 
         if self.backend == 'cohere':
             from rago.augmented.cohere import CohereAug

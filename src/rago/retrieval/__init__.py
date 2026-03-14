@@ -53,7 +53,7 @@ class Retrieval(StepBase):
             'RecursiveCharacterTextSplitter'
         )
         self.cache = cache
-        self.logs = logs or {}
+        self.logs = logs if logs is not None else {}
 
     def __call__(self, **kwargs: Any) -> Retrieval:
         """Update this wrapper with additional retrieval parameters."""
@@ -79,8 +79,7 @@ class Retrieval(StepBase):
             config['splitter'] = self.splitter
         if self.cache is not None:
             config['cache'] = self.cache
-        if self.logs:
-            config['logs'] = self.logs
+        config['logs'] = self.logs
 
         if self.backend == 'string':
             from rago.retrieval.dummy import StringRet

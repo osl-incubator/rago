@@ -14,4 +14,4 @@ class Logs(ParametersBase):
     """Attach a mutable log dictionary to a step."""
 
     def __init__(self, target: dict[str, Any] | None = None) -> None:
-        super().__init__(logs=target or {})
+        super().__init__(logs=target if target is not None else {})
