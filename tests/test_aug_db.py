@@ -12,6 +12,8 @@ import pytest
 from chromadb.config import Settings
 from rago.augmented.db.chroma import ChromaDB
 
+from tests.helpers import skip_if_runtime_unavailable
+
 API_MAP = {
     # ChromaDB: 'api_key_openai',
 }
@@ -93,22 +95,26 @@ def test_aug_chromadb(
     api_key_name: str = API_MAP.get(model_class, '')
     api_key = locals().get(api_key_name, '')
 
-    client = create_chroma_client(temp_dir)
+    try:
+        client = create_chroma_client(temp_dir)
 
-    documents = animals_data
-    # Create fixed-size dummy embeddings
-    embeddings = [[i] * embedding_size for i in range(len(documents))]
+        documents = animals_data
+        # Create fixed-size dummy embeddings
+        embeddings = [[i] * embedding_size for i in range(len(documents))]
 
-    model_args = {
-        'client': client,
-        **({'api_key': api_key} if api_key else {}),
-    }
+        model_args = {
+            'client': client,
+            **({'api_key': api_key} if api_key else {}),
+        }
 
-    db = partial_model(**model_args)
-    db.embed(documents=(documents, embeddings))
+        db = partial_model(**model_args)
+        db.embed(documents=(documents, embeddings))
 
-    query_encoded = [question_id] * embedding_size
-    distances, ids = db.search(query_encoded=query_encoded, top_k=top_k)
+        query_encoded = [question_id] * embedding_size
+        distances, ids = db.search(query_encoded=query_encoded, top_k=top_k)
+    except Exception as exc:
+        skip_if_runtime_unavailable('chroma', exc)
+        raise
 
     assert len(distances) == 2
     assert len(ids) == 2

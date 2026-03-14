@@ -1,4 +1,4 @@
-"""Provide an extension for caching."""
+"""Cache backends for Rago steps."""
 
 from __future__ import annotations
 
@@ -11,47 +11,46 @@ import joblib
 
 from typeguard import typechecked
 
-from rago.extensions.base import Extension
-
 
 @typechecked
-class Cache(Extension):
-    """Define an extension base for caching."""
+class Cache:
+    """Abstract cache backend used by pipeline steps."""
 
     @abstractmethod
     def load(self, key: Any) -> Any:
-        """Load the cache for given key."""
-        raise Exception(f'Load method is not implemented: {key}')
+        """Load cached data for the given key."""
 
     @abstractmethod
     def save(self, key: Any, data: Any) -> None:
-        """Save the cache for given key."""
-        raise Exception(f'Save method is not implemented: {key}')
+        """Persist data in the cache."""
+
+    def get_file_key(self, key: Any) -> str:
+        """Normalize a cache key into a stable string representation."""
+        return sha256(str(key).encode('utf-8')).hexdigest()
 
 
 @typechecked
 class CacheFile(Cache):
-    """Define a extra step for caching."""
+    """File-based cache backend implemented with joblib."""
 
     target_dir: Path
 
-    def __init__(self, target_dir: Path) -> None:
-        self.target_dir = target_dir
+    def __init__(self, target_dir: Path | str) -> None:
+        self.target_dir = Path(target_dir)
         self.target_dir.mkdir(parents=True, exist_ok=True)
 
     def get_file_path(self, key: Any) -> Path:
-        """Return the file path."""
-        ref = sha256(str(key).encode('utf-8')).hexdigest()
-        return self.target_dir / f'{ref}.pkl'
+        """Return the file path for a given cache key."""
+        return self.target_dir / f'{self.get_file_key(key)}.pkl'
 
     def load(self, key: Any) -> Any:
-        """Load the cache for given key."""
+        """Load cached data if present."""
         file_path = self.get_file_path(key)
         if not file_path.exists():
-            return
+            return None
         return joblib.load(file_path)
 
     def save(self, key: Any, data: Any) -> None:
-        """Load the cache for given key."""
+        """Persist cached data to disk."""
         file_path = self.get_file_path(key)
         joblib.dump(data, file_path)

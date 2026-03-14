@@ -9,10 +9,16 @@ from pathlib import Path
 import pytest
 
 from rago import Rago
-from rago.augmented import OpenAIAug, SpaCyAug
+from rago.augmented import Augmented
 from rago.extensions.cache import CacheFile
-from rago.generation import OpenAIGen
-from rago.retrieval import PDFPathRet
+from rago.generation import Generation
+from rago.retrieval import Retrieval
+
+from tests.helpers import (
+    partial_backend,
+    require_spacy_model,
+    skip_if_runtime_unavailable,
+)
 
 PDF_DATA_PATH = Path(__file__).parent / 'data' / 'pdf'
 TMP_DIR = Path('/tmp') / 'rago'
@@ -20,6 +26,14 @@ TMP_DIR = Path('/tmp') / 'rago'
 RET_CACHE = CacheFile(target_dir=TMP_DIR / 'ret')
 AUG_CACHE = CacheFile(target_dir=TMP_DIR / 'aug')
 GEN_CACHE = CacheFile(target_dir=TMP_DIR / 'gen')
+
+OpenAIAug = partial(
+    Augmented, backend='openai', model_name='text-embedding-3-small'
+)
+SpaCyAug = partial(Augmented, backend='spacy', model_name='en_core_web_md')
+PDFPathRet = partial(Retrieval, backend='pdf')
+
+OpenAIGen = partial(Generation, backend='openai')
 
 
 def clear_folder(folder: Path):
@@ -57,8 +71,7 @@ def api_keys(env) -> {str, str}:
         raise EnvironmentError(
             'Please set the OPENAI_API_KEY environment variable.'
         )
-    keys['OpenAIAug'] = openai_api_key
-    keys['OpenAIGen'] = openai_api_key
+    keys['openai'] = openai_api_key
 
     return keys
 
@@ -67,35 +80,38 @@ def api_keys(env) -> {str, str}:
 @pytest.mark.parametrize(
     'aug_class',
     [
-        partial(OpenAIAug, top_k=3, cache=AUG_CACHE),
-        partial(SpaCyAug, top_k=3, cache=AUG_CACHE),
+        partial(OpenAIAug, top_k=3),
+        partial(SpaCyAug, top_k=3),
     ],
 )
 def test_cache(
     animals_data: list[str], api_keys: dict[str, str], aug_class: partial
 ) -> None:
     """Test RAG pipeline with OpenAI's GPT."""
-    api_name = aug_class.func.__name__
-    aug_api_key = api_keys.get(api_name, '')
-    gen_api_key = api_keys.get('OpenAIGen', '')
+    backend = partial_backend(aug_class)
+    aug_api_key = api_keys.get(backend, '')
+    gen_api_key = api_keys.get('openai', '')
 
     for cache in [RET_CACHE, AUG_CACHE, GEN_CACHE]:
         clear_folder(cache.target_dir)
 
-    ret = PDFPathRet(PDF_DATA_PATH / '1.pdf', cache=RET_CACHE)
-    aug = aug_class(api_key=aug_api_key)
-    gen = OpenAIGen(
-        api_key=gen_api_key, model_name='gpt-3.5-turbo', cache=GEN_CACHE
-    )
+    if backend == 'spacy':
+        require_spacy_model('en_core_web_md')
 
-    rag = Rago(
-        retrieval=ret,
-        augmented=aug,
-        generation=gen,
-    )
+    try:
+        ret = PDFPathRet(PDF_DATA_PATH / '1.pdf') | RET_CACHE
+        aug = aug_class(api_key=aug_api_key)
+        gen = (
+            OpenAIGen(api_key=gen_api_key, model_name='gpt-3.5-turbo')
+            | GEN_CACHE
+        )
+        rag = Rago() | ret | aug | gen
 
-    query = 'Is vitamin D effective?'
-    rag.prompt(query)
+        query = 'Is vitamin D effective?'
+        rag.run(query=query, source=animals_data)
+    except Exception as exc:
+        skip_if_runtime_unavailable(f'{backend}/openai', exc)
+        raise
 
     # note: we don't need to test the gen_cache
     for cache in [RET_CACHE, AUG_CACHE]:

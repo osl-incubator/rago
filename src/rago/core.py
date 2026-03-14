@@ -1,79 +1,42 @@
-"""Rago is Retrieval Augmented Generation lightweight framework."""
+"""Rago core pipeline."""
 
 from __future__ import annotations
 
 from typing import Any
 
-from pydantic import BaseModel
 from typeguard import typechecked
 
-from rago.augmented.base import AugmentedBase
-from rago.generation.base import GenerationBase
-from rago.retrieval.base import RetrievalBase
+from rago.base import Pipeline, StepBase
 
 
 @typechecked
-class Rago:
-    """RAG class."""
-
-    retrieval: RetrievalBase
-    augmented: AugmentedBase
-    generation: GenerationBase
-
-    logs: dict[str, dict[str, Any]]
+class Rago(Pipeline):
+    """Composable Rago pipeline."""
 
     def __init__(
         self,
-        retrieval: RetrievalBase,
-        augmented: AugmentedBase,
-        generation: GenerationBase,
+        retrieval: StepBase | None = None,
+        augmented: StepBase | None = None,
+        generation: StepBase | None = None,
     ) -> None:
-        """Initialize the RAG structure.
+        super().__init__()
+        for step in (retrieval, augmented, generation):
+            if step is not None:
+                self | step
 
-        Parameters
-        ----------
-        retrieval : RetrievalBase
-            The retrieval component used to fetch relevant data based
-            on the query.
-        augmented : AugmentedBase
-            The augmentation module responsible for enriching the
-            retrieved data.
-        generation : GenerationBase
-            The text generation model used to generate a response based
-            on the query and augmented data.
-        """
-        self.retrieval = retrieval
-        self.augmented = augmented
-        self.generation = generation
-        self.logs: dict[str, dict[str, Any]] = {
-            'retrieval': retrieval.logs,
-            'augmented': augmented.logs,
-            'generation': generation.logs,
-        }
+    @property
+    def logs(self) -> dict[str, dict[str, Any]]:
+        """Expose step logs using stable public names when possible."""
+        aggregated: dict[str, dict[str, Any]] = {}
+        name_counts: dict[str, int] = {}
 
-    def prompt(self, query: str, device: str = 'auto') -> str | BaseModel:
-        """Run the pipeline for a specific prompt.
+        for step in self.stack:
+            base_name = getattr(
+                step, 'log_name', step.__class__.__name__.lower()
+            )
+            count = name_counts.get(base_name, 0)
+            name_counts[base_name] = count + 1
+            key = base_name if count == 0 else f'{base_name}_{count + 1}'
+            aggregated[key] = getattr(step, 'logs', {})
 
-        Parameters
-        ----------
-        query : str
-            The query or prompt from the user.
-        device : str (default 'auto')
-            Device for generation (e.g., 'auto', 'cpu', 'cuda'), by
-            default 'auto'.
-
-        Returns
-        -------
-        str
-            Generated text based on the query and augmented data.
-        """
-        ret_data = self.retrieval.get(query)
-        self.logs['retrieval']['result'] = ret_data
-
-        aug_data = self.augmented.search(query, ret_data)
-        self.logs['augmented']['result'] = aug_data
-
-        gen_data = self.generation.generate(query, context=aug_data)
-        self.logs['generation']['result'] = gen_data
-
-        return gen_data
+        return aggregated

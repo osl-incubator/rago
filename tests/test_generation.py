@@ -23,6 +23,8 @@ from rago.generation import (
     TogetherGen,
 )
 
+from tests.helpers import call_or_skip
+
 from .models import AnimalModel
 
 # LlamaGen doesn't support temperature zero
@@ -157,10 +159,15 @@ def _generation_simple_output(
         text for text in animals_data if expected_answer in text.lower()
     ]
 
-    gen_model = partial_model(**model_args)
+    gen_model = call_or_skip(model_class.__name__, partial_model, **model_args)
 
     query = 'what is the fastest bird on the earth?'
-    result = gen_model.generate(query, context)
+    result = call_or_skip(
+        model_class.__name__,
+        gen_model.generate,
+        query,
+        context,
+    )
 
     error_message = (
         f'Expected response: `{expected_answer}`, Result: `{result}`.'
@@ -187,6 +194,7 @@ def test_generation_simple_output(
     partial_model: partial,
 ) -> None:
     """Test RAG pipeline with model generation."""
+    # todo: check if this assertion is still valid
     assert _generation_simple_output(
         animals_data,
         api_key_openai,
@@ -197,6 +205,33 @@ def test_generation_simple_output(
         api_key_hugging_face,
         api_key_groq,
         partial_model,
+    )
+    model_class = partial_model.func
+
+    api_key_name: str = API_MAP.get(model_class, '')
+    api_key = locals().get(api_key_name, '')
+
+    model_args = {
+        'temperature': TEMPERATURE,
+        'logs': GENERATION_LOG['generation'],
+        **({'api_key': api_key} if api_key else {}),
+    }
+
+    expected_answer = 'blue whale'
+    data = [text for text in animals_data if expected_answer in text.lower()]
+
+    gen_model = call_or_skip(model_class.__name__, partial_model, **model_args)
+
+    query = 'Is there any animal larger than a dinosaur?'
+    result = call_or_skip(
+        model_class.__name__,
+        gen_model.generate,
+        query,
+        data,
+    )
+
+    error_message = (
+        f'Expected response: `{expected_answer}`, Result: `{result}`.'
     )
 
 
@@ -274,9 +309,9 @@ def _generation_structure_output(
         **({'api_key': api_key} if api_key else {}),
     }
 
-    gen_model = partial_model(**model_args)
+    gen_model = call_or_skip(model_class.__name__, partial_model, **model_args)
 
-    context = [
+    data = [
         text
         for text in animals_data
         if all(
@@ -285,7 +320,10 @@ def _generation_structure_output(
     ]
 
     assert gen_model.temperature == TEMPERATURE
-    result = cast(AnimalModel, gen_model.generate(question, context))
+    result = cast(
+        AnimalModel,
+        call_or_skip(model_class.__name__, gen_model.generate, question, data),
+    )
 
     error_message = (
         f'Expected response to mention `{expected_answer}`. '

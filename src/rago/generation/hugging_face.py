@@ -49,12 +49,10 @@ class HuggingFaceGen(GenerationBase):
         )
         self.model = model.to(self.device)
 
-    def generate(self, query: str, context: list[str]) -> str:
-        """Generate the text from the query and augmented context."""
+    def generate(self, query: str, data: list[str]) -> str:
+        """Generate the text from the query and augmented data."""
         with torch.no_grad():
-            input_text = self.prompt_template.format(
-                query=query, context=' '.join(context)
-            )
+            input_text = self._format_prompt(query, data)
             input_ids = self.tokenizer.encode(
                 input_text,
                 return_tensors='pt',
@@ -75,7 +73,7 @@ class HuggingFaceGen(GenerationBase):
 
             outputs = self.model.generate(**model_params)
 
-            self.logs['model_params'] = model_params
+            # self.logs['model_params'] = model_params
 
             response = self.tokenizer.decode(
                 outputs[0], skip_special_tokens=True

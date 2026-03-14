@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from hashlib import sha256
 from typing import cast
 
 import numpy as np
@@ -29,11 +28,6 @@ class OpenAIAug(AugmentedBase):
 
     def get_embedding(self, content: list[str]) -> EmbeddingType:
         """Retrieve the embedding for a given text using OpenAI API."""
-        cache_key = sha256(''.join(content).encode('utf-8')).hexdigest()
-        cached = self._get_cache(cache_key)
-        if cached is not None:
-            return cast(EmbeddingType, cached)
-
         model = cast(openai.OpenAI, self.model)
         response = model.embeddings.create(
             input=content, model=self.model_name
@@ -41,8 +35,6 @@ class OpenAIAug(AugmentedBase):
         result = np.array(
             [data.embedding for data in response.data], dtype=np.float32
         )
-
-        self._save_cache(cache_key, result)
 
         return result
 
@@ -59,15 +51,13 @@ class OpenAIAug(AugmentedBase):
         top_k = top_k or self.top_k or self.default_top_k or 1
 
         self.db.embed(document_encoded)
-        scores, indices = self.db.search(query_encoded, top_k=top_k)
+        _, indices = self.db.search(query_encoded, top_k=top_k)
 
-        self.logs['indices'] = indices
-        self.logs['scores'] = scores
-        self.logs['search_params'] = {
-            'query_encoded': query_encoded,
-            'top_k': top_k,
-        }
+        # self.logs['indices'] = indices
+        # self.logs['scores'] = scores
+        # self.logs['search_params'] = {
+        #     'query_encoded': query_encoded,
+        #     'top_k': top_k,
+        # }
 
-        retrieved_docs = [documents[i] for i in indices if i >= 0]
-
-        return retrieved_docs
+        return self._resolve_retrieved_docs(documents, indices)

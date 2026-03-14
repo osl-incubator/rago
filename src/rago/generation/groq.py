@@ -43,12 +43,10 @@ class GroqGen(GenerationBase):
     def generate(
         self,
         query: str,
-        context: list[str],
+        data: list[str],
     ) -> str | BaseModel:
         """Generate text using the Groq AP."""
-        input_text = self.prompt_template.format(
-            query=query, context=' '.join(context)
-        )
+        input_text = self._format_prompt(query, data)
 
         if not self.model:
             raise Exception('The model was not created.')
@@ -74,7 +72,7 @@ class GroqGen(GenerationBase):
             model_params['response_model'] = self.structured_output
 
         response = self.model.chat.completions.create(**model_params)
-        self.logs['model_params'] = model_params
+        # self.logs['model_params'] = model_params
 
         if hasattr(response, 'choices') and isinstance(response.choices, list):
             return cast(str, response.choices[0].message.content.strip())

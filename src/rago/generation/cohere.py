@@ -44,11 +44,9 @@ class CohereGen(GenerationBase):
             else model
         )
 
-    def generate(self, query: str, context: list[str]) -> str | BaseModel:
+    def generate(self, query: str, data: list[str]) -> str | BaseModel:
         """Generate text using Cohere's API."""
-        input_text = self.prompt_template.format(
-            query=query, context=' '.join(context)
-        )
+        input_text = self._format_prompt(query, data)
         api_params = self.api_params or self.default_api_params
 
         if self.structured_output:
@@ -81,7 +79,7 @@ class CohereGen(GenerationBase):
             }
 
             response = self.model.client.chat(**model_params)
-            self.logs['model_params'] = model_params
+            # self.logs['model_params'] = model_params
             json_text = response.message.content[0].text
             parsed_dict = json.loads(json_text)
             parsed_model = self.structured_output(**parsed_dict)
@@ -100,7 +98,7 @@ class CohereGen(GenerationBase):
                 **api_params,
             }
             response = self.model.chat(**model_params)
-            self.logs['model_params'] = model_params
+            # self.logs['model_params'] = model_params
             return cast(str, response.text)
 
         model_params = {
@@ -111,5 +109,5 @@ class CohereGen(GenerationBase):
             **api_params,
         }
         response = self.model.generate(**model_params)
-        self.logs['model_params'] = model_params
+        # self.logs['model_params'] = model_params
         return cast(str, response.generations[0].text.strip())

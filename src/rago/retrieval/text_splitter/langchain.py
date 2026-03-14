@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 
+from importlib import import_module
 from typing import List, cast
 
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+try:
+    _langchain_text_splitters = import_module('langchain_text_splitters')
+except ImportError:  # pragma: no cover - compatibility with older LangChain
+    _langchain_text_splitters = import_module('langchain.text_splitter')
 
 from rago.retrieval.text_splitter.base import TextSplitterBase
 
@@ -27,7 +31,9 @@ class LangChainTextSplitter(TextSplitterBase):
     def _setup(self) -> None:
         """Set up the object according to the given parameters."""
         if self.splitter_name == 'RecursiveCharacterTextSplitter':
-            self.splitter = RecursiveCharacterTextSplitter
+            self.splitter = (
+                _langchain_text_splitters.RecursiveCharacterTextSplitter
+            )
 
     def split(self, text: str) -> list[str]:
         """Split text into smaller chunks for processing."""

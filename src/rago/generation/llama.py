@@ -83,11 +83,9 @@ class LlamaGen(GenerationBase):
             device=0 if self.device_name == 'cuda' else -1,
         )
 
-    def generate(self, query: str, context: list[str]) -> str:
+    def generate(self, query: str, data: list[str]) -> str:
         """Generate text using Llama model with language support."""
-        input_text = self.prompt_template.format(
-            query=query, context=' '.join(context)
-        )
+        input_text = self._format_prompt(query, data)
 
         # Detect and set the language code for multilingual models (optional)
         language = str(self._detect(query)) or 'en'
@@ -109,7 +107,7 @@ class LlamaGen(GenerationBase):
         )
         response = self.generator(**model_params)
 
-        self.logs['model_params'] = model_params
+        # self.logs['model_params'] = model_params
 
         # Extract and return the answer only
         answer = str(response[0].get('generated_text', ''))
@@ -147,7 +145,7 @@ class OllamaGen(GenerationBase):
             host=base_url, headers={'x-some-header': 'some-value'}
         )
 
-    def generate(self, query: str, context: list[str]) -> str | BaseModel:
+    def generate(self, query: str, data: list[str]) -> str | BaseModel:
         """
         Generate text by sending a prompt to the local Ollama model.
 
@@ -155,7 +153,7 @@ class OllamaGen(GenerationBase):
         ----------
         query : str
             The user query.
-        context : list[str]
+        data : list[str]
             Augmented context strings.
 
         Returns
@@ -163,20 +161,23 @@ class OllamaGen(GenerationBase):
         str
             The generated response text.
         """
-        input_text = self.prompt_template.format(
-            query=query,
-            context=' '.join(context),
-        )
+        input_text = self._format_prompt(query, data)
 
         messages = []
         if self.system_message:
             messages.append({'role': 'system', 'content': self.system_message})
         messages.append({'role': 'user', 'content': input_text})
 
+        request_params = copy(self.api_params or {})
+        options = copy(request_params.pop('options', {}))
+        options.setdefault('temperature', self.temperature)
+        options.setdefault('num_predict', self.output_max_length)
+
         params = {
             'model': self.model_name,
             'messages': messages,
-            **(self.api_params or {}),
+            'options': options,
+            **request_params,
         }
         response = self.model.chat(**params)
         return str(response.message.content).strip()
