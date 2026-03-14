@@ -11,6 +11,16 @@ import pytest
 
 from dotenv import dotenv_values, load_dotenv
 
+INVALID_API_KEYS = frozenset({'', 'nokey'})
+
+
+def _load_api_key(variable_name: str) -> str:
+    """Return a real API key or skip the provider-backed test."""
+    api_key = os.getenv(variable_name, '').strip()
+    if api_key.lower() in INVALID_API_KEYS:
+        pytest.skip(f'{variable_name} is not configured for this test run.')
+    return api_key
+
 
 @pytest.fixture
 def env() -> dict[str, str]:
@@ -35,73 +45,47 @@ def animals_data() -> list[str]:
 @pytest.fixture
 def api_key_openai(env: dict[str, str]) -> str:
     """Fixture for OpenAI API key from environment."""
-    api_key = os.getenv('OPENAI_API_KEY')
-    if not api_key:
-        raise EnvironmentError(
-            'Please set the OPENAI_API_KEY environment variable.'
-        )
-    return api_key
+    del env
+    return _load_api_key('OPENAI_API_KEY')
 
 
 @pytest.fixture
 def api_key_gemini(env: dict[str, str]) -> str:
     """Fixture for Gemini API key from environment."""
-    api_key = os.getenv('GEMINI_API_KEY')
-    if not api_key:
-        raise EnvironmentError(
-            'Please set the GEMINI_API_KEY environment variable.'
-        )
-    return api_key
+    del env
+    return _load_api_key('GEMINI_API_KEY')
 
 
 @pytest.fixture
 def api_key_hugging_face(env: dict[str, str]) -> str:
     """Fixture for Hugging Face API key from environment."""
-    api_key = os.getenv('HF_TOKEN')
-    if not api_key:
-        raise EnvironmentError('Please set the HF_TOKEN environment variable.')
-    return api_key
+    del env
+    return _load_api_key('HF_TOKEN')
 
 
 @pytest.fixture
-def api_key_cohere(env) -> str:
+def api_key_cohere(env: dict[str, str]) -> str:
     """Fixture for Cohere API key from environment."""
-    key = os.getenv('COHERE_API_KEY')
-    if not key:
-        raise EnvironmentError(
-            'Please set the COHERE_API_KEY environment variable.'
-        )
-    return key
+    del env
+    return _load_api_key('COHERE_API_KEY')
 
 
 @pytest.fixture
-def api_key_fireworks(env) -> str:
+def api_key_fireworks(env: dict[str, str]) -> str:
     """Fixture for Fireworks API key from environment."""
-    key = os.getenv('FIREWORKS_API_KEY')
-    if not key:
-        raise EnvironmentError(
-            'Please set the FIREWORKS_API_KEY environment variable.'
-        )
-    return key
+    del env
+    return _load_api_key('FIREWORKS_API_KEY')
 
 
 @pytest.fixture
-def api_key_together(env) -> str:
+def api_key_together(env: dict[str, str]) -> str:
     """Fixture for Together API key from environment."""
-    key = os.getenv('TOGETHER_API_KEY')
-    if not key:
-        raise EnvironmentError(
-            'Please set the TOGETHER_API_KEY environment variable.'
-        )
-    return key
+    del env
+    return _load_api_key('TOGETHER_API_KEY')
 
 
 @pytest.fixture
-def api_key_groq(env) -> str:
+def api_key_groq(env: dict[str, str]) -> str:
     """Fixture for GROQ API key from environment."""
-    key = os.getenv('GROQ_API_KEY')
-    if not key:
-        raise EnvironmentError(
-            'Please set the GROQ_API_KEY environment variable.'
-        )
-    return key
+    del env
+    return _load_api_key('GROQ_API_KEY')

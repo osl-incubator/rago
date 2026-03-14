@@ -23,7 +23,7 @@ from rago.generation import (
     TogetherGen,
 )
 
-from tests.helpers import call_or_skip
+from tests.helpers import call_or_skip, get_api_key_fixture
 
 from .models import AnimalModel
 
@@ -123,14 +123,8 @@ gen_models_ci = [
 
 
 def _generation_simple_output(
+    request: pytest.FixtureRequest,
     animals_data: list[str],
-    api_key_openai: str,
-    api_key_cohere: str,
-    api_key_fireworks: str,
-    api_key_gemini: str,
-    api_key_together: str,
-    api_key_hugging_face: str,
-    api_key_groq: str,
     partial_model: partial,
 ) -> bool:
     """Test RAG pipeline with model generation."""
@@ -146,7 +140,7 @@ def _generation_simple_output(
         pytest.skip(f'Skipping {model_class} on macOS due to CI failure.')
 
     api_key_name: str = API_MAP.get(model_class, '')
-    api_key = locals().get(api_key_name, '')
+    api_key = get_api_key_fixture(request, api_key_name)
 
     model_args = {
         'temperature': TEMPERATURE,
@@ -182,34 +176,22 @@ def _generation_simple_output(
 
 @pytest.mark.skip_on_ci
 @pytest.mark.parametrize('partial_model', gen_models_no_ci)
-def test_generation_simple_output(
+def test_generation_simple_output_no_ci(
+    request: pytest.FixtureRequest,
     animals_data: list[str],
-    api_key_openai: str,
-    api_key_cohere: str,
-    api_key_fireworks: str,
-    api_key_gemini: str,
-    api_key_together: str,
-    api_key_hugging_face: str,
-    api_key_groq: str,
     partial_model: partial,
 ) -> None:
     """Test RAG pipeline with model generation."""
     # todo: check if this assertion is still valid
     assert _generation_simple_output(
+        request,
         animals_data,
-        api_key_openai,
-        api_key_cohere,
-        api_key_fireworks,
-        api_key_gemini,
-        api_key_together,
-        api_key_hugging_face,
-        api_key_groq,
         partial_model,
     )
     model_class = partial_model.func
 
     api_key_name: str = API_MAP.get(model_class, '')
-    api_key = locals().get(api_key_name, '')
+    api_key = get_api_key_fixture(request, api_key_name)
 
     model_args = {
         'temperature': TEMPERATURE,
@@ -233,42 +215,25 @@ def test_generation_simple_output(
     error_message = (
         f'Expected response: `{expected_answer}`, Result: `{result}`.'
     )
+    assert expected_answer.lower() in result.lower(), error_message
 
 
 @pytest.mark.parametrize('partial_model', gen_models_ci)
-def test_generation_simple_output(
+def test_generation_simple_output_ci(
+    request: pytest.FixtureRequest,
     animals_data: list[str],
-    api_key_openai: str,
-    api_key_cohere: str,
-    api_key_fireworks: str,
-    api_key_gemini: str,
-    api_key_together: str,
-    api_key_hugging_face: str,
-    api_key_groq: str,
     partial_model: partial,
 ) -> None:
     """Test RAG pipeline with model generation."""
     assert _generation_simple_output(
+        request,
         animals_data,
-        api_key_openai,
-        api_key_cohere,
-        api_key_fireworks,
-        api_key_gemini,
-        api_key_together,
-        api_key_hugging_face,
-        api_key_groq,
         partial_model,
     )
 
 
 def _generation_structure_output(
-    api_key_openai: str,
-    api_key_cohere: str,
-    api_key_fireworks: str,
-    api_key_gemini: str,
-    api_key_together: str,
-    api_key_hugging_face: str,
-    api_key_groq: str,
+    request: pytest.FixtureRequest,
     animals_data: list[str],
     question: str,
     partial_model: partial,
@@ -300,7 +265,7 @@ def _generation_structure_output(
         pytest.skip(f'Skipping {model_class} on macOS due to CI failure.')
 
     api_key_name: str = API_MAP.get(model_class, '')
-    api_key = locals().get(api_key_name, '')
+    api_key = get_api_key_fixture(request, api_key_name)
 
     model_args = {
         'temperature': TEMPERATURE,
@@ -343,14 +308,8 @@ def _generation_structure_output(
     ],
 )
 @pytest.mark.parametrize('partial_model', gen_models_no_ci)
-def test_generation_structure_output(
-    api_key_openai: str,
-    api_key_cohere: str,
-    api_key_fireworks: str,
-    api_key_gemini: str,
-    api_key_together: str,
-    api_key_hugging_face: str,
-    api_key_groq: str,
+def test_generation_structure_output_no_ci(
+    request: pytest.FixtureRequest,
     animals_data: list[str],
     question: str,
     partial_model: partial,
@@ -358,13 +317,7 @@ def test_generation_structure_output(
 ) -> None:
     """Test Model Generation with structure output."""
     assert _generation_structure_output(
-        api_key_openai,
-        api_key_cohere,
-        api_key_fireworks,
-        api_key_gemini,
-        api_key_together,
-        api_key_hugging_face,
-        api_key_groq,
+        request,
         animals_data,
         question,
         partial_model,
@@ -379,14 +332,8 @@ def test_generation_structure_output(
     ],
 )
 @pytest.mark.parametrize('partial_model', gen_models_ci)
-def test_generation_structure_output(
-    api_key_openai: str,
-    api_key_cohere: str,
-    api_key_fireworks: str,
-    api_key_gemini: str,
-    api_key_together: str,
-    api_key_hugging_face: str,
-    api_key_groq: str,
+def test_generation_structure_output_ci(
+    request: pytest.FixtureRequest,
     animals_data: list[str],
     question: str,
     partial_model: partial,
@@ -394,13 +341,7 @@ def test_generation_structure_output(
 ) -> None:
     """Test Model Generation with structure output."""
     assert _generation_structure_output(
-        api_key_openai,
-        api_key_cohere,
-        api_key_fireworks,
-        api_key_gemini,
-        api_key_together,
-        api_key_hugging_face,
-        api_key_groq,
+        request,
         animals_data,
         question,
         partial_model,
