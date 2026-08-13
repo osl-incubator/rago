@@ -44,7 +44,7 @@ class CohereAug(AugmentedBase):
             input_type='search_document',
             embedding_types=['float'],
         )
-        result = np.array(response.embeddings.float_, dtype=np.float32)  # type: ignore[union-attr]
+        result = np.array(response.embeddings.float_, dtype=np.float32)
 
         return result
 
@@ -62,7 +62,7 @@ class CohereAug(AugmentedBase):
             input_type='search_query',
             embedding_types=['float'],
         )
-        query_encoded = np.array(response.embeddings.float_, dtype=np.float32)  # type: ignore[union-attr]
+        query_encoded = np.array(response.embeddings.float_, dtype=np.float32)
 
         top_k = top_k or self.top_k or self.default_top_k or 1
 
