@@ -24,4 +24,4 @@ def extract_text_from_image(
         context='Tesseract OCR',
     )
 
-    return pytesseract.image_to_string(str(file_path))
+    return str(pytesseract.image_to_string(str(file_path)))
