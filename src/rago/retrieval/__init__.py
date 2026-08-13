@@ -13,6 +13,7 @@ from rago.retrieval.base import RetrievalBase
 from rago.retrieval.text_splitter import LangChainTextSplitter
 
 __all__ = [
+    'ImagePathRet',
     'PDFPathRet',
     'Retrieval',
     'RetrievalBase',
@@ -63,6 +64,7 @@ class Retrieval(StepBase):
     def apply(self, parameters: Any) -> None:
         """Apply declarative configuration to the retrieval wrapper."""
         super().apply(parameters)
+
         for key, value in config_to_dict(parameters).items():
             if key == 'backend' and isinstance(value, str):
                 self.backend = value.lower()
@@ -73,22 +75,33 @@ class Retrieval(StepBase):
 
     def _resolve(self, source: Any = None) -> RetrievalBase:
         config = deepcopy(self.params.params)
+
         if config.get('source') is None and source is not None:
             config['source'] = source
+
         if self.splitter is not None:
             config['splitter'] = self.splitter
+
         if self.cache is not None:
             config['cache'] = self.cache
+
         config['logs'] = self.logs
 
         if self.backend == 'string':
             from rago.retrieval.dummy import StringRet
 
             return StringRet(**config)
+
         if self.backend == 'pdf':
             from rago.retrieval.file import PDFPathRet
 
             return PDFPathRet(**config)
+
+        if self.backend == 'image':
+            from rago.retrieval.file import ImagePathRet
+
+            return ImagePathRet(**config)
+
         raise Exception(f'Unsupported retrieval backend: {self.backend}')
 
     def retrieve(self, query: str = '', source: Any = None) -> list[str]:
@@ -103,13 +116,16 @@ class Retrieval(StepBase):
     def process(self, inp: Input) -> Output:
         """Process the current pipeline source with retrieval."""
         source = self.params.params.get('source')
+
         if source is None:
             source = inp.get('source', inp.get('content'))
 
         result = self.retrieve(query=inp.query, source=source)
+
         output = Output.from_input(inp)
         output.content = result
         output.data = result
+
         return output
 
 
@@ -118,8 +134,15 @@ def __getattr__(name: str) -> Any:
         from rago.retrieval.dummy import StringRet
 
         return StringRet
+
     if name == 'PDFPathRet':
         from rago.retrieval.file import PDFPathRet
 
         return PDFPathRet
+
+    if name == 'ImagePathRet':
+        from rago.retrieval.file import ImagePathRet
+
+        return ImagePathRet
+
     raise AttributeError(f'module {__name__!r} has no attribute {name!r}')
