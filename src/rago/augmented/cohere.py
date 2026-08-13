@@ -44,7 +44,12 @@ class CohereAug(AugmentedBase):
             input_type='search_document',
             embedding_types=['float'],
         )
-        result = np.array(response.embeddings.float_, dtype=np.float32)
+
+        embeddings = getattr(response.embeddings, 'float_', None)
+        if embeddings is None:
+            raise ValueError('Cohere did not return float embeddings.')
+
+        result = np.array(embeddings, dtype=np.float32)
 
         return result
 
@@ -54,6 +59,7 @@ class CohereAug(AugmentedBase):
         """Search an encoded query into vector database."""
         if not getattr(self, 'db', None):
             raise Exception('Vector database (db) is not initialized.')
+
         document_encoded = self.get_embedding(documents)
         model = cast('cohere.Client', self.model)
         response = model.embed(
@@ -62,7 +68,12 @@ class CohereAug(AugmentedBase):
             input_type='search_query',
             embedding_types=['float'],
         )
-        query_encoded = np.array(response.embeddings.float_, dtype=np.float32)
+
+        embeddings = getattr(response.embeddings, 'float_', None)
+        if embeddings is None:
+            raise ValueError('Cohere did not return float embeddings.')
+
+        query_encoded = np.array(embeddings, dtype=np.float32)
 
         top_k = top_k or self.top_k or self.default_top_k or 1
 
