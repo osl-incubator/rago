@@ -43,7 +43,7 @@ repos:
         name: mypy
         entry: mypy src/rago
         language: system
-        
+
         pass_filenames: false
         types:
           - python
