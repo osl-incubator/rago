@@ -41,10 +41,10 @@ repos:
 
       - id: mypy
         name: mypy
-        entry: mypy
+        entry: mypy src/rago
         language: system
-        files: "src/rago"
-        pass_filenames: true
+        
+        pass_filenames: false
         types:
           - python
 
