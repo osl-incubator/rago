@@ -41,6 +41,9 @@ dependencies = [
 [project.optional-dependencies]
 # Vector / ANN
 chromadb = ["chromadb >=0.3.23"]
+ocr = [
+  "pytesseract >=0.3.13",
+]
 
 # LLM providers (opt-in)
 google = ["google-generativeai >=0.8.3"]

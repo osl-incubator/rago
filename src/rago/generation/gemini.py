@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, cast
+from typing import cast
 
 import instructor
 
@@ -11,9 +11,6 @@ from typeguard import typechecked
 
 from rago._optional import require_dependency
 from rago.generation.base import GenerationBase
-
-if TYPE_CHECKING:
-    import google.generativeai as genai
 
 
 @typechecked
@@ -32,7 +29,7 @@ class GeminiGen(GenerationBase):
 
     def _setup(self) -> None:
         """Set up the object with the initial parameters."""
-        genai.configure(api_key=self.api_key)  # type: ignore[attr-defined]
+        self._genai.configure(api_key=self.api_key)
         model = self._genai.GenerativeModel(self.model_name)
 
         self.model = (
