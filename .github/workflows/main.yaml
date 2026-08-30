@@ -104,7 +104,7 @@ jobs:
       - name: Install dependencies
         run: ./scripts/install-dev.sh
 
-      - name: Setup ollama ubuntu
+            - name: Setup ollama ubuntu
         if: ${{ matrix.os == 'ubuntu' }}
         run: |
           curl -fsSL https://ollama.com/install.sh | sh
@@ -112,9 +112,15 @@ jobs:
 
       - name: Setup ollama windows
         if: ${{ matrix.os == 'windows' }}
+        shell: pwsh
         run: |
-          ollama serve &
+          irm https://ollama.com/install.ps1 | iex
+          Start-Process -FilePath "ollama" -ArgumentList "serve" -NoNewWindow
+
       - name: Download llama model
+        run: |
+          sleep 20
+          ollama pull llama3.2:1b
         run: |
           sleep 20
           ollama pull llama3.2:1b
