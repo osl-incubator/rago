@@ -13,6 +13,7 @@ from rago.retrieval.base import RetrievalBase
 from rago.retrieval.text_splitter import LangChainTextSplitter
 
 __all__ = [
+    'AudioPathRet',
     'ImagePathRet',
     'PDFPathRet',
     'Retrieval',
@@ -101,6 +102,10 @@ class Retrieval(StepBase):
             from rago.retrieval.file import ImagePathRet
 
             return ImagePathRet(**config)
+        if self.backend == 'audio':
+            from rago.retrieval.file import AudioPathRet
+
+            return AudioPathRet(**config)
 
         raise Exception(f'Unsupported retrieval backend: {self.backend}')
 
@@ -130,6 +135,10 @@ class Retrieval(StepBase):
 
 
 def __getattr__(name: str) -> Any:
+    if name == 'AudioPathRet':
+        from rago.retrieval.file import AudioPathRet
+
+        return AudioPathRet
     if name == 'StringRet':
         from rago.retrieval.dummy import StringRet
 

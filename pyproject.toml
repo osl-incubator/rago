@@ -44,6 +44,9 @@ chromadb = ["chromadb >=0.3.23"]
 ocr = [
   "pytesseract >=0.3.13",
 ]
+audio = [
+  "faster-whisper >=1.2.1",
+]
 
 # LLM providers (opt-in)
 google = ["google-generativeai >=0.8.3"]
